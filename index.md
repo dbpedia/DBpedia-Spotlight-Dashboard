@@ -1,3 +1,5 @@
+# DBpedia Spotlight Dashboard
+### Progress
 **[17/05/2021]**: Proposal acceptance and community bonding period started.
 
 **[27/05/2021]**: Meeting the mentors on Google Meet to introduce ourselves and talk about the project and interesting ideas:

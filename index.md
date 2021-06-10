@@ -8,3 +8,8 @@
  - Use frameworks like [Dash](https://dash.plotly.com/) for building the dashboard. 
  - Compute the desired statistics over the dataframe using [NumPy](https://numpy.org/) library. 
  - Publish the statistical data generated using [Linked Open Vocabularies](https://lov.linkeddata.es/dataset/lov/) once the dashboard is built. 
+
+**[10/06/2021]**: Second meeting with the mentors, first advances in the project and new ideas:
+ - Get model raw data for Spanish and English -> Done
+ - Visualize DBpedia types for Spanish and English -> Done (**problem**: some hierarchy types are missing in the instance_types file) 
+ - Validation of DBpedia links (entities) -> In progress (**problem**: IP address blocked for 1 day due to excessive requests) (**new idea**: get ALL DBpedia distinct resources doing SPARQL queries and store results in local file, then look for valid URLs comparing that **generated file URLs** and **instance_types URLs** using UNIX commands)

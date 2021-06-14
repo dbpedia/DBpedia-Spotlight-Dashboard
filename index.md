@@ -14,7 +14,7 @@
 ![Blocked IP](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dbpedia_ban.png)
 
 **[14/06/2021]**: Some progress:
- - Validation of DBpedia links (entities) -> In progress (solving problem), even putting timeout between each request, my IP address is still blocked (already 3 times in total)
+ - Validation of DBpedia links (entities) -> In progress (solving problem). I found out that all entities (both valid and invalid entities) are found on SPARQL endpoints, so the idea I came up with doesn't work in this case. Regarding the first idea, even putting timeout between each request my IP address is still blocked (already 3 times in total)
  - Review of the code generated so far -> Done
  - Dashboard draft using [Dash](https://dash.plotly.com/) -> Done
  ![Dashboard draft](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_draft.png)

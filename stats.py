@@ -1,16 +1,6 @@
-import requests
-
-# Maybe this will not be used
-def is_valid_url(url):
-    valid = True
-    # Making a get request
-    r = requests.get(url)
-    if r.status_code != 200:
-        valid = False
-    return valid
-
-def is_url_invalid(url,file):
-    with open(file) as f:
+# Search invalid URLs in file
+def is_url_invalid(url):
+    with open(es_invalid_urls_file) as f:
         if url in f.read():
             return True
         else:
@@ -43,17 +33,16 @@ def get_stats(df,file):
 
             
 # Assuming we get these files from get_resources.sh script 
-es_invalid_urls_file = "resources/es/dashboard_data/invalid_urls.txt"
-en_invalid_urls_file = "resources/en/dashboard_data/invalid_urls.txt"
+es_invalid_urls_file = "resources/es/dashboard_data/invalid_urls"
+en_invalid_urls_file = "resources/en/dashboard_data/invalid_urls"
 
-'''
-print('Getting precision and impact for Spanish language')
+if __name__ == '__main__':
 
-es_precision = get_stats('uri_df from resources.py',es_invalid_urls_file)[0]
-es_impact = get_stats('uri_df from resources.py',es_invalid_urls_file)[1]
+    print('Getting precision and impact for Spanish language')
+    es_precision = get_stats('uri_df from resources.py',es_invalid_urls_file)[0]
+    es_impact = get_stats('uri_df from resources.py',es_invalid_urls_file)[1]
 
-print('Getting precision and impact for English language')
-
-en_precision = get_stats('uri_df from resources.py',en_invalid_urls_file)[0]
-en_impact = get_stats('uri_df from resources.py',en_invalid_urls_file)[1]
-'''
+    print('Getting precision and impact for English language')
+    en_precision = get_stats('uri_df from resources.py',en_invalid_urls_file)[0]
+    en_impact = get_stats('uri_df from resources.py',en_invalid_urls_file)[1]
+    

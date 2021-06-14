@@ -2,7 +2,6 @@ import pandas as pd
 import time
 import os
 
-
 # Auxiliary functions for processing TSV files
 
 # TSV to dataframe
@@ -34,25 +33,21 @@ uriCounts_first_file = "uriCounts_aa"
 es_dashboard_directory = "resources/es/dashboard_data/"
 en_dashboard_directory = "resources/en/dashboard_data/"
 
+if __name__ == '__main__':
+    print('Processing Spanish instance-types')
+    instance_types_es = tsv_to_df(es_dashboard_directory + types_file)
+    print('Done')
 
-print('Processing Spanish instance-types')
-instance_types_es = tsv_to_df(es_dashboard_directory + types_file)
-print('Done')
+    print('Processing English instance-types')
+    instance_types_en = tsv_to_df(en_dashboard_directory + types_file)
+    print('Done')
 
+    print('Processing Spanish uriCounts')
+    uriCounts_es = join_tsv_df(tsv_to_df(es_dashboard_directory + uriCounts_first_file), es_dashboard_directory)
+    print('Done')
 
-print('Processing English instance-types')
-instance_types_en = tsv_to_df(en_dashboard_directory + types_file)
-print('Done')
+    print('Processing English uriCounts')
+    uriCounts_en = join_tsv_df(tsv_to_df(en_dashboard_directory + uriCounts_first_file), en_dashboard_directory)
+    print('Done')
 
-
-'''
-print('Processing Spanish uriCounts')
-uriCounts_es = join_tsv_df(tsv_to_df(es_dashboard_directory + uriCounts_first_file), es_dashboard_directory)
-print('Done')
-
-
-print('Processing English uriCounts')
-uriCounts_en = join_tsv_df(tsv_to_df(en_dashboard_directory + uriCounts_first_file), en_dashboard_directory)
-print('Done')
-'''
 

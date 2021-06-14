@@ -97,30 +97,51 @@ SELECT  ?file WHERE {
 	sed -i -n '/http:\/\/dbpedia.org\/ontology\//p' instance_types_*
 	echo "done"
 	
-	# echo "Separating valid and invalid URLs of all files:"
-	# for file in test_*
-	# do
-		# sh ./check_url_file.sh $file &
-	# done
-	# wait
+	echo "Separating valid and invalid URLs of all files:"
+	
+	maxno=500
+    cno = 0
+	
+	for file in instance_types_*
+	echo "Separating valid and invalid URLs of $file:"
+	do
+		while read line;
+		do
+			url=`echo "$line" | cut -d' ' -f1 | cut -d'<' -f2 | cut -d'>' -f1`
+			checkurl  "$line" "$url" &
+			((cno=cno+1))
+			if [ $cno -gt $maxno ]
+			then
+				echo "Sleeping"
+				sleep 10
+				cno=0
+			fi
+		done < $file
+		echo "$file URLs completed"
+	done
+	wait
 
 	echo "counting types"
-	# cat invalid_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' > invalid_types.tsv 
-	# cat valid_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' > valid_types.tsv 
-	# sed -i 's%http://dbpedia.org/ontology/%%g' invalid_types.tsv
-	# sed -i 's%http://dbpedia.org/ontology/%%g' valid_types.tsv
+	cat invalid_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' > invalid_types.tsv 
+	cat valid_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' > valid_types.tsv 
+	sed -i 's%http://dbpedia.org/ontology/%%g' invalid_types.tsv
+	sed -i 's%http://dbpedia.org/ontology/%%g' valid_types.tsv
 	
-	cat instance_types_* | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' > types.tsv 
-	sed -i 's%http://dbpedia.org/ontology/%%g' types.tsv
+	cat invalid_instance_types | cut -d' ' -f1 | cut -d'<' -f2 | cut -d'>' -f1 > invalid_urls
+	
+	#cat instance_types_* | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' > types.tsv 
+	#sed -i 's%http://dbpedia.org/ontology/%%g' types.tsv
 	
 	rm instance_types_* 
 	# rm disambiguations.nt
 	# rm redirects.nt
 	
-	echo "Done"
-	
+	rm *valid_instance_types*
 	mv *.tsv $RESOURCES_DIR/$1/$DASHBOARD
+	mv invalid_urls $RESOURCES_DIR/$1/$DASHBOARD
 	cd ..
+	
+	echo "Done"
 }
 
 function download_wikistats {
@@ -191,6 +212,20 @@ SELECT ?file WHERE {
 	cd $RESOURCES_DIR
 }
 
+## The fucntions does the checking. This will be called 
+## as a async background process
+
+function checkurl
+{
+    myline=$1
+    myurl=$2
+    if ! wget -q --method=HEAD $myurl; then
+        echo $myline >> invalid_instance_types
+    else
+        echo $myline >> valid_instance_types
+    fi
+}
+
 if [ -d "$RESOURCES_DIR" ]; then
 	read -p "Do you want to download DBpedia Databus resources again? [y/n] " download
 	if [[ $download == [yY] ]]; then
@@ -198,6 +233,10 @@ if [ -d "$RESOURCES_DIR" ]; then
 		echo "Downloading resources"
 		download_dbpedia_datasets "$ES"
 		download_wikistats "$ES"
+		download_dbpedia_datasets "$EN"
+		download_wikistats "$EN"
+		echo "Downloading DBpedia Ontology"
+	    curl -o ontologies.csv curl -o ontologies.csv https://raw.githubusercontent.com/dbpedia/gsoc-2020-dashboard/master/data/v1/Ontologies.csv
 	fi
 else
 	echo "Making resources folder"
@@ -215,6 +254,8 @@ else
 	download_wikistats "$ES"
 	download_dbpedia_datasets "$EN"
 	download_wikistats "$EN"
+	echo "Downloading DBpedia Ontology"
+	curl -o ontologies.csv curl -o ontologies.csv https://raw.githubusercontent.com/dbpedia/gsoc-2020-dashboard/master/data/v1/Ontologies.csv
 fi
 
 echo "Done"

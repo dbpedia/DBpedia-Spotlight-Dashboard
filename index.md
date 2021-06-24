@@ -18,3 +18,19 @@
  - Review of the code generated so far -> Done
  - Dashboard draft using [Dash](https://dash.plotly.com/) -> Done
  ![Dashboard draft](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_draft.png)
+
+**[24/06/2021]**: The problem of URLs validation has been resolved:
+ - URLs of the latest version of uriCounts file have been validated for Spanish language. For this, each URL of the file has been checked by means of the following SPARQL query (using a local SPARQL Endpoint to avoid DBpedia IP blocking):
+ 
+![SPARQL validation](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/validate_query.png)
+
+If the value returned by the query is 0, it means that this URL does not have any type, that is, it is a URL that does not exist and therefore is invalid.
+- Once valid and invalid URLs for Spanish were obtained, types of valid URLs have been obtained and can be viewed according to the DBpedia hierarchy:
+
+ ![Dashboard draft](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_valid_types.png)
+
+- Precision and impact of Spanish URLs has also been calculated.
+ ![Dashboard draft](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_urls_impact.png)
+- URLs validation of the latest version of uriCounts file for English language-> In progress (executing)
+- Types of valid English URLs -> In progress (executing)
+- Precision and impact of English URLs -> In progress (executing)

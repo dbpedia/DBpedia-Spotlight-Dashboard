@@ -15,7 +15,7 @@ DASHBOARD="dashboard_data"
 
 function download_dbpedia_datasets {
 	cd $1/$DATASETS
-	echo "Downloading DBpedia datasets for $1 language:
+	echo "Downloading latest version of DBpedia datasets for $1 language:
 * https://databus.dbpedia.org/dbpedia/generic/disambiguations
 * https://databus.dbpedia.org/dbpedia/generic/redirects
 * https://databus.dbpedia.org/dbpedia/mappings/instance-types
@@ -88,65 +88,25 @@ SELECT  ?file WHERE {
 	# clean
 	rm -r $TMPDOWN
 	
-	echo "splitting" 
-	split -l 500000 instance_types.nt instance_types_
+	# echo "splitting" 
+	# split -l 500000 instance_types.nt instance_types_
 	# split -l 500000 disambiguations.nt disambiguations_
 	# split -l 500000 redirects.nt redirects_
 	
-	echo "filtering"
-	sed -i -n '/http:\/\/dbpedia.org\/ontology\//p' instance_types_*
-	echo "done"
+	# echo "filtering"
+	# sed -i -n '/http:\/\/dbpedia.org\/ontology\//p' instance_types_*
+	# echo "done"
 	
-	echo "Separating valid and invalid URLs of all files:"
-	
-	maxno=500
-    cno = 0
-	
-	for file in instance_types_*
-	echo "Separating valid and invalid URLs of $file:"
-	do
-		while read line;
-		do
-			url=`echo "$line" | cut -d' ' -f1 | cut -d'<' -f2 | cut -d'>' -f1`
-			checkurl  "$line" "$url" &
-			((cno=cno+1))
-			if [ $cno -gt $maxno ]
-			then
-				echo "Sleeping"
-				sleep 10
-				cno=0
-			fi
-		done < $file
-		echo "$file URLs completed"
-	done
-	wait
-
-	echo "counting types"
-	cat invalid_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' > invalid_types.tsv 
-	cat valid_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' > valid_types.tsv 
-	sed -i 's%http://dbpedia.org/ontology/%%g' invalid_types.tsv
-	sed -i 's%http://dbpedia.org/ontology/%%g' valid_types.tsv
-	
-	cat invalid_instance_types | cut -d' ' -f1 | cut -d'<' -f2 | cut -d'>' -f1 > invalid_urls
-	
-	#cat instance_types_* | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' > types.tsv 
-	#sed -i 's%http://dbpedia.org/ontology/%%g' types.tsv
-	
-	rm instance_types_* 
+	# rm instance_types_* 
 	# rm disambiguations.nt
 	# rm redirects.nt
 	
-	rm *valid_instance_types*
-	mv *.tsv $RESOURCES_DIR/$1/$DASHBOARD
-	mv invalid_urls $RESOURCES_DIR/$1/$DASHBOARD
-	cd ..
-	
-	echo "Done"
+	cd $RESOURCES_DIR
 }
 
 function download_wikistats {
-	cd $WIKISTATS
-	echo "Downloading Wikipedia statistics for $1 language"
+	cd $1/$WIKISTATS
+	echo "Downloading latest version of Wikipedia statistics for $1 language"
 	QUERY="PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
 PREFIX dct:    <http://purl.org/dc/terms/>
 PREFIX dcat:   <http://www.w3.org/ns/dcat#>
@@ -212,57 +172,35 @@ SELECT ?file WHERE {
 	cd $RESOURCES_DIR
 }
 
-## The fucntions does the checking. This will be called 
-## as a async background process
-
-function checkurl
-{
-    myline=$1
-    myurl=$2
-    if ! wget -q --method=HEAD $myurl; then
-        echo $myline >> invalid_instance_types
-    else
-        echo $myline >> valid_instance_types
-    fi
-}
-
-if [ -d "$RESOURCES_DIR" ]; then
-	read -p "Do you want to download DBpedia Databus resources again? [y/n] " download
-	if [[ $download == [yY] ]]; then
+if [ -d "$RESOURCES_DIR/$ES/$DATASETS" ]; then
+	read -p "Do you want to download DBpedia Databus resources again? [y/n] " download_dbpedia
+	if [[ $download_dbpedia == [yY] ]]; then
 		cd $RESOURCES_DIR
-		echo "Downloading resources"
+		echo "Downloading..."
 		download_dbpedia_datasets "$ES"
-		download_wikistats "$ES"
 		download_dbpedia_datasets "$EN"
-		download_wikistats "$EN"
-		echo "Downloading DBpedia Ontology"
-	    curl -o ontologies.csv curl -o ontologies.csv https://raw.githubusercontent.com/dbpedia/gsoc-2020-dashboard/master/data/v1/Ontologies.csv
 	fi
 else
-	echo "Making resources folder"
-	mkdir -p $RESOURCES_DIR
 	cd $RESOURCES_DIR
-	echo "Making languages folder"
 	mkdir -p $ES/$DATASETS
-	mkdir -p $ES/$WIKISTATS
-	mkdir -p $ES/$DASHBOARD
 	mkdir -p $EN/$DATASETS
-	mkdir -p $EN/$WIKISTATS
-	mkdir -p $EN/$DASHBOARD
 	echo "Downloading resources"
 	download_dbpedia_datasets "$ES"
-	download_wikistats "$ES"
 	download_dbpedia_datasets "$EN"
-	download_wikistats "$EN"
-	echo "Downloading DBpedia Ontology"
-	curl -o ontologies.csv curl -o ontologies.csv https://raw.githubusercontent.com/dbpedia/gsoc-2020-dashboard/master/data/v1/Ontologies.csv
 fi
-
+if [ -d "$RESOURCES_DIR/$ES/$WIKISTATS" ]; then
+	read -p "Do you want to download DBpedia Databus wikipedia statistics again? [y/n] " download_wikistats
+	if [[ $download_wikistats == [yY] ]]; then
+		cd $RESOURCES_DIR
+		echo "Downloading..."
+		download_wikistats "$ES"
+		download_wikistats "$EN"
+	fi
+else
+	cd $RESOURCES_DIR
+	mkdir -p $ES/$WIKISTATS
+	mkdir -p $EN/$WIKISTATS
+	download_wikistats "$ES"
+	download_wikistats "$EN"
+fi
 echo "Done"
-
-
-
-
-
-
-

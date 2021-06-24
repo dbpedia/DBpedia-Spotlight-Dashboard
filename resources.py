@@ -1,6 +1,7 @@
 import pandas as pd
 import time
 import os
+import re
 
 # Auxiliary functions for processing TSV files
 
@@ -17,7 +18,7 @@ def tsv_to_df(path):
 def join_tsv_df(df,lang_directory):
     start = time.time()
     for filename in os.listdir(lang_directory):
-        if "uriCounts" in filename and filename != uriCounts_first_file:
+        if "uriCounts" in filename and filename != "uriCounts_aa":
             print('Parsing TSV file: ' + filename)
             df = pd.concat([df,tsv_to_df(lang_directory + filename)])
             print("Joining dataframes")
@@ -27,27 +28,42 @@ def join_tsv_df(df,lang_directory):
 
 # End of auxiliary functions for processing wikistats (TSV files)
 
-types_file = "types.tsv"
-uriCounts_first_file = "uriCounts_aa"
+# Getting dataframes
 
+def get_ontology_df():
+   # Load dataframe
+   df = pd.read_csv("resources/ontologies.csv")
+   return  df
+
+def get_valid_types_df(language_directory):
+    # Load dataframe
+    valid_types_df = tsv_to_df(language_directory + "valid_types.tsv")
+    return valid_types_df
+
+
+def get_uriCounts_df(dashboard_directory):
+    # Load dataframe
+    uriCounts_df = join_tsv_df(tsv_to_df(dashboard_directory + "uriCounts_aa"), dashboard_directory)
+    return uriCounts_df
+
+def get_statistics(dashboard_directory):
+    if("es" in dashboard_directory):
+        file = open(es_dashboard_directory + "stats.txt", 'r')
+        file = file.read()
+        numbers = re.findall(r"[-+]?\d*\.\d+|\d+", file)
+    else:
+        file = open(en_dashboard_directory + "stats.txt", 'r')
+        file = file.read()
+        numbers = re.findall(r"[-+]?\d*\.\d+|\d+", file)
+    return numbers
+
+types_file = "valid_types.tsv"
+uriCounts_first_file = "uriCounts_aa"
 es_dashboard_directory = "resources/es/dashboard_data/"
 en_dashboard_directory = "resources/en/dashboard_data/"
-
-if __name__ == '__main__':
-    print('Processing Spanish instance-types')
-    instance_types_es = tsv_to_df(es_dashboard_directory + types_file)
-    print('Done')
-
-    print('Processing English instance-types')
-    instance_types_en = tsv_to_df(en_dashboard_directory + types_file)
-    print('Done')
-
-    print('Processing Spanish uriCounts')
-    uriCounts_es = join_tsv_df(tsv_to_df(es_dashboard_directory + uriCounts_first_file), es_dashboard_directory)
-    print('Done')
-
-    print('Processing English uriCounts')
-    uriCounts_en = join_tsv_df(tsv_to_df(en_dashboard_directory + uriCounts_first_file), en_dashboard_directory)
-    print('Done')
-
-
+es_stats = get_statistics(es_dashboard_directory)
+ontology_df = get_ontology_df()
+valid_types_es = tsv_to_df(es_dashboard_directory + types_file)
+es_stats = get_statistics(es_dashboard_directory)
+#valid_types_en = tsv_to_df(en_dashboard_directory + types_file)
+#en_stats = get_statistics(en_dashboard_directory)

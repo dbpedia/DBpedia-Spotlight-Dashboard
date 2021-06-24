@@ -1,48 +1,42 @@
-# Search invalid URLs in file
-def is_url_invalid(url):
-    with open(es_invalid_urls_file) as f:
-        if url in f.read():
-            return True
-        else:
-            return False
+import resources as R
 
+# Count lines of a file
+def size_file(file):
+    num_lines = sum(1 for line in open(file, encoding="utf-8"))
+    return num_lines
 
-# Draft function due to technical problems
-def get_stats(df,file):
-    url_column = df["URI"]
-    count_column = df["Count"]
+# Get precision and impact of URLs
+def get_stats(valid_file,invalid_file):
+    valid_urls = size_file(valid_file)
+    invalid_urls = size_file(invalid_file)
+    total_urls = valid_urls + invalid_urls
     stats=[]
-    valid_unique_links = 0
-    total_invalid_links = 0
-    total_unique_links = len(df)
-    total_links = count_column.sum()
-    
-    # Iterating over URI column
-    for url in url_column.values:
-        count_value = int(df.loc[url_column == url, count_column].iloc[1])
-        if(is_url_invalid(url,file)):
-            total_invalid_links += count_value
-        else:
-            valid_unique_links += 1
-            
-    precision = valid_unique_links / total_unique_links
-    impact = total_invalid_links / total_links
-    stats.append(precision,impact)
-    
+    precision = round(valid_urls / total_urls, 3)
+    impact = round(invalid_urls / total_urls, 3)
+    stats.append(precision)
+    stats.append(impact)
     return stats
+    
 
-            
-# Assuming we get these files from get_resources.sh script 
-es_invalid_urls_file = "resources/es/dashboard_data/invalid_urls"
-en_invalid_urls_file = "resources/en/dashboard_data/invalid_urls"
+es_invalid_urls_file = R.es_dashboard_directory + "invalid_urls"
+es_valid_urls_file = R.es_dashboard_directory + "valid_urls"
+en_invalid_urls_file = R.en_dashboard_directory + "invalid_urls"
+en_valid_urls_file = R.en_dashboard_directory + "valid_urls"
 
 if __name__ == '__main__':
-
-    print('Getting precision and impact for Spanish language')
-    es_precision = get_stats('uri_df from resources.py',es_invalid_urls_file)[0]
-    es_impact = get_stats('uri_df from resources.py',es_invalid_urls_file)[1]
-
-    print('Getting precision and impact for English language')
-    en_precision = get_stats('uri_df from resources.py',en_invalid_urls_file)[0]
-    en_impact = get_stats('uri_df from resources.py',en_invalid_urls_file)[1]
+    es_stats_file = open(R.es_dashboard_directory + "stats.txt", "w+")
+    print('Getting precision and impact')
+    es_stats = get_stats(es_valid_urls_file, es_invalid_urls_file)
+    es_precision = es_stats[0]
+    es_impact = es_stats[1]
+    es_stats_file.write("Precision: " + str(es_precision) + "\n" + "Impact: " + str(es_impact) + "\n" )
+    es_stats_file.close()
+    '''
+    en_stats_file = open(R.en_dashboard_directory + "stats.txt", "w+")
+    en_stats = get_stats(en_valid_urls_file, en_invalid_urls_file)
+    en_precision = en_stats[0]
+    en_impact = en_stats[1]
+    en_stats_file.write("Precision: " + en_precision + "\n" + "Impact: " + en_impact + "\n" )
+    '''
+    print('Done')
     

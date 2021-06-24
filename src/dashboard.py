@@ -162,7 +162,7 @@ def en_update_valid_types_bar(clicked_data):
             selected_all_instances_df.append({'DBpedia Type': selected_type, 'Count': 0}, ignore_index=True)
         figure = update_types_plot(selected_all_instances_df)
         return figure
-
+    
 if __name__ == '__main__':
     app.run_server(debug=True)
     

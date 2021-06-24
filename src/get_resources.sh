@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_DIR=$(pwd)
+BASE_DIR=$OLDPWD
 RESOURCES_DIR="$BASE_DIR/resources"
 ES="es"
 EN="en"

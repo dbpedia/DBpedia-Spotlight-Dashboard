@@ -32,7 +32,7 @@ def join_tsv_df(df,lang_directory):
 
 def get_ontology_df():
    # Load dataframe
-   df = pd.read_csv("resources/ontologies.csv")
+   df = pd.read_csv(root_path + "resources/ontologies.csv")
    return  df
 
 def get_valid_types_df(language_directory):
@@ -57,10 +57,13 @@ def get_statistics(dashboard_directory):
         numbers = re.findall(r"[-+]?\d*\.\d+|\d+", file)
     return numbers
 
+
+src_path = os.path.dirname(os.path.realpath(__file__))
+root_path = src_path.replace("src","")
 types_file = "valid_types.tsv"
 uriCounts_first_file = "uriCounts_aa"
-es_dashboard_directory = "resources/es/dashboard_data/"
-en_dashboard_directory = "resources/en/dashboard_data/"
+es_dashboard_directory = root_path + "resources/es/dashboard_data/"
+en_dashboard_directory = root_path + "resources/en/dashboard_data/"
 es_stats = get_statistics(es_dashboard_directory)
 ontology_df = get_ontology_df()
 valid_types_es = tsv_to_df(es_dashboard_directory + types_file)

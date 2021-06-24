@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_DIR=$(pwd)
+BASE_DIR=$OLDPWD
 RESOURCES_DIR="$BASE_DIR/resources"
 ES="es"
 EN="en"
@@ -57,12 +57,12 @@ function validate_urls {
 	done
 	echo "Waiting for all to complete"
 	wait
+	split -l 250000 valid_urls valid_urls_
 	echo "Done"
 }
 
 function validate_types {
 	cd $RESOURCES_DIR/$1/$DASHBOARD
-	split -l 250000 valid_urls valid_urls_
 	echo "Getting valid types for $1 language"
 	for file in valid_urls_*
 	do
@@ -84,8 +84,8 @@ function validate_types {
 	echo "Done"
 }
 
-validate_urls "$ES"
-validate_types "$ES"
+#validate_urls "$ES"
+#validate_types "$ES"
 validate_urls "$EN"
 validate_types "$EN"
 echo "Done"

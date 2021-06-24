@@ -9,7 +9,8 @@ python -c "import dash"
 if [ "$status" != 0 ]; then
 	pip install dash
 fi
-	
+
+cd "src"	
 echo "Getting raw dashboard data"
 ./get_resources.sh
 read -p "URLs validation takes so much time. Also a DBpedia SPARQL instance is necessary.

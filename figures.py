@@ -15,7 +15,7 @@ def get_language_statistics_figure(language_directory):
     go.Indicator(
     mode = "gauge+number",
     value = float(stats[0]),
-    title = {'text': "Precision of valid types"},
+    title = {'text': "Precision of valid URLs"},
     domain = {'x': [0, 1], 'y': [0, 1]},
     gauge = {'axis': {'range': [0, 1]}}
 ),
@@ -26,7 +26,7 @@ def get_language_statistics_figure(language_directory):
     go.Indicator(
     mode = "gauge+number",
     value = float(stats[1]),
-    title = {'text': "Impact of invalid types"},
+    title = {'text': "Impact of invalid URLs"},
     domain = {'x': [0, 1], 'y': [0, 1]},
     gauge = {'axis': {'range': [0, 1]}, 'bar': {'color': "red"}}
 ),

@@ -73,7 +73,7 @@ def update_metrics(value):
     go.Indicator(
     mode = "gauge+number",
     value = float(R.es_stats[0]),
-    title = {'text': "Precision of Spanish valid types"},
+    title = {'text': "Precision of Spanish valid URLs"},
     domain = {'x': [0, 1], 'y': [0, 1]},
     gauge = {'axis': {'range': [0, 1]}}
 ),
@@ -83,7 +83,7 @@ def update_metrics(value):
     go.Indicator(
     mode = "gauge+number",
     value = float(R.en_stats[0]),
-    title = {'text': "Precision of English valid types"},
+    title = {'text': "Precision of English valid URLs"},
     domain = {'x': [0, 1], 'y': [0, 1]},
     gauge = {'axis': {'range': [0, 1]}}
 ),

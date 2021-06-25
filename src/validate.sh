@@ -80,12 +80,13 @@ function validate_types {
 	
 	rm valid_instance_types
     rm valid_types
+	rm valid_urls_*
 	
 	echo "Done"
 }
 
-#validate_urls "$ES"
-#validate_types "$ES"
+validate_urls "$ES"
+validate_types "$ES"
 validate_urls "$EN"
 validate_types "$EN"
 echo "Done"

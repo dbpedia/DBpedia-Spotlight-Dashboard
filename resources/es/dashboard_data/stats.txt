@@ -1,2 +1,2 @@
-Precision: 0.704
-Impact: 0.296
+Precision: 0.703
+Impact: 0.297

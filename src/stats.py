@@ -31,12 +31,11 @@ if __name__ == '__main__':
     es_impact = es_stats[1]
     es_stats_file.write("Precision: " + str(es_precision) + "\n" + "Impact: " + str(es_impact) + "\n" )
     es_stats_file.close()
-    '''
     en_stats_file = open(R.en_dashboard_directory + "stats.txt", "w+")
     en_stats = get_stats(en_valid_urls_file, en_invalid_urls_file)
     en_precision = en_stats[0]
     en_impact = en_stats[1]
-    en_stats_file.write("Precision: " + en_precision + "\n" + "Impact: " + en_impact + "\n" )
-    '''
+    en_stats_file.write("Precision: " + str( en_precision) + "\n" + "Impact: " + str(en_impact) + "\n" )
+    en_stats_file.close()
     print('Done')
     

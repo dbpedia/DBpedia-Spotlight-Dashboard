@@ -27,10 +27,23 @@
 If the value returned by the query is 0, it means that this URL does not have any type, that is, it is a URL that does not exist and therefore is invalid.
 - Once valid and invalid URLs for Spanish were obtained, types of valid URLs have been obtained and can be viewed according to the DBpedia hierarchy:
 
- ![Dashboard draft](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_valid_types.png)
+ ![Spanish valid types](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_valid_types.png)
 
 - Precision and impact of Spanish URLs has also been calculated.
- ![Dashboard draft](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_urls_impact.png)
-- URLs validation of the latest version of uriCounts file for English language-> In progress (executing)
+ ![Spanish statistics](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_urls_impact.png)
+
+- URLs validation of the latest version of uriCounts file for English language -> In progress (executing)
 - Types of valid English URLs -> In progress (executing)
 - Precision and impact of English URLs -> In progress (executing)
+
+**[25/06/2021]**: DBpedia entities used by Spotlight have been validated for both Spanish and English languages. Now is time to think of other interesting statistical measures to show on the dashboard: 
+- URLs validation of the latest version of uriCounts file for English language -> Done
+- Types of valid English URLs -> Done
+
+![English valid types](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/en_valid_types.png)
+
+- Precision and impact of English URLs -> Done
+
+![English statistics](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/en_urls_impact.png)
+
+- Think about other interesting statistical measures to show on the dashboard -> In progress

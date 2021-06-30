@@ -1,9 +1,12 @@
 #!/bin/bash
 
-BASE_DIR=$OLDPWD
+DIR=$(pwd)
+BASE_DIR=${DIR//"/src"/}
 RESOURCES_DIR="$BASE_DIR/resources"
 ES="es"
 EN="en"
+DATASETS="dbpedia_datasets"
+WIKISTATS="wikistats"
 DASHBOARD="dashboard_data"
 
 function file_urls {
@@ -49,7 +52,9 @@ FILTER regex(?type,'dbpedia.org','i')
 
 
 function validate_urls {
-	cd $RESOURCES_DIR/$1/$DASHBOARD
+	cd $RESOURCES_DIR/$1/$WIKISTATS
+	echo "Splitting" 
+	split -l 500000 uriCounts uriCounts_
 	echo "Separating valid and invalid URLs for $1 language of all files:"
 	for file in uriCounts_*
 	do
@@ -57,6 +62,9 @@ function validate_urls {
 	done
 	echo "Waiting for all to complete"
 	wait
+	rm uriCounts_*
+	mv *id_urls* $RESOURCES_DIR/$1/$DASHBOARD
+	cd $RESOURCES_DIR/$1/$DASHBOARD
 	split -l 250000 valid_urls valid_urls_
 	echo "Done"
 }
@@ -89,4 +97,5 @@ validate_urls "$ES"
 validate_types "$ES"
 validate_urls "$EN"
 validate_types "$EN"
+
 echo "Done"

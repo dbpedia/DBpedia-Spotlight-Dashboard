@@ -14,6 +14,7 @@ def tsv_to_df(path):
     
     return df
 
+'''
 # Join partial dataframes
 def join_tsv_df(df,lang_directory):
     start = time.time()
@@ -25,6 +26,7 @@ def join_tsv_df(df,lang_directory):
     end = time.time()
     print('Done in ' + str(end-start) +' seconds')
     return df
+'''
 
 # End of auxiliary functions for processing wikistats (TSV files)
 
@@ -40,11 +42,12 @@ def get_valid_types_df(language_directory):
     valid_types_df = tsv_to_df(language_directory + "valid_types.tsv")
     return valid_types_df
 
-
+'''
 def get_uriCounts_df(dashboard_directory):
     # Load dataframe
     uriCounts_df = join_tsv_df(tsv_to_df(dashboard_directory + "uriCounts_aa"), dashboard_directory)
     return uriCounts_df
+'''
 
 def get_statistics(dashboard_directory):
     if(es_dashboard_directory == dashboard_directory):

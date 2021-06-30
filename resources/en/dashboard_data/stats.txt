@@ -1,2 +1,60 @@
-Precision: 0.626
-Impact: 0.374
+DBpedia Spotlight URLs
+-------------------------------------
+Precision of valid URLs: 0.626
+Impact of invalid URLs: 0.374
+
+DBpedia redirects and disambiguations
+-------------------------------------
+Number of redirects: 9684759
+Number of disambiguations: 323252
+
+DBpedia instance-types
+-------------------------------------
+Number of DBpedia entities: 6419204
+Number of DBpedia types: 470
+Mean number of DBpedia entities per type: 20243.5
+Median number of DBpedia entities per type: 1674.5
+Population variance of DBpedia entities per type: 8445952669.22
+Population standard deviation of DBpedia entities per type: 91901.86
+First quartile value of DBpedia entities per type: 364
+Third quartile value of DBpedia entities per type: 8337
+10th percentile value of DBpedia entities per type: 68
+20th percentile value of DBpedia entities per type: 272
+30th percentile value of DBpedia entities per type: 473
+40th percentile value of DBpedia entities per type: 862
+50th percentile value of DBpedia entities per type: 1674
+60th percentile value of DBpedia entities per type: 3309
+70th percentile value of DBpedia entities per type: 5659
+80th percentile value of DBpedia entities per type: 11734
+90th percentile value of DBpedia entities per type: 30663
+95th percentile value of DBpedia entities per type: 80135
+
+DBpedia Spotlight uriCounts
+-------------------------------------
+Mean number of uriCounts URLs per DBpedia resource: 51.02
+Median number of uriCounts URLs per DBpedia resource: 8
+Population variance of uriCounts URLs per DBpedia resource: 733128.73
+Population standard deviation of uriCounts URLs per DBpedia resource: 856.22
+
+DBpedia Spotlight pairCounts
+-------------------------------------
+Mean number of pairCounts URLs per surface form: 25.88
+Median number of pairCounts URLs per surface form: 5
+Population variance of pairCounts URLs per surface form: 260467.06
+Population standard deviation of pairCounts URLs per surface form: 510.35
+
+DBpedia Spotlight tokenCounts
+-------------------------------------
+Number of Wikipedia pages: 2387035
+Mean number of tokens per Wikipedia page: 238.1
+
+DBpedia Spotlight sfAndTotalCounts
+-------------------------------------
+Number of surface forms: 13164312
+Number of surface forms without associated link: 6087814
+Number of surface forms not appearing as text: 1897642
+Number of surface forms not appearing as text without associated link: 927692
+Mean number of sfAndTotalCounts linked URLs per surface form: 17.54
+Median number of sfAndTotalCounts linked URLs per surface form: 2
+Population variance of sfAndTotalCounts linked URLs per surface form: 247054.69
+Population standard deviation of sfAndTotalCounts linked URLs per surface form: 497.04

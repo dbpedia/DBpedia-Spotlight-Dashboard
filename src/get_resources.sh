@@ -1,6 +1,7 @@
 #!/bin/bash
 
-BASE_DIR=$OLDPWD
+DIR=$(pwd)
+BASE_DIR=${DIR//"/src"/}
 RESOURCES_DIR="$BASE_DIR/resources"
 ES="es"
 EN="en"
@@ -88,19 +89,6 @@ SELECT  ?file WHERE {
 	# clean
 	rm -r $TMPDOWN
 	
-	# echo "splitting" 
-	# split -l 500000 instance_types.nt instance_types_
-	# split -l 500000 disambiguations.nt disambiguations_
-	# split -l 500000 redirects.nt redirects_
-	
-	# echo "filtering"
-	# sed -i -n '/http:\/\/dbpedia.org\/ontology\//p' instance_types_*
-	# echo "done"
-	
-	# rm instance_types_* 
-	# rm disambiguations.nt
-	# rm redirects.nt
-	
 	cd $RESOURCES_DIR
 }
 
@@ -155,19 +143,6 @@ SELECT ?file WHERE {
 
 	# clean
 	rm -r $TMPDOWN
-	
-	echo "splitting" 
-	# split -l 500000 pairCounts pairCounts_
-	split -l 500000 uriCounts uriCounts_
-	# split -l 500000 sfAndTotalCounts sfAndTotalCounts_
-	# split -l 500000 tokenCounts tokenCounts_
-	
-	mv uriCounts_* $RESOURCES_DIR/$1/$DASHBOARD
-	
-	# rm pairCounts
-	# rm uriCounts
-	# rm sfAndTotalCounts
-	# rm tokenCounts
 	
 	cd $RESOURCES_DIR
 }

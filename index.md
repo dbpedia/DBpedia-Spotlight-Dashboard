@@ -47,3 +47,40 @@ If the value returned by the query is 0, it means that this URL does not have an
 ![English statistics](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/en_urls_impact.png)
 
 - Think about other interesting statistical measures to show on the dashboard -> In progress
+
+**[01/07/2021]**: Some statistical measures have been calculated from DBpedia datasets (redirects, disambiguations and instance-types) and Wikistats (uriCounts, pairCounts, tokenCounts, sfAndTotalCounts) for English and Spanish:
+- **Redirects and disambiguations**:
+
+![Redirects and disambiguations](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/redirects_disambiguations_statistics1.png)
+
+- **Instance-types**:
+
+![Instance-types 1](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/instance_types_statistics1.png)
+![Instance-types 2](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/instance_types_statistics2.png)
+![Instance-types 3](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/instance_types_statistics3.png)
+
+- **uriCounts**:
+
+![uriCounts1](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/uriCounts_statistics1.png)
+![uriCounts2](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/uriCounts_statistics1.png)
+
+- **pairCounts**:
+
+![pairCounts1](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/pairCounts_statistics1.png)
+![pairCounts2](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/pairCounts_statistics2.png)
+
+- **tokenCounts**:
+
+![tokenCounts1](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/tokenCounts_statistics1.png)
+
+- sfAndTotalCounts:
+
+![sfAndTotalCounts1](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/sfAndTotalCounts_statistics1.png)
+![sfAndTotalCounts2](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/sfAndTotalCounts_statistics2.png)
+![sfAndTotalCounts3](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/sfAndTotalCounts_statistics3.png)
+
+Next tasks:
+    
+       1. Review all the statistics generated (especially those of the instance-types file) -> In progress
+       2. Think about other statistics that may be interesting to have on the dashboard
+       3. Think about how these statistics will be displayed on the dashboard

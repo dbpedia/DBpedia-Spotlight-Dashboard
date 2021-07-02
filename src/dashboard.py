@@ -24,14 +24,14 @@ app.layout = html.Div(children=[
     dcc.Tabs(id='tabs', value='tab-1', children=[
         dcc.Tab(label='Spanish', children = [html.Div(
            dcc.Graph(id='es_statistics', figure=F.es_statistics_figure)),
-        html.Div(children=[html.H3("Spotlight valid resources by DBpedia types"),
+        html.Div(children=[html.H3("Spotlight entities by DBpedia types"),
            dcc.Graph(id='ontology', figure=F.ontology_figure, style={'display': 'inline-block'}),
            dcc.Graph(id='es_valid_types', figure=F.es_valid_types_figure, 
                                    style={'display': 'inline-block'})]
             )]),
         dcc.Tab(label='English', children=[html.Div(
            dcc.Graph(id='en_statistics', figure=F.en_statistics_figure)),
-            html.Div(children = [html.H3("Spotlight valid resources by DBpedia types"),
+            html.Div(children = [html.H3("Spotlight entities by DBpedia types"),
            dcc.Graph(id='ontology2', figure=F.ontology_figure, style={'display': 'inline-block'}),
            dcc.Graph(id='en_valid_types', figure=F.en_valid_types_figure, 
                                    style={'display': 'inline-block'})])

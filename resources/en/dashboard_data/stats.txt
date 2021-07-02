@@ -1,33 +1,39 @@
+DBpedia Extraction Framework redirects and disambiguations
+-------------------------------------
+Number of redirects (without counting repetitions): 9684759
+Number of disambiguations (without counting repetitions): 323252
+
+DBpedia Extraction Framework instance-types
+-------------------------------------
+Number of DBpedia entities (without counting repetitions): 6419204
+Number of DBpedia types: 470
+
+DBpedia Spotlight instance-types
+-------------------------------------
+Number of DBpedia entities with DBpedia types (without counting repetitions): 2807280
+Number of DBpedia types: 460
+Mean number of DBpedia entities per type: 20406.63
+Median number of DBpedia entities per type: 1409
+Population variance of DBpedia entities per type: 9372532963.01
+Population standard deviation of DBpedia entities per type: 96811.84
+Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 9387051
+First quartile value of DBpedia entities per type: 3
+Third quartile value of DBpedia entities per type: 26
+10th percentile value of DBpedia entities per type: 1
+20th percentile value of DBpedia entities per type: 2
+30th percentile value of DBpedia entities per type: 3
+40th percentile value of DBpedia entities per type: 5
+50th percentile value of DBpedia entities per type: 7
+60th percentile value of DBpedia entities per type: 11
+70th percentile value of DBpedia entities per type: 19
+80th percentile value of DBpedia entities per type: 35
+90th percentile value of DBpedia entities per type: 71
+95th percentile value of DBpedia entities per type: 116
+
 DBpedia Spotlight URLs
 -------------------------------------
-Precision of valid URLs: 0.626
-Impact of invalid URLs: 0.374
-
-DBpedia redirects and disambiguations
--------------------------------------
-Number of redirects: 9684759
-Number of disambiguations: 323252
-
-DBpedia instance-types
--------------------------------------
-Number of DBpedia entities: 6419204
-Number of DBpedia types: 470
-Mean number of DBpedia entities per type: 20243.5
-Median number of DBpedia entities per type: 1674.5
-Population variance of DBpedia entities per type: 8445952669.22
-Population standard deviation of DBpedia entities per type: 91901.86
-First quartile value of DBpedia entities per type: 364
-Third quartile value of DBpedia entities per type: 8337
-10th percentile value of DBpedia entities per type: 68
-20th percentile value of DBpedia entities per type: 272
-30th percentile value of DBpedia entities per type: 473
-40th percentile value of DBpedia entities per type: 862
-50th percentile value of DBpedia entities per type: 1674
-60th percentile value of DBpedia entities per type: 3309
-70th percentile value of DBpedia entities per type: 5659
-80th percentile value of DBpedia entities per type: 11734
-90th percentile value of DBpedia entities per type: 30663
-95th percentile value of DBpedia entities per type: 80135
+Precision of DBpedia types URLs: 0.626
+Impact of unknown type URLs: 0.374
 
 DBpedia Spotlight uriCounts
 -------------------------------------

@@ -37,8 +37,8 @@ PRECISION=$(echo 'print(round(' $VALID_URLS_LINES/$TOTAL_LINES ', 3))' | python3
 IMPACT=$(echo 'print(round(' $INVALID_URLS_LINES/$TOTAL_LINES ', 3))' | python3 )
 echo "DBpedia Spotlight URLs" >> stats.txt
 echo "-------------------------------------" >> stats.txt
-echo "Precision of valid URLs: $PRECISION" >> stats.txt
-echo "Impact of invalid URLs: $IMPACT" >> stats.txt
+echo "Precision of DBpedia types URLs: $PRECISION" >> stats.txt
+echo "Impact of unknown type URLs: $IMPACT" >> stats.txt
 echo "" >> stats.txt
 # rm *valid_urls*
 }
@@ -49,10 +49,10 @@ REDIRECTS_FILE=$RESOURCES_DIR/$1/$DATASETS/redirects.nt
 DISAMBIGUATIONS_FILE=$RESOURCES_DIR/$1/$DATASETS/disambiguations.nt
 REDIRECTS_LINES=$(cat $REDIRECTS_FILE | awk -F ' ' '{print $1}' | sort | uniq | wc -l)
 DISAMBIGUATIONS_LINES=$(cat $DISAMBIGUATIONS_FILE | awk -F ' ' '{print $1}' | sort | uniq | wc -l)
-echo "DBpedia redirects and disambiguations" >> stats.txt
+echo "DBpedia Extraction Framework redirects and disambiguations" >> stats.txt
 echo "-------------------------------------" >> stats.txt
-echo "Number of redirects: $REDIRECTS_LINES" >> stats.txt
-echo "Number of disambiguations: $DISAMBIGUATIONS_LINES" >> stats.txt
+echo "Number of redirects (without counting repetitions): $REDIRECTS_LINES" >> stats.txt
+echo "Number of disambiguations (without counting repetitions): $DISAMBIGUATIONS_LINES" >> stats.txt
 echo "" >> stats.txt
 }
 
@@ -62,20 +62,27 @@ INSTANCE_TYPES_FILE=$RESOURCES_DIR/$1/$DATASETS/instance_types.nt
 echo "Filtering"
 cat $INSTANCE_TYPES_FILE | grep "http://dbpedia.org/ontology/" >> filtered_instance_types
 INSTANCE_TYPES_LINES=$(cat filtered_instance_types | awk -F ' ' '{print $1}' | sort | uniq | wc -l)
-echo "DBpedia instance-types" >> stats.txt
+echo "DBpedia Extraction Framework instance-types" >> stats.txt
 echo "-------------------------------------" >> stats.txt
-echo "Number of DBpedia entities: $INSTANCE_TYPES_LINES" >> stats.txt
+echo "Number of DBpedia entities (without counting repetitions): $INSTANCE_TYPES_LINES" >> stats.txt
 echo "Getting number of resources for each DBpedia type"
 cat filtered_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' >> instance_types.tsv
 sed -i 's%http://dbpedia.org/ontology/%%g' instance_types.tsv
 INSTANCE_TYPES_TSV_LINES=$(cat instance_types.tsv | wc -l)
 echo "Number of DBpedia types: $INSTANCE_TYPES_TSV_LINES" >> stats.txt
-echo "Getting most used resources of instance_types.tsv file"
-cat instance_types.tsv | head -n 50 >> instance_types_top50
+echo "" >> stats.txt
+echo "DBpedia Spotlight instance-types" >> stats.txt
+echo "-------------------------------------" >> stats.txt
+VALID_TYPES_LINES=$(cat valid_urls | wc -l)
+VALID_TYPES_TSV_LINES=$(cat valid_types.tsv | wc -l)
+echo "Number of DBpedia entities with DBpedia types (without counting repetitions): $VALID_TYPES_LINES" >> stats.txt
+echo "Number of DBpedia types: $VALID_TYPES_TSV_LINES" >> stats.txt
+echo "Getting most used resources of valid_types.tsv file"
+cat valid_types.tsv | head -n 50 >> valid_types_top50
 echo "Done"
 rm "filtered_instance_types"
-echo "Calculating stats of instance_types.tsv URLs"
-cat instance_types.tsv | cut -f 2 -d$' ' | datamash mean 1 median 1 pvar 1 q1 1 q3 1 perc:10 1 perc:20 1 perc:30 1 perc:40 1 perc:50 1 perc:60 1 perc:70 1 perc:80 1 perc:90 1 perc:95 1 >> temp.txt
+echo "Calculating stats of valid_types.tsv URLs"
+cat valid_types.tsv | cut -f 2 -d$' ' | datamash mean 1 median 1 pvar 1 sum 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
 MEDIAN=$(awk -F '\t' '{ print $2 }' temp.txt)
@@ -83,34 +90,39 @@ MEDIAN=$(echo 'print(round(' $MEDIAN ',2))' | python3 )
 VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
 VAR=$(echo 'print(round(' $VAR ',2))' | python3 )
 STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
-Q1=$(awk -F '\t' '{ print $4 }' temp.txt)
+SUM=$(awk -F '\t' '{ print $4 }' temp.txt)
+rm temp.txt
+echo "Calculating position measures"
+cat valid_types.tsv | awk '{for (i=1; i<=$2; i++) print NR}' | datamash q1 1 q3 1 perc:10 1 perc:20 1 perc:30 1 perc:40 1 perc:50 1 perc:60 1 perc:70 1 perc:80 1 perc:90 1 perc:95 1 >> temp.txt
+Q1=$(awk -F '\t' '{ print $1 }' temp.txt)
 Q1=$(echo 'print(round(' $Q1 '))' | python3 )
-Q3=$(awk -F '\t' '{ print $5 }' temp.txt)
+Q3=$(awk -F '\t' '{ print $2 }' temp.txt)
 Q3=$(echo 'print(round(' $Q3 '))' | python3 )
-PERC10=$(awk -F '\t' '{ print $6 }' temp.txt)
+PERC10=$(awk -F '\t' '{ print $3 }' temp.txt)
 PERC10=$(echo 'print(round(' $PERC10 '))' | python3 )
-PERC20=$(awk -F '\t' '{ print $7 }' temp.txt)
+PERC20=$(awk -F '\t' '{ print $4 }' temp.txt)
 PERC20=$(echo 'print(round(' $PERC20 '))' | python3 )
-PERC30=$(awk -F '\t' '{ print $8 }' temp.txt)
+PERC30=$(awk -F '\t' '{ print $5 }' temp.txt)
 PERC30=$(echo 'print(round(' $PERC30 '))' | python3 )
-PERC40=$(awk -F '\t' '{ print $9 }' temp.txt)
+PERC40=$(awk -F '\t' '{ print $6 }' temp.txt)
 PERC40=$(echo 'print(round(' $PERC40 '))' | python3 )
-PERC50=$(awk -F '\t' '{ print $10 }' temp.txt)
+PERC50=$(awk -F '\t' '{ print $7 }' temp.txt)
 PERC50=$(echo 'print(round(' $PERC50 '))' | python3 )
-PERC60=$(awk -F '\t' '{ print $11 }' temp.txt)
+PERC60=$(awk -F '\t' '{ print $8 }' temp.txt)
 PERC60=$(echo 'print(round(' $PERC60 '))' | python3 )
-PERC70=$(awk -F '\t' '{ print $12 }' temp.txt)
+PERC70=$(awk -F '\t' '{ print $9 }' temp.txt)
 PERC70=$(echo 'print(round(' $PERC70 '))' | python3 )
-PERC80=$(awk -F '\t' '{ print $13 }' temp.txt)
+PERC80=$(awk -F '\t' '{ print $10 }' temp.txt)
 PERC80=$(echo 'print(round(' $PERC80 '))' | python3 )
-PERC90=$(awk -F '\t' '{ print $14 }' temp.txt)
+PERC90=$(awk -F '\t' '{ print $11 }' temp.txt)
 PERC90=$(echo 'print(round(' $PERC90 '))' | python3 )
-PERC95=$(awk -F '\t' '{ print $15 }' temp.txt)
+PERC95=$(awk -F '\t' '{ print $12 }' temp.txt)
 PERC95=$(echo 'print(round(' $PERC95 '))' | python3 )
 echo "Mean number of DBpedia entities per type: $MEAN" >> stats.txt
 echo "Median number of DBpedia entities per type: $MEDIAN" >> stats.txt
 echo "Population variance of DBpedia entities per type: $VAR" >> stats.txt
 echo "Population standard deviation of DBpedia entities per type: $STDDEV" >> stats.txt
+echo "Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): $SUM" >> stats.txt
 echo "First quartile value of DBpedia entities per type: $Q1" >> stats.txt
 echo "Third quartile value of DBpedia entities per type: $Q3" >> stats.txt
 echo "10th percentile value of DBpedia entities per type: $PERC10" >> stats.txt
@@ -164,7 +176,7 @@ function get_pairCounts {
 cd $RESOURCES_DIR/$1/$DASHBOARD
 PAIRCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/pairCounts
 echo "Cleaning pairCounrs file"
-cat $PAIRCOUNTS_FILE | awk -F '\t' '{if($3~/[0-9]+/){print}}' >> cleaned_pairCounts 
+cat $PAIRCOUNTS_FILE | awk -F '\t' '{if($3~/^[0-9]+$/){print}}' >> cleaned_pairCounts 
 echo "Getting most used resources of pairCounts file"
 cat cleaned_pairCounts | sort -t$'\t' -k3 -nr | uniq | head -n 50 >> pairCounts_top50
 if [ "$1" = "$ES" ]
@@ -255,9 +267,6 @@ check "python3"
 check "datamash"
 remove_old_files "$ES"
 remove_old_files "$EN"
-echo "Getting precision and impact of URLs"
-get_precision_impact "$ES"
-get_precision_impact "$EN"
 echo "Done"
 echo "Getting number of redirects and disambiguations"
 get_redirects_disambiguations "$ES"
@@ -266,6 +275,10 @@ echo "Done"
 echo "Getting number of DBpedia instance-types"
 get_types "$ES"
 get_types "$EN"
+echo "Done"
+echo "Getting precision and impact of URLs"
+get_precision_impact "$ES"
+get_precision_impact "$EN"
 echo "Done"
 get_uriCounts "$ES"
 get_uriCounts "$EN"

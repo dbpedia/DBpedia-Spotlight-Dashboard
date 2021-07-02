@@ -85,4 +85,4 @@ Next tasks:
        2. Think about other statistics that may be interesting to have on the dashboard
        3. Think about how these statistics will be displayed on the dashboard
 
-**[01/07/2021]**: Statistics have been revised and now they seem to be all good. Next thing to do is think about how to display them in the Dashboard.
+**[02/07/2021]**: Statistics have been revised and now they seem to be all good. Next thing to do is think about how to display them in the Dashboard.

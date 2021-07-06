@@ -1,14 +1,18 @@
 #!/bin/bash
 
-status="$?"
-python -c "import pandas"
-if [ "$status" != 0 ]; then
-	pip install pandas
-fi
-python -c "import dash"
-if [ "$status" != 0 ]; then
-	pip install dash
-fi
+#status="$?"
+#python -c "import pandas"
+#if [ "$status" != 0 ]; then
+	#pip install pandas
+#fi
+#python -c "import dash"
+#if [ "$status" != 0 ]; then
+	#pip install dash
+#fi
+#python -c "import dash_bootstrap_components"
+#if [ "$status" != 0 ]; then
+	#pip install dash-bootstrap-components
+#fi
 
 cd "src"	
 read -p "URLs validation takes so much time. Also a DBpedia SPARQL instance is necessary.

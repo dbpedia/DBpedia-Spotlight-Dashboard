@@ -56,10 +56,11 @@ Mean number of tokens per Wikipedia page: 238.1
 
 DBpedia Spotlight sfAndTotalCounts
 -------------------------------------
-Number of surface forms: 13164312
+Total number of surface forms: 13164312
 Number of surface forms without associated link: 6087814
 Number of surface forms not appearing as text: 1897642
 Number of surface forms not appearing as text without associated link: 927692
+Rest of surface forms: 4251164
 Mean number of sfAndTotalCounts linked URLs per surface form: 17.54
 Median number of sfAndTotalCounts linked URLs per surface form: 2
 Population variance of sfAndTotalCounts linked URLs per surface form: 247054.69

@@ -138,6 +138,8 @@ echo "95th percentile value of DBpedia entities per type: $PERC95" >> stats.txt
 echo "" >> stats.txt
 echo "Done"
 rm temp.txt
+echo "Generating file for dashboard"
+cat valid_types.tsv |  awk '$0=$0" " NR' > valid_types.tsv
 }
 
 function get_uriCounts {
@@ -231,6 +233,7 @@ SFANDTOTALCOUNTS_LINES=$(cat $SFANDTOTALCOUNTS_FILE | wc -l)
 SFANDTOTALCOUNTS_NOLINKEDLINES=$(cat $SFANDTOTALCOUNTS_FILE | awk -F '\t' '{if($2==-1){print}}' | wc -l)
 SFANDTOTALCOUNTS_NOTEXTLINES=$(cat $SFANDTOTALCOUNTS_FILE | awk -F '\t' '{if($3==0){print}}' | wc -l)
 SFANDTOTALCOUNTS_NOLINKEDLINES_NOTEXTLINES=$(cat $SFANDTOTALCOUNTS_FILE | awk -F '\t' '{if($2==-1 && $3==0){print}}' | wc -l)
+REST=$((SFANDTOTALCOUNTS_LINES-SFANDTOTALCOUNTS_NOLINKEDLINES-SFANDTOTALCOUNTS_NOTEXTLINES-SFANDTOTALCOUNTS_NOLINKEDLINES_NOTEXTLINES))
 echo "Getting most used resources of sfAndTotalCounts file"
 cat $SFANDTOTALCOUNTS_FILE | sort -t$'\t' -k2 -nr | uniq | head -n 50 >> sfAndTotalCounts_top50 
 if [ "$1" = "$ES" ]
@@ -242,10 +245,11 @@ fi
 echo "Done"
 echo "DBpedia Spotlight sfAndTotalCounts" >> stats.txt
 echo "-------------------------------------" >> stats.txt
-echo "Number of surface forms: $SFANDTOTALCOUNTS_LINES" >> stats.txt
+echo "Total number of surface forms: $SFANDTOTALCOUNTS_LINES" >> stats.txt
 echo "Number of surface forms without associated link: $SFANDTOTALCOUNTS_NOLINKEDLINES" >> stats.txt
 echo "Number of surface forms not appearing as text: $SFANDTOTALCOUNTS_NOTEXTLINES" >> stats.txt
 echo "Number of surface forms not appearing as text without associated link: $SFANDTOTALCOUNTS_NOLINKEDLINES_NOTEXTLINES" >> stats.txt
+echo "Rest of surface forms: $REST">> stats.txt
 echo "Calculating stats of sfAndTotalCounts URLs"
 cat $SFANDTOTALCOUNTS_FILE | cut -f 2 -d$'\t' |  awk -F '\t' '{if($1 == -1){$1=0}{print $1}}' | datamash mean 1 median 1 pvar 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)

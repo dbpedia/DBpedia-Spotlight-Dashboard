@@ -86,3 +86,40 @@ Next tasks:
        3. Think about how these statistics will be displayed on the dashboard
 
 **[02/07/2021]**: Statistics have been revised and now they seem to be all good. Next thing to do is think about how to display them in the Dashboard.
+
+**[06/07/2021]**: I have thought about how to display the statistics on the dashboard.
+
+These are the statistics that are currently displayed:
+- Firstly, the **information of the Dbpedia Extraction Framework** is displayed:
+ 1. Number of non-repeating entities (instance_types.nt)
+ 1. Non-repeating types (instance_types.tsv)
+ 1. Bar chart of instance-types.nt (instance_types.tsv)
+
+- Then, the **Spotlight information** is displayed:
+ 1. Number of non-repeating entities with known types from Dbpedia (valid_urls)
+ 1. Number of non-repeating types (valid_types.tsv)
+ 1. Bar chart with known types (valid_types.tsv)
+ 1. Statistics on known types: median, mean, percentiles, quartiles, etc (valid_types.tsv)
+
+This is how the dashboard is at the moment, waiting for feedback from the mentors to change what is necessary:
+
+![dashboard_stats1](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats1.png)
+
+![dashboard_stats2](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats2.png)
+
+![dashboard_stats3](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats3.png)
+
+![dashboard_stats4](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats4.png)
+
+![dashboard_stats5](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats5.png)
+
+![dashboard_stats6](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats6.png)
+
+![dashboard_stats7](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats7.png)
+
+![dashboard_stats8](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats8.png)
+
+![dashboard_stats9](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats9.png)
+
+![dashboard_stats10](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats10.png)
+

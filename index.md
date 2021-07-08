@@ -123,3 +123,6 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 
 ![dashboard_stats10](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats10.png)
 
+**[08/07/2021]**: Meeting with the mentors and new ideas for the Dashboard:
+- Add a flowchart at the beginning where it can be seen how DBpedia Spotlight works
+- Change some of the graphs so that the dispersion of the data can be better appreciated 

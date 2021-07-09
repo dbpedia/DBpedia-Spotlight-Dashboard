@@ -45,7 +45,7 @@ function file_types {
 FILTER regex(?type,'dbpedia.org','i')
 }" --data-urlencode "format=text/csv")
 			type=$(echo $answer | cut -d ' ' -f 2- | sed s/\"//g | grep -v type)
-			echo $type >> valid_instance_types
+			echo $type >> known_instance_types
 		done < $1
 	echo "$1 valid URLs file completed"
 }
@@ -71,7 +71,7 @@ function validate_urls {
 
 function validate_types {
 	cd $RESOURCES_DIR/$1/$DASHBOARD
-	echo "Getting valid types for $1 language"
+	echo "Getting known types for $1 language"
 	for file in valid_urls_*
 	do
 	file_types "$file" &	
@@ -79,15 +79,14 @@ function validate_types {
 	echo "Waiting for all to complete"
 	wait
 	echo "Done"
-	cat valid_instance_types | grep "http://dbpedia.org/ontology/" |tr " " "\n" > valid_types
+	cat known_instance_types | grep "http://dbpedia.org/ontology/" |tr " " "\n" > known_types
 	echo "Done"
 
 	echo "counting types"
-	cat valid_types | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' |  grep -v "^ "  > valid_types.tsv 
-	sed -i 's%http://dbpedia.org/ontology/%%g' valid_types.tsv
+	cat known_types | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' |  grep -v "^ "  > known_types 
+	sed -i 's%http://dbpedia.org/ontology/%%g' known_types
 	
-	rm valid_instance_types
-    rm valid_types
+	rm known_instance_types
 	rm valid_urls_*
 	
 	echo "Done"

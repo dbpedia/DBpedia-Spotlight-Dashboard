@@ -49,9 +49,9 @@ def get_instance_types_figure(instance_types_df):
     return fig3
 
 
-def get_valid_types_figure(valid_types_df):
+def get_known_types_figure(known_types_df):
     # Valid types Bar 
-    fig4 = go.Figure(go.Bar(x = valid_types_df['Nº entities'], y = valid_types_df['DBpedia type'], orientation='h', marker_color='#A349A4'))
+    fig4 = go.Figure(go.Bar(x = known_types_df['Nº entities'], y = known_types_df['DBpedia type'], orientation='h', marker_color='#A349A4'))
     fig4.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white")
     return fig4
 
@@ -158,17 +158,17 @@ en_statistics_figure = get_language_statistics_figure(R.en_stats)
 ontology_figure = get_ontology_figure()
 es_instance_types_figure = get_instance_types_figure(R.instance_types_es)
 en_instance_types_figure = get_instance_types_figure(R.instance_types_en)
-es_valid_types_figure = get_valid_types_figure(R.valid_types_es)
-en_valid_types_figure = get_valid_types_figure(R.valid_types_en)
+es_known_types_figure = get_known_types_figure(R.known_types_es)
+en_known_types_figure = get_known_types_figure(R.known_types_en)
 es_sfpie_figure = get_sfpie_figure(R.es_dashboard_directory)
 en_sfpie_figure = get_sfpie_figure(R.en_dashboard_directory)
 es_uriCounts_figure = get_init_bar_figure(R.es_dashboard_directory, R.uriCounts_es)
 es_pairCounts_figure = get_init_bar_figure(R.es_dashboard_directory, R.pairCounts_es)
 es_sfAndTotalCounts_figure = get_init_bar_figure(R.es_dashboard_directory, R.sfAndTotalCounts_es)
-es_top_valid_types_figure =  get_init_bar_figure(R.es_dashboard_directory, R.top_valid_types_es)
+es_top_known_types_figure =  get_init_bar_figure(R.es_dashboard_directory, R.top_known_types_es)
 en_uriCounts_figure = get_init_bar_figure(R.en_dashboard_directory, R.uriCounts_en)
 en_pairCounts_figure = get_init_bar_figure(R.en_dashboard_directory, R.pairCounts_en)
 en_sfAndTotalCounts_figure = get_init_bar_figure(R.en_dashboard_directory, R.sfAndTotalCounts_en)
-en_top_valid_types_figure =  get_init_bar_figure(R.en_dashboard_directory, R.top_valid_types_en)
-es_pos_valid_types_figure =  get_init_bar_figure_pos(R.es_dashboard_directory, R.valid_types_es)
-en_pos_valid_types_figure =  get_init_bar_figure_pos(R.en_dashboard_directory, R.valid_types_en)
+en_top_known_types_figure =  get_init_bar_figure(R.en_dashboard_directory, R.top_known_types_en)
+es_pos_known_types_figure =  get_init_bar_figure_pos(R.es_dashboard_directory, R.known_types_es)
+en_pos_known_types_figure =  get_init_bar_figure_pos(R.en_dashboard_directory, R.known_types_en)

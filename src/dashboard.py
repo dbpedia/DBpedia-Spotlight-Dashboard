@@ -16,6 +16,39 @@ app.layout = html.Div(children=[
     html.H1(children='DBpedia Spotlight Dashboard'),
     html.Br(),
     dcc.Tabs(id='tabs', value='tab-1', children=[
+        # Information tab
+        dcc.Tab(label='Information', children = [
+            dcc.Markdown('''
+## DBpedia Spotlight 
+**DBpedia Spotlight** is a tool for automatically **annotating mentions of DBpedia resources in text**,  providing a solution for linking unstructured information sources to the Linked Open Data cloud through DBpedia. Spotlight can annotate texts in multiple languages (e.g., English, German, French, Portuguese, etc). 
+
+### How does Spotlight link DBpedia resources with their corresponding text?
+ First it is necessary to **create a model for the desired language** (Spanish, English ...).  Then Spotlight takes the model as input and **performs 4 steps**:   
+ - `Spotting`: texts that may correspond to a DBpedia resource are detected
+- `Candidate selection`: candidate DBpedia resources are selected for each text detected in the previous step
+- `Disambiguation`: for each text, the DBpedia resource that most corresponds to all the candidates is selected.
+- `Filtering`: the annotations obtained are filtered according to the needs of each user.
+
+### How are the models created?
+The following datasets for the desired language are first downloaded from the DBpedia Databus:  [instance-types](https://databus.dbpedia.org/dbpedia/mappings/instance-types/),  [redirects ](https://databus.dbpedia.org/dbpedia/generic/redirects) and [disambiguations](https://databus.dbpedia.org/dbpedia/generic/disambiguations/).   Wikipedia dump is then downloaded for the desired language in `XML` format. Subsequently, [Wikipedia's statistics ](https://databus.dbpedia.org/dbpedia/spotlight/spotlight-wikistats/) (Wikistats)  are generated from the Wikipedia dump: `uriCounts`, `pairCounts`, `sfAndTotalCounts`  and `tokenCounts`. Once the three DBpedia datasets and Wikipedia statistics are obtained, **the model for the corresponding  language is created**.
+
+### DBpedia Spotlight Flowchart
+
+![DBpedia Spotlight Flowchart](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/spotlight_flowchart.png)
+
+## DBpedia Spotlight Dashboard
+
+The purpose of this dashboard is to **facilitate the understanding and analysis of both DBpedia datasets and Wikistats** by calculating statistical measures on these data that allow understanding the trends of **DBpedia resources**, **Wikipedia links** and **surface forms**.
+ 
+ To make the dashboard, it is first necessary to **obtain the raw data**.  Subsequently, it is verified that the DBpedia entities (URLs) that Spotlight uses (URLs of the `uriCounts` file) are found  in one of the three DBpedia datasets (`instance-types`, `redirects` and `disambiguations`).  If they are found in a dataset, they are entities whose type is **known** (from DBpedia), on the contrary,  if they are not found in any dataset, they are entities whose type is **unknown**.  This process is called **entity validation**. 
+Once `valid URLs` (of known type), `invalid URLs` (of unknown type)  and the `DBpedia types` that each URL present are known, a series of **statistical measures** are calculated on the data  (percentage of valid URLs over the total (**precision**), percentage of invalid URLs over the total (**impact**), mean, median, standard deviation, quartiles , percentiles, etc).   
+Afterwards, **necessary figures** are generated to visualize the statistics.  Once all the figures are ready, they are placed and the final dashboard is obtained.
+
+### DBpedia Spotlight Dashboard Flowchart
+
+![DBpedia Spotlight Dashboard Flowchart](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_flowchart.png)              
+                         ''')  
+            ]),
         # Spanish tab
         dcc.Tab(label='Spanish', children = [
         html.Br(),    
@@ -48,14 +81,14 @@ app.layout = html.Div(children=[
           dcc.Graph(id='es_statistics', figure=F.es_statistics_figure)]),
         html.Div(children=[html.H3("Entities by DBpedia types"),
            dcc.Graph(id='ontology', figure=F.ontology_figure, style={'display': 'inline-block'}),
-           dcc.Graph(id='es_valid_types', figure=F.es_valid_types_figure, 
+           dcc.Graph(id='es_known_types', figure=F.es_known_types_figure, 
                                    style={'display': 'inline-block'})]
             ),
         html.Br(),
         html.H3("Position measures for DBpedia types"),
         html.Div([
          dcc.Graph(id='ontology_pos', figure=F.ontology_figure, style={'display': 'inline-block'}),
-         dcc.Graph(id='es_valid_types_pos', figure=F.es_pos_valid_types_figure, 
+         dcc.Graph(id='es_known_types_pos', figure=F.es_pos_known_types_figure, 
                                  style={'display': 'inline-block'})
         ]),
         html.Br(),
@@ -64,17 +97,17 @@ app.layout = html.Div(children=[
         html.Div([
         html.Div([
         DataTable(
-            id="es_top_valid_types_table",
+            id="es_top_known_types_table",
             columns=[{"name": "DBpedia type", "id": "DBpedia type"}],
-            data=R.top_valid_types_es.to_dict("records"),
+            data=R.top_known_types_es.to_dict("records"),
             fill_width=False,
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 310
                          }
         )], style={'flex-grow': '0.15'}
             ),
-        dcc.Graph(id="es_valid_types_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.es_top_valid_types_figure)], style={'display': 'flex'}),
+        dcc.Graph(id="es_known_types_stats", style={'width': '900px', 'height': '400px'},
+                  figure= F.es_top_known_types_figure)], style={'display': 'flex'}),
          html.Br(),
           html.Div([html.H2("Wikistats"),
                    ]),
@@ -182,14 +215,14 @@ app.layout = html.Div(children=[
           dcc.Graph(id='en_statistics', figure=F.en_statistics_figure)]),
         html.Div(children=[html.H3("Entities by DBpedia types"),
            dcc.Graph(id='en_ontology', figure=F.ontology_figure, style={'display': 'inline-block'}),
-           dcc.Graph(id='en_valid_types', figure=F.en_valid_types_figure, 
+           dcc.Graph(id='en_known_types', figure=F.en_known_types_figure, 
                                    style={'display': 'inline-block'})]
             ),
         html.Br(),
         html.H3("Position measures for DBpedia types"),
         html.Div([
          dcc.Graph(id='en_ontology_pos', figure=F.ontology_figure, style={'display': 'inline-block'}),
-         dcc.Graph(id='en_valid_types_pos', figure=F.en_pos_valid_types_figure, 
+         dcc.Graph(id='en_known_types_pos', figure=F.en_pos_known_types_figure, 
                                  style={'display': 'inline-block'})
         ]),
         html.Br(),
@@ -198,17 +231,17 @@ app.layout = html.Div(children=[
         html.Div([
         html.Div([
         DataTable(
-            id="en_top_valid_types_table",
+            id="en_top_known_types_table",
             columns=[{"name": "DBpedia type", "id": "DBpedia type"}],
-            data=R.top_valid_types_en.to_dict("records"),
+            data=R.top_known_types_en.to_dict("records"),
             fill_width=False,
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 230
                          }
         )], style={'flex-grow': '0.15'}
             ),
-        dcc.Graph(id="en_valid_types_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.en_top_valid_types_figure)], style={'display': 'flex'}),
+        dcc.Graph(id="en_known_types_stats", style={'width': '900px', 'height': '400px'},
+                  figure= F.en_top_known_types_figure)], style={'display': 'flex'}),
          html.Br(),
           html.Div([html.H2("Wikistats"),
                    ]),

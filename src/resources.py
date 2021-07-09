@@ -9,10 +9,10 @@ import re
 def tsv_to_df(path):
     if "uriCounts" in path: 
         df = pd.read_csv(path, sep='\t',  names=["DBpedia entity", "Count"])
-    elif "valid_types.tsv" in path:
+    elif "known_types" in path:
         df = pd.read_csv(path, sep=' ',  names=["DBpedia type", "Nº entities", "Pos"])
-    elif "valid_types_top50" in path:
-        df = pd.read_csv(path, sep=' ',  names=["DBpedia type", "Nº entities"])
+    elif "known_types_top50" in path:
+        df = pd.read_csv(path, sep=' ',  names=["DBpedia type", "Nº entities", "Pos"])
     elif "instance_types" in path:
         df = pd.read_csv(path, sep=' ',  names=["DBpedia type", "Nº entities"])
     elif "pairCounts" in path:
@@ -33,13 +33,13 @@ def get_ontology_df():
 
 def get_instance_types_df(language_directory):
     # Load dataframe
-    instance_types_df = tsv_to_df(language_directory + "instance_types.tsv")
+    instance_types_df = tsv_to_df(language_directory + "instance_types")
     return instance_types_df
 
-def get_valid_types_df(language_directory):
+def get_known_types_df(language_directory):
     # Load dataframe
-    valid_types_df = tsv_to_df(language_directory + "valid_types.tsv")
-    return valid_types_df
+    known_types_df = tsv_to_df(language_directory + "known_types")
+    return known_types_df
 
 def get_statistics(dashboard_directory):
     if(es_dashboard_directory == dashboard_directory):
@@ -55,26 +55,26 @@ def get_statistics(dashboard_directory):
 
 src_path = os.path.dirname(os.path.realpath(__file__))
 root_path = src_path.replace("src","")
-instance_types_file = "instance_types.tsv"
-valid_types_file = "valid_types.tsv"
+instance_types_file = "instance_types"
+known_types_file = "known_types"
 uriCounts_file = "uriCounts_top50"
 pairCounts_file = "pairCounts_top50"
 sfAndTotalCounts_file = "sfAndTotalCounts_top50"
-top_valid_types_file = "valid_types_top50"
+top_known_types_file = "known_types_top50"
 es_dashboard_directory = root_path + "resources/es/dashboard_data/"
 en_dashboard_directory = root_path + "resources/en/dashboard_data/"
 ontology_df = get_ontology_df()
 instance_types_es = tsv_to_df(es_dashboard_directory + instance_types_file)
-valid_types_es = tsv_to_df(es_dashboard_directory + valid_types_file)
+known_types_es = tsv_to_df(es_dashboard_directory + known_types_file)
 uriCounts_es = tsv_to_df(es_dashboard_directory + uriCounts_file)
 pairCounts_es = tsv_to_df(es_dashboard_directory + pairCounts_file)
 sfAndTotalCounts_es = tsv_to_df(es_dashboard_directory + sfAndTotalCounts_file)
-top_valid_types_es = tsv_to_df(es_dashboard_directory + top_valid_types_file)
+top_known_types_es = tsv_to_df(es_dashboard_directory + top_known_types_file)
 es_stats = get_statistics(es_dashboard_directory)
 instance_types_en = tsv_to_df(en_dashboard_directory + instance_types_file)
-valid_types_en = tsv_to_df(en_dashboard_directory + valid_types_file)
+known_types_en = tsv_to_df(en_dashboard_directory + known_types_file)
 uriCounts_en = tsv_to_df(en_dashboard_directory + uriCounts_file)
 pairCounts_en = tsv_to_df(en_dashboard_directory + pairCounts_file)
 sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + sfAndTotalCounts_file)
-top_valid_types_en = tsv_to_df(en_dashboard_directory + top_valid_types_file)
+top_known_types_en = tsv_to_df(en_dashboard_directory + top_known_types_file)
 en_stats = get_statistics(en_dashboard_directory)

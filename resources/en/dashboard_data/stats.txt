@@ -1,12 +1,12 @@
 DBpedia Extraction Framework redirects and disambiguations
 -------------------------------------
-Number of redirects (without counting repetitions): 9684759
-Number of disambiguations (without counting repetitions): 323252
+Number of redirects (without counting repetitions): 9724397
+Number of disambiguations (without counting repetitions): 324062
 
 DBpedia Extraction Framework instance-types
 -------------------------------------
-Number of DBpedia entities (without counting repetitions): 6419204
-Number of DBpedia types: 470
+Number of DBpedia entities (without counting repetitions): 6419269
+Number of DBpedia types: 471
 
 DBpedia Spotlight instance-types
 -------------------------------------

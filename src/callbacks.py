@@ -59,12 +59,12 @@ def initialize_callbacks(app):
 
     # Spanish valid types callback
      @app.callback(
-            dash.dependencies.Output('es_valid_types', 'figure'),
+            dash.dependencies.Output('es_known_types', 'figure'),
             [dash.dependencies.Input('ontology', 'clickData')]
             )
-     def es_update_valid_types_bar(clicked_data):
+     def es_update_known_types_bar(clicked_data):
             selected_type = 'owlThing'
-            types_count_df = R.get_valid_types_df(R.es_dashboard_directory)
+            types_count_df = R.known_types_es
             ontology_df = R.get_ontology_df()
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
@@ -107,16 +107,16 @@ def initialize_callbacks(app):
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white")
             return figure
         
- # Spanish top 50 valid types callback       
+ # Spanish top 50 known types callback       
      @app.callback(
-    dash.dependencies.Output("es_valid_types_stats", "figure"), 
-    dash.dependencies.Input("es_top_valid_types_table", "active_cell"), 
+    dash.dependencies.Output("es_known_types_stats", "figure"), 
+    dash.dependencies.Input("es_top_known_types_table", "active_cell"), 
     prevent_initial_call=True
 )
-     def update_valid_types_stats(active_cell):
+     def update_known_types_stats(active_cell):
         selected_row = active_cell["row"]
-        label = R.top_valid_types_es["DBpedia type"].iloc[selected_row]
-        value = R.top_valid_types_es["Nº entities"].iloc[selected_row]
+        label = R.top_known_types_es["DBpedia type"].iloc[selected_row]
+        value = R.top_known_types_es["Nº entities"].iloc[selected_row]
         mean = float(R.es_stats[6])
         median = float(R.es_stats[7])
         std_dv = float(R.es_stats[9])
@@ -223,17 +223,17 @@ def initialize_callbacks(app):
          fig.update_layout(yaxis={'visible': False}, yaxis_range=[0,1500], margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white")
          return fig
 
-# Spanish valid types position measures callback
+# Spanish known types position measures callback
      @app.callback(
-            dash.dependencies.Output('es_valid_types_pos', 'figure'),
+            dash.dependencies.Output('es_known_types_pos', 'figure'),
             [dash.dependencies.Input('ontology_pos', 'clickData')]
             )
      def es_update_inits_bar_pos(clicked_data):
             if clicked_data is None:
                 return dash.no_update
             selected_type = clicked_data['points'][0]['label'] 
-            if selected_type in R.valid_types_es["DBpedia type"].values:
-                selected_row = R.valid_types_es[R.valid_types_es["DBpedia type"] == selected_type]
+            if selected_type in R.known_types_es["DBpedia type"].values:
+                selected_row = R.known_types_es[R.known_types_es["DBpedia type"] == selected_type]
                 fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
             else:
                 fig = go.Figure(go.Bar(x = [0], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
@@ -257,14 +257,14 @@ def initialize_callbacks(app):
             fig.update_layout(xaxis={'range': [0,65]}, margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700)
             return fig
         
-# English valid types callback
+# English known types callback
      @app.callback(
-            dash.dependencies.Output('en_valid_types', 'figure'),
+            dash.dependencies.Output('en_known_types', 'figure'),
             [dash.dependencies.Input('en_ontology', 'clickData')]
             )
-     def en_update_valid_types_bar(clicked_data):
+     def en_update_known_types_bar(clicked_data):
             selected_type = 'owlThing'
-            types_count_df = R.get_valid_types_df(R.en_dashboard_directory)
+            types_count_df = R.known_types_en
             ontology_df = R.get_ontology_df()
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
@@ -307,16 +307,16 @@ def initialize_callbacks(app):
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white")
             return figure
         
- # English top 50 valid types callback       
+ # English top 50 known types callback       
      @app.callback(
-    dash.dependencies.Output("en_valid_types_stats", "figure"), 
-    dash.dependencies.Input("en_top_valid_types_table", "active_cell"), 
+    dash.dependencies.Output("en_known_types_stats", "figure"), 
+    dash.dependencies.Input("en_top_known_types_table", "active_cell"), 
     prevent_initial_call=True
 )
-     def en_update_valid_types_stats(active_cell):
+     def en_update_known_types_stats(active_cell):
          selected_row = active_cell["row"]
-         label = R.top_valid_types_en["DBpedia type"].iloc[selected_row]
-         value = R.top_valid_types_en["Nº entities"].iloc[selected_row]
+         label = R.top_known_types_en["DBpedia type"].iloc[selected_row]
+         value = R.top_known_types_en["Nº entities"].iloc[selected_row]
          mean = float(R.en_stats[6])
          median = float(R.en_stats[7])
          std_dv = float(R.en_stats[9])
@@ -423,17 +423,17 @@ def initialize_callbacks(app):
          fig.update_layout(yaxis={'visible': False}, yaxis_range=[0,1500], margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white")
          return fig
 
-# English valid types position measures callback
+# English known types position measures callback
      @app.callback(
-            dash.dependencies.Output('en_valid_types_pos', 'figure'),
+            dash.dependencies.Output('en_known_types_pos', 'figure'),
             [dash.dependencies.Input('en_ontology_pos', 'clickData')]
             )
      def en_update_inits_bar_pos(clicked_data):
             if clicked_data is None:
                 return dash.no_update
             selected_type = clicked_data['points'][0]['label'] 
-            if selected_type in R.valid_types_en["DBpedia type"].values:
-                selected_row = R.valid_types_en[R.valid_types_en["DBpedia type"] == selected_type]
+            if selected_type in R.known_types_en["DBpedia type"].values:
+                selected_row = R.known_types_en[R.known_types_en["DBpedia type"] == selected_type]
                 fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
             else:
                 fig = go.Figure(go.Bar(x = [0], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))

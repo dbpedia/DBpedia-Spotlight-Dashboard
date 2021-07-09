@@ -23,7 +23,7 @@ function remove_old_files {
 cd $RESOURCES_DIR/$1/$DASHBOARD
 rm "stats.txt"
 rm *top50*
-rm "instance_types.tsv"
+rm "instance_types"
 }
 
 function get_precision_impact {
@@ -60,29 +60,29 @@ function get_types {
 cd $RESOURCES_DIR/$1/$DASHBOARD
 INSTANCE_TYPES_FILE=$RESOURCES_DIR/$1/$DATASETS/instance_types.nt
 echo "Filtering"
-cat $INSTANCE_TYPES_FILE | grep "http://dbpedia.org/ontology/" >> filtered_instance_types
+cat $INSTANCE_TYPES_FILE | grep "http://dbpedia.org/ontology/" > filtered_instance_types
 INSTANCE_TYPES_LINES=$(cat filtered_instance_types | awk -F ' ' '{print $1}' | sort | uniq | wc -l)
 echo "DBpedia Extraction Framework instance-types" >> stats.txt
 echo "-------------------------------------" >> stats.txt
 echo "Number of DBpedia entities (without counting repetitions): $INSTANCE_TYPES_LINES" >> stats.txt
 echo "Getting number of resources for each DBpedia type"
-cat filtered_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' >> instance_types.tsv
-sed -i 's%http://dbpedia.org/ontology/%%g' instance_types.tsv
-INSTANCE_TYPES_TSV_LINES=$(cat instance_types.tsv | wc -l)
+cat filtered_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' >> instance_types
+sed -i 's%http://dbpedia.org/ontology/%%g' instance_types
+INSTANCE_TYPES_TSV_LINES=$(cat instance_types | wc -l)
 echo "Number of DBpedia types: $INSTANCE_TYPES_TSV_LINES" >> stats.txt
 echo "" >> stats.txt
 echo "DBpedia Spotlight instance-types" >> stats.txt
 echo "-------------------------------------" >> stats.txt
-VALID_TYPES_LINES=$(cat valid_urls | wc -l)
-VALID_TYPES_TSV_LINES=$(cat valid_types.tsv | wc -l)
-echo "Number of DBpedia entities with DBpedia types (without counting repetitions): $VALID_TYPES_LINES" >> stats.txt
-echo "Number of DBpedia types: $VALID_TYPES_TSV_LINES" >> stats.txt
-echo "Getting most used resources of valid_types.tsv file"
-cat valid_types.tsv | head -n 50 >> valid_types_top50
+KNOWN_TYPES_LINES=$(cat valid_urls | wc -l)
+KNOWN_TYPES_TSV_LINES=$(cat known_types | wc -l)
+echo "Number of DBpedia entities with DBpedia types (without counting repetitions): $KNOWN_TYPES_LINES" >> stats.txt
+echo "Number of DBpedia types: $KNOWN_TYPES_TSV_LINES" >> stats.txt
+echo "Getting most used resources of known_types file"
+cat known_types | head -n 50 >> known_types_top50
 echo "Done"
 rm "filtered_instance_types"
-echo "Calculating stats of valid_types.tsv URLs"
-cat valid_types.tsv | cut -f 2 -d$' ' | datamash mean 1 median 1 pvar 1 sum 1 >> temp.txt
+echo "Calculating stats of known_types URLs"
+cat known_types | cut -f 2 -d$' ' | datamash mean 1 median 1 pvar 1 sum 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
 MEDIAN=$(awk -F '\t' '{ print $2 }' temp.txt)
@@ -93,7 +93,7 @@ STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
 SUM=$(awk -F '\t' '{ print $4 }' temp.txt)
 rm temp.txt
 echo "Calculating position measures"
-cat valid_types.tsv | awk '{for (i=1; i<=$2; i++) print NR}' | datamash q1 1 q3 1 perc:10 1 perc:20 1 perc:30 1 perc:40 1 perc:50 1 perc:60 1 perc:70 1 perc:80 1 perc:90 1 perc:95 1 >> temp.txt
+cat known_types | awk '{for (i=1; i<=$2; i++) print NR}' | datamash q1 1 q3 1 perc:10 1 perc:20 1 perc:30 1 perc:40 1 perc:50 1 perc:60 1 perc:70 1 perc:80 1 perc:90 1 perc:95 1 >> temp.txt
 Q1=$(awk -F '\t' '{ print $1 }' temp.txt)
 Q1=$(echo 'print(round(' $Q1 '))' | python3 )
 Q3=$(awk -F '\t' '{ print $2 }' temp.txt)
@@ -139,7 +139,7 @@ echo "" >> stats.txt
 echo "Done"
 rm temp.txt
 echo "Generating file for dashboard"
-cat valid_types.tsv |  awk '$0=$0" " NR' > valid_types.tsv
+# cat known_types |  awk '$0=$0" " NR' > known_types
 }
 
 function get_uriCounts {

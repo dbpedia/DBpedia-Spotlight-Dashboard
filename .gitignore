@@ -1,2 +1,15 @@
 
 *.pyc
+resources/es/wikistats/tokenCounts
+resources/es/wikistats/uriCounts
+resources/es/wikistats/sfAndTotalCounts
+resources/es/wikistats/pairCounts
+*.nt
+resources/es/dashboard_data/valid_urls
+resources/es/dashboard_data/invalid_urls
+resources/en/wikistats/pairCounts
+resources/en/wikistats/sfAndTotalCounts
+resources/en/wikistats/tokenCounts
+resources/en/wikistats/uriCounts
+resources/en/dashboard_data/invalid_urls
+resources/en/dashboard_data/valid_urls

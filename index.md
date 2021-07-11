@@ -127,3 +127,32 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 **[08/07/2021]**: Meeting with the mentors and new ideas for the Dashboard:
 - Add a flowchart at the beginning where it can be seen how DBpedia Spotlight works
 - Change some of the graphs so that the dispersion of the data can be better appreciated 
+
+**[11/07/2021]**: DBpedia Spotlight and Spotlight Dashboard flow charts have been made. Some Dashboard charts have also been changed, now the data looks better. Waiting for feedback from mentors:
+- An additional tab has been added to the Dashboard called `Information` where the process of creating Spotlight models and the purpose and operation of the Spotlight Dashboard are explained, as well as flow charts to see both processes graphically.
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/information_tab.png)
+
+- Some of the Dashboard graphics have been changed to better appreciate the dispersion of the data. In the case of Wikistats, since they are millions of data, `Slicers` have been added so that the user can select different samples of the data. The information reflected in these graphs together with the tables (`top 50`) allow you to get an idea of what the data used by Spotlight is like.
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new2.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new3.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new4.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new5.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new6.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new7.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new8.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new9.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new10.png)
+
+![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new11.png)

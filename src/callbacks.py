@@ -10,6 +10,8 @@ def initialize_callbacks(app):
         dash.dependencies.Output('metric', 'figure'),
         [dash.dependencies.Input('dropdown', 'value')])
      def update_metrics(value):
+        if value is None:
+                return dash.no_update
         fig = make_subplots(rows=1, cols=2, specs=[[{'type' : 'indicator'}, 
                                                 {'type' : 'indicator'}]])
         if value == 'Precision':
@@ -121,6 +123,8 @@ def initialize_callbacks(app):
         dash.dependencies.Output('uriCounts_graph', 'figure'),
         [dash.dependencies.Input('uriCounts_slider', 'value')])
      def update_uriCounts_figure(value):
+        if value is None:
+                return dash.no_update
         uriCounts_df = R.uriCounts_es
         filtered_df = uriCounts_df[(uriCounts_df['Count'] >= value[0]) & (uriCounts_df['Count'] <= value[1])].sample(n=20)	
         fig = go.Figure()
@@ -142,6 +146,8 @@ def initialize_callbacks(app):
         dash.dependencies.Output('pairCounts_graph', 'figure'),
         [dash.dependencies.Input('pairCounts_slider', 'value')])
      def update_pairCounts_figure(value):
+        if value is None:
+                return dash.no_update
         pairCounts_df = R.pairCounts_es
         filtered_df = pairCounts_df[(pairCounts_df['Times linked'] >= value[0]) & (pairCounts_df['Times linked'] <= value[1])].sample(n=20)	
         fig = go.Figure()
@@ -162,6 +168,8 @@ def initialize_callbacks(app):
         dash.dependencies.Output('sfAndTotalCounts_graph', 'figure'),
         [dash.dependencies.Input('sfAndTotalCounts_slider', 'value')])
      def update_sfAndTotalCounts_figure(value):
+        if value is None:
+                return dash.no_update
         sfAndTotalCounts_df = R.sfAndTotalCounts_es
         filtered_df = sfAndTotalCounts_df[(sfAndTotalCounts_df['Times linked'] >= value[0]) & (sfAndTotalCounts_df['Times linked'] <= value[1])].sample(n=20)	
         fig = go.Figure()
@@ -183,6 +191,8 @@ def initialize_callbacks(app):
         dash.dependencies.Output('tokenCounts_graph', 'figure'),
         [dash.dependencies.Input('tokenCounts_slider', 'value')])
      def update_tokenCounts_figure(value):
+        if value is None:
+                return dash.no_update
         tokenCounts_df = R.tokenCounts_es
         filtered_df = tokenCounts_df[(tokenCounts_df['Nº tokens'] >= value[0]) & (tokenCounts_df['Nº tokens'] <= value[1])].sample(n=20)	
         fig = go.Figure()
@@ -296,6 +306,8 @@ def initialize_callbacks(app):
         dash.dependencies.Output('en_uriCounts_graph', 'figure'),
         [dash.dependencies.Input('en_uriCounts_slider', 'value')])
      def en_update_uriCounts_figure(value):
+        if value is None:
+                return dash.no_update
         uriCounts_df = R.uriCounts_en
         filtered_df = uriCounts_df[(uriCounts_df['Count'] >= value[0]) & (uriCounts_df['Count'] <= value[1])].sample(n=20)	
         fig = go.Figure()
@@ -317,6 +329,8 @@ def initialize_callbacks(app):
         dash.dependencies.Output('en_pairCounts_graph', 'figure'),
         [dash.dependencies.Input('en_pairCounts_slider', 'value')])
      def en_update_pairCounts_figure(value):
+        if value is None:
+                return dash.no_update
         pairCounts_df = R.pairCounts_en
         filtered_df = pairCounts_df[(pairCounts_df['Times linked'] >= value[0]) & (pairCounts_df['Times linked'] <= value[1])].sample(n=20)	
         fig = go.Figure()
@@ -337,6 +351,8 @@ def initialize_callbacks(app):
         dash.dependencies.Output('en_sfAndTotalCounts_graph', 'figure'),
         [dash.dependencies.Input('en_sfAndTotalCounts_slider', 'value')])
      def en_update_sfAndTotalCounts_figure(value):
+        if value is None:
+                return dash.no_update
         sfAndTotalCounts_df = R.sfAndTotalCounts_en
         filtered_df = sfAndTotalCounts_df[(sfAndTotalCounts_df['Times linked'] >= value[0]) & (sfAndTotalCounts_df['Times linked'] <= value[1])].sample(n=20)	
         fig = go.Figure()
@@ -357,6 +373,8 @@ def initialize_callbacks(app):
         dash.dependencies.Output('en_tokenCounts_graph', 'figure'),
         [dash.dependencies.Input('en_tokenCounts_slider', 'value')])
      def en_update_tokenCounts_figure(value):
+        if value is None:
+                return dash.no_update
         tokenCounts_df = R.tokenCounts_en
         filtered_df = tokenCounts_df[(tokenCounts_df['Nº tokens'] >= value[0]) & (tokenCounts_df['Nº tokens'] <= value[1])].sample(n=20)	
         fig = go.Figure()

@@ -16,7 +16,9 @@ def tsv_to_df(path):
     elif "instance_types" in path:
         df = pd.read_csv(path, sep=' ',  names=["DBpedia type", "Nº entities"])
     elif "pairCounts" in path:
-        df = pd.read_csv(path, sep='\t',  names=["Surface form", "DBpedia entity", "Count"])
+        df = pd.read_csv(path, sep='\t',  names=["Surface form", "DBpedia entity", "Times linked"])
+    elif "token" in path:
+        df = pd.read_csv(path, sep=' ',  names=["Wikipedia article", " ", "Nº tokens"])
     else:
         df = pd.read_csv(path, sep='\t',  names=["Surface form", "Times linked", "Times as plain text"])
     return df
@@ -57,9 +59,14 @@ src_path = os.path.dirname(os.path.realpath(__file__))
 root_path = src_path.replace("src","")
 instance_types_file = "instance_types"
 known_types_file = "known_types"
-uriCounts_file = "uriCounts_top50"
-pairCounts_file = "pairCounts_top50"
-sfAndTotalCounts_file = "sfAndTotalCounts_top50"
+uriCounts_file = "uriCounts"
+pairCounts_file = "cleaned_pairCounts"
+tokenCounts_file="tokens"
+sfAndTotalCounts_file = "sfAndTotalCounts"
+top_uriCounts_file = "uriCounts_top50"
+top_pairCounts_file = "pairCounts_top50"
+top_sfAndTotalCounts_file = "sfAndTotalCounts_top50"
+top_tokenCounts_file = "tokenCounts_top50"
 top_known_types_file = "known_types_top50"
 es_dashboard_directory = root_path + "resources/es/dashboard_data/"
 en_dashboard_directory = root_path + "resources/en/dashboard_data/"
@@ -69,6 +76,11 @@ known_types_es = tsv_to_df(es_dashboard_directory + known_types_file)
 uriCounts_es = tsv_to_df(es_dashboard_directory + uriCounts_file)
 pairCounts_es = tsv_to_df(es_dashboard_directory + pairCounts_file)
 sfAndTotalCounts_es = tsv_to_df(es_dashboard_directory + sfAndTotalCounts_file)
+tokenCounts_es = tsv_to_df(es_dashboard_directory + tokenCounts_file)
+top_uriCounts_es = tsv_to_df(es_dashboard_directory + top_uriCounts_file)
+top_pairCounts_es = tsv_to_df(es_dashboard_directory + top_pairCounts_file)
+top_sfAndTotalCounts_es = tsv_to_df(es_dashboard_directory + top_sfAndTotalCounts_file)
+top_tokenCounts_es = tsv_to_df(es_dashboard_directory + top_tokenCounts_file)
 top_known_types_es = tsv_to_df(es_dashboard_directory + top_known_types_file)
 es_stats = get_statistics(es_dashboard_directory)
 instance_types_en = tsv_to_df(en_dashboard_directory + instance_types_file)
@@ -76,5 +88,10 @@ known_types_en = tsv_to_df(en_dashboard_directory + known_types_file)
 uriCounts_en = tsv_to_df(en_dashboard_directory + uriCounts_file)
 pairCounts_en = tsv_to_df(en_dashboard_directory + pairCounts_file)
 sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + sfAndTotalCounts_file)
+tokenCounts_en = tsv_to_df(en_dashboard_directory + tokenCounts_file)
+top_uriCounts_en = tsv_to_df(en_dashboard_directory +top_uriCounts_file)
+top_pairCounts_en = tsv_to_df(en_dashboard_directory + top_pairCounts_file)
+top_sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + top_sfAndTotalCounts_file)
+top_tokenCounts_en = tsv_to_df(en_dashboard_directory + top_tokenCounts_file)
 top_known_types_en = tsv_to_df(en_dashboard_directory + top_known_types_file)
 en_stats = get_statistics(en_dashboard_directory)

@@ -217,11 +217,34 @@ echo "DBpedia Spotlight tokenCounts" >> stats.txt
 echo "-------------------------------------" >> stats.txt
 echo "Number of Wikipedia pages: $TOKENCOUNTS_LINES" >> stats.txt
 echo "Calculating stats of tokens per Wikipedia page"
-cat $TOKENCOUNTS_FILE | awk '{print gsub(/\([^)]*\)/,"&")}' | datamash mean 1 >> temp.txt
+TOKENS=$(cat $TOKENCOUNTS_FILE | awk '{print gsub(/\([^)]*\)/,"&")}')
+cat $TOKENCOUNTS_FILE | awk -F '\t' '{$2=""; print $0}' > tokens
+cat tokens | tr -d " \t\n\r"
+printf "%s\n" $TOKENS | paste -d ' ' tokens - > tmp && mv tmp tokens
+if [ "$1" = "$ES" ]
+then
+	sed -i 's%http://es.wikipedia.org/wiki/%%g' tokens
+else
+	sed -i 's%http://en.wikipedia.org/wiki/%%g' tokens
+fi
+cat tokens | sort -t$' ' -k3 -nr | uniq | head -n 50 >> tokenCounts_top50
+cat tokens | cut -f 3 -d$' ' | datamash mean 1 median 1 pvar 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
+MEDIAN=$(awk -F '\t' '{ print $2 }' temp.txt)
+MEDIAN=$(echo 'print(round(' $MEDIAN ',2))' | python3 )
+VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
+VAR=$(echo 'print(round(' $VAR ',2))' | python3 )
+STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
 echo "Mean number of tokens per Wikipedia page: $MEAN" >> stats.txt
+echo "Median number of tokens per Wikipedia page: $MEDIAN" >> stats.txt
+echo "Population standard deviation of tokens per Wikipedia page: $STDDEV" >> stats.txt
 echo "" >> stats.txt
+if [ "$1" = "$EN" ]
+then
+	split -l 500000 tokens tokens_
+	rm tokens
+fi
 echo "Done"
 rm temp.txt
 }

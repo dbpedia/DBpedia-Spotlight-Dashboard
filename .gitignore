@@ -13,3 +13,12 @@ resources/en/wikistats/tokenCounts
 resources/en/wikistats/uriCounts
 resources/en/dashboard_data/invalid_urls
 resources/en/dashboard_data/valid_urls
+resources/en/dashboard_data/instance_types_top50
+resources/en/dashboard_data/sfAndTotalCounts
+resources/en/dashboard_data/cleaned_pairCounts
+resources/en/dashboard_data/tokens
+resources/en/dashboard_data/uriCounts
+resources/es/dashboard_data/cleaned_pairCounts
+resources/es/dashboard_data/instance_types_top50
+resources/es/dashboard_data/sfAndTotalCounts
+resources/es/dashboard_data/uriCounts

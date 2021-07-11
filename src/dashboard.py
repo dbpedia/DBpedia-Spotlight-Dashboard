@@ -9,7 +9,7 @@ import resources as R
 import callbacks as CB
 
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(external_stylesheets=[dbc.themes.LUX])
 
 
 app.layout = html.Div(children=[
@@ -94,62 +94,97 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         html.Br(),
         html.H3("Top 50 DBpedia types with more entities"),
         html.Br(),
-        html.Div([
-        html.Div([
         DataTable(
             id="es_top_known_types_table",
-            columns=[{"name": "DBpedia type", "id": "DBpedia type"}],
+            columns=[{"name": "DBpedia type", "id": "DBpedia type"},
+                     {"name": "Nº entities", "id": "Nº entities"}],
             data=R.top_known_types_es.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 310
+                'overflowY': 'scroll', 'height': 400, 'width': 425
                          }
-        )], style={'flex-grow': '0.15'}
-            ),
-        dcc.Graph(id="es_known_types_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.es_top_known_types_figure)], style={'display': 'flex'}),
+        ),
          html.Br(),
           html.Div([html.H2("Wikistats"),
                    ]),
           html.Div([html.H3("uriCounts"),
+          html.H4("Number of times each DBpedia entity appears in Wikipedia dump"),
+        html.Br(),
+        html.Div([
+        dcc.RangeSlider(id='uriCounts_slider', min=0, max=1300, step=None, value=[0, 100],
+        marks={
+            0: '0',
+            100: '100',
+            200: '200',
+            300: '300',
+            400: '400',
+		    500: '500',
+		    600: '600',
+		    700: '700',
+		    800: '800',
+		    900: '900',
+		   1000:'1000',
+           1100:'1100',
+           1200:'1200',
+           1300:'1300'
+    }
+    ),
+        dcc.Graph(id="uriCounts_graph", style={'width': '1500px', 'height': '500px'},
+                  figure= F.get_uriCounts_figure(R.es_dashboard_directory,R.uriCounts_es)), 
+        ])
+          ]),
         html.H4("Top 50 most frequent entities"),
         html.Br(),
-           html.Div([
-        html.Div([
         DataTable(
             id="es_uriCounts_table",
-            columns=[{"name": "DBpedia entity", "id": "DBpedia entity"}],
-            data=R.uriCounts_es.to_dict("records"),
+            columns=[{"name": "DBpedia entity", "id": "DBpedia entity"},
+                     {"name": "Count", "id": "Count"}],
+            data=R.top_uriCounts_es.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 375
+                'overflowY': 'scroll', 'height': 400, 'width': 450
                          }
-        )], style={'flex-grow': '0.15'}
-            ),
-        dcc.Graph(id="es_uriCounts_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.es_uriCounts_figure)], style={'display': 'flex'}),
-                   ]),
+        ),
            html.Br(),
           html.Div([html.H3("pairCounts"),
+             html.H4("Number of times each surface form is linked to a DBpedia entity"),
+            html.Br(),
+            html.Div([
+            dcc.RangeSlider(id='pairCounts_slider', min=0, max=1300, step=None, value=[0, 100],
+            marks={
+                0: '0',
+                100: '100',
+                200: '200',
+                300: '300',
+                400: '400',
+    		    500: '500',
+    		    600: '600',
+    		    700: '700',
+    		    800: '800',
+    		    900: '900',
+    		   1000:'1000',
+               1100:'1100',
+               1200:'1200',
+               1300:'1300'
+        }
+        ),
+            dcc.Graph(id="pairCounts_graph", style={'width': '1500px', 'height': '500px'},
+                      figure= F.get_pairCounts_figure(R.es_dashboard_directory,R.pairCounts_es)), 
+            ])
+          ]),          
           html.H4("Top 50 most linked surface forms"),
            html.Br(),
-           html.Div([
-        html.Div([
         DataTable(
             id="es_pairCounts_table",
             columns=[{"name": "Surface form", "id": "Surface form"},
-                     {"name": "DBpedia entity", "id": "DBpedia entity"}],
-            data=R.pairCounts_es.to_dict("records"),
+                     {"name": "DBpedia entity", "id": "DBpedia entity"},
+                     {"name": "Times linked", "id": "Times linked"}],
+            data=R.top_pairCounts_es.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 385
+                'overflowY': 'scroll', 'height': 400, 'width': 520
                          }
-        )], style={'flex-grow': '0.15'}
-            ),
-        dcc.Graph(id="es_pairCounts_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.es_pairCounts_figure)], style={'display': 'flex'}),
-                   
-                   ]),
+        ),
            html.Br(),
          html.Div(children=[html.H3("tokenCounts"),
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº Wikipedia pages"), html.H4(R.es_stats[43])], 
@@ -157,32 +192,89 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº tokens per Wikipedia pages"), html.H4(R.es_stats[44])], 
                                          )]),style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'), 
              ]),
+         html.Br(),
+          html.H4("Number of tokens per Wikipedia article"),
+        html.Br(),
+        html.Div([
+        dcc.RangeSlider(id='tokenCounts_slider', min=0, max=1300, step=None, value=[0, 100],
+        marks={
+            0: '0',
+            100: '100',
+            200: '200',
+            300: '300',
+            400: '400',
+		    500: '500',
+		    600: '600',
+		    700: '700',
+		    800: '800',
+		    900: '900',
+		   1000:'1000',
+           1100:'1100',
+           1200:'1200',
+           1300:'1300'
+    }
+    ),
+        dcc.Graph(id="tokenCounts_graph", style={'width': '1500px', 'height': '500px'},
+                  figure= F.get_tokenCounts_figure(R.es_dashboard_directory,R.tokenCounts_es)), 
+        ]),
+        html.H4("Top 50 Wikipedia articles with more tokens"),
+        html.Br(),
+        DataTable(
+            id="tokenCounts_table",
+             columns=[{"name": "Wikipedia article", "id": "Wikipedia article"},
+                     {"name": "Nº tokens", "id": "Nº tokens"}],
+            data=R.top_tokenCounts_es.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 475
+                         }
+        ),
           html.Br(),
           html.Div([html.H3("sfAndTotalCounts"),
-          dbc.Card(dbc.CardBody([html.Div([html.H4("Nº surface forms"), html.H4(R.es_stats[45])]
+          dbc.Card(dbc.CardBody([html.Div([html.H4("Nº surface forms"), html.H4(R.es_stats[47])]
                                        )]), color='#F5F5F5', style={'display': 'inline-block'})
                    ]),
           html.Br(),
+           html.H4("Surface forms"),
+          dcc.Graph(id='es_pie', figure=F.es_sfpie_figure),
+          html.Br(),
+          html.H4("Number of times each surface form is linked to a DBpedia entity"),
+            html.Br(),
+            html.Div([
+            dcc.RangeSlider(id='sfAndTotalCounts_slider', min=0, max=1300, step=None, value=[0, 100],
+            marks={
+                0: '0',
+                100: '100',
+                200: '200',
+                300: '300',
+                400: '400',
+    		    500: '500',
+    		    600: '600',
+    		    700: '700',
+    		    800: '800',
+    		    900: '900',
+    		   1000:'1000',
+               1100:'1100',
+               1200:'1200',
+               1300:'1300'
+        }
+        ),
+            dcc.Graph(id="sfAndTotalCounts_graph", style={'width': '1500px', 'height': '500px'},
+                      figure= F.get_sfAndTotalCounts_figure(R.es_dashboard_directory,R.sfAndTotalCounts_es)), 
+            ]),
           html.H4("Top 50 most linked surface forms"),
-           html.Div([
-        html.Div([
         DataTable(
             id="es_sfAndTotalCounts_table",
             columns=[{"name": "Surface form", "id": "Surface form"},
+                     {"name": "Times linked", "id": "Times linked"},
                      {"name": "Times as plain text", "id": "Times as plain text"}],
-            data=R.sfAndTotalCounts_es.to_dict("records"),
+            data=R.top_sfAndTotalCounts_es.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 325
+                'overflowY': 'scroll', 'height': 400, 'width': 400
                          }
-        )], style={'flex-grow': '0.15'}
-            ),
-        dcc.Graph(id="es_sfAndTotalCounts_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.es_sfAndTotalCounts_figure)], style={'display': 'flex'}),
-            html.Br(),
-           html.H4("Surface forms"),
-          dcc.Graph(id='es_pie', figure=F.es_sfpie_figure),
-          ]),
+        )])
+          ,
         # English tab
         dcc.Tab(label='English', children = [
         html.Br(),    
@@ -228,95 +320,186 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         html.Br(),
         html.H3("Top 50 DBpedia types with more entities"),
         html.Br(),
-        html.Div([
-        html.Div([
         DataTable(
             id="en_top_known_types_table",
-            columns=[{"name": "DBpedia type", "id": "DBpedia type"}],
+            columns=[{"name": "DBpedia type", "id": "DBpedia type"},
+                     {"name": "Nº entities", "id": "Nº entities"}],
             data=R.top_known_types_en.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 230
+                'overflowY': 'scroll', 'height': 400, 'width': 325
                          }
-        )], style={'flex-grow': '0.15'}
-            ),
-        dcc.Graph(id="en_known_types_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.en_top_known_types_figure)], style={'display': 'flex'}),
+        ),
          html.Br(),
           html.Div([html.H2("Wikistats"),
                    ]),
           html.Div([html.H3("uriCounts"),
+        html.H4("Number of times each DBpedia entity appears in Wikipedia dump"),
+        html.Br(),
+        html.Div([
+        dcc.RangeSlider(id='en_uriCounts_slider', min=0, max=1300, step=None, value=[0, 100],
+        marks={
+            0: '0',
+            100: '100',
+            200: '200',
+            300: '300',
+            400: '400',
+		    500: '500',
+		    600: '600',
+		    700: '700',
+		    800: '800',
+		    900: '900',
+		   1000:'1000',
+           1100:'1100',
+           1200:'1200',
+           1300:'1300'
+    }
+    ),
+        dcc.Graph(id="en_uriCounts_graph", style={'width': '1500px', 'height': '500px'},
+                  figure= F.get_uriCounts_figure(R.en_dashboard_directory,R.uriCounts_en)), 
+        ]),
         html.H4("Top 50 most frequent entities"),
         html.Br(),
-           html.Div([
-        html.Div([
         DataTable(
             id="en_uriCounts_table",
-            columns=[{"name": "DBpedia entity", "id": "DBpedia entity"}],
-            data=R.uriCounts_en.to_dict("records"),
+             columns=[{"name": "DBpedia entity", "id": "DBpedia entity"},
+                     {"name": "Count", "id": "Count"}],
+            data=R.top_uriCounts_en.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 430
+                'overflowY': 'scroll', 'height': 400, 'width': 500
                          }
-        )], style={'flex-grow': '0.15'}
-            ),
-        dcc.Graph(id="en_uriCounts_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.en_uriCounts_figure)], style={'display': 'flex'}),
-                   ]),
+        )]),
            html.Br(),
           html.Div([html.H3("pairCounts"),
+         html.H4("Number of times each surface form is linked to a DBpedia entity"),
+            html.Br(),
+            html.Div([
+            dcc.RangeSlider(id='en_pairCounts_slider', min=0, max=1300, step=None, value=[0, 100],
+            marks={
+                0: '0',
+                100: '100',
+                200: '200',
+                300: '300',
+                400: '400',
+    		    500: '500',
+    		    600: '600',
+    		    700: '700',
+    		    800: '800',
+    		    900: '900',
+    		   1000:'1000',
+               1100:'1100',
+               1200:'1200',
+               1300:'1300'
+        }
+        ),
+            dcc.Graph(id="en_pairCounts_graph", style={'width': '1500px', 'height': '500px'},
+                      figure= F.get_pairCounts_figure(R.en_dashboard_directory,R.pairCounts_en)), 
+            ]),
           html.H4("Top 50 most linked surface forms"),
            html.Br(),
-           html.Div([
-        html.Div([
         DataTable(
             id="en_pairCounts_table",
-            columns=[{"name": "Surface form", "id": "Surface form"},
-                     {"name": "DBpedia entity", "id": "DBpedia entity"}],
-            data=R.pairCounts_en.to_dict("records"),
+           columns=[{"name": "Surface form", "id": "Surface form"},
+                     {"name": "DBpedia entity", "id": "DBpedia entity"},
+                     {"name": "Times linked", "id": "Times linked"}],
+            data=R.top_pairCounts_en.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 670
+                'overflowY': 'scroll', 'height': 400, 'width': 835
                          }
-        )], style={'flex-grow': '0.15'}
-            ),
-        dcc.Graph(id="en_pairCounts_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.en_pairCounts_figure)], style={'display': 'flex'}),
-                   
-                   ]),
-           html.Br(),
+        ),
+           html.Br()
+           ]),
          html.Div(children=[html.H3("tokenCounts"),
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº Wikipedia pages"), html.H4(R.en_stats[43])], 
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº tokens per Wikipedia pages"), html.H4(R.en_stats[44])], 
                                          )]),style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'), 
              ]),
+         html.Br(),
+          html.H4("Number of tokens per Wikipedia article"),
+        html.Br(),
+        html.Div([
+        dcc.RangeSlider(id='en_tokenCounts_slider', min=0, max=1300, step=None, value=[0, 100],
+        marks={
+            0: '0',
+            100: '100',
+            200: '200',
+            300: '300',
+            400: '400',
+		    500: '500',
+		    600: '600',
+		    700: '700',
+		    800: '800',
+		    900: '900',
+		   1000:'1000',
+           1100:'1100',
+           1200:'1200',
+           1300:'1300'
+    }
+    ),
+        dcc.Graph(id="en_tokenCounts_graph", style={'width': '1500px', 'height': '500px'},
+                  figure= F.get_tokenCounts_figure(R.en_dashboard_directory,R.tokenCounts_en)), 
+        ]),
+        html.H4("Top 50 Wikipedia articles with more tokens"),
+        html.Br(),
+        DataTable(
+            id="en_tokenCounts_table",
+             columns=[{"name": "Wikipedia article", "id": "Wikipedia article"},
+                     {"name": "Nº tokens", "id": "Nº tokens"}],
+            data=R.top_tokenCounts_en.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 500
+                         }
+        ),
           html.Br(),
           html.Div([html.H3("sfAndTotalCounts"),
-          dbc.Card(dbc.CardBody([html.Div([html.H4("Nº surface forms"), html.H4(R.en_stats[45])]
+          dbc.Card(dbc.CardBody([html.Div([html.H4("Nº surface forms"), html.H4(R.en_stats[47])]
                                        )]), color='#F5F5F5', style={'display': 'inline-block'})
                    ]),
           html.Br(),
+           html.H4("Surface forms"),
+          dcc.Graph(id='en_pie', figure=F.en_sfpie_figure),
+          html.Br(),
+          html.H4("Number of times each surface form is linked to a DBpedia entity"),
+            html.Br(),
+            html.Div([
+            dcc.RangeSlider(id='en_sfAndTotalCounts_slider', min=0, max=1300, step=None, value=[0, 100],
+            marks={
+                0: '0',
+                100: '100',
+                200: '200',
+                300: '300',
+                400: '400',
+    		    500: '500',
+    		    600: '600',
+    		    700: '700',
+    		    800: '800',
+    		    900: '900',
+    		   1000:'1000',
+               1100:'1100',
+               1200:'1200',
+               1300:'1300'
+        }
+        ),
+            dcc.Graph(id="en_sfAndTotalCounts_graph", style={'width': '1500px', 'height': '500px'},
+                      figure= F.get_sfAndTotalCounts_figure(R.en_dashboard_directory,R.sfAndTotalCounts_en)), 
+            ]),
           html.H4("Top 50 most linked surface forms"),
-           html.Div([
-        html.Div([
         DataTable(
             id="en_sfAndTotalCounts_table",
             columns=[{"name": "Surface form", "id": "Surface form"},
+                     {"name": "Times linked", "id": "Times linked"},
                      {"name": "Times as plain text", "id": "Times as plain text"}],
-            data=R.sfAndTotalCounts_en.to_dict("records"),
+            data=R.top_sfAndTotalCounts_en.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 520
+                'overflowY': 'scroll', 'height': 400, 'width': 625
                          }
-        )], style={'flex-grow': '0.15'}
-            ),
-        dcc.Graph(id="en_sfAndTotalCounts_stats", style={'width': '900px', 'height': '400px'},
-                  figure= F.en_sfAndTotalCounts_figure)], style={'display': 'flex'}),
-            html.Br(),
-           html.H4("Surface forms"),
-          dcc.Graph(id='en_pie', figure=F.en_sfpie_figure),
-          ]),
+        )
+        ]),
         # To be modified                    
         dcc.Tab(label='Comparison', value='comparison-tab', children = [
             html.Div(children=[
@@ -325,8 +508,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             {'label': 'Precision', 'value': 'Precision'},
             {'label': 'Impact', 'value': 'Impact'}], value = 'Precision'),
           dcc.Graph(id='metric', figure={})
-    ])])
-            ])])
+    ])
+    ])
+            ])
+            ])
 
 if __name__ == '__main__':
     CB.initialize_callbacks(app)

@@ -53,6 +53,8 @@ DBpedia Spotlight tokenCounts
 -------------------------------------
 Number of Wikipedia pages: 509175
 Mean number of tokens per Wikipedia page: 261.85
+Median number of tokens per Wikipedia page: 70
+Population standard deviation of tokens per Wikipedia page: 953.59
 
 DBpedia Spotlight sfAndTotalCounts
 -------------------------------------

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+DIR=$(pwd)
+BASE_DIR=${DIR//"/src"/}
+RESOURCES_DIR="$BASE_DIR/resources"
+ES="es"
+DASHBOARD="dashboard_data"
+
 function install_modules {
 pip install pandas
 pip install dash
@@ -23,5 +29,9 @@ if [[ $validate == [yY] ]]; then
 	echo "Generating stats again"
 	./stats.sh
 fi
-echo "Launching dashboard"
+if [ ! -f $RESOURCES_DIR/$ES/$DASHBOARD/cleaned_pairCounts ]; then
+	echo "Joining"
+	./join.sh
+fi
+echo "Loading dashboard..."
 python dashboard.py

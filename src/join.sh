@@ -20,11 +20,11 @@ then
 	cat *sfAndTotalCounts_c* >> sfAndTotalCounts
 	rm *Counts_b*
 	rm *Counts_c*
+	rm *tokens_a*
 fi
 echo "Cleaning pairCounts file"
 cat pairCounts | awk -F '\t' '{if($3~/^[0-9]+$/){print}}' > cleaned_pairCounts
 rm *Counts_a*
-rm *tokens_a*
 rm pairCounts
 }
 

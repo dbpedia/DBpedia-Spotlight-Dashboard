@@ -406,7 +406,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             data=R.top_pairCounts_en.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 835
+                'overflowY': 'scroll', 'height': 400, 'width': 780
                          }
         ),
            html.Br()
@@ -515,5 +515,5 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
 
 if __name__ == '__main__':
     CB.initialize_callbacks(app)
-    app.run_server(debug=True)
+    app.run_server(host='0.0.0.0', port=8050, debug=True)
     

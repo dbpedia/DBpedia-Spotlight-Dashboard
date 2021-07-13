@@ -6,17 +6,36 @@ RESOURCES_DIR="$BASE_DIR/resources"
 ES="es"
 DASHBOARD="dashboard_data"
 
-function install_modules {
-pip install pandas
-pip install dash
-pip install dash-core-components
-pip install dash-html-components
-pip install dash-table
-pip install plotly
-pip install dash-bootstrap-components
+function check_packages {
+REQUIRED_PKG=$1
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+echo Checking for $REQUIRED_PKG: $PKG_OK
+if [ "" = "$PKG_OK" ]; then
+  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+  sudo apt-get --yes install $REQUIRED_PKG 
+fi
 }
 
-install_modules
+function check_modules {
+REQUIRED_MODULE=$1
+MODULE_OK=$(pip3 list --format=columns | grep $REQUIRED_MODULE)
+if [ -z "$MODULE_OK" ]
+then
+      pip3 install $REQUIRED_MODULE
+else
+      echo "$REQUIRED_MODULE is already installed"
+fi
+}
+
+check_packages "python3"
+check_packages "python3-pip"
+check_modules "pandas"
+check_modules "dash"
+check_modules "dash-core-components"
+check_modules "dash-html-components"
+check_modules "dash-table"
+check_modules "plotly"
+check_modules "dash-bootstrap-components"
 cd "src"	
 read -p "URLs validation takes so much time. Also a DBpedia SPARQL instance is necessary.
 However, files resulting from validation are already in the repository so it is not necessary to validate URLs.
@@ -34,4 +53,4 @@ if [ ! -f $RESOURCES_DIR/$ES/$DASHBOARD/cleaned_pairCounts ]; then
 	./join.sh
 fi
 echo "Loading dashboard..."
-python dashboard.py
+python3 dashboard.py

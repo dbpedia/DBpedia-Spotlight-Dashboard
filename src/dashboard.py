@@ -515,5 +515,5 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
 
 if __name__ == '__main__':
     CB.initialize_callbacks(app)
-    app.run_server(host='0.0.0.0', port=8050, debug=True)
+    app.run_server(host='0.0.0.0', port=8050, debug=False)
     

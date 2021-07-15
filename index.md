@@ -156,3 +156,13 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 ![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new10.png)
 
 ![information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_dashboard_stats_new11.png)
+
+**[15/07/2021]**: Meeting with the mentors in which the Dashboard has been reviewed and the following tasks to be carried out have been defined:
+- Make the `Comparison` tab, where the number of entities and the types found in the DBpedia `instance-types` dataset will be compared for both Spanish and English for the following versions:
+```
+2016.10.01
+2020.10.01
+2021.05.01
+2021.06.01
+```
+- Think about the ontology to use to represent the calculated statistics as Linked Data. Also think if it is worth creating our own ontology to represent the information instead of using any of the existing ones or reusing terms from different ontologies.

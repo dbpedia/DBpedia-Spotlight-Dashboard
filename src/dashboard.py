@@ -13,11 +13,13 @@ app = dash.Dash(external_stylesheets=[dbc.themes.LUX])
 
 
 app.layout = html.Div(children=[
+    html.Br(),
     html.H1(children='DBpedia Spotlight Dashboard'),
     html.Br(),
     dcc.Tabs(id='tabs', value='tab-1', children=[
         # Information tab
         dcc.Tab(label='Information', children = [
+            html.Br(),
             dcc.Markdown('''
 ## DBpedia Spotlight 
 **DBpedia Spotlight** is a tool for automatically **annotating mentions of DBpedia resources in text**,  providing a solution for linking unstructured information sources to the Linked Open Data cloud through DBpedia. Spotlight can annotate texts in multiple languages (e.g., English, German, French, Portuguese, etc). 

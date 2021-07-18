@@ -183,3 +183,15 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 2021.06.01
 ```
 - Think about the ontology to use to represent the calculated statistics as Linked Data. Also think if it is worth creating our own ontology to represent the information instead of using any of the existing ones or reusing terms from different ontologies.
+
+**[18/07/2021]**:
+
+- `Instance types`,` uriCounts`, `pairCounts`,` tokenCounts` and `sfAndTotalCounts` sub-tabs have been added within the `Spanish` and `English` tabs to be able to view the information of interest in parts.
+
+![Subtabs](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/subtabs.png)
+
+- The `Comparison` tab has been made, where the different versions can be compared and the variation of entities and types between them can be appreciated.
+
+![Comparison 1](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/comp1.png)
+
+![Comparison 2](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/comp2.png)

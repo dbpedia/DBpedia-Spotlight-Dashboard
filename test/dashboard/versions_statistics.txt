@@ -1,0 +1,56 @@
+Language: es | Version: 2016.10.01
+
+DBpedia Extraction Framework instance-types
+-------------------------------------
+Number of DBpedia entities (without counting repetitions): 923443
+Number of DBpedia types: 183
+
+Language: es | Version: 2020.10.01
+
+DBpedia Extraction Framework instance-types
+-------------------------------------
+Number of DBpedia entities (without counting repetitions): 1277362
+Number of DBpedia types: 188
+
+Language: es | Version: 2021.05.01
+
+DBpedia Extraction Framework instance-types
+-------------------------------------
+Number of DBpedia entities (without counting repetitions): 1327554
+Number of DBpedia types: 188
+
+Language: es | Version: 2021.06.01
+
+DBpedia Extraction Framework instance-types
+-------------------------------------
+Number of DBpedia entities (without counting repetitions): 1337360
+Number of DBpedia types: 188
+
+Language: en | Version: 2016.10.01
+
+DBpedia Extraction Framework instance-types
+-------------------------------------
+Number of DBpedia entities (without counting repetitions): 4767202
+Number of DBpedia types: 465
+
+Language: en | Version: 2020.10.01
+
+DBpedia Extraction Framework instance-types
+-------------------------------------
+Number of DBpedia entities (without counting repetitions): 6218434
+Number of DBpedia types: 471
+
+Language: en | Version: 2021.05.01
+
+DBpedia Extraction Framework instance-types
+-------------------------------------
+Number of DBpedia entities (without counting repetitions): 6419269
+Number of DBpedia types: 471
+
+Language: en | Version: 2021.06.01
+
+DBpedia Extraction Framework instance-types
+-------------------------------------
+Number of DBpedia entities (without counting repetitions): 6442040
+Number of DBpedia types: 471
+

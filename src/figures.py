@@ -184,6 +184,19 @@ def get_init_bar_figure_pos(language_directory,df):
     fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
     return fig
 
+def get_version_bar_figure(labels, values):
+    fig = go.Figure()
+    fig.add_trace(go.Bar(x= [int(values[0])], orientation='h', marker_color='#A349A4', name = labels[0], width = 1, hovertext=[values[0]], hoverinfo="text"))
+    fig.add_trace(go.Bar(x= [int(values[1])], orientation='h', marker_color="#77C14C", name = labels[1], width = 0.5, hovertext=[values[1]], hoverinfo="text"))
+    
+    fig.update_layout(yaxis={'ticks':'', 'showticklabels':False}, barmode='overlay', margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia version")
+    return fig
+    
+def get_version_pie_figure(labels,values):
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=300, width=700)
+    return fig
+
 es_statistics_figure = get_language_statistics_figure(R.es_stats)
 en_statistics_figure = get_language_statistics_figure(R.en_stats)
 ontology_figure = get_ontology_figure()

@@ -47,6 +47,8 @@ if [[ $validate == [yY] ]]; then
 	./validate.sh
 	echo "Generating stats again"
 	./stats.sh
+	echo "Getting instance-types version stats"
+	./versions.sh
 fi
 if [ ! -f $RESOURCES_DIR/$ES/$DASHBOARD/cleaned_pairCounts ]; then
 	echo "Joining"

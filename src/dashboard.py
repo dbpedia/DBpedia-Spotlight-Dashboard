@@ -53,8 +53,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             ]),
         # Spanish tab
         dcc.Tab(label='Spanish', children = [
-        html.Br(),    
-        html.Div(children=[html.H2("DBpedia Extraction Framework"),
+        dcc.Tabs(id='subtabs', value='subtab-1', children=[
+        # Instance-types subtab
+        dcc.Tab(label='Instance types', children = [html.Br(),
+             html.Div(children=[html.H2("DBpedia Extraction Framework"),
         html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.es_stats[2])]
                                          )]),style={'display': 'inline-block'}, color="#F5F5F5"),
@@ -105,12 +107,12 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 425
                          }
-        ),
-         html.Br(),
-          html.Div([html.H2("Wikistats"),
-                   ]),
-          html.Div([html.H3("uriCounts"),
-          html.H4("Number of times each DBpedia entity appears in Wikipedia dump"),
+        )
+            ])
+        ,
+         # uriCounts subtab
+         dcc.Tab(label='uriCounts', children = [html.Br(),
+               html.H4("Number of times each DBpedia entity appears in Wikipedia dump"),
         html.Br(),
         html.Div([
         dcc.RangeSlider(id='uriCounts_slider', min=0, max=1300, step=None, value=[0, 100],
@@ -134,7 +136,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         dcc.Graph(id="uriCounts_graph", style={'width': '1500px', 'height': '500px'},
                   figure= F.get_uriCounts_figure(R.es_dashboard_directory,R.uriCounts_es)), 
         ])
-          ]),
+         ,
         html.H4("Top 50 most frequent entities"),
         html.Br(),
         DataTable(
@@ -146,10 +148,12 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 450
                          }
-        ),
-           html.Br(),
-          html.Div([html.H3("pairCounts"),
-             html.H4("Number of times each surface form is linked to a DBpedia entity"),
+        )
+         ])
+              ,
+          # pairCounts subtab
+         dcc.Tab(label='pairCounts', children = [html.Br(),
+              html.H4("Number of times each surface form is linked to a DBpedia entity"),
             html.Br(),
             html.Div([
             dcc.RangeSlider(id='pairCounts_slider', min=0, max=1300, step=None, value=[0, 100],
@@ -173,7 +177,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             dcc.Graph(id="pairCounts_graph", style={'width': '1500px', 'height': '500px'},
                       figure= F.get_pairCounts_figure(R.es_dashboard_directory,R.pairCounts_es)), 
             ])
-          ]),          
+          ,          
           html.H4("Top 50 most linked surface forms"),
            html.Br(),
         DataTable(
@@ -186,9 +190,11 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 520
                          }
-        ),
-           html.Br(),
-         html.Div(children=[html.H3("tokenCounts"),
+        )])
+              ,
+          # tokenCounts subtab
+         dcc.Tab(label='tokenCounts', children = [html.Br(),
+               html.Div(children=[
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº Wikipedia pages"), html.H4(R.es_stats[43])], 
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº tokens per Wikipedia pages"), html.H4(R.es_stats[44])], 
@@ -230,9 +236,11 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 475
                          }
-        ),
-          html.Br(),
-          html.Div([html.H3("sfAndTotalCounts"),
+        )
+              ]),
+          # sfAndTotalCounts subtab
+        dcc.Tab(label='sfAndTotalCounts', children = [html.Br(),
+              html.Div([
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº surface forms"), html.H4(R.es_stats[47])]
                                        )]), color='#F5F5F5', style={'display': 'inline-block'})
                    ]),
@@ -275,12 +283,18 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 400
                          }
-        )])
+        )
+              
+              ])
+        ])
+        ])
           ,
         # English tab
         dcc.Tab(label='English', children = [
-        html.Br(),    
-        html.Div(children=[html.H2("DBpedia Extraction Framework"),
+        dcc.Tabs(id='en-subtabs', value='en-subtab-1', children=[
+        # Instance-types subtab
+        dcc.Tab(label='Instance types', children = [html.Br(),
+            html.Div(children=[html.H2("DBpedia Extraction Framework"),
         html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.en_stats[2])]
                                          )]),style={'display': 'inline-block'}, color="#F5F5F5"),
@@ -331,11 +345,11 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 325
                          }
-        ),
-         html.Br(),
-          html.Div([html.H2("Wikistats"),
-                   ]),
-          html.Div([html.H3("uriCounts"),
+        )
+       ]),
+         # uriCounts subtab
+        dcc.Tab(label='uriCounts', children = [html.Br(),
+             html.Div([
         html.H4("Number of times each DBpedia entity appears in Wikipedia dump"),
         html.Br(),
         html.Div([
@@ -371,9 +385,11 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 500
                          }
-        )]),
-           html.Br(),
-          html.Div([html.H3("pairCounts"),
+        )])
+       ]),
+         # pairCounts subtab
+        dcc.Tab(label='pairCounts', children = [html.Br(),
+             html.Div([
          html.H4("Number of times each surface form is linked to a DBpedia entity"),
             html.Br(),
             html.Div([
@@ -410,10 +426,12 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 780
                          }
-        ),
-           html.Br()
-           ]),
-         html.Div(children=[html.H3("tokenCounts"),
+        )
+        ])
+       ]),
+         # tokenCounts subtab
+        dcc.Tab(label='tokenCounts', children = [html.Br(),
+             html.Div([
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº Wikipedia pages"), html.H4(R.en_stats[43])], 
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº tokens per Wikipedia pages"), html.H4(R.en_stats[44])], 
@@ -455,9 +473,12 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 500
                          }
-        ),
-          html.Br(),
-          html.Div([html.H3("sfAndTotalCounts"),
+        )
+       ]),
+        
+         # sfAndTotalCounts subtab
+        dcc.Tab(label='sfAndTotalCounts', children = [html.Br(),
+             html.Div([
           dbc.Card(dbc.CardBody([html.Div([html.H4("Nº surface forms"), html.H4(R.en_stats[47])]
                                        )]), color='#F5F5F5', style={'display': 'inline-block'})
                    ]),
@@ -501,17 +522,40 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 'overflowY': 'scroll', 'height': 400, 'width': 625
                          }
         )
-        ]),
-        # To be modified                    
+       ])
+        ])   
+    ]),
+        # Comparison tab                    
         dcc.Tab(label='Comparison', value='comparison-tab', children = [
-            html.Div(children=[
-            html.H3('Choose metric to compare:'),
-          dcc.Dropdown(id='dropdown',options=[
-            {'label': 'Precision', 'value': 'Precision'},
-            {'label': 'Impact', 'value': 'Impact'}], value = 'Precision'),
-          dcc.Graph(id='metric', figure={})
-    ])
-    ])
+            html.Br(),
+        html.H3("Choose language version: "),
+        dcc.Dropdown(id='lang_dropdown',options=[
+            {'label': 'Spanish', 'value': 'Spanish'},
+            {'label': 'English', 'value': 'English'}], 
+            placeholder="Language"),
+        html.Br(),
+        html.H3("Choose 2 versions to compare: "),
+        html.Div([
+        dcc.Dropdown(id='version1_dropdown',options=[
+            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 1st 2021', 'value': 'May 1st 2021'},
+            {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
+            ], 
+            placeholder="Version 1", style={'display': 'inline-block', 'width': 700}),
+        dcc.Dropdown(id='version2_dropdown',options=[
+            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 1st 2021', 'value': 'May 1st 2021'},
+            {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
+            ], 
+            placeholder="Version 2", style={'display': 'inline-block', 'width': 700, "margin-left": "25px"})
+        ]),
+       html.Br(),
+       html.Div(id='data_container'),
+       html.Br(),
+      html.Div(id='figures_container')
+        ])
             ])
             ])
 

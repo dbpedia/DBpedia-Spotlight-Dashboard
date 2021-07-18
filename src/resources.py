@@ -54,6 +54,12 @@ def get_statistics(dashboard_directory):
         numbers = re.findall(r"[-+]?\d*\.\d+|\d+", file)
     return numbers
 
+def get_version_statistics(resources_directory):
+    file = open(resources_directory + "versions_statistics.txt", 'r')
+    file = file.read()
+    numbers = re.findall(r"[-+]?\d*\.\d+|\d+", file)
+    return numbers
+
 
 src_path = os.path.dirname(os.path.realpath(__file__))
 root_path = src_path.replace("src","")
@@ -95,3 +101,4 @@ top_sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + top_sfAndTotalCount
 top_tokenCounts_en = tsv_to_df(en_dashboard_directory + top_tokenCounts_file)
 top_known_types_en = tsv_to_df(en_dashboard_directory + top_known_types_file)
 en_stats = get_statistics(en_dashboard_directory)
+versions_stats = get_version_statistics(root_path + "resources/")

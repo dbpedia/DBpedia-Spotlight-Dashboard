@@ -20,8 +20,6 @@ function download_dbpedia_datasets {
 * https://databus.dbpedia.org/dbpedia/generic/disambiguations
 * https://databus.dbpedia.org/dbpedia/generic/redirects
 * https://databus.dbpedia.org/dbpedia/mappings/instance-types
-Note of deviation from original index_db.sh: 
-takes the direct AND transitive version of redirects and instance-types and the redirected version of disambiguation 
 "
 
 	QUERY="PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

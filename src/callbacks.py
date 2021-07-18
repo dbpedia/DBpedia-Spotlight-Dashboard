@@ -1,63 +1,193 @@
 # -*- coding: utf-8 -*-
 import dash
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+import dash_html_components as html
+import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import resources as R
+import figures as F
 
 def initialize_callbacks(app):                                                 
- # Comparison callback -> To be modified
+ # Comparison callback - cards
      @app.callback(
-        dash.dependencies.Output('metric', 'figure'),
-        [dash.dependencies.Input('dropdown', 'value')])
-     def update_metrics(value):
-        if value is None:
-                return dash.no_update
-        fig = make_subplots(rows=1, cols=2, specs=[[{'type' : 'indicator'}, 
-                                                {'type' : 'indicator'}]])
-        if value == 'Precision':
-            fig.add_trace(
-                go.Indicator(
-                    mode = "gauge+number",
-                    value = float(R.es_stats[0]),
-        title = {'text': "Precision of Spanish valid URLs"},
-        domain = {'x': [0, 1], 'y': [0, 1]},
-        gauge = {'axis': {'range': [0, 1]}}
-        ),
-        row=1, col=1
-        )
-            fig.add_trace(
-                go.Indicator(
-                    mode = "gauge+number",
-                    value = float(R.en_stats[0]),
-                    title = {'text': "Precision of English valid URLs"},
-                    domain = {'x': [0, 1], 'y': [0, 1]},
-                    gauge = {'axis': {'range': [0, 1]}}
-                    ),
-                row=1, col=2
+    dash.dependencies.Output('data_container', 'children'),
+    [dash.dependencies.Input('version1_dropdown', 'value'),
+     dash.dependencies.Input('version2_dropdown', 'value'),
+     dash.dependencies.Input('lang_dropdown', 'value')])
+     def version_data(value1, value2, lang_value):
+        if(lang_value is None or value1 is None or value2 is None):
+            return dash.no_update
+        else:
+            versions_stats = R.versions_stats
+            if lang_value == 'Spanish':
+                if value1 == 'Oct 1st 2016':
+                    entities_version1 = versions_stats[2]
+                    types_version1 = versions_stats[3]
+                if value1 == 'Oct 1st 2020':
+                    entities_version1 = versions_stats[6]
+                    types_version1 = versions_stats[7]
+                    
+                if value1 == 'May 1st 2021':
+                    entities_version1 = versions_stats[10]
+                    types_version1 = versions_stats[11]
+                    
+                if value1 == 'June 1st 2021':
+                    entities_version1 = versions_stats[14]
+                    types_version1 = versions_stats[15]
+                    
+                if value2 == 'Oct 1st 2016':
+                    entities_version2 = versions_stats[2]
+                    types_version2 = versions_stats[3]
+                if value2 == 'Oct 1st 2020':
+                    entities_version2 = versions_stats[6]
+                    types_version2 = versions_stats[7]
+                    
+                if value2 == 'May 1st 2021':
+                    entities_version2 = versions_stats[10]
+                    types_version2 = versions_stats[11]
+                    
+                if value2 == 'June 1st 2021':
+                    entities_version2 = versions_stats[14]
+                    types_version2 = versions_stats[15]
+            
+            if lang_value == 'English':
+                if value1 == 'Oct 1st 2016':
+                    entities_version1 = versions_stats[18]
+                    types_version1 = versions_stats[19]
+                if value1 == 'Oct 1st 2020':
+                    entities_version1 = versions_stats[22]
+                    types_version1 = versions_stats[23]
+                    
+                if value1 == 'May 1st 2021':
+                    entities_version1 = versions_stats[26]
+                    types_version1 = versions_stats[27]
+                    
+                if value1 == 'June 1st 2021':
+                    entities_version1 = versions_stats[30]
+                    types_version1 = versions_stats[31]
+                    
+                if value2 == 'Oct 1st 2016':
+                    entities_version2 = versions_stats[18]
+                    types_version2 = versions_stats[19]
+                if value2 == 'Oct 1st 2020':
+                    entities_version2 = versions_stats[22]
+                    types_version2 = versions_stats[23]
+                    
+                if value2 == 'May 1st 2021':
+                    entities_version2 = versions_stats[26]
+                    types_version2 = versions_stats[27]
+                    
+                if value2 == 'June 1st 2021':
+                    entities_version2 = versions_stats[30]
+                    types_version2 = versions_stats[31]
+                
+            entity_growth = abs(int(entities_version1) - int(entities_version2))
+            type_growth = abs(int(types_version1) - int(types_version2))
+            version1_container = html.Div(id='entity_container', children = [
+                html.H4(value1),
+                dbc.Card(dbc.CardBody(
+                        html.H4("Nº DBpedia entities: " + entities_version1)
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                dbc.Card(dbc.CardBody(
+                        html.H4("Nº DBpedia types: " + types_version1)
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
                 )
-        
-        elif value == 'Impact':
-            fig.add_trace(
-                go.Indicator(
-                    mode = "gauge+number",
-                    value = float(R.es_stats[1]),
-                    title = {'text': "Impact of Spanish invalid types"},
-                    domain = {'x': [0, 1], 'y': [0, 1]},
-                    gauge = {'axis': {'range': [0, 1]}, 'bar': {'color': "red"}}
-                    ),
-                row=1, col=1
+                ])
+                
+            version2_container = html.Div(id='type_container', children = [
+                html.H4(value2),
+                dbc.Card(dbc.CardBody(
+                        html.H4("Nº DBpedia entities: " + entities_version2)
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                dbc.Card(dbc.CardBody(
+                        html.H4("Nº DBpedia types: " + types_version2)
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
                 )
-            fig.add_trace(
-                go.Indicator(
-                    mode = "gauge+number",
-                    value = float(R.en_stats[1]),
-                    title = {'text': "Impact of English invalid types"},
-                    domain = {'x': [0, 1], 'y': [0, 1]},
-                    gauge = {'axis': {'range': [0, 1]}, 'bar': {'color': "red"}}
-                    ),
-                row=1, col=2
+                ])
+            
+            growth_container = html.Div(id='growth_container', children = [
+            html.H4("Growth between versions"),
+            dbc.Card(dbc.CardBody(
+                        html.H4("Entity growth: " + str(entity_growth))
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+            dbc.Card(dbc.CardBody(
+                html.H4("Type growth: " + str(type_growth))
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
                 )
-        return fig
+                ])
+            title = html.H3("Version comparison")
+            
+            return title, html.Br(), version1_container, html.Br(), version2_container, html.Br(), growth_container
+    
+    
+    
+# Comparison callback - figures
+     @app.callback(
+    dash.dependencies.Output('figures_container', 'children'),
+    [dash.dependencies.Input('version1_dropdown', 'value'),
+     dash.dependencies.Input('version2_dropdown', 'value'),
+     dash.dependencies.Input('lang_dropdown', 'value')])
+     def version_figures(value1, value2, lang_value):
+        if(lang_value is None or value1 is None or value2 is None):
+            return dash.no_update
+        else:
+            versions_stats = R.versions_stats
+            if lang_value == 'Spanish':
+                if value1 == 'Oct 1st 2016':
+                    entities_version1 = versions_stats[2]
+                    
+                if value1 == 'Oct 1st 2020':
+                    entities_version1 = versions_stats[6]
+                    
+                if value1 == 'May 1st 2021':
+                    entities_version1 = versions_stats[10]
+                    
+                if value1 == 'June 1st 2021':
+                    entities_version1 = versions_stats[14]
+                    
+                if value2 == 'Oct 1st 2016':
+                    entities_version2 = versions_stats[2]
+                if value2 == 'Oct 1st 2020':
+                    entities_version2 = versions_stats[6]
+                    
+                if value2 == 'May 1st 2021':
+                    entities_version2 = versions_stats[10]
+                    
+                if value2 == 'June 1st 2021':
+                    entities_version2 = versions_stats[14]
+            
+            if lang_value == 'English':
+                if value1 == 'Oct 1st 2016':
+                    entities_version1 = versions_stats[18]
+                if value1 == 'Oct 1st 2020':
+                    entities_version1 = versions_stats[22]
+                    
+                if value1 == 'May 1st 2021':
+                    entities_version1 = versions_stats[26]
+                    
+                if value1 == 'June 1st 2021':
+                    entities_version1 = versions_stats[30]
+                    
+                if value2 == 'Oct 1st 2016':
+                    entities_version2 = versions_stats[18]
+                if value2 == 'Oct 1st 2020':
+                    entities_version2 = versions_stats[22]
+                    
+                if value2 == 'May 1st 2021':
+                    entities_version2 = versions_stats[26]
+                    
+                if value2 == 'June 1st 2021':
+                    entities_version2 = versions_stats[30]
+            
+            bar_figure = F.get_version_bar_figure([value1, value2], [entities_version1, entities_version2])
+            pie_figure = F.get_version_pie_figure([value1, value2], [entities_version1, entities_version2])
+            bar_graph = dcc.Graph(id='versions_bar', figure=bar_figure, style={'display': 'inline-block'})
+            pie_graph = dcc.Graph(id='versions_pie', figure=pie_figure, style={'display': 'inline-block'})
+            title = html.H3(value1 + " VS " + value2)
+            return title, html.Br(), bar_graph, pie_graph
 
     # Spanish known types callback
      @app.callback(

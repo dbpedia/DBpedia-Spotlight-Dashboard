@@ -64,7 +64,7 @@ SELECT DISTINCT ?file WHERE {
 }
 
 function versions_statistics {
-	cd $RESOURCES_DIR
+	cd $RESOURCES_DIR/versions
 	INSTANCE_TYPES_FILE=$RESOURCES_DIR/$1/$VERSIONS/$2/instance_types.nt
 	echo "Language: $1 | Version: $2" >> versions_statistics.txt
 	echo "" >> versions_statistics.txt
@@ -75,13 +75,12 @@ function versions_statistics {
 	echo "-------------------------------------" >> versions_statistics.txt
 	echo "Number of DBpedia entities (without counting repetitions): $INSTANCE_TYPES_LINES" >> versions_statistics.txt
 	echo "Getting number of resources for each DBpedia type"
-	cat filtered_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' >> instance_types
-	sed -i 's%http://dbpedia.org/ontology/%%g' instance_types
-	INSTANCE_TYPES_TSV_LINES=$(cat instance_types | wc -l)
+	cat filtered_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' >> instance_types_$1_$2
+	sed -i 's%http://dbpedia.org/ontology/%%g' instance_types_$1_$2
+	INSTANCE_TYPES_TSV_LINES=$(cat instance_types_$1_$2 | wc -l)
 	echo "Number of DBpedia types: $INSTANCE_TYPES_TSV_LINES" >> versions_statistics.txt
 	echo "" >> versions_statistics.txt
     rm filtered_instance_types
-	rm instance_types
 }
 
 if [ -d "$RESOURCES_DIR/$ES/$VERSIONS" ]; then
@@ -119,8 +118,12 @@ else
 	download_versions "$EN" "$_2021_06_01"
 fi
 echo "Calculating versions statistics"
-if [ -f $RESOURCES_DIR/versions_statistics.txt ]; then
-	rm $RESOURCES_DIR/versions_statistics.txt
+if [ -f $RESOURCES_DIR/versions/versions_statistics.txt ]; then
+	rm $RESOURCES_DIR/versions/versions_statistics.txt
+	rm $RESOURCES_DIR/versions/*instance_types*
+else
+	cd $RESOURCES_DIR
+	mkdir versions
 fi
 versions_statistics "$ES" "$_2016_10_01"
 versions_statistics "$ES" "$_2020_10_01"

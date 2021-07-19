@@ -197,6 +197,15 @@ def get_version_pie_figure(labels,values):
     fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=300, width=700)
     return fig
 
+def get_versions_instance_types_figure(labels, version1_df, version2_df):
+    fig = go.Figure()
+    # Instance types Bar
+    fig.add_trace(go.Bar(x = version1_df['Nº entities'], y = version1_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = labels[0]))
+    fig.add_trace(go.Bar(x = version2_df['Nº entities'], y = version2_df['DBpedia type'], orientation='h', marker_color="#77C14C", name = labels[1]))
+    
+    fig.update_layout(barmode='group', margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+    return fig
+
 es_statistics_figure = get_language_statistics_figure(R.es_stats)
 en_statistics_figure = get_language_statistics_figure(R.en_stats)
 ontology_figure = get_ontology_figure()

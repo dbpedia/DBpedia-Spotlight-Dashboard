@@ -52,10 +52,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                          ''')  
             ]),
         # Spanish tab
-        dcc.Tab(label='Spanish', children = [
+        dcc.Tab(id='es_tab', label='Spanish', value = "spanish", children = [
         dcc.Tabs(id='subtabs', value='subtab-1', children=[
         # Instance-types subtab
-        dcc.Tab(label='Instance types', children = [html.Br(),
+        dcc.Tab(id='es_types_tab', label='Instance types', value = 'es_types', children = [html.Br(),
              html.Div(children=[html.H2("DBpedia Extraction Framework"),
         html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.es_stats[2])]
@@ -111,7 +111,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             ])
         ,
          # uriCounts subtab
-         dcc.Tab(label='uriCounts', children = [html.Br(),
+         dcc.Tab(label='uriCounts', value = 'es_uricounts', children = [html.Br(),
                html.H4("Number of times each DBpedia entity appears in Wikipedia dump"),
         html.Br(),
         html.Div([
@@ -290,10 +290,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         ])
           ,
         # English tab
-        dcc.Tab(label='English', children = [
+        dcc.Tab(id='en_tab', label='English', value = "english", children = [
         dcc.Tabs(id='en-subtabs', value='en-subtab-1', children=[
         # Instance-types subtab
-        dcc.Tab(label='Instance types', children = [html.Br(),
+        dcc.Tab(id='en_types_tab', label='Instance types', value = 'en_types', children = [html.Br(),
             html.Div(children=[html.H2("DBpedia Extraction Framework"),
         html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.en_stats[2])]
@@ -348,7 +348,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         )
        ]),
          # uriCounts subtab
-        dcc.Tab(label='uriCounts', children = [html.Br(),
+        dcc.Tab(label='uriCounts', value = 'en_uricounts', children = [html.Br(),
              html.Div([
         html.H4("Number of times each DBpedia entity appears in Wikipedia dump"),
         html.Br(),

@@ -36,7 +36,8 @@ check_modules "dash-html-components"
 check_modules "dash-table"
 check_modules "plotly"
 check_modules "dash-bootstrap-components"
-cd "src"	
+cd "src"
+echo ""	
 read -p "URLs validation takes so much time. Also a DBpedia SPARQL instance is necessary.
 However, files resulting from validation are already in the repository so it is not necessary to validate URLs.
 Do you want to validate URLs anyway? [y/n] " validate

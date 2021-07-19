@@ -7,8 +7,27 @@ import dash_bootstrap_components as dbc
 import resources as R
 import figures as F
 
-def initialize_callbacks(app):                                                 
- # Comparison callback - cards
+def initialize_callbacks(app):
+     '''
+    # Spanish Tab callback
+     @app.callback(dash.dependencies.Output('subtabs', 'value'),
+          [dash.dependencies.Input('tabs', 'value')])
+     def es_switch_tab(value):
+         if value == "spanish":
+             return "es_uricounts"
+         else:
+             return dash.no_update
+         
+    # English Tab callback
+     @app.callback(dash.dependencies.Output('en-subtabs', 'value'),
+          [dash.dependencies.Input('tabs', 'value')])
+     def en_switch_tab(value):
+         if value == "english":
+             return "en_uricounts"
+         else:
+             return dash.no_update
+     '''
+    # Comparison callback - cards
      @app.callback(
     dash.dependencies.Output('data_container', 'children'),
     [dash.dependencies.Input('version1_dropdown', 'value'),
@@ -138,56 +157,166 @@ def initialize_callbacks(app):
             if lang_value == 'Spanish':
                 if value1 == 'Oct 1st 2016':
                     entities_version1 = versions_stats[2]
+                    df1 = R.instance_types_es_2016_10_01
                     
                 if value1 == 'Oct 1st 2020':
                     entities_version1 = versions_stats[6]
+                    df1 = R.instance_types_es_2020_10_01
                     
                 if value1 == 'May 1st 2021':
                     entities_version1 = versions_stats[10]
+                    df1 = R.instance_types_es_2021_05_01
                     
                 if value1 == 'June 1st 2021':
                     entities_version1 = versions_stats[14]
+                    df1 = R.instance_types_es_2021_06_01
                     
                 if value2 == 'Oct 1st 2016':
                     entities_version2 = versions_stats[2]
+                    df2 = R.instance_types_es_2016_10_01
+                    
                 if value2 == 'Oct 1st 2020':
                     entities_version2 = versions_stats[6]
+                    df2 = R.instance_types_es_2020_10_01
                     
                 if value2 == 'May 1st 2021':
                     entities_version2 = versions_stats[10]
+                    df2 = R.instance_types_es_2021_05_01
                     
                 if value2 == 'June 1st 2021':
                     entities_version2 = versions_stats[14]
+                    df2 = R.instance_types_es_2021_06_01
             
             if lang_value == 'English':
                 if value1 == 'Oct 1st 2016':
                     entities_version1 = versions_stats[18]
+                    df1 = R.instance_types_en_2016_10_01
                 if value1 == 'Oct 1st 2020':
                     entities_version1 = versions_stats[22]
+                    df1 = R.instance_types_en_2020_10_01
                     
                 if value1 == 'May 1st 2021':
                     entities_version1 = versions_stats[26]
+                    df1 = R.instance_types_en_2021_05_01
                     
                 if value1 == 'June 1st 2021':
                     entities_version1 = versions_stats[30]
+                    df1 = R.instance_types_en_2021_06_01
                     
                 if value2 == 'Oct 1st 2016':
                     entities_version2 = versions_stats[18]
+                    df2 = R.instance_types_en_2016_10_01
+                    
                 if value2 == 'Oct 1st 2020':
                     entities_version2 = versions_stats[22]
+                    df2 = R.instance_types_en_2020_10_01
                     
                 if value2 == 'May 1st 2021':
                     entities_version2 = versions_stats[26]
+                    df2 = R.instance_types_en_2021_05_01
                     
                 if value2 == 'June 1st 2021':
                     entities_version2 = versions_stats[30]
+                    df2 = R.instance_types_en_2021_06_01
             
             bar_figure = F.get_version_bar_figure([value1, value2], [entities_version1, entities_version2])
             pie_figure = F.get_version_pie_figure([value1, value2], [entities_version1, entities_version2])
             bar_graph = dcc.Graph(id='versions_bar', figure=bar_figure, style={'display': 'inline-block'})
             pie_graph = dcc.Graph(id='versions_pie', figure=pie_figure, style={'display': 'inline-block'})
             title = html.H3(value1 + " VS " + value2)
-            return title, html.Br(), bar_graph, pie_graph
+            type_title = html.H3("DBpedia types comparison")
+            types_container = html.Div([
+                dcc.Graph(id='ontology_version', figure=F.ontology_figure, style={'display': 'inline-block'}),
+                dcc.Graph(id='instance_types_version', figure=F.get_versions_instance_types_figure([value1, value2], df1, df2), 
+                                     style={'display': 'inline-block'})
+                ]
+                )
+            return title, html.Br(), bar_graph, pie_graph, html.Br(), html.Br(),  type_title, types_container
+        
+       # Comparison instance types callback
+     @app.callback(
+            dash.dependencies.Output('instance_types_version', 'figure'),
+            [dash.dependencies.Input('ontology_version', 'clickData'), 
+             dash.dependencies.Input('version1_dropdown', 'value'),
+             dash.dependencies.Input('version2_dropdown', 'value'),
+             dash.dependencies.Input('lang_dropdown', 'value')]
+            )
+     def update_version_instance_types_bar(clicked_data, value1, value2, lang_value):
+            selected_type = 'owlThing'
+            if(lang_value is None or value1 is None or value2 is None):
+                return dash.no_update
+            else:
+                if lang_value == 'Spanish':
+                    if value1 == 'Oct 1st 2016':
+                        df1 = R.instance_types_es_2016_10_01
+                        
+                    if value1 == 'Oct 1st 2020':
+                        df1 = R.instance_types_es_2020_10_01
+                        
+                    if value1 == 'May 1st 2021':
+                        df1 = R.instance_types_es_2021_05_01
+                        
+                    if value1 == 'June 1st 2021':
+                        df1 = R.instance_types_es_2021_06_01
+                        
+                    if value2 == 'Oct 1st 2016':
+                        df2 = R.instance_types_es_2016_10_01
+                        
+                    if value2 == 'Oct 1st 2020':
+                        df2 = R.instance_types_es_2020_10_01
+                        
+                    if value2 == 'May 1st 2021':
+                        df2 = R.instance_types_es_2021_05_01
+                        
+                    if value2 == 'June 1st 2021':
+                        df2 = R.instance_types_es_2021_06_01
+                
+                if lang_value == 'English':
+                    if value1 == 'Oct 1st 2016':
+                        df1 = R.instance_types_en_2016_10_01
+                    if value1 == 'Oct 1st 2020':
+                        df1 = R.instance_types_en_2020_10_01
+                        
+                    if value1 == 'May 1st 2021':
+                        df1 = R.instance_types_en_2021_05_01
+                        
+                    if value1 == 'June 1st 2021':
+                        df1 = R.instance_types_en_2021_06_01
+                        
+                    if value2 == 'Oct 1st 2016':
+                        df2 = R.instance_types_en_2016_10_01
+                        
+                    if value2 == 'Oct 1st 2020':
+                        df2 = R.instance_types_en_2020_10_01
+                        
+                    if value2 == 'May 1st 2021':
+                        df2 = R.instance_types_en_2021_05_01
+                        
+                    if value2 == 'June 1st 2021':
+                        df2 = R.instance_types_en_2021_06_01
+                        
+            ontology_df = R.ontology_df
+            if clicked_data is not None:
+                if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
+                    selected_type = clicked_data['points'][0]['parent']
+                else:
+                    selected_type = clicked_data['points'][0]['label']
+            selected_ontology_df_labels = ontology_df[ontology_df['parents'] == selected_type]['labels']
+            if selected_ontology_df_labels.empty:
+                selected_ontology_df_labels = ontology_df[ontology_df['labels'] == selected_type]['labels']
+            selected_all_instances_df1 = df1[df1['DBpedia type'].isin(selected_ontology_df_labels)]
+            selected_all_instances_df1 = selected_all_instances_df1.sort_values(by='Nº entities', ascending=False)
+            selected_all_instances_df2 = df2[df2['DBpedia type'].isin(selected_ontology_df_labels)]
+            selected_all_instances_df2 = selected_all_instances_df2.sort_values(by='Nº entities', ascending=False)
+            if selected_all_instances_df1.empty:
+                selected_all_instances_df1.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
+            if selected_all_instances_df2.empty:
+                selected_all_instances_df2.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
+            figure = go.Figure()    
+            figure.add_trace(go.Bar(x = selected_all_instances_df1['Nº entities'], y = selected_all_instances_df1['DBpedia type'], orientation='h', marker_color='#A349A4', name = value1))
+            figure.add_trace(go.Bar(x = selected_all_instances_df2['Nº entities'], y = selected_all_instances_df2['DBpedia type'], orientation='h', marker_color="#77C14C", name = value2))
+            figure.update_layout(barmode='group', margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+            return figure
 
     # Spanish known types callback
      @app.callback(
@@ -197,7 +326,7 @@ def initialize_callbacks(app):
      def es_update_known_types_bar(clicked_data):
             selected_type = 'owlThing'
             types_count_df = R.known_types_es
-            ontology_df = R.get_ontology_df()
+            ontology_df = R.ontology_df
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
                     selected_type = clicked_data['points'][0]['parent']
@@ -229,8 +358,8 @@ def initialize_callbacks(app):
             )
      def es_update_instance_types_bar(clicked_data):
             selected_type = 'owlThing'
-            types_count_df = R.get_instance_types_df(R.es_dashboard_directory)
-            ontology_df = R.get_ontology_df()
+            types_count_df = R.instance_types_es
+            ontology_df = R.ontology_df
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
                     selected_type = clicked_data['points'][0]['parent']
@@ -380,7 +509,7 @@ def initialize_callbacks(app):
      def en_update_known_types_bar(clicked_data):
             selected_type = 'owlThing'
             types_count_df = R.known_types_en
-            ontology_df = R.get_ontology_df()
+            ontology_df = R.ontology_df
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
                     selected_type = clicked_data['points'][0]['parent']
@@ -412,8 +541,8 @@ def initialize_callbacks(app):
             )
      def en_update_instance_types_bar(clicked_data):
             selected_type = 'owlThing'
-            types_count_df = R.get_instance_types_df(R.en_dashboard_directory)
-            ontology_df = R.get_ontology_df()
+            types_count_df = R.instance_types_en
+            ontology_df = R.ontology_df
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
                     selected_type = clicked_data['points'][0]['parent']

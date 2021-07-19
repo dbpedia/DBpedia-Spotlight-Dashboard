@@ -19,29 +19,15 @@ def tsv_to_df(path):
         df = pd.read_csv(path, sep='\t',  names=["Surface form", "DBpedia entity", "Times linked"])
     elif "token" in path:
         df = pd.read_csv(path, sep=' ',  names=["Wikipedia article", " ", "Nº tokens"])
+    elif "ontologies" in path:
+        df = pd.read_csv(path)
     else:
         df = pd.read_csv(path, sep='\t',  names=["Surface form", "Times linked", "Times as plain text"])
     return df
 
 # End of auxiliary function for processing TSV files
 
-# Getting dataframes
-
-def get_ontology_df():
-   # Load dataframe
-   df = pd.read_csv(root_path + "resources/ontologies.csv")
-   return  df
-
-
-def get_instance_types_df(language_directory):
-    # Load dataframe
-    instance_types_df = tsv_to_df(language_directory + "instance_types")
-    return instance_types_df
-
-def get_known_types_df(language_directory):
-    # Load dataframe
-    known_types_df = tsv_to_df(language_directory + "known_types")
-    return known_types_df
+# Getting statistics
 
 def get_statistics(dashboard_directory):
     if(es_dashboard_directory == dashboard_directory):
@@ -76,7 +62,8 @@ top_tokenCounts_file = "tokenCounts_top50"
 top_known_types_file = "known_types_top50"
 es_dashboard_directory = root_path + "resources/es/dashboard_data/"
 en_dashboard_directory = root_path + "resources/en/dashboard_data/"
-ontology_df = get_ontology_df()
+versions_directory =  root_path + "resources/versions/"
+ontology_df = tsv_to_df(root_path + "resources/ontologies.csv")
 instance_types_es = tsv_to_df(es_dashboard_directory + instance_types_file)
 known_types_es = tsv_to_df(es_dashboard_directory + known_types_file)
 uriCounts_es = tsv_to_df(es_dashboard_directory + uriCounts_file)
@@ -101,4 +88,12 @@ top_sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + top_sfAndTotalCount
 top_tokenCounts_en = tsv_to_df(en_dashboard_directory + top_tokenCounts_file)
 top_known_types_en = tsv_to_df(en_dashboard_directory + top_known_types_file)
 en_stats = get_statistics(en_dashboard_directory)
-versions_stats = get_version_statistics(root_path + "resources/")
+versions_stats = get_version_statistics(root_path + "resources/versions/")
+instance_types_es_2016_10_01 = tsv_to_df(versions_directory + "instance_types_es_2016.10.01")
+instance_types_es_2020_10_01 = tsv_to_df(versions_directory + "instance_types_es_2020.10.01")
+instance_types_es_2021_05_01 = tsv_to_df(versions_directory + "instance_types_es_2021.05.01")
+instance_types_es_2021_06_01 = tsv_to_df(versions_directory + "instance_types_es_2021.06.01")
+instance_types_en_2016_10_01 = tsv_to_df(versions_directory + "instance_types_en_2016.10.01")
+instance_types_en_2020_10_01 = tsv_to_df(versions_directory + "instance_types_en_2020.10.01")
+instance_types_en_2021_05_01 = tsv_to_df(versions_directory + "instance_types_en_2021.05.01")
+instance_types_en_2021_06_01 = tsv_to_df(versions_directory + "instance_types_en_2021.06.01")

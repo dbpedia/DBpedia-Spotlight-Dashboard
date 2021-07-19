@@ -195,3 +195,13 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 ![Comparison 1](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/comp1.png)
 
 ![Comparison 2](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/comp2.png)
+
+**[19/07/2021]**:
+
+- DBpedia types comparison between different versions of `instance-types` dataset has been added to the `Comparison` tab.
+
+![Comparison 3](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/comp3.png)
+
+**Next tasks**:
+- **Ontology**: think about statistics of interest to show and think about vocabularies to use or else, create an ontology.
+- **Wikistats**: think about what data is interesting to show for the user or another way to show the data.

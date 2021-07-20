@@ -202,6 +202,15 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 
 ![Comparison 3](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/comp3.png)
 
-**Next tasks**:
+**Pending tasks**:
 - **Ontology**: think about statistics of interest to show and think about vocabularies to use or else, create an ontology.
 - **Wikistats**: think about what data is interesting to show for the user or another way to show the data.
+
+**[20/07/2021]**: Once the final version of the Dashboard is made (there are still pending tasks), the idea is to update it in the future with suggestions for improvement from the users:
+- A [form](https://forms.gle/YKiibhasVuYQ5goe6) has been made to receive feedback from the Dashboard. This form evaluates the **usability principles** contained in the paper: [The Development of Heuristics for Evaluation of Dashboard Visualizations.](Https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6041119/)
+
+![Evaluation](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/evaluation.png)
+
+- A `Feedback` tab has been added to the Dashboard. The direct link to the form appears in this tab, so that users can contribute their ideas for improvement after having examined the Dashboard.
+
+![Evaluation Tab](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/evaluation_tab.png)

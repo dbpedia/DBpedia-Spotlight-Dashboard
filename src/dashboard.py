@@ -568,7 +568,7 @@ If you are a user who finds this tool useful, we would like you to `fill out a f
 
 `The form is available here:` https://forms.gle/YKiibhasVuYQ5goe6
 
-`We will take into account all opinions for future features / updates ;)`
+`We will take into account all opinions for future features/updates ;)`
 
 In this form the following usability principles are contemplated:
 - Visibility of System Status

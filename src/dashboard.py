@@ -555,7 +555,39 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
        html.Div(id='data_container'),
        html.Br(),
       html.Div(id='figures_container')
-        ])
+        ]),
+        
+        # Feedback tab
+        dcc.Tab(label='Feedback', children = [
+            html.Br(),
+            dcc.Markdown('''
+## Give us your opinion!                         
+
+
+If you are a user who finds this tool useful, we would like you to `fill out a form` to evaluate the Dashboard and give suggestions for improvement.
+
+`The form is available here:` https://forms.gle/YKiibhasVuYQ5goe6
+
+`We will take into account all opinions for future features / updates ;)`
+
+In this form the following usability principles are contemplated:
+- Visibility of System Status
+- Match between System and the Real World
+- User Control and Freedom
+- Consistency and Standards
+- Recognition rather than Recall
+- Flexibility and Efficiency of Use
+- Aesthetic and Minimalist Design / Remove the Extraneous
+(Ink)
+- Spatial Organization
+- Information Coding
+- Orientation
+
+If you want to know more about these usability principles and about some aspects to take into account when evaluating a visual tool, you can consult the article by Dawn Dowding and Jacqueline A. Merrill: [The Development of Heuristics for Evaluation of Dashboard Visualizations.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6041119/)
+
+Thanks for your time :)              
+                         ''')  
+            ])
             ])
             ])
 

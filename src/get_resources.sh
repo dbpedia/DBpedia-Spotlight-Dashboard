@@ -144,26 +144,6 @@ SELECT ?file WHERE {
 	cd $RESOURCES_DIR
 }
 
-function split_files {
-    cd $RESOURCES_DIR/$1/$WIKISTATS
-	echo "Splitting files"
-	split -l 250000 uriCounts uriCounts_
-	split -l 250000 pairCounts pairCounts_
-	split -l 250000 sfAndTotalCounts sfAndTotalCounts_
-	echo "Filtering"
-	if [ "$1" = "$ES" ]
-	then
-		for i in *Counts_*; do
-			sed -i 's%http://es.dbpedia.org/resource/%%g' $i
-		done
-	else
-		for i in *Counts_*; do
-			sed -i 's%http://dbpedia.org/resource/%%g' $i
-		done
-	fi
-	mv *Counts_* $RESOURCES_DIR/$1/$DASHBOARD
-}
-
 if [ -d "$RESOURCES_DIR/$ES/$DATASETS" ]; then
 	read -p "Do you want to download DBpedia Databus resources again? [y/n] " download_dbpedia
 	if [[ $download_dbpedia == [yY] ]]; then
@@ -195,6 +175,5 @@ else
 	download_wikistats "$ES"
 	download_wikistats "$EN"
 fi
-split_files "$ES"
-split_files "$EN"
+
 echo "Done"

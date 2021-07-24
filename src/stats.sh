@@ -144,18 +144,29 @@ echo "Generating file for dashboard"
 
 function get_uriCounts {
 cd $RESOURCES_DIR/$1/$DASHBOARD
-URICOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/uriCounts
+if [ "$2" = "2021" ]
+then
+	URICOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/uriCounts
+	TOP_50="uriCounts_top50"
+	echo "DBpedia Spotlight 2021 uriCounts" >> stats.txt
+else
+	URICOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2016"/uriCounts_all
+	echo "DBpedia Spotlight 2016 uriCounts" >> stats.txt
+	TOP_50="uriCounts_2016_top50"
+fi
+
 echo "Getting most used resources of uriCounts file"
-cat $URICOUNTS_FILE | sort -t$'\t' -k2 -nr | uniq | head -n 50 >> uriCounts_top50
+cat $URICOUNTS_FILE | sort -t$'\t' -k2 -nr | uniq | head -n 50 >> "$TOP_50"
 if [ "$1" = "$ES" ]
 then
-	sed -i 's%http://es.dbpedia.org/resource/%%g' uriCounts_top50
+	sed -i 's%http://es.dbpedia.org/resource/%%g' "$TOP_50"
 else
-	sed -i 's%http://dbpedia.org/resource/%%g' uriCounts_top50
+	sed -i 's%http://dbpedia.org/resource/%%g' "$TOP_50"
 fi
 echo "Done"
-echo "DBpedia Spotlight uriCounts" >> stats.txt
 echo "-------------------------------------" >> stats.txt
+URICOUNTS_LINES=$(cat $URICOUNTS_FILE | wc -l)
+echo "Number of DBpedia entities: $URICOUNTS_LINES" >> stats.txt
 echo "Calculating stats of uriCounts URLs"
 cat $URICOUNTS_FILE | cut -f 2 -d$'\t' | datamash mean 1 median 1 pvar 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
@@ -165,10 +176,10 @@ MEDIAN=$(echo 'print(round(' $MEDIAN ',2))' | python3 )
 VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
 VAR=$(echo 'print(round(' $VAR ',2))' | python3 )
 STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
-echo "Mean number of uriCounts URLs per DBpedia resource: $MEAN" >> stats.txt
-echo "Median number of uriCounts URLs per DBpedia resource: $MEDIAN" >> stats.txt
-echo "Population variance of uriCounts URLs per DBpedia resource: $VAR" >> stats.txt
-echo "Population standard deviation of uriCounts URLs per DBpedia resource: $STDDEV" >> stats.txt
+echo "Mean number of uriCounts URLs per DBpedia entity: $MEAN" >> stats.txt
+echo "Median number of uriCounts URLs per DBpedia entity: $MEDIAN" >> stats.txt
+echo "Population variance of uriCounts URLs per DBpedia entity: $VAR" >> stats.txt
+echo "Population standard deviation of uriCounts URLs per DBpedia entity: $STDDEV" >> stats.txt
 echo "" >> stats.txt
 echo "Done"
 rm temp.txt
@@ -176,20 +187,30 @@ rm temp.txt
 
 function get_pairCounts {
 cd $RESOURCES_DIR/$1/$DASHBOARD
-PAIRCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/pairCounts
+if [ "$2" = "2021" ]
+then
+	PAIRCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/pairCounts
+	TOP_50="pairCounts_top50"
+	echo "DBpedia Spotlight 2021 pairCounts" >> stats.txt
+else
+	PAIRCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2016"/pairCounts
+	echo "DBpedia Spotlight 2016 pairCounts" >> stats.txt
+	TOP_50="pairCounts_2016_top50"
+fi
 echo "Cleaning pairCounrs file"
 cat $PAIRCOUNTS_FILE | awk -F '\t' '{if($3~/^[0-9]+$/){print}}' >> cleaned_pairCounts 
+PAIRCOUNTS_LINES=$(cat cleaned_pairCounts | wc -l)
 echo "Getting most used resources of pairCounts file"
-cat cleaned_pairCounts | sort -t$'\t' -k3 -nr | uniq | head -n 50 >> pairCounts_top50
+cat cleaned_pairCounts | sort -t$'\t' -k3 -nr | uniq | head -n 50 >> "$TOP_50"
 if [ "$1" = "$ES" ]
 then
-	sed -i 's%http://es.dbpedia.org/resource/%%g' pairCounts_top50
+	sed -i 's%http://es.dbpedia.org/resource/%%g' "$TOP_50"
 else
-	sed -i 's%http://dbpedia.org/resource/%%g' pairCounts_top50
+	sed -i 's%http://dbpedia.org/resource/%%g' "$TOP_50"
 fi
 echo "Done"
-echo "DBpedia Spotlight pairCounts" >> stats.txt
 echo "-------------------------------------" >> stats.txt
+echo "Number of [Surface form - DBpedia entity] pairs: $PAIRCOUNTS_LINES" >> stats.txt
 echo "Calculating stats of pairCounts URLs"
 cat cleaned_pairCounts | cut -f 3 -d$'\t' | datamash mean 1 median 1 pvar 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
@@ -211,12 +232,20 @@ rm temp.txt
 
 function get_tokenCounts {
 cd $RESOURCES_DIR/$1/$DASHBOARD
-TOKENCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/tokenCounts
+if [ "$2" = "2021" ]
+then
+	TOKENCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/tokenCounts
+	TOP_50="tokenCounts_top50"
+	echo "DBpedia Spotlight 2021 tokenCounts" >> stats.txt
+else
+	TOKENCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2016"/tokenCounts
+	echo "DBpedia Spotlight 2016 tokenCounts" >> stats.txt
+	TOP_50="tokenCounts_2016_top50"
+fi
 TOKENCOUNTS_LINES=$(cat $TOKENCOUNTS_FILE | wc -l)
-echo "DBpedia Spotlight tokenCounts" >> stats.txt
 echo "-------------------------------------" >> stats.txt
-echo "Number of Wikipedia pages: $TOKENCOUNTS_LINES" >> stats.txt
-echo "Calculating stats of tokens per Wikipedia page"
+echo "Number of Wikipedia articles: $TOKENCOUNTS_LINES" >> stats.txt
+echo "Calculating stats of tokens per Wikipedia article"
 TOKENS=$(cat $TOKENCOUNTS_FILE | awk '{print gsub(/\([^)]*\)/,"&")}')
 cat $TOKENCOUNTS_FILE | awk -F '\t' '{$2=""; print $0}' > tokens
 cat tokens | tr -d " \t\n\r"
@@ -227,7 +256,7 @@ then
 else
 	sed -i 's%http://en.wikipedia.org/wiki/%%g' tokens
 fi
-cat tokens | sort -t$' ' -k3 -nr | uniq | head -n 50 >> tokenCounts_top50
+cat tokens | sort -t$' ' -k3 -nr | uniq | head -n 50 >> "$TOP_50"
 cat tokens | cut -f 3 -d$' ' | datamash mean 1 median 1 pvar 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
@@ -236,37 +265,41 @@ MEDIAN=$(echo 'print(round(' $MEDIAN ',2))' | python3 )
 VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
 VAR=$(echo 'print(round(' $VAR ',2))' | python3 )
 STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
-echo "Mean number of tokens per Wikipedia page: $MEAN" >> stats.txt
-echo "Median number of tokens per Wikipedia page: $MEDIAN" >> stats.txt
-echo "Population standard deviation of tokens per Wikipedia page: $STDDEV" >> stats.txt
+echo "Mean number of tokens per Wikipedia article: $MEAN" >> stats.txt
+echo "Median number of tokens per Wikipedia article: $MEDIAN" >> stats.txt
+echo "Population standard deviation of tokens per Wikipedia article: $STDDEV" >> stats.txt
 echo "" >> stats.txt
-if [ "$1" = "$EN" ]
-then
-	split -l 500000 tokens tokens_
-	rm tokens
-fi
 echo "Done"
 rm temp.txt
+rm tokens
 }
 
 function get_sfAndTotalCounts {
 cd $RESOURCES_DIR/$1/$DASHBOARD
-SFANDTOTALCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/sfAndTotalCounts
+if [ "$2" = "2021" ]
+then
+	SFANDTOTALCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/sfAndTotalCounts
+	TOP_50="sfAndTotalCounts_top50"
+	echo "DBpedia Spotlight 2021 sfAndTotalCounts" >> stats.txt
+else
+	SFANDTOTALCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2016"/sfAndTotalCounts
+	echo "DBpedia Spotlight 2016 sfAndTotalCounts" >> stats.txt
+	TOP_50="sfAndTotalCounts_2016_top50"
+fi
 SFANDTOTALCOUNTS_LINES=$(cat $SFANDTOTALCOUNTS_FILE | wc -l)
 SFANDTOTALCOUNTS_NOLINKEDLINES=$(cat $SFANDTOTALCOUNTS_FILE | awk -F '\t' '{if($2==-1){print}}' | wc -l)
 SFANDTOTALCOUNTS_NOTEXTLINES=$(cat $SFANDTOTALCOUNTS_FILE | awk -F '\t' '{if($3==0){print}}' | wc -l)
 SFANDTOTALCOUNTS_NOLINKEDLINES_NOTEXTLINES=$(cat $SFANDTOTALCOUNTS_FILE | awk -F '\t' '{if($2==-1 && $3==0){print}}' | wc -l)
 REST=$((SFANDTOTALCOUNTS_LINES-SFANDTOTALCOUNTS_NOLINKEDLINES-SFANDTOTALCOUNTS_NOTEXTLINES-SFANDTOTALCOUNTS_NOLINKEDLINES_NOTEXTLINES))
 echo "Getting most used resources of sfAndTotalCounts file"
-cat $SFANDTOTALCOUNTS_FILE | sort -t$'\t' -k2 -nr | uniq | head -n 50 >> sfAndTotalCounts_top50 
+cat $SFANDTOTALCOUNTS_FILE | sort -t$'\t' -k2 -nr | uniq | head -n 50 >> "$TOP_50"
 if [ "$1" = "$ES" ]
 then
-	sed -i 's%http://es.dbpedia.org/resource/%%g' sfAndTotalCounts_top50
+	sed -i 's%http://es.dbpedia.org/resource/%%g' "$TOP_50"
 else
-	sed -i 's%http://dbpedia.org/resource/%%g' sfAndTotalCounts_top50
+	sed -i 's%http://dbpedia.org/resource/%%g' "$TOP_50"
 fi
 echo "Done"
-echo "DBpedia Spotlight sfAndTotalCounts" >> stats.txt
 echo "-------------------------------------" >> stats.txt
 echo "Total number of surface forms: $SFANDTOTALCOUNTS_LINES" >> stats.txt
 echo "Number of surface forms without associated link: $SFANDTOTALCOUNTS_NOLINKEDLINES" >> stats.txt
@@ -286,6 +319,7 @@ echo "Mean number of sfAndTotalCounts linked URLs per surface form: $MEAN" >> st
 echo "Median number of sfAndTotalCounts linked URLs per surface form: $MEDIAN" >> stats.txt
 echo "Population variance of sfAndTotalCounts linked URLs per surface form: $VAR" >> stats.txt
 echo "Population standard deviation of sfAndTotalCounts linked URLs per surface form: $STDDEV" >> stats.txt
+echo "" >> stats.txt
 echo "Done"
 rm temp.txt
 }
@@ -307,15 +341,27 @@ echo "Getting precision and impact of URLs"
 get_precision_impact "$ES"
 get_precision_impact "$EN"
 echo "Done"
-get_uriCounts "$ES"
-get_uriCounts "$EN"
+get_uriCounts "$ES" "2021"
+get_uriCounts "$EN" "2021"
 echo "Done"
-get_pairCounts "$ES"
-get_pairCounts "$EN"
+get_pairCounts "$ES" "2021"
+get_pairCounts "$EN" "2021"
 echo "Done"
-get_tokenCounts "$ES"
-get_tokenCounts "$EN"
+get_tokenCounts "$ES" "2021"
+get_tokenCounts "$EN" "2021"
 echo "Done"
-get_sfAndTotalCounts "$ES"
-get_sfAndTotalCounts "$EN"
+get_sfAndTotalCounts "$ES" "2021"
+get_sfAndTotalCounts "$EN" "2021"
+echo "Done"
+get_uriCounts "$ES" "2016"
+get_uriCounts "$EN" "2016"
+echo "Done"
+get_pairCounts "$ES" "2016"
+get_pairCounts "$EN" "2016"
+echo "Done"
+get_tokenCounts "$ES" "2016"
+get_tokenCounts "$EN" "2016"
+echo "Done"
+get_sfAndTotalCounts "$ES" "2016"
+get_sfAndTotalCounts "$EN" "2016"
 echo "Done"

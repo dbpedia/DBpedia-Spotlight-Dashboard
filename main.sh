@@ -37,23 +37,20 @@ check_modules "dash-table"
 check_modules "plotly"
 check_modules "dash-bootstrap-components"
 cd "src"
-echo ""	
-read -p "URLs validation takes so much time. Also a DBpedia SPARQL instance is necessary.
-However, files resulting from validation are already in the repository so it is not necessary to validate URLs.
-Do you want to validate URLs anyway? [y/n] " validate
-if [[ $validate == [yY] ]]; then
-	echo "Getting raw dashboard data"
-	./get_resources.sh
-	echo "Validating URLs"
-	./validate.sh
-	echo "Generating stats again"
-	./stats.sh
-	echo "Getting instance-types version stats"
-	./versions.sh
-fi
-if [ ! -f $RESOURCES_DIR/$ES/$DASHBOARD/cleaned_pairCounts ]; then
-	echo "Joining"
-	./join.sh
-fi
+# echo ""	
+# read -p "URLs validation takes so much time. Also a DBpedia SPARQL instance is necessary.
+# However, files resulting from validation are already in the repository so it is not necessary to validate URLs.
+# Do you want to validate URLs anyway? [y/n] " validate
+# if [[ $validate == [yY] ]]; then
+#	echo "Getting raw dashboard data"
+#	./get_resources.sh
+#	echo "Validating URLs"
+#	./validate.sh
+#	echo "Generating stats again"
+#	./stats.sh
+#	echo "Getting instance-types version stats"
+#	./versions.sh
+#fi
+
 echo "Loading dashboard..."
 python3 dashboard.py

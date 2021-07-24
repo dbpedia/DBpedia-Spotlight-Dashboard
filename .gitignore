@@ -24,3 +24,11 @@ resources/es/dashboard_data/sfAndTotalCounts
 resources/es/dashboard_data/uriCounts
 *.drawio
 ontology draft.png
+resources/es/wikistats/2016/uriCounts_all
+resources/es/wikistats/2016/tokenCounts
+resources/es/wikistats/2016/sfAndTotalCounts
+resources/es/wikistats/2016/pairCounts
+resources/en/wikistats/2016/uriCounts_all
+resources/en/wikistats/2016/tokenCounts
+resources/en/wikistats/2016/sfAndTotalCounts
+resources/en/wikistats/2016/pairCounts

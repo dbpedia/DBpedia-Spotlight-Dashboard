@@ -1,7 +1,7 @@
 # Table of contents
 - [Objective](#objective)
 - [Dashboard chart](#dbpedia-spotlight-dashboard-flowchart)
-- [Statistical measures](#statistical-measures)
+- [Raw data](#raw-data)
 - [Progress](#progress)
 
 ## Objective
@@ -16,7 +16,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
 
 ![DBpedia Spotlight Dashboard Flowchart](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_flowchart.png)
 
-## Statistical measures
+## Raw Data
 As mentioned before, the statistical measures have been calculated from the **DBpedia datasets** and the Wikipedia statistical files (**Wikistats**)
 
 ### DBpedia Datasets

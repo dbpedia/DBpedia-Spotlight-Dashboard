@@ -233,3 +233,32 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 - A `Feedback` tab has been added to the Dashboard. The direct link to the form appears in this tab, so that users can contribute their ideas for improvement after having examined the Dashboard.
 
 ![Evaluation Tab](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/evaluation_tab.png)
+
+**[28/07/2021]**:
+
+- My mentors and I have considered eliminating the bar graphs from the Wikistats because they did not provide relevant information for the user and implied an excess of unnecessary information
+- Instead, we have thought of displaying the relevant measurements in the form of cards: 
+
+![Cards1](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/uricounts_cards.png)
+
+![Cards2](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/paircounts_cards.png)
+
+![Cards3](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/tokencounts_cards.png)
+
+![Cards4](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/sfandtotalcounts_cards.png)
+
+- The corresponding statistical measures have also been added for the version of `October 10, 2016`
+- All statistical measurements have been reviewed and appear to be correct
+- Added to the `Information` tab an explanation of the files from which the Dashboard statistics are obtained:
+
+![DBpedia datasets](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_information_dbpedia_datasets.png)
+
+![Wikistats](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_information_wikistats.png)
+
+- Modified the Dashboard header and added the Spotlight logo as  well as the appearance of the tabs, also added margins to the dashboard:
+
+![Appearance](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/heading.png)
+
+**Tasks in progress**: 
+- Add statistics of `2020.10.01` and `2021.05.01` versions for Wikistats files
+- Add a `Summary` tab to summarize the statistics in a table

@@ -260,5 +260,5 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 ![Appearance](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/heading.png)
 
 **Tasks in progress**: 
-- Add statistics of `2020.10.01` and `2021.05.01` versions for Wikistats files
+- Add statistics of `2020.10.01` and `2021.06.01` versions for Wikistats files
 - Add a `Summary` tab to summarize the statistics in a table

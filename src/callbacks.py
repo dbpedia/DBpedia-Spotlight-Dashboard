@@ -4,29 +4,34 @@ import plotly.graph_objects as go
 import dash_html_components as html
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
+from dash_table import DataTable
 import resources as R
 import figures as F
 
+
 def initialize_callbacks(app):
      '''
-    # Spanish Tab callback
-     @app.callback(dash.dependencies.Output('subtabs', 'value'),
-          [dash.dependencies.Input('tabs', 'value')])
-     def es_switch_tab(value):
-         if value == "spanish":
-             return "es_uricounts"
-         else:
-             return dash.no_update
-         
-    # English Tab callback
-     @app.callback(dash.dependencies.Output('en-subtabs', 'value'),
-          [dash.dependencies.Input('tabs', 'value')])
-     def en_switch_tab(value):
-         if value == "english":
-             return "en_uricounts"
-         else:
-             return dash.no_update
+        # Spanish Tab callback
+         @app.callback(dash.dependencies.Output('subtabs', 'value'),
+              [dash.dependencies.Input('tabs', 'value')])
+         def es_switch_tab(value):
+             global es_ntimes
+             if value == "spanish":
+                 return "es_uricounts"
+             else:
+                 return dash.no_update
+             
+        # English Tab callback
+         @app.callback(dash.dependencies.Output('en-subtabs', 'value'),
+              [dash.dependencies.Input('tabs', 'value')])
+         def en_switch_tab(value):
+             global en_ntimes
+             if value == "english":
+                 return "en_uricounts"
+             else:
+                 return dash.no_update
      '''
+         
     # Comparison callback - cards
      @app.callback(
     dash.dependencies.Output('data_container', 'children'),
@@ -105,11 +110,11 @@ def initialize_callbacks(app):
             version1_container = html.Div(id='entity_container', children = [
                 html.H4(value1),
                 dbc.Card(dbc.CardBody(
-                        html.H4("Nº DBpedia entities: " + entities_version1)
+                        html.Div([html.H4("Nº DBpedia entities"), html.H4(entities_version1)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 dbc.Card(dbc.CardBody(
-                        html.H4("Nº DBpedia types: " + types_version1)
+                        html.Div([html.H4("Nº DBpedia types"), html.H4(types_version1)])
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
                 )
                 ])
@@ -117,11 +122,11 @@ def initialize_callbacks(app):
             version2_container = html.Div(id='type_container', children = [
                 html.H4(value2),
                 dbc.Card(dbc.CardBody(
-                        html.H4("Nº DBpedia entities: " + entities_version2)
+                        html.Div([html.H4("Nº DBpedia entities"), html.H4(entities_version2)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 dbc.Card(dbc.CardBody(
-                        html.H4("Nº DBpedia types: " + types_version2)
+                        html.Div([html.H4("Nº DBpedia types"), html.H4(types_version2)])
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
                 )
                 ])
@@ -129,11 +134,11 @@ def initialize_callbacks(app):
             growth_container = html.Div(id='growth_container', children = [
             html.H4("Growth between versions"),
             dbc.Card(dbc.CardBody(
-                        html.H4("Entity growth: " + str(entity_growth))
+                        html.Div([html.H4("Entity growth"), html.H4(str(entity_growth))])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
             dbc.Card(dbc.CardBody(
-                html.H4("Type growth: " + str(type_growth))
+                html.Div([html.H4("Type growth"), html.H4(str(type_growth))])
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
                 )
                 ])
@@ -375,97 +380,6 @@ def initialize_callbacks(app):
             figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4'))
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
-        
-
-# Spanish uriCounts callback
-     @app.callback(
-        dash.dependencies.Output('uriCounts_graph', 'figure'),
-        [dash.dependencies.Input('uriCounts_slider', 'value')])
-     def update_uriCounts_figure(value):
-        if value is None:
-                return dash.no_update
-        uriCounts_df = R.uriCounts_es
-        filtered_df = uriCounts_df[(uriCounts_df['Count'] >= value[0]) & (uriCounts_df['Count'] <= value[1])].sample(n=20)	
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x= filtered_df['Count'], y= filtered_df['DBpedia entity'], orientation='h', marker_color='#A349A4', name = "DBpedia entity"))
-        fig.add_vline(x=float(R.es_stats[35]), line_width=4, line_color="#77C14C") # Mean
-        fig.add_vline(x=float(R.es_stats[36]), line_width=4, line_color="#1FAFEE") # Median
-        fig.add_vline(x=float(R.es_stats[38]), line_width=4, line_color="#D53614") # Standard deviation
-        fig.add_traces([
-        go.Scatter(x=[float(R.es_stats[35])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.es_stats[35]], hoverinfo="text"),
-        go.Scatter(x=[float(R.es_stats[36])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[36]], hoverinfo="text"),
-        go.Scatter(x=[float(R.es_stats[38])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.es_stats[38]], hoverinfo="text")
-        ])
-        fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Times appearing in Wikipedia dump", yaxis_title="DBpedia entity")
-        return fig    
-   
-
-# Spanish pairCounts callback
-     @app.callback(
-        dash.dependencies.Output('pairCounts_graph', 'figure'),
-        [dash.dependencies.Input('pairCounts_slider', 'value')])
-     def update_pairCounts_figure(value):
-        if value is None:
-                return dash.no_update
-        pairCounts_df = R.pairCounts_es
-        filtered_df = pairCounts_df[(pairCounts_df['Times linked'] >= value[0]) & (pairCounts_df['Times linked'] <= value[1])].sample(n=20)	
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x= filtered_df['Times linked'], y= filtered_df['Surface form'], orientation='h', marker_color='#A349A4', name = "Surface form"))
-        fig.add_vline(x=float(R.es_stats[39]), line_width=4, line_color="#77C14C") # Mean
-        fig.add_vline(x=float(R.es_stats[40]), line_width=4, line_color="#1FAFEE") # Median
-        fig.add_vline(x=float(R.es_stats[42]), line_width=4, line_color="#D53614") # Standard deviation
-        fig.add_traces([
-        go.Scatter(x=[float(R.es_stats[39])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.es_stats[39]], hoverinfo="text"),
-        go.Scatter(x=[float(R.es_stats[40])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[40]], hoverinfo="text"),
-        go.Scatter(x=[float(R.es_stats[42])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.es_stats[42]], hoverinfo="text")
-        ])
-        fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Times linked to a DBpedia entity", yaxis_title="Surface form")
-        return fig           
-      
-# Spanish sfAndTotalCounts callback
-     @app.callback(
-        dash.dependencies.Output('sfAndTotalCounts_graph', 'figure'),
-        [dash.dependencies.Input('sfAndTotalCounts_slider', 'value')])
-     def update_sfAndTotalCounts_figure(value):
-        if value is None:
-                return dash.no_update
-        sfAndTotalCounts_df = R.sfAndTotalCounts_es
-        filtered_df = sfAndTotalCounts_df[(sfAndTotalCounts_df['Times linked'] >= value[0]) & (sfAndTotalCounts_df['Times linked'] <= value[1])].sample(n=20)	
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x= filtered_df['Times linked'], y= filtered_df['Surface form'], orientation='h', marker_color='#A349A4', name = "Surface form"))
-        fig.add_vline(x=float(R.es_stats[52]), line_width=4, line_color="#77C14C") # Mean
-        fig.add_vline(x=float(R.es_stats[53]), line_width=4, line_color="#1FAFEE") # Median
-        fig.add_vline(x=float(R.es_stats[55]), line_width=4, line_color="#D53614") # Standard deviation
-        fig.add_traces([
-        go.Scatter(x=[float(R.es_stats[52])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.es_stats[52]], hoverinfo="text"),
-        go.Scatter(x=[float(R.es_stats[53])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[53]], hoverinfo="text"),
-        go.Scatter(x=[float(R.es_stats[55])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.es_stats[55]], hoverinfo="text")
-        ])
-        fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Times linked to a DBpedia entity", yaxis_title="Surface form")
-        return fig
-
-
-# Spanish tokenCounts callback
-     @app.callback(
-        dash.dependencies.Output('tokenCounts_graph', 'figure'),
-        [dash.dependencies.Input('tokenCounts_slider', 'value')])
-     def update_tokenCounts_figure(value):
-        if value is None:
-                return dash.no_update
-        tokenCounts_df = R.tokenCounts_es
-        filtered_df = tokenCounts_df[(tokenCounts_df['Nº tokens'] >= value[0]) & (tokenCounts_df['Nº tokens'] <= value[1])].sample(n=20)	
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x= filtered_df['Nº tokens'], y= filtered_df['Wikipedia article'], orientation='h', marker_color='#A349A4', name = "Wikipedia article"))
-        fig.add_vline(x=float(R.es_stats[44]), line_width=4, line_color="#77C14C") # Mean
-        fig.add_vline(x=float(R.es_stats[45]), line_width=4, line_color="#1FAFEE") # Median
-        fig.add_vline(x=float(R.es_stats[46]), line_width=4, line_color="#D53614") # Standard deviation
-        fig.add_traces([
-         go.Scatter(x=[float(R.es_stats[44])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.es_stats[44]], hoverinfo="text"),
-         go.Scatter(x=[float(R.es_stats[45])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[45]], hoverinfo="text"),
-         go.Scatter(x=[float(R.es_stats[46])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.es_stats[46]], hoverinfo="text")
-         ])
-        fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Number of tokens", yaxis_title="Wikipedia article")
-        return fig                 
 
 # Spanish known types position measures callback
      @app.callback(
@@ -500,6 +414,296 @@ def initialize_callbacks(app):
     
             fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
             return fig
+        
+# Spanish uriCounts callback
+     @app.callback(
+    dash.dependencies.Output('uriCounts_container', 'children'),
+    [dash.dependencies.Input('uriCounts_dropdown', 'value')])
+     def uriCounts(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.es_stats
+            if value == 'Oct 1st 2016':
+                dbpedia_entities = stats[63]
+                mean = stats[64]
+                median = 'dbpedia-es:Hinduismo'
+                std_dev = stats[67]
+                top_file = R.top_2016_uriCounts_es
+    
+            if value == 'May 25th 2021':
+                dbpedia_entities = stats[36]
+                mean = stats[37]
+                median = 'dbpedia-es:III_milenio_a._C.'
+                std_dev = stats[40]
+                top_file = R.top_uriCounts_es
+                
+            mode = 'dbpedia-es:' + top_file['DBpedia entity'].iloc[0]
+            cards_container = html.Div(id='cards_container', children = [
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Nº DBpedia entities"), html.H4(dbpedia_entities)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       html.Div([html.H4("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Intermediate DBpedia entity (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("DBpedia entity that appears the most (mode)"), html.H4(mode)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                )
+                ])
+                
+            table_container = html.Div(id='table_container', children = [
+        html.Div([
+        DataTable(
+            id="es_uriCounts_table",
+            columns=[{"name": "DBpedia entity", "id": "DBpedia entity"},
+                     {"name": "Count", "id": "Count"}],
+            data=top_file.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 450, 'margin-left': '10px'
+                         }
+        )])])
+    
+        return cards_container, html.Br(), html.H4("Top 50 most frequent entities"), html.Br(), table_container  
+        
+# Spanish pairCounts callback
+     @app.callback(
+    dash.dependencies.Output('pairCounts_container', 'children'),
+    [dash.dependencies.Input('pairCounts_dropdown', 'value')])
+     def pairCounts(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.es_stats
+            if value == 'Oct 1st 2016':
+                surface_forms = stats[69]
+                mean = stats[70]
+                median = '[hinduista - dbpedia-es:Hinduismo]'
+                std_dev = stats[73]
+                top_file = R.top_2016_pairCounts_es
+    
+            if value == 'May 25th 2021':
+                surface_forms = stats[42]
+                mean = stats[43]
+                median = '[ambiente - dbpedia-es:Hábitat]'
+                std_dev = stats[46]
+                top_file = R.top_pairCounts_es
+                
+            mode = "[" + top_file['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ top_file['DBpedia entity'].iloc[0] + "]"
+            cards_container = html.Div(id='cards_container', children = [
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       html.Div([html.H4("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Intermediate pair (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                 dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Pair that appears the most (mode)"), html.H4(mode)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                )
+                ])
+                
+            table_container = html.Div(id='table_container', children = [
+        html.Div([
+        DataTable(
+            id="es_pairCounts_table",
+            columns=[{"name": "Surface form", "id": "Surface form"},
+                     {"name": "DBpedia entity", "id": "DBpedia entity"},
+                     {"name": "Times linked", "id": "Times linked"}],
+            data=top_file.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 520, 'margin-left': '10px'
+                         }
+        )])])
+            
+            return cards_container, html.Br(), html.H4("Top 50 most linked surface forms"), html.Br(), table_container
+
+# Spanish tokenCounts callback
+     @app.callback(
+    dash.dependencies.Output('tokenCounts_container', 'children'),
+    [dash.dependencies.Input('tokenCounts_dropdown', 'value')])
+     def tokenCounts(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.es_stats
+            if value == 'Oct 1st 2016':
+                articles = stats[75]
+                mean = stats[76]
+                median = 'http://es.wikipedia.org/wiki/Imperio_almohade'
+                std_dev = stats[78]
+                top_file = R.top_2016_tokenCounts_es
+    
+            if value == 'May 25th 2021':
+                articles = stats[48]
+                mean = stats[49]
+                median = 'http://es.wikipedia.org/wiki/Impunidad'
+                std_dev = stats[51]
+                top_file = R.top_tokenCounts_es
+                
+            mode = 'http://es.wikipedia.org/wiki/'+ top_file['Wikipedia article'].iloc[0]
+            cards_container = html.Div(id='cards_container', children = [
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Nº Wikipedia articles"), html.H4(articles)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       html.Div([html.H4("Nº tokens per Wikipedia article (mean)"), html.H4(mean)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Intermediate Wikipedia article (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Wikipedia article that appears the most (mode)"), html.H4(mode)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                )
+                ])
+                
+            table_container = html.Div(id='table_container', children = [
+        html.Div([
+        DataTable(
+            id="es_tokenCounts_table",
+           columns=[{"name": "Wikipedia article", "id": "Wikipedia article"},
+                     {"name": "Nº tokens", "id": "Nº tokens"}],
+            data=top_file.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 475, 'margin-left': '10px'
+                         }
+        )])])
+            return cards_container, html.Br(), html.H4("Top 50 Wikipedia articles with more tokens"), html.Br(), table_container
+
+# Spanish sfAndTotalCounts callback
+     @app.callback(
+    dash.dependencies.Output('sfAndTotalCounts_container', 'children'),
+    [dash.dependencies.Input('sfAndTotalCounts_dropdown', 'value')])
+     def sfAndTotalCounts(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.es_stats
+            if value == 'Oct 1st 2016':
+                surface_forms = stats[80]
+                mean = stats[85]
+                median = 'doris miller'
+                std_dev = stats[88]
+                top_file = R.top_2016_sfAndTotalCounts_es
+                values = [stats[81], stats[82], stats[83], stats[84]]
+    
+            if value == 'May 25th 2021':
+                surface_forms = stats[53]
+                mean = stats[58]
+                median = 'pulmonar'
+                std_dev = stats[61]
+                top_file = R.top_sfAndTotalCounts_es
+                values = [stats[54], stats[55], stats[56], stats[57]]
+                
+            mode = top_file['Surface form'].iloc[0]
+            cards_container = html.Div(id='cards_container', children = [
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Nº surface forms"), html.H4(surface_forms)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       html.Div([html.H4("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Intermediate surface form (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Surface form that appears the most (mode)"), html.H4(mode)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                )
+                ])
+            
+            figure_container = html.Div([
+            html.H4("Surface forms"),
+            dcc.Graph(id='es_pie', figure=F.get_sfpie_figure(values))
+            ])
+                
+            table_container = html.Div(id='table_container', children = [
+        html.Div([
+        DataTable(
+            id="es_sfAndTotalCounts_table",
+           columns=[{"name": "Surface form", "id": "Surface form"},
+                     {"name": "Times linked", "id": "Times linked"},
+                     {"name": "Times as plain text", "id": "Times as plain text"}],
+            data=top_file.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 400, 'margin-left': '10px'
+                         }
+        )])])
+            
+            return cards_container, html.Br(), figure_container, html.Br(), html.H4("Top 50 most linked surface forms"), html.Br(), table_container                
         
 # English known types callback
      @app.callback(
@@ -559,97 +763,6 @@ def initialize_callbacks(app):
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
         
-
-# English uriCounts callback
-     @app.callback(
-        dash.dependencies.Output('en_uriCounts_graph', 'figure'),
-        [dash.dependencies.Input('en_uriCounts_slider', 'value')])
-     def en_update_uriCounts_figure(value):
-        if value is None:
-                return dash.no_update
-        uriCounts_df = R.uriCounts_en
-        filtered_df = uriCounts_df[(uriCounts_df['Count'] >= value[0]) & (uriCounts_df['Count'] <= value[1])].sample(n=20)	
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x= filtered_df['Count'], y= filtered_df['DBpedia entity'], orientation='h', marker_color='#A349A4', name = "DBpedia entity"))
-        fig.add_vline(x=float(R.en_stats[35]), line_width=4, line_color="#77C14C") # Mean
-        fig.add_vline(x=float(R.en_stats[36]), line_width=4, line_color="#1FAFEE") # Median
-        fig.add_vline(x=float(R.en_stats[38]), line_width=4, line_color="#D53614") # Standard deviation
-        fig.add_traces([
-        go.Scatter(x=[float(R.en_stats[35])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.en_stats[35]], hoverinfo="text"),
-        go.Scatter(x=[float(R.en_stats[36])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[36]], hoverinfo="text"),
-        go.Scatter(x=[float(R.en_stats[38])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.en_stats[38]], hoverinfo="text")
-        ])
-        fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Times appearing in Wikipedia dump", yaxis_title="DBpedia entity")
-        return fig    
-   
-
-# English pairCounts callback
-     @app.callback(
-        dash.dependencies.Output('en_pairCounts_graph', 'figure'),
-        [dash.dependencies.Input('en_pairCounts_slider', 'value')])
-     def en_update_pairCounts_figure(value):
-        if value is None:
-                return dash.no_update
-        pairCounts_df = R.pairCounts_en
-        filtered_df = pairCounts_df[(pairCounts_df['Times linked'] >= value[0]) & (pairCounts_df['Times linked'] <= value[1])].sample(n=20)	
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x= filtered_df['Times linked'], y= filtered_df['Surface form'], orientation='h', marker_color='#A349A4', name = "Surface form"))
-        fig.add_vline(x=float(R.en_stats[39]), line_width=4, line_color="#77C14C") # Mean
-        fig.add_vline(x=float(R.en_stats[40]), line_width=4, line_color="#1FAFEE") # Median
-        fig.add_vline(x=float(R.en_stats[42]), line_width=4, line_color="#D53614") # Standard deviation
-        fig.add_traces([
-       go.Scatter(x=[float(R.en_stats[39])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.en_stats[39]], hoverinfo="text"),
-        go.Scatter(x=[float(R.en_stats[40])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[40]], hoverinfo="text"),
-        go.Scatter(x=[float(R.en_stats[42])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.en_stats[42]], hoverinfo="text")
-        ])
-        fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Times linked to a DBpedia entity", yaxis_title="Surface form")
-        return fig           
-      
-# English sfAndTotalCounts callback
-     @app.callback(
-        dash.dependencies.Output('en_sfAndTotalCounts_graph', 'figure'),
-        [dash.dependencies.Input('en_sfAndTotalCounts_slider', 'value')])
-     def en_update_sfAndTotalCounts_figure(value):
-        if value is None:
-                return dash.no_update
-        sfAndTotalCounts_df = R.sfAndTotalCounts_en
-        filtered_df = sfAndTotalCounts_df[(sfAndTotalCounts_df['Times linked'] >= value[0]) & (sfAndTotalCounts_df['Times linked'] <= value[1])].sample(n=20)	
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x= filtered_df['Times linked'], y= filtered_df['Surface form'], orientation='h', marker_color='#A349A4', name = "Surface form"))
-        fig.add_vline(x=float(R.en_stats[52]), line_width=4, line_color="#77C14C") # Mean
-        fig.add_vline(x=float(R.en_stats[53]), line_width=4, line_color="#1FAFEE") # Median
-        fig.add_vline(x=float(R.en_stats[55]), line_width=4, line_color="#D53614") # Standard deviation
-        fig.add_traces([
-        go.Scatter(x=[float(R.en_stats[52])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.en_stats[52]], hoverinfo="text"),
-        go.Scatter(x=[float(R.en_stats[53])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[53]], hoverinfo="text"),
-        go.Scatter(x=[float(R.en_stats[55])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.en_stats[55]], hoverinfo="text")
-        ])
-        fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Times linked to a DBpedia entity", yaxis_title="Surface form")
-        return fig  
-
-# English tokenCounts callback
-     @app.callback(
-        dash.dependencies.Output('en_tokenCounts_graph', 'figure'),
-        [dash.dependencies.Input('en_tokenCounts_slider', 'value')])
-     def en_update_tokenCounts_figure(value):
-        if value is None:
-                return dash.no_update
-        tokenCounts_df = R.tokenCounts_en
-        filtered_df = tokenCounts_df[(tokenCounts_df['Nº tokens'] >= value[0]) & (tokenCounts_df['Nº tokens'] <= value[1])].sample(n=20)	
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x= filtered_df['Nº tokens'], y= filtered_df['Wikipedia article'], orientation='h', marker_color='#A349A4', name = "Wikipedia article"))
-        fig.add_vline(x=float(R.en_stats[44]), line_width=4, line_color="#77C14C") # Mean
-        fig.add_vline(x=float(R.en_stats[45]), line_width=4, line_color="#1FAFEE") # Median
-        fig.add_vline(x=float(R.en_stats[46]), line_width=4, line_color="#D53614") # Standard deviation
-        fig.add_traces([
-         go.Scatter(x=[float(R.en_stats[44])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.en_stats[44]], hoverinfo="text"),
-        go.Scatter(x=[float(R.en_stats[45])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[45]], hoverinfo="text"),
-        go.Scatter(x=[float(R.en_stats[46])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.en_stats[46]], hoverinfo="text")
-         ])
-        fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Number of tokens", yaxis_title="Wikipedia article")
-        return fig                         
-    
-
 # English known types position measures callback
      @app.callback(
             dash.dependencies.Output('en_known_types_pos', 'figure'),
@@ -683,4 +796,294 @@ def initialize_callbacks(app):
     
             fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
             return fig
+        
+# English uriCounts callback
+     @app.callback(
+    dash.dependencies.Output('en_uriCounts_container', 'children'),
+    [dash.dependencies.Input('en_uriCounts_dropdown', 'value')])
+     def en_uriCounts(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.en_stats
+            if value == 'Oct 1st 2016':
+                dbpedia_entities = stats[63]
+                mean = stats[64]
+                median = 'dbr:Latvian_constitutional_referendum,_2008'
+                std_dev = stats[67]
+                top_file = R.top_2016_uriCounts_en
+    
+            if value == 'May 25th 2021':
+                dbpedia_entities = stats[36]
+                mean = stats[37]
+                median = 'dbr:Kyrgyzstan_national_football_team'
+                std_dev = stats[40]
+                top_file = R.top_uriCounts_en
+                
+            mode = 'dbr:' + top_file['DBpedia entity'].iloc[0]
+            cards_container = html.Div(id='cards_container', children = [
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Nº DBpedia entities"), html.H4(dbpedia_entities)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       html.Div([html.H4("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                 dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Intermediate DBpedia entity (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("DBpedia entity that appears the most (mode)"), html.H4(mode)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                )
+                ])
+                
+            table_container = html.Div(id='table_container', children = [
+        html.Div([
+        DataTable(
+            id="en_uriCounts_table",
+            columns=[{"name": "DBpedia entity", "id": "DBpedia entity"},
+                     {"name": "Count", "id": "Count"}],
+            data=top_file.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 500, 'margin-left': '10px'
+                         }
+        )])])
+    
+        return cards_container, html.Br(), html.H4("Top 50 most frequent entities"), html.Br(), table_container  
+        
+# English pairCounts callback
+     @app.callback(
+    dash.dependencies.Output('en_pairCounts_container', 'children'),
+    [dash.dependencies.Input('en_pairCounts_dropdown', 'value')])
+     def en_pairCounts(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.en_stats
+            if value == 'Oct 1st 2016':
+                surface_forms = stats[69]
+                mean = stats[70]
+                median = '[part of the Soviet Union - dbr:Latvian_Soviet_Socialist_Republic]'
+                std_dev = stats[73]
+                top_file = R.top_2016_pairCounts_en
+    
+            if value == 'May 25th 2021':
+                surface_forms = stats[42]
+                mean = stats[43]
+                median = '[Wallenpaupack - dbr:Lake_Wallenpaupack]'
+                std_dev = stats[46]
+                top_file = R.top_pairCounts_en
+                
+            mode = "[" + top_file['Surface form'].iloc[0] + " - " + "dbr:"+ top_file['DBpedia entity'].iloc[0] + "]"
+            cards_container = html.Div(id='cards_container', children = [
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       html.Div([html.H4("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Intermediate pair (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                 dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Pair that appears the most (mode)"), html.H4(mode)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                )
+                ])
+                
+            table_container = html.Div(id='table_container', children = [
+        html.Div([
+        DataTable(
+            id="en_pairCounts_table",
+            columns=[{"name": "Surface form", "id": "Surface form"},
+                     {"name": "DBpedia entity", "id": "DBpedia entity"},
+                     {"name": "Times linked", "id": "Times linked"}],
+            data=top_file.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 780, 'margin-left': '10px'
+                         }
+        )])])
+            
+            return cards_container, html.Br(), html.H4("Top 50 most linked surface forms"), html.Br(), table_container
+
+# English tokenCounts callback
+     @app.callback(
+    dash.dependencies.Output('en_tokenCounts_container', 'children'),
+    [dash.dependencies.Input('en_tokenCounts_dropdown', 'value')])
+     def en_tokenCounts(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.en_stats
+            if value == 'Oct 1st 2016':
+                articles = stats[75]
+                mean = stats[76]
+                median = 'http://en.wikipedia.org/wiki/Kushti'
+                std_dev = stats[78]
+                top_file = R.top_2016_tokenCounts_en
+    
+            if value == 'May 25th 2021':
+                articles = stats[48]
+                mean = stats[49]
+                median = 'http://en.wikipedia.org/wiki/Klas_Lund'
+                std_dev = stats[51]
+                top_file = R.top_tokenCounts_en
+                
+            mode = top_file['Wikipedia article'].iloc[0]
+            cards_container = html.Div(id='cards_container', children = [
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Nº Wikipedia articles"), html.H4(articles)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       html.Div([html.H4("Nº tokens per Wikipedia article (mean)"), html.H4(mean)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Intermediate Wikipedia article (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Wikipedia article that appears the most (mode)"), html.H4(mode)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                )
+                ])
+                
+            table_container = html.Div(id='table_container', children = [
+        html.Div([
+        DataTable(
+            id="en_tokenCounts_table",
+           columns=[{"name": "Wikipedia article", "id": "Wikipedia article"},
+                     {"name": "Nº tokens", "id": "Nº tokens"}],
+            data=top_file.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 500, 'margin-left': '10px'
+                         }
+        )])])
+            return cards_container, html.Br(), html.H4("Top 50 Wikipedia articles with more tokens"), html.Br(), table_container
+
+# English sfAndTotalCounts callback
+     @app.callback(
+    dash.dependencies.Output('en_sfAndTotalCounts_container', 'children'),
+    [dash.dependencies.Input('en_sfAndTotalCounts_dropdown', 'value')])
+     def en_sfAndTotalCounts(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.en_stats
+            if value == 'Oct 1st 2016':
+                surface_forms = stats[80]
+                mean = stats[85]
+                median = 'Deep Cove'
+                std_dev = stats[88]
+                top_file = R.top_2016_sfAndTotalCounts_en
+                values = [stats[81], stats[82], stats[83], stats[84]]
+    
+            if value == 'May 25th 2021':
+                surface_forms = stats[53]
+                mean = stats[58]
+                median = 'DC Comics'
+                std_dev = stats[61]
+                top_file = R.top_sfAndTotalCounts_en
+                values = [stats[54], stats[55], stats[56], stats[57]]
+                
+            mode = top_file['Surface form'].iloc[0]
+            cards_container = html.Div(id='cards_container', children = [
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Nº surface forms"), html.H4(surface_forms)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       html.Div([html.H4("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Intermediate surface form (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        html.Div([html.H4("Surface form that appears the most (mode)"), html.H4(mode)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                )
+                ])
+            
+            figure_container = html.Div([
+            html.H4("Surface forms"),
+            dcc.Graph(id='es_pie', figure=F.get_sfpie_figure(values))
+            ])
+                
+            table_container = html.Div(id='table_container', children = [
+        html.Div([
+        DataTable(
+            id="en_sfAndTotalCounts_table",
+           columns=[{"name": "Surface form", "id": "Surface form"},
+                     {"name": "Times linked", "id": "Times linked"},
+                     {"name": "Times as plain text", "id": "Times as plain text"}],
+            data=top_file.to_dict("records"),
+            fill_width=False,
+            style_table={
+                'overflowY': 'scroll', 'height': 400, 'width': 625, 'margin-left': '10px'
+                         }
+        )])])
+            
+            return cards_container, html.Br(), figure_container, html.Br(), html.H4("Top 50 most linked surface forms"), html.Br(), table_container        
         

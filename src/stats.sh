@@ -119,7 +119,7 @@ PERC90=$(echo 'print(round(' $PERC90 '))' | python3 )
 PERC95=$(awk -F '\t' '{ print $12 }' temp.txt)
 PERC95=$(echo 'print(round(' $PERC95 '))' | python3 )
 echo "Mean number of DBpedia entities per type: $MEAN" >> stats.txt
-echo "Median number of DBpedia entities per type: $MEDIAN" >> stats.txt
+echo "Median number of DBpedia entities per type (occurrences, only for the second bar chart of Instance types tab): $MEDIAN" >> stats.txt
 echo "Population variance of DBpedia entities per type: $VAR" >> stats.txt
 echo "Population standard deviation of DBpedia entities per type: $STDDEV" >> stats.txt
 echo "Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): $SUM" >> stats.txt
@@ -168,14 +168,15 @@ echo "-------------------------------------" >> stats.txt
 URICOUNTS_LINES=$(cat $URICOUNTS_FILE | wc -l)
 echo "Number of DBpedia entities: $URICOUNTS_LINES" >> stats.txt
 echo "Calculating stats of uriCounts URLs"
-cat $URICOUNTS_FILE | cut -f 2 -d$'\t' | datamash mean 1 median 1 pvar 1 >> temp.txt
+cat $URICOUNTS_FILE | cut -f 2 -d$'\t' | datamash mean 1 pvar 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
-MEDIAN=$(awk -F '\t' '{ print $2 }' temp.txt)
-MEDIAN=$(echo 'print(round(' $MEDIAN ',2))' | python3 )
-VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
+VAR=$(awk -F '\t' '{ print $2 }' temp.txt)
 VAR=$(echo 'print(round(' $VAR ',2))' | python3 )
 STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
+cat $URICOUNTS_FILE | awk -F '\t' '{for (i=1; i<=$2; i++) print NR}' | datamash median 1 > temp.txt
+MEDIAN=$(awk -F '\t' '{ print $1 }' temp.txt)
+MEDIAN=$(echo 'print(round(' $MEDIAN '))' | python3 )
 echo "Mean number of uriCounts URLs per DBpedia entity: $MEAN" >> stats.txt
 echo "Median number of uriCounts URLs per DBpedia entity: $MEDIAN" >> stats.txt
 echo "Population variance of uriCounts URLs per DBpedia entity: $VAR" >> stats.txt
@@ -212,14 +213,15 @@ echo "Done"
 echo "-------------------------------------" >> stats.txt
 echo "Number of [Surface form - DBpedia entity] pairs: $PAIRCOUNTS_LINES" >> stats.txt
 echo "Calculating stats of pairCounts URLs"
-cat cleaned_pairCounts | cut -f 3 -d$'\t' | datamash mean 1 median 1 pvar 1 >> temp.txt
+cat cleaned_pairCounts | cut -f 3 -d$'\t' | awk -F '\t' '{if($1 == -1){$1=0}{print $1}}' | datamash mean 1 pvar 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
-MEDIAN=$(awk -F '\t' '{ print $2 }' temp.txt)
-MEDIAN=$(echo 'print(round(' $MEDIAN ',2))' | python3 )
-VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
+VAR=$(awk -F '\t' '{ print $2 }' temp.txt)
 VAR=$(echo 'print(round(' $VAR ',2))' | python3 )
 STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
+cat cleaned_pairCounts | awk -F '\t' '{for (i=1; i<=$3; i++) print NR}' | datamash median 1 > temp.txt
+MEDIAN=$(awk -F '\t' '{ print $1 }' temp.txt)
+MEDIAN=$(echo 'print(round(' $MEDIAN '))' | python3 )
 echo "Mean number of pairCounts URLs per surface form: $MEAN" >> stats.txt
 echo "Median number of pairCounts URLs per surface form: $MEDIAN" >> stats.txt
 echo "Population variance of pairCounts URLs per surface form: $VAR" >> stats.txt
@@ -257,14 +259,15 @@ else
 	sed -i 's%http://en.wikipedia.org/wiki/%%g' tokens
 fi
 cat tokens | sort -t$' ' -k3 -nr | uniq | head -n 50 >> "$TOP_50"
-cat tokens | cut -f 3 -d$' ' | datamash mean 1 median 1 pvar 1 >> temp.txt
+cat tokens | cut -f 3 -d$' ' | datamash mean 1 pvar 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
-MEDIAN=$(awk -F '\t' '{ print $2 }' temp.txt)
-MEDIAN=$(echo 'print(round(' $MEDIAN ',2))' | python3 )
-VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
+VAR=$(awk -F '\t' '{ print $2 }' temp.txt)
 VAR=$(echo 'print(round(' $VAR ',2))' | python3 )
 STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
+cat tokens | awk -F '  ' '{for (i=1; i<=$2; i++) print NR}' | datamash median 1 > temp.txt
+MEDIAN=$(awk -F '\t' '{ print $1 }' temp.txt)
+MEDIAN=$(echo 'print(round(' $MEDIAN '))' | python3 )
 echo "Mean number of tokens per Wikipedia article: $MEAN" >> stats.txt
 echo "Median number of tokens per Wikipedia article: $MEDIAN" >> stats.txt
 echo "Population standard deviation of tokens per Wikipedia article: $STDDEV" >> stats.txt
@@ -307,14 +310,15 @@ echo "Number of surface forms not appearing as text: $SFANDTOTALCOUNTS_NOTEXTLIN
 echo "Number of surface forms not appearing as text without associated link: $SFANDTOTALCOUNTS_NOLINKEDLINES_NOTEXTLINES" >> stats.txt
 echo "Rest of surface forms: $REST">> stats.txt
 echo "Calculating stats of sfAndTotalCounts URLs"
-cat $SFANDTOTALCOUNTS_FILE | cut -f 2 -d$'\t' |  awk -F '\t' '{if($1 == -1){$1=0}{print $1}}' | datamash mean 1 median 1 pvar 1 >> temp.txt
+cat $SFANDTOTALCOUNTS_FILE | cut -f 2 -d$'\t' |  awk -F '\t' '{if($1 == -1){$1=0}{print $1}}' | datamash mean 1 pvar 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
-MEDIAN=$(awk -F '\t' '{ print $2 }' temp.txt)
-MEDIAN=$(echo 'print(round(' $MEDIAN ',2))' | python3 )
-VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
+VAR=$(awk -F '\t' '{ print $2 }' temp.txt)
 VAR=$(echo 'print(round(' $VAR ',2))' | python3 )
 STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
+cat $SFANDTOTALCOUNTS_FILE | awk -F '\t' '{for (i=1; i<=$2; i++) print NR}' | datamash median 1 > temp.txt
+MEDIAN=$(awk -F '\t' '{ print $1 }' temp.txt)
+MEDIAN=$(echo 'print(round(' $MEDIAN '))' | python3 )
 echo "Mean number of sfAndTotalCounts linked URLs per surface form: $MEAN" >> stats.txt
 echo "Median number of sfAndTotalCounts linked URLs per surface form: $MEDIAN" >> stats.txt
 echo "Population variance of sfAndTotalCounts linked URLs per surface form: $VAR" >> stats.txt

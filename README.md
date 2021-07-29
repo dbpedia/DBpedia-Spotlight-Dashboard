@@ -1,6 +1,11 @@
 # DBpedia-Spotlight-Dashboard
 An integrated statistical information tool from the Wikipedia dumps and the DBpedia Extraction Framework artifacts
 
+## Table of contents
+- [Objective](#objective)
+- [Dashboard chart](#dbpedia-spotlight-dashboard-flowchart)
+- [Raw data](#raw-data)
+
 ### Objective
 
 The purpose of this dashboard is to **facilitate the understanding and analysis of both DBpedia datasets ([instance-types](https://databus.dbpedia.org/dbpedia/mappings/instance-types/),  [redirects ](https://databus.dbpedia.org/dbpedia/generic/redirects) and [disambiguations](https://databus.dbpedia.org/dbpedia/generic/disambiguations/)) and [Wikipedia's statistics ](https://databus.dbpedia.org/dbpedia/spotlight/spotlight-wikistats/) (uriCounts, pairCounts, sfAndTotalCounts and tokenCounts)** by calculating statistical measures on these data that allow understanding the trends of **DBpedia resources**, **Wikipedia links** and **surface forms**.

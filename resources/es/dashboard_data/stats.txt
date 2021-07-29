@@ -1,20 +1,14 @@
-DBpedia Extraction Framework redirects and disambiguations
+DBpedia Extraction Framework May 2021 redirects and disambiguations
 -------------------------------------
 Number of redirects (without counting repetitions): 1797653
 Number of disambiguations (without counting repetitions): 51115
 
-DBpedia Extraction Framework instance-types
--------------------------------------
-Number of DBpedia entities (without counting repetitions): 1327554
-Number of DBpedia types: 188
-
-DBpedia Spotlight instance-types
+DBpedia Spotlight May 2021 instance-types (after validation process)
 -------------------------------------
 Number of DBpedia entities with DBpedia types (without counting repetitions): 757866
 Number of DBpedia types: 183
 Mean number of DBpedia entities per type: 13989.87
-Median number of DBpedia entities per type (occurrences, only for the second bar chart of Instance types tab): 1888
-Population variance of DBpedia entities per type: 1745625238.69
+Median number of DBpedia entities per type (occurrences): 1888
 Population standard deviation of DBpedia entities per type: 41780.68
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 2560146
 First quartile value of DBpedia entities per type: 3
@@ -30,35 +24,33 @@ Third quartile value of DBpedia entities per type: 16
 90th percentile value of DBpedia entities per type: 38
 95th percentile value of DBpedia entities per type: 60
 
-DBpedia Spotlight URLs
+DBpedia Spotlight May 2021 URLs
 -------------------------------------
 Precision of DBpedia types URLs: 0.704
 Impact of unknown type URLs: 0.296
 
-DBpedia Spotlight 2021 uriCounts
+DBpedia Spotlight May 2021 uriCounts
 -------------------------------------
 Number of DBpedia entities: 1075967
 Mean number of uriCounts URLs per DBpedia entity: 55.73
 Median number of uriCounts URLs per DBpedia entity: 475322
-Population variance of uriCounts URLs per DBpedia entity: 999615.89
 Population standard deviation of uriCounts URLs per DBpedia entity: 999.80
 
-DBpedia Spotlight 2021 pairCounts
+DBpedia Spotlight May 2021 pairCounts
 -------------------------------------
-Number of [Surface form - DBpedia entity] pairs: 2154724
-Mean number of pairCounts URLs per surface form: 27.9
-Median number of pairCounts URLs per surface form: 984147
-Population variance of pairCounts URLs per surface form: 353467.2
-Population standard deviation of pairCounts URLs per surface form: 594.53
+Number of [Surface form - DBpedia entity] pairs: 3473622
+Mean number of pairCounts URLs per surface form: 28.33
+Median number of pairCounts URLs per surface form: 1552650
+Population standard deviation of pairCounts URLs per surface form: 630.78
 
-DBpedia Spotlight 2021 tokenCounts
+DBpedia Spotlight May 2021 tokenCounts
 -------------------------------------
 Number of Wikipedia articles: 509175
 Mean number of tokens per Wikipedia article: 261.85
 Median number of tokens per Wikipedia article: 234659
 Population standard deviation of tokens per Wikipedia article: 953.59
 
-DBpedia Spotlight 2021 sfAndTotalCounts
+DBpedia Spotlight May 2021 sfAndTotalCounts
 -------------------------------------
 Total number of surface forms: 3129811
 Number of surface forms without associated link: 1380775
@@ -67,7 +59,6 @@ Number of surface forms not appearing as text without associated link: 182237
 Rest of surface forms: 1183641
 Mean number of sfAndTotalCounts linked URLs per surface form: 19.21
 Median number of sfAndTotalCounts linked URLs per surface form: 636453
-Population variance of sfAndTotalCounts linked URLs per surface form: 285913.33
 Population standard deviation of sfAndTotalCounts linked URLs per surface form: 534.70
 
 DBpedia Spotlight 2016 uriCounts
@@ -75,7 +66,6 @@ DBpedia Spotlight 2016 uriCounts
 Number of DBpedia entities: 855800
 Mean number of uriCounts URLs per DBpedia entity: 53.34
 Median number of uriCounts URLs per DBpedia entity: 371399
-Population variance of uriCounts URLs per DBpedia entity: 975065.73
 Population standard deviation of uriCounts URLs per DBpedia entity: 987.45
 
 DBpedia Spotlight 2016 pairCounts
@@ -83,7 +73,6 @@ DBpedia Spotlight 2016 pairCounts
 Number of [Surface form - DBpedia entity] pairs: 1663152
 Mean number of pairCounts URLs per surface form: 27.45
 Median number of pairCounts URLs per surface form: 742137
-Population variance of pairCounts URLs per surface form: 341526.89
 Population standard deviation of pairCounts URLs per surface form: 584.40
 
 DBpedia Spotlight 2016 tokenCounts
@@ -102,6 +91,69 @@ Number of surface forms not appearing as text without associated link: 150702
 Rest of surface forms: 913409
 Mean number of sfAndTotalCounts linked URLs per surface form: 18.49
 Median number of sfAndTotalCounts linked URLs per surface form: 515916
-Population variance of sfAndTotalCounts linked URLs per surface form: 261357.01
 Population standard deviation of sfAndTotalCounts linked URLs per surface form: 511.23
+
+DBpedia Spotlight June 2021 uriCounts
+-------------------------------------
+Number of DBpedia entities: 1083969
+Mean number of uriCounts URLs per DBpedia entity: 55.89
+Median number of uriCounts URLs per DBpedia entity: 479271
+Population standard deviation of uriCounts URLs per DBpedia entity: 1003.04
+
+DBpedia Spotlight June 2021 pairCounts
+-------------------------------------
+Number of [Surface form - DBpedia entity] pairs: 2173521
+Mean number of pairCounts URLs per surface form: 27.95
+Median number of pairCounts URLs per surface form: 994114
+Population standard deviation of pairCounts URLs per surface form: 596.16
+
+DBpedia Spotlight June 2021 tokenCounts
+-------------------------------------
+Number of Wikipedia articles: 513395
+Mean number of tokens per Wikipedia article: 262.48
+Median number of tokens per Wikipedia article: 236804
+Population standard deviation of tokens per Wikipedia article: 955.43
+
+DBpedia Spotlight June 2021 sfAndTotalCounts
+-------------------------------------
+Total number of surface forms: 3154614
+Number of surface forms without associated link: 1391441
+Number of surface forms not appearing as text: 385673
+Number of surface forms not appearing as text without associated link: 183415
+Rest of surface forms: 1194085
+Mean number of sfAndTotalCounts linked URLs per surface form: 19.26
+Median number of sfAndTotalCounts linked URLs per surface form: 639512
+Population standard deviation of sfAndTotalCounts linked URLs per surface form: 536.55
+
+DBpedia Spotlight 2020 uriCounts
+-------------------------------------
+Number of DBpedia entities: 1051602
+Mean number of uriCounts URLs per DBpedia entity: 55.07
+Median number of uriCounts URLs per DBpedia entity: 462200
+Population standard deviation of uriCounts URLs per DBpedia entity: 999.59
+
+DBpedia Spotlight 2020 pairCounts
+-------------------------------------
+Number of [Surface form - DBpedia entity] pairs: 2079461
+Mean number of pairCounts URLs per surface form: 27.85
+Median number of pairCounts URLs per surface form: 944462
+Population standard deviation of pairCounts URLs per surface form: 594.55
+
+DBpedia Spotlight 2020 tokenCounts
+-------------------------------------
+Number of Wikipedia articles: 491748
+Mean number of tokens per Wikipedia article: 259.62
+Median number of tokens per Wikipedia article: 226427
+Population standard deviation of tokens per Wikipedia article: 949.13
+
+DBpedia Spotlight 2020 sfAndTotalCounts
+-------------------------------------
+Total number of surface forms: 3034770
+Number of surface forms without associated link: 1340310
+Number of surface forms not appearing as text: 373399
+Number of surface forms not appearing as text without associated link: 177609
+Rest of surface forms: 1143452
+Mean number of sfAndTotalCounts linked URLs per surface form: 19.08
+Median number of sfAndTotalCounts linked URLs per surface form: 622149
+Population standard deviation of sfAndTotalCounts linked URLs per surface form: 531.54
 

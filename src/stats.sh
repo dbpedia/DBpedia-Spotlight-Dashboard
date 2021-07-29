@@ -35,7 +35,7 @@ INVALID_URLS_LINES=$(cat $INVALID_URLS_FILE | wc -l)
 TOTAL_LINES=$((VALID_URLS_LINES + INVALID_URLS_LINES))
 PRECISION=$(echo 'print(round(' $VALID_URLS_LINES/$TOTAL_LINES ', 3))' | python3 )
 IMPACT=$(echo 'print(round(' $INVALID_URLS_LINES/$TOTAL_LINES ', 3))' | python3 )
-echo "DBpedia Spotlight URLs" >> stats.txt
+echo "DBpedia Spotlight May 2021 URLs" >> stats.txt
 echo "-------------------------------------" >> stats.txt
 echo "Precision of DBpedia types URLs: $PRECISION" >> stats.txt
 echo "Impact of unknown type URLs: $IMPACT" >> stats.txt
@@ -49,7 +49,7 @@ REDIRECTS_FILE=$RESOURCES_DIR/$1/$DATASETS/redirects.nt
 DISAMBIGUATIONS_FILE=$RESOURCES_DIR/$1/$DATASETS/disambiguations.nt
 REDIRECTS_LINES=$(cat $REDIRECTS_FILE | awk -F ' ' '{print $1}' | sort | uniq | wc -l)
 DISAMBIGUATIONS_LINES=$(cat $DISAMBIGUATIONS_FILE | awk -F ' ' '{print $1}' | sort | uniq | wc -l)
-echo "DBpedia Extraction Framework redirects and disambiguations" >> stats.txt
+echo "DBpedia Extraction Framework May 2021 redirects and disambiguations" >> stats.txt
 echo "-------------------------------------" >> stats.txt
 echo "Number of redirects (without counting repetitions): $REDIRECTS_LINES" >> stats.txt
 echo "Number of disambiguations (without counting repetitions): $DISAMBIGUATIONS_LINES" >> stats.txt
@@ -58,20 +58,7 @@ echo "" >> stats.txt
 
 function get_types {
 cd $RESOURCES_DIR/$1/$DASHBOARD
-INSTANCE_TYPES_FILE=$RESOURCES_DIR/$1/$DATASETS/instance_types.nt
-echo "Filtering"
-cat $INSTANCE_TYPES_FILE | grep "http://dbpedia.org/ontology/" > filtered_instance_types
-INSTANCE_TYPES_LINES=$(cat filtered_instance_types | awk -F ' ' '{print $1}' | sort | uniq | wc -l)
-echo "DBpedia Extraction Framework instance-types" >> stats.txt
-echo "-------------------------------------" >> stats.txt
-echo "Number of DBpedia entities (without counting repetitions): $INSTANCE_TYPES_LINES" >> stats.txt
-echo "Getting number of resources for each DBpedia type"
-cat filtered_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' >> instance_types
-sed -i 's%http://dbpedia.org/ontology/%%g' instance_types
-INSTANCE_TYPES_TSV_LINES=$(cat instance_types | wc -l)
-echo "Number of DBpedia types: $INSTANCE_TYPES_TSV_LINES" >> stats.txt
-echo "" >> stats.txt
-echo "DBpedia Spotlight instance-types" >> stats.txt
+echo "DBpedia Spotlight May 2021 instance-types (after validation process)" >> stats.txt
 echo "-------------------------------------" >> stats.txt
 KNOWN_TYPES_LINES=$(cat valid_urls | wc -l)
 KNOWN_TYPES_TSV_LINES=$(cat known_types | wc -l)
@@ -80,7 +67,6 @@ echo "Number of DBpedia types: $KNOWN_TYPES_TSV_LINES" >> stats.txt
 echo "Getting most used resources of known_types file"
 cat known_types | head -n 50 >> known_types_top50
 echo "Done"
-rm "filtered_instance_types"
 echo "Calculating stats of known_types URLs"
 cat known_types | cut -f 2 -d$' ' | datamash mean 1 median 1 pvar 1 sum 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
@@ -119,8 +105,7 @@ PERC90=$(echo 'print(round(' $PERC90 '))' | python3 )
 PERC95=$(awk -F '\t' '{ print $12 }' temp.txt)
 PERC95=$(echo 'print(round(' $PERC95 '))' | python3 )
 echo "Mean number of DBpedia entities per type: $MEAN" >> stats.txt
-echo "Median number of DBpedia entities per type (occurrences, only for the second bar chart of Instance types tab): $MEDIAN" >> stats.txt
-echo "Population variance of DBpedia entities per type: $VAR" >> stats.txt
+echo "Median number of DBpedia entities per type (occurrences): $MEDIAN" >> stats.txt
 echo "Population standard deviation of DBpedia entities per type: $STDDEV" >> stats.txt
 echo "Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): $SUM" >> stats.txt
 echo "First quartile value of DBpedia entities per type: $Q1" >> stats.txt
@@ -144,12 +129,25 @@ echo "Generating file for dashboard"
 
 function get_uriCounts {
 cd $RESOURCES_DIR/$1/$DASHBOARD
-if [ "$2" = "2021" ]
+if [ "$2" = "052021" ]
 then
 	URICOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/uriCounts
-	TOP_50="uriCounts_top50"
-	echo "DBpedia Spotlight 2021 uriCounts" >> stats.txt
-else
+	TOP_50="uriCounts_2021_may_top50"
+	echo "DBpedia Spotlight May 2021 uriCounts" >> stats.txt
+	
+elif [ "$2" = "062021" ]
+then
+	URICOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2021-junio"/uriCounts_all
+	TOP_50="uriCounts_2021_june_top50"
+	echo "DBpedia Spotlight June 2021 uriCounts" >> stats.txt
+
+elif [ "$2" = "2020" ]
+then
+	URICOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2020"/uriCounts_all
+	TOP_50="uriCounts_2020_top50"
+	echo "DBpedia Spotlight 2020 uriCounts" >> stats.txt
+	
+else 
 	URICOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2016"/uriCounts_all
 	echo "DBpedia Spotlight 2016 uriCounts" >> stats.txt
 	TOP_50="uriCounts_2016_top50"
@@ -179,7 +177,6 @@ MEDIAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEDIAN=$(echo 'print(round(' $MEDIAN '))' | python3 )
 echo "Mean number of uriCounts URLs per DBpedia entity: $MEAN" >> stats.txt
 echo "Median number of uriCounts URLs per DBpedia entity: $MEDIAN" >> stats.txt
-echo "Population variance of uriCounts URLs per DBpedia entity: $VAR" >> stats.txt
 echo "Population standard deviation of uriCounts URLs per DBpedia entity: $STDDEV" >> stats.txt
 echo "" >> stats.txt
 echo "Done"
@@ -188,12 +185,25 @@ rm temp.txt
 
 function get_pairCounts {
 cd $RESOURCES_DIR/$1/$DASHBOARD
-if [ "$2" = "2021" ]
+if [ "$2" = "052021" ]
 then
 	PAIRCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/pairCounts
-	TOP_50="pairCounts_top50"
-	echo "DBpedia Spotlight 2021 pairCounts" >> stats.txt
-else
+	TOP_50="pairCounts_2021_may_top50"
+	echo "DBpedia Spotlight May 2021 pairCounts" >> stats.txt
+	
+elif [ "$2" = "062021" ]
+then
+	PAIRCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2021-junio"/pairCounts
+	TOP_50="pairCounts_2021_june_top50"
+	echo "DBpedia Spotlight June 2021 pairCounts" >> stats.txt
+
+elif [ "$2" = "2020" ]
+then
+	PAIRCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2020"/pairCounts
+	TOP_50="pairCounts_2020_top50"
+	echo "DBpedia Spotlight 2020 pairCounts" >> stats.txt
+	
+else 
 	PAIRCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2016"/pairCounts
 	echo "DBpedia Spotlight 2016 pairCounts" >> stats.txt
 	TOP_50="pairCounts_2016_top50"
@@ -224,7 +234,6 @@ MEDIAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEDIAN=$(echo 'print(round(' $MEDIAN '))' | python3 )
 echo "Mean number of pairCounts URLs per surface form: $MEAN" >> stats.txt
 echo "Median number of pairCounts URLs per surface form: $MEDIAN" >> stats.txt
-echo "Population variance of pairCounts URLs per surface form: $VAR" >> stats.txt
 echo "Population standard deviation of pairCounts URLs per surface form: $STDDEV" >> stats.txt
 echo "" >> stats.txt
 rm cleaned_pairCounts 
@@ -234,12 +243,25 @@ rm temp.txt
 
 function get_tokenCounts {
 cd $RESOURCES_DIR/$1/$DASHBOARD
-if [ "$2" = "2021" ]
+if [ "$2" = "052021" ]
 then
 	TOKENCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/tokenCounts
-	TOP_50="tokenCounts_top50"
-	echo "DBpedia Spotlight 2021 tokenCounts" >> stats.txt
-else
+	TOP_50="tokenCounts_2021_may_top50"
+	echo "DBpedia Spotlight May 2021 tokenCounts" >> stats.txt
+	
+elif [ "$2" = "062021" ]
+then
+	TOKENCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2021-junio"/tokenCounts
+	TOP_50="tokenCounts_2021_june_top50"
+	echo "DBpedia Spotlight June 2021 tokenCounts" >> stats.txt
+
+elif [ "$2" = "2020" ]
+then
+	TOKENCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2020"/tokenCounts
+	TOP_50="tokenCounts_2020_top50"
+	echo "DBpedia Spotlight 2020 tokenCounts" >> stats.txt
+	
+else 
 	TOKENCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2016"/tokenCounts
 	echo "DBpedia Spotlight 2016 tokenCounts" >> stats.txt
 	TOP_50="tokenCounts_2016_top50"
@@ -279,12 +301,25 @@ rm tokens
 
 function get_sfAndTotalCounts {
 cd $RESOURCES_DIR/$1/$DASHBOARD
-if [ "$2" = "2021" ]
+if [ "$2" = "052021" ]
 then
 	SFANDTOTALCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/sfAndTotalCounts
-	TOP_50="sfAndTotalCounts_top50"
-	echo "DBpedia Spotlight 2021 sfAndTotalCounts" >> stats.txt
-else
+	TOP_50="sfAndTotalCounts_2021_may_top50"
+	echo "DBpedia Spotlight May 2021 sfAndTotalCounts" >> stats.txt
+	
+elif [ "$2" = "062021" ]
+then
+	SFANDTOTALCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2021-junio"/sfAndTotalCounts
+	TOP_50="sfAndTotalCounts_2021_june_top50"
+	echo "DBpedia Spotlight June 2021 sfAndTotalCounts" >> stats.txt
+
+elif [ "$2" = "2020" ]
+then
+	SFANDTOTALCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2020"/sfAndTotalCounts
+	TOP_50="sfAndTotalCounts_2020_top50"
+	echo "DBpedia Spotlight 2020 sfAndTotalCounts" >> stats.txt
+	
+else 
 	SFANDTOTALCOUNTS_FILE=$RESOURCES_DIR/$1/$WIKISTATS/"2016"/sfAndTotalCounts
 	echo "DBpedia Spotlight 2016 sfAndTotalCounts" >> stats.txt
 	TOP_50="sfAndTotalCounts_2016_top50"
@@ -321,7 +356,6 @@ MEDIAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEDIAN=$(echo 'print(round(' $MEDIAN '))' | python3 )
 echo "Mean number of sfAndTotalCounts linked URLs per surface form: $MEAN" >> stats.txt
 echo "Median number of sfAndTotalCounts linked URLs per surface form: $MEDIAN" >> stats.txt
-echo "Population variance of sfAndTotalCounts linked URLs per surface form: $VAR" >> stats.txt
 echo "Population standard deviation of sfAndTotalCounts linked URLs per surface form: $STDDEV" >> stats.txt
 echo "" >> stats.txt
 echo "Done"
@@ -345,17 +379,17 @@ echo "Getting precision and impact of URLs"
 get_precision_impact "$ES"
 get_precision_impact "$EN"
 echo "Done"
-get_uriCounts "$ES" "2021"
-get_uriCounts "$EN" "2021"
+get_uriCounts "$ES" "052021"
+get_uriCounts "$EN" "052021"
 echo "Done"
-get_pairCounts "$ES" "2021"
-get_pairCounts "$EN" "2021"
+get_pairCounts "$ES" "052021"
+get_pairCounts "$EN" "052021"
 echo "Done"
-get_tokenCounts "$ES" "2021"
-get_tokenCounts "$EN" "2021"
+get_tokenCounts "$ES" "052021"
+get_tokenCounts "$EN" "052021"
 echo "Done"
-get_sfAndTotalCounts "$ES" "2021"
-get_sfAndTotalCounts "$EN" "2021"
+get_sfAndTotalCounts "$ES" "052021"
+get_sfAndTotalCounts "$EN" "052021"
 echo "Done"
 get_uriCounts "$ES" "2016"
 get_uriCounts "$EN" "2016"
@@ -368,4 +402,28 @@ get_tokenCounts "$EN" "2016"
 echo "Done"
 get_sfAndTotalCounts "$ES" "2016"
 get_sfAndTotalCounts "$EN" "2016"
+echo "Done"
+get_uriCounts "$ES" "062021"
+get_uriCounts "$EN" "062021"
+echo "Done"
+get_pairCounts "$ES" "062021"
+get_pairCounts "$EN" "062021"
+echo "Done"
+get_tokenCounts "$ES" "062021"
+get_tokenCounts "$EN" "062021"
+echo "Done"
+get_sfAndTotalCounts "$ES" "062021"
+get_sfAndTotalCounts "$EN" "062021"
+echo "Done"
+get_uriCounts "$ES" "2020"
+get_uriCounts "$EN" "2020"
+echo "Done"
+get_pairCounts "$ES" "2020"
+get_pairCounts "$EN" "2020"
+echo "Done"
+get_tokenCounts "$ES" "2020"
+get_tokenCounts "$EN" "2020"
+echo "Done"
+get_sfAndTotalCounts "$ES" "2020"
+get_sfAndTotalCounts "$EN" "2020"
 echo "Done"

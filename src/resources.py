@@ -33,67 +33,104 @@ def get_statistics(dashboard_directory):
     if(es_dashboard_directory == dashboard_directory):
         file = open(es_dashboard_directory + "stats.txt", 'r')
         file = file.read()
-        numbers = re.findall(r"[-+]?\d*\.\d+|\d+", file)
+        numbers = re.findall(r"(?<=: )\d*\.?\d+", file)
     else:
         file = open(en_dashboard_directory + "stats.txt", 'r')
         file = file.read()
-        numbers = re.findall(r"[-+]?\d*\.\d+|\d+", file)
+        numbers = re.findall(r"(?<=: )\d*\.?\d+", file)
     return numbers
 
 def get_version_statistics(resources_directory):
     file = open(resources_directory + "versions_statistics.txt", 'r')
     file = file.read()
-    numbers = re.findall(r"[-+]?\d*\.\d+|\d+", file)
+    numbers = re.findall(r"(?<=: )\d*\.?\d+", file)
     return numbers
 
 
 src_path = os.path.dirname(os.path.realpath(__file__))
 root_path = src_path.replace("src","")
-instance_types_file = "instance_types"
+es_dashboard_directory = root_path + "resources/es/dashboard_data/"
+en_dashboard_directory = root_path + "resources/en/dashboard_data/"
+versions_directory =  root_path + "resources/versions/"
+# Known types files
 known_types_file = "known_types"
+top_known_types_file = "known_types_top50"
+# Ontology dataframe
+ontology_df = tsv_to_df(root_path + "resources/ontologies.csv")
+# Known types dataframes
+known_types_es_2021_05_01 = tsv_to_df(es_dashboard_directory + known_types_file)
+known_types_en_2021_05_01 = tsv_to_df(en_dashboard_directory + known_types_file)
+top_known_types_2021_05_es = tsv_to_df(es_dashboard_directory + top_known_types_file)
+top_known_types_2021_05_en = tsv_to_df(en_dashboard_directory + top_known_types_file)
+# Instance types 2016 dataframes
+instance_types_es_2016_10_01 = tsv_to_df(versions_directory + "instance_types_es_2016.10.01")
+instance_types_en_2016_10_01 = tsv_to_df(versions_directory + "instance_types_en_2016.10.01")
+# Instance types 2020 dataframes
+instance_types_es_2020_10_01 = tsv_to_df(versions_directory + "instance_types_es_2020.10.01")
+instance_types_en_2020_10_01 = tsv_to_df(versions_directory + "instance_types_en_2020.10.01")
+# Instance types May 2021 dataframes
+instance_types_es_2021_05_01 = tsv_to_df(versions_directory + "instance_types_es_2021.05.01")
+instance_types_en_2021_05_01 = tsv_to_df(versions_directory + "instance_types_en_2021.05.01")
+# Instance types June 2021 dataframes
+instance_types_es_2021_06_01 = tsv_to_df(versions_directory + "instance_types_es_2021.06.01")
+instance_types_en_2021_06_01 = tsv_to_df(versions_directory + "instance_types_en_2021.06.01")
+# Wikistats 2016 files
 top_2016_uriCounts_file = "uriCounts_2016_top50"
 top_2016_pairCounts_file = "pairCounts_2016_top50"
 top_2016_sfAndTotalCounts_file = "sfAndTotalCounts_2016_top50"
 top_2016_tokenCounts_file = "tokenCounts_2016_top50"
-top_uriCounts_file = "uriCounts_top50"
-top_pairCounts_file = "pairCounts_top50"
-top_sfAndTotalCounts_file = "sfAndTotalCounts_top50"
-top_tokenCounts_file = "tokenCounts_top50"
-top_known_types_file = "known_types_top50"
-es_dashboard_directory = root_path + "resources/es/dashboard_data/"
-en_dashboard_directory = root_path + "resources/en/dashboard_data/"
-versions_directory =  root_path + "resources/versions/"
-ontology_df = tsv_to_df(root_path + "resources/ontologies.csv")
-instance_types_es = tsv_to_df(es_dashboard_directory + instance_types_file)
-known_types_es = tsv_to_df(es_dashboard_directory + known_types_file)
+# Wikistats 2020 files
+top_2020_uriCounts_file = "uriCounts_2020_top50"
+top_2020_pairCounts_file = "pairCounts_2020_top50"
+top_2020_sfAndTotalCounts_file = "sfAndTotalCounts_2020_top50"
+top_2020_tokenCounts_file = "tokenCounts_2020_top50"
+# Wikistats May 2021 files
+top_2021_05_uriCounts_file = "uriCounts_2021_may_top50"
+top_2021_05_pairCounts_file = "pairCounts_2021_may_top50"
+top_2021_05_sfAndTotalCounts_file = "sfAndTotalCounts_2021_may_top50"
+top_2021_05_tokenCounts_file = "tokenCounts_2021_may_top50"
+# Wikistats June 2021 files
+top_2021_06_uriCounts_file = "uriCounts_2021_june_top50"
+top_2021_06_pairCounts_file = "pairCounts_2021_june_top50"
+top_2021_06_sfAndTotalCounts_file = "sfAndTotalCounts_2021_june_top50"
+top_2021_06_tokenCounts_file = "tokenCounts_2021_june_top50"
+# Wikistats 2016 dataframes
 top_2016_uriCounts_es = tsv_to_df(es_dashboard_directory + top_2016_uriCounts_file)
 top_2016_pairCounts_es = tsv_to_df(es_dashboard_directory + top_2016_pairCounts_file)
 top_2016_sfAndTotalCounts_es = tsv_to_df(es_dashboard_directory + top_2016_sfAndTotalCounts_file)
 top_2016_tokenCounts_es = tsv_to_df(es_dashboard_directory + top_2016_tokenCounts_file)
-top_uriCounts_es = tsv_to_df(es_dashboard_directory + top_uriCounts_file)
-top_pairCounts_es = tsv_to_df(es_dashboard_directory + top_pairCounts_file)
-top_sfAndTotalCounts_es = tsv_to_df(es_dashboard_directory + top_sfAndTotalCounts_file)
-top_tokenCounts_es = tsv_to_df(es_dashboard_directory + top_tokenCounts_file)
-top_known_types_es = tsv_to_df(es_dashboard_directory + top_known_types_file)
-es_stats = get_statistics(es_dashboard_directory)
-instance_types_en = tsv_to_df(en_dashboard_directory + instance_types_file)
-known_types_en = tsv_to_df(en_dashboard_directory + known_types_file)
 top_2016_uriCounts_en = tsv_to_df(en_dashboard_directory +top_2016_uriCounts_file)
 top_2016_pairCounts_en = tsv_to_df(en_dashboard_directory + top_2016_pairCounts_file)
 top_2016_sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + top_2016_sfAndTotalCounts_file)
 top_2016_tokenCounts_en = tsv_to_df(en_dashboard_directory + top_2016_tokenCounts_file)
-top_uriCounts_en = tsv_to_df(en_dashboard_directory +top_uriCounts_file)
-top_pairCounts_en = tsv_to_df(en_dashboard_directory + top_pairCounts_file)
-top_sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + top_sfAndTotalCounts_file)
-top_tokenCounts_en = tsv_to_df(en_dashboard_directory + top_tokenCounts_file)
-top_known_types_en = tsv_to_df(en_dashboard_directory + top_known_types_file)
+# Wikistats 2020 dataframes
+top_2020_uriCounts_es = tsv_to_df(es_dashboard_directory + top_2020_uriCounts_file)
+top_2020_pairCounts_es = tsv_to_df(es_dashboard_directory + top_2020_pairCounts_file)
+top_2020_sfAndTotalCounts_es = tsv_to_df(es_dashboard_directory + top_2020_sfAndTotalCounts_file)
+top_2020_tokenCounts_es = tsv_to_df(es_dashboard_directory + top_2020_tokenCounts_file)
+top_2020_uriCounts_en = tsv_to_df(en_dashboard_directory + top_2020_uriCounts_file)
+top_2020_pairCounts_en = tsv_to_df(en_dashboard_directory + top_2020_pairCounts_file)
+top_2020_sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + top_2020_sfAndTotalCounts_file)
+top_2020_tokenCounts_en = tsv_to_df(en_dashboard_directory + top_2020_tokenCounts_file)
+# Wikistats May 2021 dataframes
+top_2021_05_uriCounts_es = tsv_to_df(es_dashboard_directory + top_2021_05_uriCounts_file)
+top_2021_05_pairCounts_es = tsv_to_df(es_dashboard_directory + top_2021_05_pairCounts_file)
+top_2021_05_sfAndTotalCounts_es = tsv_to_df(es_dashboard_directory + top_2021_05_sfAndTotalCounts_file)
+top_2021_05_tokenCounts_es = tsv_to_df(es_dashboard_directory + top_2021_05_tokenCounts_file)
+top_2021_05_uriCounts_en = tsv_to_df(en_dashboard_directory + top_2021_05_uriCounts_file)
+top_2021_05_pairCounts_en = tsv_to_df(en_dashboard_directory + top_2021_05_pairCounts_file)
+top_2021_05_sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + top_2021_05_sfAndTotalCounts_file)
+top_2021_05_tokenCounts_en = tsv_to_df(en_dashboard_directory + top_2021_05_tokenCounts_file)
+# Wikistats June 2021 dataframes
+top_2021_06_uriCounts_es = tsv_to_df(es_dashboard_directory + top_2021_06_uriCounts_file)
+top_2021_06_pairCounts_es = tsv_to_df(es_dashboard_directory + top_2021_06_pairCounts_file)
+top_2021_06_sfAndTotalCounts_es = tsv_to_df(es_dashboard_directory + top_2021_06_sfAndTotalCounts_file)
+top_2021_06_tokenCounts_es = tsv_to_df(es_dashboard_directory + top_2021_06_tokenCounts_file)
+top_2021_06_uriCounts_en = tsv_to_df(en_dashboard_directory + top_2021_06_uriCounts_file)
+top_2021_06_pairCounts_en = tsv_to_df(en_dashboard_directory + top_2021_06_pairCounts_file)
+top_2021_06_sfAndTotalCounts_en = tsv_to_df(en_dashboard_directory + top_2021_06_sfAndTotalCounts_file)
+top_2021_06_tokenCounts_en = tsv_to_df(en_dashboard_directory + top_2021_06_tokenCounts_file)
+# Stats lists
+es_stats = get_statistics(es_dashboard_directory)
 en_stats = get_statistics(en_dashboard_directory)
 versions_stats = get_version_statistics(root_path + "resources/versions/")
-instance_types_es_2016_10_01 = tsv_to_df(versions_directory + "instance_types_es_2016.10.01")
-instance_types_es_2020_10_01 = tsv_to_df(versions_directory + "instance_types_es_2020.10.01")
-instance_types_es_2021_05_01 = tsv_to_df(versions_directory + "instance_types_es_2021.05.01")
-instance_types_es_2021_06_01 = tsv_to_df(versions_directory + "instance_types_es_2021.06.01")
-instance_types_en_2016_10_01 = tsv_to_df(versions_directory + "instance_types_en_2016.10.01")
-instance_types_en_2020_10_01 = tsv_to_df(versions_directory + "instance_types_en_2020.10.01")
-instance_types_en_2021_05_01 = tsv_to_df(versions_directory + "instance_types_en_2021.05.01")
-instance_types_en_2021_06_01 = tsv_to_df(versions_directory + "instance_types_en_2021.06.01")

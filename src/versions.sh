@@ -12,6 +12,16 @@ _2021_06_01="2021.06.01"
 VERSIONS="instance_types_versions"
 DASHBOARD="dashboard_data"
 
+function check {
+REQUIRED_PKG=$1
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+echo Checking for $REQUIRED_PKG: $PKG_OK
+if [ "" = "$PKG_OK" ]; then
+  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+  sudo apt-get --yes install $REQUIRED_PKG 
+fi
+}
+
 
 ########################################################################################################
 # DBpedia extraction:
@@ -66,7 +76,7 @@ SELECT DISTINCT ?file WHERE {
 function versions_statistics {
 	cd $RESOURCES_DIR/versions
 	INSTANCE_TYPES_FILE=$RESOURCES_DIR/$1/$VERSIONS/$2/instance_types.nt
-	echo "Language: $1 | Version: $2" >> versions_statistics.txt
+	echo "Language -> $1 | Version -> $2" >> versions_statistics.txt
 	echo "" >> versions_statistics.txt
 	echo "Filtering"
 	cat $INSTANCE_TYPES_FILE | grep "http://dbpedia.org/ontology/" > filtered_instance_types
@@ -79,6 +89,58 @@ function versions_statistics {
 	sed -i 's%http://dbpedia.org/ontology/%%g' instance_types_$1_$2
 	INSTANCE_TYPES_TSV_LINES=$(cat instance_types_$1_$2 | wc -l)
 	echo "Number of DBpedia types: $INSTANCE_TYPES_TSV_LINES" >> versions_statistics.txt
+	echo "Calculating stats of instance_types_$1_$2 URLs"
+	cat "instance_types_$1_$2" | cut -f 2 -d$' ' | datamash mean 1 median 1 pvar 1 sum 1 > temp.txt
+	MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
+	MEAN=$(echo 'print(round('$MEAN',2))' | python3 )
+	MEDIAN=$(awk -F '\t' '{ print $2 }' temp.txt)
+	MEDIAN=$(echo 'print(round('$MEDIAN',2))' | python3 )
+	VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
+	VAR=$(echo 'print(round('$VAR',2))' | python3 )
+	STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
+	SUM=$(awk -F '\t' '{ print $4 }' temp.txt)
+	echo "Calculating position measures"
+	cat "instance_types_$1_$2" | awk '{for (i=1; i<=$2; i++) print NR}' | datamash q1 1 q3 1 perc:10 1 perc:20 1 perc:30 1 perc:40 1 perc:50 1 perc:60 1 perc:70 1 perc:80 1 perc:90 1 perc:95 1 > temp.txt
+	Q1=$(awk -F '\t' '{ print $1 }' temp.txt)
+	Q1=$(echo 'print(round(' $Q1 '))' | python3 )
+	Q3=$(awk -F '\t' '{ print $2 }' temp.txt)
+	Q3=$(echo 'print(round(' $Q3 '))' | python3 )
+	PERC10=$(awk -F '\t' '{ print $3 }' temp.txt)
+	PERC10=$(echo 'print(round(' $PERC10 '))' | python3 )
+	PERC20=$(awk -F '\t' '{ print $4 }' temp.txt)
+	PERC20=$(echo 'print(round(' $PERC20 '))' | python3 )
+	PERC30=$(awk -F '\t' '{ print $5 }' temp.txt)
+	PERC30=$(echo 'print(round(' $PERC30 '))' | python3 )
+	PERC40=$(awk -F '\t' '{ print $6 }' temp.txt)
+	PERC40=$(echo 'print(round(' $PERC40 '))' | python3 )
+	PERC50=$(awk -F '\t' '{ print $7 }' temp.txt)
+	PERC50=$(echo 'print(round(' $PERC50 '))' | python3 )
+	PERC60=$(awk -F '\t' '{ print $8 }' temp.txt)
+	PERC60=$(echo 'print(round(' $PERC60 '))' | python3 )
+	PERC70=$(awk -F '\t' '{ print $9 }' temp.txt)
+	PERC70=$(echo 'print(round(' $PERC70 '))' | python3 )
+	PERC80=$(awk -F '\t' '{ print $10 }' temp.txt)
+	PERC80=$(echo 'print(round(' $PERC80 '))' | python3 )
+	PERC90=$(awk -F '\t' '{ print $11 }' temp.txt)
+	PERC90=$(echo 'print(round(' $PERC90 '))' | python3 )
+	PERC95=$(awk -F '\t' '{ print $12 }' temp.txt)
+	PERC95=$(echo 'print(round(' $PERC95 '))' | python3 )
+	echo "Mean number of DBpedia entities per type: $MEAN" >> versions_statistics.txt
+	echo "Median number of DBpedia entities per type (occurrences): $MEDIAN" >> versions_statistics.txt
+	echo "Population standard deviation of DBpedia entities per type: $STDDEV" >> versions_statistics.txt
+	echo "Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): $SUM" >> versions_statistics.txt
+	echo "First quartile value of DBpedia entities per type: $Q1" >> versions_statistics.txt
+	echo "Third quartile value of DBpedia entities per type: $Q3" >> versions_statistics.txt
+	echo "10th percentile value of DBpedia entities per type: $PERC10" >> versions_statistics.txt
+	echo "20th percentile value of DBpedia entities per type: $PERC20" >> versions_statistics.txt
+	echo "30th percentile value of DBpedia entities per type: $PERC30" >> versions_statistics.txt
+	echo "40th percentile value of DBpedia entities per type: $PERC40" >> versions_statistics.txt
+	echo "50th percentile value of DBpedia entities per type: $PERC50" >> versions_statistics.txt
+	echo "60th percentile value of DBpedia entities per type: $PERC60" >> versions_statistics.txt
+	echo "70th percentile value of DBpedia entities per type: $PERC70" >> versions_statistics.txt
+	echo "80th percentile value of DBpedia entities per type: $PERC80" >> versions_statistics.txt
+	echo "90th percentile value of DBpedia entities per type: $PERC90" >> versions_statistics.txt
+	echo "95th percentile value of DBpedia entities per type: $PERC95" >> versions_statistics.txt
 	echo "" >> versions_statistics.txt
     rm filtered_instance_types
 }
@@ -117,6 +179,9 @@ else
 	download_versions "$EN" "$_2021_05_01"
 	download_versions "$EN" "$_2021_06_01"
 fi
+
+check "python3"
+check "datamash"
 echo "Calculating versions statistics"
 if [ -f $RESOURCES_DIR/versions/versions_statistics.txt ]; then
 	rm $RESOURCES_DIR/versions/versions_statistics.txt

@@ -8,12 +8,22 @@ import figures as F
 import resources as R
 import callbacks as CB
 
+
 tabs_styles = {
     'height': '44px',
     'align-items': 'center',
     'margin-left': '50px',
     'margin-right': '50px'
 }
+
+subtabs_styles = {
+    'height': '44px',
+    'width' : '1000px',
+    'align-items': 'center',
+    'margin-left': '200px',
+    'margin-right': '50px'
+}
+
 tab_style = {
     'borderBottom': '1px solid #d6d6d6',
     'padding': '6px',
@@ -35,7 +45,6 @@ tab_selected_style = {
 
 
 app = dash.Dash(external_stylesheets=[dbc.themes.LUX])
-
 
 app.layout = html.Div(children=[
     # Header
@@ -124,15 +133,32 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         # Spanish tab
         dcc.Tab(id='es_tab', label='Spanish', value = "spanish", children = [
         dcc.Tabs(id='subtabs', value='subtab-1', children=[
+            
+        # Summary subtab    
+          dcc.Tab(id='es_summary_tab', label='Summary', value = 'es_summary', children = [
+            html.Div([
+             html.Br(),
+            html.H3("Choose files version: "),
+            dcc.Dropdown(id='es_summary_dropdown',options=[
+                {'label': 'Oct 2016', 'value': 'Oct 2016'},
+                {'label': 'Oct 2020', 'value': 'Oct 2020'},
+                {'label': 'May 2021', 'value': 'May 2021'},
+                {'label': 'Jun 2021', 'value': 'Jun 2021'}], 
+                placeholder="Version"),
+             html.Br(),
+            html.Div(id='es_summary_container')
+        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = tab_style, selected_style = tab_selected_style),   
+            
         # Instance-types subtab
         dcc.Tab(id='es_types_tab', label='Instance types', value = 'es_types', children = [
             html.Div([
             html.Br(),
              html.Div(children=[html.H2("DBpedia Extraction Framework"),
         html.Br(),
-         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.es_stats[2])]
+         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.versions_stats[36])]
                                          )]),style={'display': 'inline-block'}, color="#F5F5F5"),
-         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia types"), html.H3(R.es_stats[3])] 
+         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia types"), html.H3(R.versions_stats[37])] 
                                          )]), style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),  
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº redirects"), html.H3(R.es_stats[0])] 
                                          )]),style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
@@ -140,27 +166,13 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                                          )]),style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
           html.Br(),
           html.Br(),
-          html.Div(children=[html.H3("Entities by DBpedia types"),
-           dcc.Graph(id='ontologyy', figure=F.ontology_figure, style={'display': 'inline-block'}),
-           dcc.Graph(id='es_instance_types', figure=F.es_instance_types_figure, 
-                                   style={'display': 'inline-block'})]
-            )]),
-         html.Br(),
-         html.Div([html.H2("DBpedia Spotlight"),      
-         html.Br(),        
-         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.es_stats[4])] 
-                                         )]),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia types"), html.H3(R.es_stats[5])])]),
-                  style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
-          html.Br(),
-          html.Br(),
           html.H3("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H3("Nº entities per DBpedia type (mean)"), html.H3(R.es_stats[6])])
+                       html.Div([html.H3("Nº entities per DBpedia type (mean)"), html.H3(R.versions_stats[38])])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H3("Intermediate DBpedia type (median)"), html.H3('dbo:Region')])
+                        html.Div([html.H3("Intermediate DBpedia type (median)"), html.H3('dbo:AdministrativeRegion')])
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "30px"}
                 ),
                 html.Br(),
@@ -173,9 +185,23 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 html.Br(),
                 html.H3("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H3("Standard deviation"), html.H3(R.es_stats[9])])
+                         html.Div([html.H3("Standard deviation"), html.H3(R.versions_stats[40])])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
+          html.Br(),
+          html.Br(),
+          html.Div(children=[html.H3("Entities by DBpedia types"),
+           dcc.Graph(id='ontologyy', figure=F.ontology_figure, style={'display': 'inline-block'}),
+           dcc.Graph(id='es_instance_types', figure=F.es_instance_types_figure, 
+                                   style={'display': 'inline-block'})]
+            )]),
+         html.Br(),
+         html.Div([html.H2("DBpedia Spotlight"),      
+         html.Br(),        
+         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.es_stats[2])] 
+                                         )]),style={'display': 'inline-block'}, color='#F5F5F5'),
+         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia types"), html.H3(R.es_stats[3])])]),
+                  style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
           html.Br(),
           html.Br(),
           dcc.Graph(id='es_statistics', figure=F.es_statistics_figure)]),
@@ -200,7 +226,11 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             id="es_top_known_types_table",
             columns=[{"name": "DBpedia type", "id": "DBpedia type"},
                      {"name": "Nº entities", "id": "Nº entities"}],
-            data=R.top_known_types_es.to_dict("records"),
+            style_header=
+           {
+              'fontWeight': 'bold'
+           },
+            data=R.known_types_es_2021_05_01.to_dict("records"),
             fill_width=False,
             style_table={
                 'overflowY': 'scroll', 'height': 400, 'width': 425, 'margin-left': '10px'
@@ -217,7 +247,9 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         html.H3("Choose uriCounts file version: "),
         dcc.Dropdown(id='uriCounts_dropdown',options=[
             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'}], 
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
+            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
             placeholder="Version"),
          html.Br(),
         html.Div(id='uriCounts_container')
@@ -230,8 +262,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 html.Br(),
         html.H3("Choose pairCounts file version: "),
         dcc.Dropdown(id='pairCounts_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'}], 
+             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
+            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
             placeholder="Version"),
          html.Br(),
         html.Div(id='pairCounts_container')
@@ -244,8 +278,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
           html.Br(),
         html.H3("Choose tokenCounts file version: "),
         dcc.Dropdown(id='tokenCounts_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'}], 
+             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
+            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
             placeholder="Version"),
          html.Br(),
         html.Div(id='tokenCounts_container')
@@ -257,28 +293,46 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
              html.Br(),
         html.H3("Choose sfAndTotalCounts file version: "),
         dcc.Dropdown(id='sfAndTotalCounts_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'}], 
+             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
+            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
             placeholder="Version"),
          html.Br(),
         html.Div(id='sfAndTotalCounts_container')
         ], style = {'margin-left': '50px', 'margin-right': '50px'})
               ], style = tab_style, selected_style = tab_selected_style)
-        ], style = tabs_styles)
+        ], style = subtabs_styles)
         ], style = tab_style, selected_style = tab_selected_style)
           ,
         # English tab
         dcc.Tab(id='en_tab', label='English', value = "english", children = [
         dcc.Tabs(id='en-subtabs', value='en-subtab-1', children=[
+            
+        # Summary subtab    
+        dcc.Tab(id='en_summary_tab', label='Summary', value = 'en_summary', children = [
+        html.Div([
+        html.Br(),
+            html.H3("Choose files version: "),
+            dcc.Dropdown(id='en_summary_dropdown',options=[
+                {'label': 'Oct 2016', 'value': 'Oct 2016'},
+                {'label': 'Oct 2020', 'value': 'Oct 2020'},
+                {'label': 'May 2021', 'value': 'May 2021'},
+                {'label': 'Jun 2021', 'value': 'Jun 2021'}], 
+                placeholder="Version"),
+             html.Br(),
+            html.Div(id='en_summary_container')        
+        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = tab_style, selected_style = tab_selected_style),   
         # Instance-types subtab
         dcc.Tab(id='en_types_tab', label='Instance types', value = 'en_types', children = [
             html.Div([
             html.Br(),
             html.Div(children=[html.H2("DBpedia Extraction Framework"),
         html.Br(),
-         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.en_stats[2])]
+         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.versions_stats[108])]
                                          )]),style={'display': 'inline-block'}, color="#F5F5F5"),
-         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia types"), html.H3(R.en_stats[3])] 
+         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia types"), html.H3(R.versions_stats[109])] 
                                          )]), style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),  
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº redirects"), html.H3(R.en_stats[0])] 
                                          )]),style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
@@ -286,27 +340,13 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                                          )]),style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
           html.Br(),
           html.Br(),
-          html.Div(children=[html.H3("Entities by DBpedia types"),
-           dcc.Graph(id='en_ontologyy', figure=F.ontology_figure, style={'display': 'inline-block'}),
-           dcc.Graph(id='en_instance_types', figure=F.en_instance_types_figure, 
-                                   style={'display': 'inline-block'})]
-            )]),
-         html.Br(),
-         html.Div([html.H2("DBpedia Spotlight"),      
-         html.Br(),        
-         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.en_stats[4])] 
-                                         )]),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia types"), html.H3(R.en_stats[5])])]),
-                  style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
-          html.Br(),
-          html.Br(),
           html.H3("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H3("Nº entities per DBpedia type (mean)"), html.H3(R.en_stats[6])])
+                       html.Div([html.H3("Nº entities per DBpedia type (mean)"), html.H3(R.versions_stats[110])])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H3("Intermediate DBpedia type (median)"), html.H3('dbo:Settlement')])
+                        html.Div([html.H3("Intermediate DBpedia type (median)"), html.H3('dbo:Work')])
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "30px"}
                 ),
                 html.Br(),
@@ -319,9 +359,23 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 html.Br(),
                 html.H3("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H3("Standard deviation"), html.H3(R.en_stats[9])])
+                         html.Div([html.H3("Standard deviation"), html.H3(R.versions_stats[112])])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
+          html.Br(),
+          html.Br(),
+          html.Div(children=[html.H3("Entities by DBpedia types"),
+           dcc.Graph(id='en_ontologyy', figure=F.ontology_figure, style={'display': 'inline-block'}),
+           dcc.Graph(id='en_instance_types', figure=F.en_instance_types_figure, 
+                                   style={'display': 'inline-block'})]
+            )]),
+         html.Br(),
+         html.Div([html.H2("DBpedia Spotlight"),      
+         html.Br(),        
+         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.en_stats[2])] 
+                                         )]),style={'display': 'inline-block'}, color='#F5F5F5'),
+         dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia types"), html.H3(R.en_stats[3])])]),
+                  style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
           html.Br(),
           html.Br(),
           dcc.Graph(id='en_statistics', figure=F.en_statistics_figure)]),
@@ -346,10 +400,14 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             id="en_top_known_types_table",
             columns=[{"name": "DBpedia type", "id": "DBpedia type"},
                      {"name": "Nº entities", "id": "Nº entities"}],
-            data=R.top_known_types_en.to_dict("records"),
+            style_header=
+           {
+              'fontWeight': 'bold'
+           },
+            data=R.known_types_en_2021_05_01.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 325, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': 400, 'width': 425, 'margin-left': '10px'
                          }
         )
         ])])
@@ -361,8 +419,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         html.Br(),
         html.H3("Choose uriCounts file version: "),
         dcc.Dropdown(id='en_uriCounts_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'}], 
+             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
+            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
             placeholder="Version"),
          html.Br(),
         html.Div(id='en_uriCounts_container')
@@ -374,8 +434,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         html.Br(),
         html.H3("Choose pairCounts file version: "),
         dcc.Dropdown(id='en_pairCounts_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'}], 
+             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
+            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
             placeholder="Version"),
          html.Br(),
         html.Div(id='en_pairCounts_container')
@@ -387,8 +449,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
           html.Br(),
         html.H3("Choose tokenCounts file version: "),
         dcc.Dropdown(id='en_tokenCounts_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'}], 
+             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
+            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
             placeholder="Version"),
          html.Br(),
         html.Div(id='en_tokenCounts_container')
@@ -400,14 +464,16 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
              html.Br(),
         html.H3("Choose sfAndTotalCounts file version: "),
         dcc.Dropdown(id='en_sfAndTotalCounts_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'}], 
+             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
+            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
             placeholder="Version"),
          html.Br(),
         html.Div(id='en_sfAndTotalCounts_container')
               ], style = {'margin-left': '50px', 'margin-right': '50px'})
         ], style = tab_style, selected_style = tab_selected_style)]
-            , style = tabs_styles)
+            , style = subtabs_styles)
         ], style = tab_style, selected_style = tab_selected_style),
         # Comparison tab                    
         dcc.Tab(label='Comparison', value='comparison-tab', children = [

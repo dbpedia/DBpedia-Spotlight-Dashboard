@@ -8,29 +8,404 @@ from dash_table import DataTable
 import resources as R
 import figures as F
 
+es_executed = False
+en_executed = False
 
 def initialize_callbacks(app):
-     '''
-        # Spanish Tab callback
-         @app.callback(dash.dependencies.Output('subtabs', 'value'),
+     # Spanish Tab callback
+     @app.callback(dash.dependencies.Output('subtabs', 'value'),
               [dash.dependencies.Input('tabs', 'value')])
-         def es_switch_tab(value):
-             global es_ntimes
-             if value == "spanish":
-                 return "es_uricounts"
+     def es_switch_tab(value):
+             global es_executed
+             if value == "spanish" and not es_executed:
+                 es_executed = True
+                 return "es_summary"
              else:
                  return dash.no_update
              
-        # English Tab callback
-         @app.callback(dash.dependencies.Output('en-subtabs', 'value'),
+     # English Tab callback
+     @app.callback(dash.dependencies.Output('en-subtabs', 'value'),
               [dash.dependencies.Input('tabs', 'value')])
-         def en_switch_tab(value):
-             global en_ntimes
-             if value == "english":
-                 return "en_uricounts"
+     def en_switch_tab(value):
+             global en_executed
+             if value == "english" and not en_executed:
+                 en_executed = True
+                 return "en_summary"
              else:
                  return dash.no_update
-     '''
+             
+    # Spanish summary callback
+     @app.callback(
+    dash.dependencies.Output('es_summary_container', 'children'),
+    [dash.dependencies.Input('es_summary_dropdown', 'value')])
+     def es_summary(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.es_stats
+            versions_stats = R.versions_stats
+            
+            if value == 'Oct 2016':
+               it_elements = versions_stats[1]
+               it_mean = versions_stats[2]
+               it_median = 'dbo:Athlete'
+               it_mode = 'dbo:Agent'
+               it_std_dev = versions_stats[4]
+               uri_elements = stats[42]
+               uri_mean = stats[43]
+               uri_median = 'dbpedia-es:Hinduismo'
+               uri_mode = 'dbpedia-es:' + R.top_2016_uriCounts_es['DBpedia entity'].iloc[0]
+               uri_std_dev = stats[45]
+               pair_elements = stats[46]
+               pair_mean = stats[47]
+               pair_median = '[hinduista - dbpedia-es:Hinduismo]'
+               pair_mode =  "[" + R.top_2016_pairCounts_es['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ R.top_2016_pairCounts_es['DBpedia entity'].iloc[0] + "]"
+               pair_std_dev = stats[49]
+               token_elements = stats[50]
+               token_mean = stats[51]
+               token_median = 'http://es.wikipedia.org/wiki/Imperio_almohade'
+               token_mode = 'http://es.wikipedia.org/wiki/'+ R.top_2016_tokenCounts_es['Wikipedia article'].iloc[0]
+               token_std_dev = stats[52]
+               sf_elements = stats[54]
+               sf_mean = stats[59]
+               sf_median = 'doris miller'
+               sf_mode =  R.top_2016_sfAndTotalCounts_es['Surface form'].iloc[0]
+               sf_std_dev = stats[61]
+            
+            if value == 'Oct 2020':
+                it_elements = versions_stats[19]
+                it_mean = versions_stats[20]
+                it_std_dev = versions_stats[22]
+                it_mode = 'dbo:Agent'
+                it_median = 'dbo:AdministrativeRegion'
+                uri_elements = stats[82]
+                uri_mean = stats[83]
+                uri_median = 'dbpedia-es:Huiracocha_Inca'
+                uri_mode = 'dbpedia-es:' + R.top_2020_uriCounts_es['DBpedia entity'].iloc[0]
+                uri_std_dev = stats[85]
+                pair_elements = stats[86]
+                pair_mean = stats[87]
+                pair_median = '[Wiracocha - dbpedia-es:Huiracocha_(dios)]'
+                pair_mode =  "[" + R.top_2020_pairCounts_es['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ R.top_2016_pairCounts_es['DBpedia entity'].iloc[0] + "]"
+                pair_std_dev = stats[89]
+                token_elements = stats[70]
+                token_mean = stats[71]
+                token_median = 'http://es.wikipedia.org/wiki/Idioma_ruso_en_Ucrania'
+                token_mode = 'http://es.wikipedia.org/wiki/'+ R.top_2020_tokenCounts_es['Wikipedia article'].iloc[0]
+                token_std_dev = stats[72]
+                sf_elements = stats[94]
+                sf_mean = stats[99]
+                sf_median = 'Ciudad del Vaticano'
+                sf_mode =  R.top_2020_sfAndTotalCounts_es['Surface form'].iloc[0]
+                sf_std_dev = stats[101]
+               
+    
+            if value == 'May 2021':
+                it_elements = versions_stats[37]
+                it_mean = versions_stats[38]
+                it_std_dev = versions_stats[40]
+                it_mode = 'dbo:Agent'
+                it_median = 'dbo:AdministrativeRegion'
+                uri_elements = stats[22]
+                uri_mean = stats[23]
+                uri_median = 'dbpedia-es:III_milenio_a._C.'
+                uri_mode = 'dbpedia-es:' + R.top_2021_05_uriCounts_es['DBpedia entity'].iloc[0]
+                uri_std_dev = stats[25]
+                pair_elements = stats[26]
+                pair_mean = stats[27]
+                pair_median = '[artículo - dbpedia-es:Película_de_culto]'
+                pair_mode =  "[" + R.top_2021_05_pairCounts_es['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ R.top_2016_pairCounts_es['DBpedia entity'].iloc[0] + "]"
+                pair_std_dev = stats[29]
+                token_elements = stats[30]
+                token_mean = stats[31]
+                token_median = 'http://es.wikipedia.org/wiki/Impunidad'
+                token_mode = 'http://es.wikipedia.org/wiki/'+ R.top_2021_05_tokenCounts_es['Wikipedia article'].iloc[0]
+                token_std_dev = stats[32]
+                sf_elements = stats[34]
+                sf_mean = stats[39]
+                sf_median = 'pulmonar'
+                sf_mode =  R.top_2021_05_sfAndTotalCounts_es['Surface form'].iloc[0]
+                sf_std_dev = stats[41]
+               
+            if value == 'Jun 2021':
+                it_elements = versions_stats[55]
+                it_mean = versions_stats[56]
+                it_std_dev = versions_stats[58]
+                it_mode = 'dbo:Agent'
+                it_median = 'dbo:AdministrativeRegion'
+                uri_elements = stats[62]
+                uri_mean = stats[63]
+                uri_median = 'dbpedia-es:ITunes_Store'
+                uri_mode = 'dbpedia-es:' + R.top_2021_06_uriCounts_es['DBpedia entity'].iloc[0]
+                uri_std_dev = stats[65]
+                pair_elements = stats[66]
+                pair_mean = stats[67]
+                pair_median = '[Herois (Héroes) - dbpedia-es:Héroes_(película)]'
+                pair_mode =  "[" + R.top_2021_06_pairCounts_es['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ R.top_2016_pairCounts_es['DBpedia entity'].iloc[0] + "]"
+                pair_std_dev = stats[69]
+                token_elements = stats[70]
+                token_mean = stats[71]
+                token_median = 'http://es.wikipedia.org/wiki/Invierno'
+                token_mode = 'http://es.wikipedia.org/wiki/'+ R.top_2021_06_tokenCounts_es['Wikipedia article'].iloc[0]
+                token_std_dev = stats[72]
+                sf_elements = stats[74]
+                sf_mean = stats[79]
+                sf_median = 'culebrera europea'
+                sf_mode =  R.top_2021_06_sfAndTotalCounts_es['Surface form'].iloc[0]
+                sf_std_dev = stats[81]
+                
+            table_container = html.Div(id='table_container', children = [
+        DataTable(
+            id="es_summary_table",
+           columns=[
+        {"name": ["", "File"], "id": "file"},
+        {"name": ["", "Nº elements"], "id": "elements"},
+        {"name": ["Measures of central tendency", "Mean"], "id": "mean"},
+        {"name": ["Measures of central tendency", "Median"], "id": "median"},
+        {"name": ["Measures of central tendency", "Mode"], "id": "mode"},
+        {"name": ["Measures of dispersion", "Standard deviation"], "id": "std_dev"}
+    ],
+       style_header=
+           {
+              'fontWeight': 'bold'
+           },
+            data=[
+        {
+            "file": "Instance types",
+            "elements": it_elements,
+            "mean": it_mean,
+            "median": it_median,
+            "mode":it_mode,
+            "std_dev": it_std_dev,
+        },
+        {
+            "file": "uriCounts",
+            "elements": uri_elements,
+            "mean": uri_mean,
+            "median": uri_median,
+            "mode": uri_mode,
+            "std_dev": uri_std_dev,
+        },
+        {
+            "file": "pairCounts",
+            "elements": pair_elements,
+            "mean": pair_mean,
+            "median": pair_median,
+            "mode": pair_mode,
+            "std_dev": pair_std_dev,
+        },
+        {
+            "file": "tokenCounts",
+            "elements": token_elements,
+            "mean": token_mean,
+            "median": token_median,
+            "mode": token_mode,
+            "std_dev": token_std_dev,
+        },
+        {
+            "file": "sfAndTotalCounts",
+            "elements": sf_elements,
+            "mean": sf_mean,
+            "median": sf_median,
+            "mode": sf_mode,
+            "std_dev": sf_std_dev,
+        }
+        ],
+            fill_width=False,
+            merge_duplicate_headers=True,
+            style_table={
+                'overflowY': 'scroll', 'height': 300, 'width': 1500, 'margin-left': '10px'
+                         }
+        )])
+    
+        return table_container
+    
+    # English summary callback
+     @app.callback(
+    dash.dependencies.Output('en_summary_container', 'children'),
+    [dash.dependencies.Input('en_summary_dropdown', 'value')])
+     def en_summary(value):
+        if(value is None):
+            return dash.no_update
+        else:
+            stats = R.en_stats
+            versions_stats = R.versions_stats
+            
+            if value == 'Oct 2016':
+               it_elements = versions_stats[73]
+               it_mean = versions_stats[74]
+               it_median = 'dbo:Work'
+               it_mode = 'dbo:Agent'
+               it_std_dev = versions_stats[76] 
+               uri_elements = stats[42]
+               uri_mean = stats[43]
+               uri_median = 'dbr:Latvian_constitutional_referendum,_2008'
+               uri_mode = 'dbpedia-es:' + R.top_2016_uriCounts_en['DBpedia entity'].iloc[0]
+               uri_std_dev = stats[45]
+               pair_elements = stats[46]
+               pair_mean = stats[47]
+               pair_median = '[part of the Soviet Union - dbr:Latvian_Soviet_Socialist_Republic]'
+               pair_mode =  "[" + R.top_2016_pairCounts_en['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ R.top_2016_pairCounts_es['DBpedia entity'].iloc[0] + "]"
+               pair_std_dev = stats[49]
+               token_elements = stats[50]
+               token_mean = stats[51]
+               token_median = 'http://en.wikipedia.org/wiki/Kushti'
+               token_mode = 'http://en.wikipedia.org/wiki/'+ R.top_2016_tokenCounts_en['Wikipedia article'].iloc[0]
+               token_std_dev = stats[52]
+               sf_elements = stats[54]
+               sf_mean = stats[59]
+               sf_median = 'Deep Cove'
+               sf_mode =  R.top_2016_sfAndTotalCounts_en['Surface form'].iloc[0]
+               sf_std_dev = stats[61]
+            
+            if value == 'Oct 2020':
+                it_elements = versions_stats[91]
+                it_mean = versions_stats[92]
+                it_std_dev = versions_stats[94]
+                it_median = 'dbo:Work'
+                it_mode = 'dbo:Agent'
+                uri_elements = stats[82]
+                uri_mean = stats[83]
+                uri_median = 'dbr:Lamar_University'
+                uri_mode = 'dbpedia-es:' + R.top_2020_uriCounts_en['DBpedia entity'].iloc[0]
+                uri_std_dev = stats[85]
+                pair_elements = stats[86]
+                pair_mean = stats[87]
+                pair_median = '[Lamar Softball Complex - dbr:Lamar_Softball_Complex]'
+                pair_mode =  "[" + R.top_2020_pairCounts_en['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ R.top_2016_pairCounts_es['DBpedia entity'].iloc[0] + "]"
+                pair_std_dev = stats[89]
+                token_elements = stats[70]
+                token_mean = stats[71]
+                token_median = 'http://en.wikipedia.org/wiki/Klondike_Open'
+                token_mode = 'http://en.wikipedia.org/wiki/'+ R.top_2020_tokenCounts_en['Wikipedia article'].iloc[0]
+                token_std_dev = stats[72]
+                sf_elements = stats[94]
+                sf_mean = stats[99]
+                sf_median = 'The Herald'
+                sf_mode =  R.top_2020_sfAndTotalCounts_en['Surface form'].iloc[0]
+                sf_std_dev = stats[101]
+               
+    
+            if value == 'May 2021':
+                it_elements = versions_stats[109]
+                it_mean = versions_stats[110]
+                it_std_dev = versions_stats[112]
+                it_median = 'dbo:Work'
+                it_mode = 'dbo:Agent'
+                uri_elements = stats[22]
+                uri_mean = stats[23]
+                uri_median = 'dbr:Kyrgyzstan_national_football_team'
+                uri_mode = 'dbpedia-es:' + R.top_2021_05_uriCounts_en['DBpedia entity'].iloc[0]
+                uri_std_dev = stats[25]
+                pair_elements = stats[26]
+                pair_mean = stats[27]
+                pair_median = '[Wallenpaupack -dbr:Lake_Wallenpaupack]'
+                pair_mode =  "[" + R.top_2021_05_pairCounts_en['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ R.top_2016_pairCounts_es['DBpedia entity'].iloc[0] + "]"
+                pair_std_dev = stats[29]
+                token_elements = stats[30]
+                token_mean = stats[31]
+                token_median = 'http://en.wikipedia.org/wiki/Klas_Lund'
+                token_mode = 'http://en.wikipedia.org/wiki/'+ R.top_2021_05_tokenCounts_en['Wikipedia article'].iloc[0]
+                token_std_dev = stats[32]
+                sf_elements = stats[34]
+                sf_mean = stats[39]
+                sf_median = 'DC Comics'
+                sf_mode =  R.top_2021_05_sfAndTotalCounts_en['Surface form'].iloc[0]
+                sf_std_dev = stats[41]
+               
+                
+            if value == 'Jun 2021':
+                it_elements = versions_stats[127]
+                it_mean = versions_stats[128]
+                it_std_dev = versions_stats[130]
+                it_median = 'dbo:AdministrativeRegion'
+                it_mode = 'dbo:Agent'
+                uri_elements = stats[62]
+                uri_mean = stats[63]
+                uri_median = 'dbr:Kwame_Nkrumah_University_of_Science_and_Technology'
+                uri_mode = 'dbpedia-es:' + R.top_2021_06_uriCounts_en['DBpedia entity'].iloc[0]
+                uri_std_dev = stats[65]
+                pair_elements = stats[66]
+                pair_mean = stats[67]
+                pair_median = '[Lakdi ka pul - dbr:Lakdi_ka_pul]'
+                pair_mode =  "[" + R.top_2021_06_pairCounts_en['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ R.top_2016_pairCounts_es['DBpedia entity'].iloc[0] + "]"
+                pair_std_dev = stats[69]
+                token_elements = stats[70]
+                token_mean = stats[71]
+                token_median = 'http://en.wikipedia.org/wiki/Kovno_Kollel'
+                token_mode = 'http://en.wikipedia.org/wiki/'+ R.top_2021_06_tokenCounts_en['Wikipedia article'].iloc[0]
+                token_std_dev = stats[72]
+                sf_elements = stats[74]
+                sf_mean = stats[79]
+                sf_median = 'Cyropaedia'
+                sf_mode =  R.top_2021_06_sfAndTotalCounts_en['Surface form'].iloc[0]
+                sf_std_dev = stats[81]
+                
+            table_container = html.Div(id='table_container', children = [
+        DataTable(
+            id="es_summary_table",
+           columns=[
+        {"name": ["", "File"], "id": "file"},
+        {"name": ["", "Nº elements"], "id": "elements"},
+        {"name": ["Measures of central tendency", "Mean"], "id": "mean"},
+        {"name": ["Measures of central tendency", "Median"], "id": "median"},
+        {"name": ["Measures of central tendency", "Mode"], "id": "mode"},
+        {"name": ["Measures of dispersion", "Standard deviation"], "id": "std_dev"}
+    ],
+           style_header=
+           {
+              'fontWeight': 'bold'
+           },
+            data=[
+        {
+            "file": "Instance types",
+            "elements": it_elements,
+            "mean": it_mean,
+            "median": it_median,
+            "mode":it_mode,
+            "std_dev": it_std_dev,
+        },
+        {
+            "file": "uriCounts",
+            "elements": uri_elements,
+            "mean": uri_mean,
+            "median": uri_median,
+            "mode": uri_mode,
+            "std_dev": uri_std_dev,
+        },
+        {
+            "file": "pairCounts",
+            "elements": pair_elements,
+            "mean": pair_mean,
+            "median": pair_median,
+            "mode": pair_mode,
+            "std_dev": pair_std_dev,
+        },
+        {
+            "file": "tokenCounts",
+            "elements": token_elements,
+            "mean": token_mean,
+            "median": token_median,
+            "mode": token_mode,
+            "std_dev": token_std_dev,
+        },
+        {
+            "file": "sfAndTotalCounts",
+            "elements": sf_elements,
+            "mean": sf_mean,
+            "median": sf_median,
+            "mode": sf_mode,
+            "std_dev": sf_std_dev,
+        }
+        ],
+            fill_width=False,
+            merge_duplicate_headers=True,
+            style_table={
+                'overflowY': 'scroll', 'height': 300, 'width': 1500, 'margin-left': '10px'
+                         }
+        )])
+    
+        return table_container
          
     # Comparison callback - cards
      @app.callback(
@@ -45,65 +420,65 @@ def initialize_callbacks(app):
             versions_stats = R.versions_stats
             if lang_value == 'Spanish':
                 if value1 == 'Oct 1st 2016':
-                    entities_version1 = versions_stats[2]
-                    types_version1 = versions_stats[3]
+                    entities_version1 = versions_stats[0]
+                    types_version1 = versions_stats[1]
                 if value1 == 'Oct 1st 2020':
-                    entities_version1 = versions_stats[6]
-                    types_version1 = versions_stats[7]
+                    entities_version1 = versions_stats[18]
+                    types_version1 = versions_stats[19]
                     
                 if value1 == 'May 1st 2021':
-                    entities_version1 = versions_stats[10]
-                    types_version1 = versions_stats[11]
+                    entities_version1 = versions_stats[36]
+                    types_version1 = versions_stats[37]
                     
                 if value1 == 'June 1st 2021':
-                    entities_version1 = versions_stats[14]
-                    types_version1 = versions_stats[15]
+                    entities_version1 = versions_stats[54]
+                    types_version1 = versions_stats[55]
                     
                 if value2 == 'Oct 1st 2016':
-                    entities_version2 = versions_stats[2]
-                    types_version2 = versions_stats[3]
+                    entities_version2 = versions_stats[0]
+                    types_version2 = versions_stats[1]
                 if value2 == 'Oct 1st 2020':
-                    entities_version2 = versions_stats[6]
-                    types_version2 = versions_stats[7]
+                    entities_version2 = versions_stats[18]
+                    types_version2 = versions_stats[19]
                     
                 if value2 == 'May 1st 2021':
-                    entities_version2 = versions_stats[10]
-                    types_version2 = versions_stats[11]
+                    entities_version2 = versions_stats[36]
+                    types_version2 = versions_stats[37]
                     
                 if value2 == 'June 1st 2021':
-                    entities_version2 = versions_stats[14]
-                    types_version2 = versions_stats[15]
+                    entities_version2 = versions_stats[54]
+                    types_version2 = versions_stats[55]
             
             if lang_value == 'English':
                 if value1 == 'Oct 1st 2016':
-                    entities_version1 = versions_stats[18]
-                    types_version1 = versions_stats[19]
+                    entities_version1 = versions_stats[72]
+                    types_version1 = versions_stats[73]
                 if value1 == 'Oct 1st 2020':
-                    entities_version1 = versions_stats[22]
-                    types_version1 = versions_stats[23]
+                    entities_version1 = versions_stats[90]
+                    types_version1 = versions_stats[91]
                     
                 if value1 == 'May 1st 2021':
-                    entities_version1 = versions_stats[26]
-                    types_version1 = versions_stats[27]
+                    entities_version1 = versions_stats[108]
+                    types_version1 = versions_stats[109]
                     
                 if value1 == 'June 1st 2021':
-                    entities_version1 = versions_stats[30]
-                    types_version1 = versions_stats[31]
+                    entities_version1 = versions_stats[126]
+                    types_version1 = versions_stats[127]
                     
                 if value2 == 'Oct 1st 2016':
-                    entities_version2 = versions_stats[18]
-                    types_version2 = versions_stats[19]
+                    entities_version2 = versions_stats[72]
+                    types_version2 = versions_stats[73]
                 if value2 == 'Oct 1st 2020':
-                    entities_version2 = versions_stats[22]
-                    types_version2 = versions_stats[23]
+                    entities_version2 = versions_stats[90]
+                    types_version2 = versions_stats[91]
                     
                 if value2 == 'May 1st 2021':
-                    entities_version2 = versions_stats[26]
-                    types_version2 = versions_stats[27]
+                    entities_version2 = versions_stats[108]
+                    types_version2 = versions_stats[109]
                     
                 if value2 == 'June 1st 2021':
-                    entities_version2 = versions_stats[30]
-                    types_version2 = versions_stats[31]
+                    entities_version2 = versions_stats[126]
+                    types_version2 = versions_stats[127]
                 
             entity_growth = abs(int(entities_version1) - int(entities_version2))
             type_growth = abs(int(types_version1) - int(types_version2))
@@ -161,67 +536,67 @@ def initialize_callbacks(app):
             versions_stats = R.versions_stats
             if lang_value == 'Spanish':
                 if value1 == 'Oct 1st 2016':
-                    entities_version1 = versions_stats[2]
+                    entities_version1 = versions_stats[0]
                     df1 = R.instance_types_es_2016_10_01
                     
                 if value1 == 'Oct 1st 2020':
-                    entities_version1 = versions_stats[6]
+                    entities_version1 = versions_stats[18]
                     df1 = R.instance_types_es_2020_10_01
                     
                 if value1 == 'May 1st 2021':
-                    entities_version1 = versions_stats[10]
+                    entities_version1 = versions_stats[36]
                     df1 = R.instance_types_es_2021_05_01
                     
                 if value1 == 'June 1st 2021':
-                    entities_version1 = versions_stats[14]
+                    entities_version1 = versions_stats[54]
                     df1 = R.instance_types_es_2021_06_01
                     
                 if value2 == 'Oct 1st 2016':
-                    entities_version2 = versions_stats[2]
+                    entities_version2 = versions_stats[0]
                     df2 = R.instance_types_es_2016_10_01
                     
                 if value2 == 'Oct 1st 2020':
-                    entities_version2 = versions_stats[6]
+                    entities_version2 = versions_stats[18]
                     df2 = R.instance_types_es_2020_10_01
                     
                 if value2 == 'May 1st 2021':
-                    entities_version2 = versions_stats[10]
+                    entities_version2 = versions_stats[36]
                     df2 = R.instance_types_es_2021_05_01
                     
                 if value2 == 'June 1st 2021':
-                    entities_version2 = versions_stats[14]
+                    entities_version2 = versions_stats[54]
                     df2 = R.instance_types_es_2021_06_01
             
             if lang_value == 'English':
                 if value1 == 'Oct 1st 2016':
-                    entities_version1 = versions_stats[18]
+                    entities_version1 = versions_stats[72]
                     df1 = R.instance_types_en_2016_10_01
                 if value1 == 'Oct 1st 2020':
-                    entities_version1 = versions_stats[22]
+                    entities_version1 = versions_stats[90]
                     df1 = R.instance_types_en_2020_10_01
                     
                 if value1 == 'May 1st 2021':
-                    entities_version1 = versions_stats[26]
+                    entities_version1 = versions_stats[108]
                     df1 = R.instance_types_en_2021_05_01
                     
                 if value1 == 'June 1st 2021':
-                    entities_version1 = versions_stats[30]
+                    entities_version1 = versions_stats[126]
                     df1 = R.instance_types_en_2021_06_01
                     
                 if value2 == 'Oct 1st 2016':
-                    entities_version2 = versions_stats[18]
+                    entities_version2 = versions_stats[72]
                     df2 = R.instance_types_en_2016_10_01
                     
                 if value2 == 'Oct 1st 2020':
-                    entities_version2 = versions_stats[22]
+                    entities_version2 = versions_stats[90]
                     df2 = R.instance_types_en_2020_10_01
                     
                 if value2 == 'May 1st 2021':
-                    entities_version2 = versions_stats[26]
+                    entities_version2 = versions_stats[108]
                     df2 = R.instance_types_en_2021_05_01
                     
                 if value2 == 'June 1st 2021':
-                    entities_version2 = versions_stats[30]
+                    entities_version2 = versions_stats[126]
                     df2 = R.instance_types_en_2021_06_01
             
             bar_figure = F.get_version_bar_figure([value1, value2], [entities_version1, entities_version2])
@@ -330,7 +705,7 @@ def initialize_callbacks(app):
             )
      def es_update_known_types_bar(clicked_data):
             selected_type = 'owlThing'
-            types_count_df = R.known_types_es
+            types_count_df = R.known_types_es_2021_05_01
             ontology_df = R.ontology_df
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
@@ -345,13 +720,13 @@ def initialize_callbacks(app):
             if selected_all_instances_df.empty:
                 selected_all_instances_df.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
             figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = "DBpedia entity"))
-            figure.add_vline(x=float(R.es_stats[6]), line_width=4, line_color="#77C14C") # Mean
-            figure.add_vline(x=float(R.es_stats[7]), line_width=4, line_color="#1FAFEE") # Median
-            figure.add_vline(x=float(R.es_stats[9]), line_width=4, line_color="#D53614") # Standard deviation
+            figure.add_vline(x=float(R.es_stats[4]), line_width=4, line_color="#77C14C") # Mean
+            figure.add_vline(x=float(R.es_stats[5]), line_width=4, line_color="#1FAFEE") # Median
+            figure.add_vline(x=float(R.es_stats[6]), line_width=4, line_color="#D53614") # Standard deviation
             figure.add_traces([
-                go.Scatter(x=[float(R.es_stats[6])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.es_stats[6]], hoverinfo="text"),
-                go.Scatter(x=[float(R.es_stats[7])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[7]], hoverinfo="text"),
-                go.Scatter(x=[float(R.es_stats[9])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.es_stats[9]], hoverinfo="text")
+                go.Scatter(x=[float(R.es_stats[4])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.es_stats[4]], hoverinfo="text"),
+                go.Scatter(x=[float(R.es_stats[5])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[5]], hoverinfo="text"),
+                go.Scatter(x=[float(R.es_stats[6])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.es_stats[6]], hoverinfo="text")
                 ])
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
@@ -363,7 +738,10 @@ def initialize_callbacks(app):
             )
      def es_update_instance_types_bar(clicked_data):
             selected_type = 'owlThing'
-            types_count_df = R.instance_types_es
+            mean = R.versions_stats[38]
+            median = R.versions_stats[39]
+            std_dev = R.versions_stats[40]
+            types_count_df = R.instance_types_es_2021_05_01
             ontology_df = R.ontology_df
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
@@ -377,7 +755,15 @@ def initialize_callbacks(app):
             selected_all_instances_df = selected_all_instances_df.sort_values(by='Nº entities', ascending=False)
             if selected_all_instances_df.empty:
                 selected_all_instances_df.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
-            figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4'))
+            figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = 'DBpedia type'))
+            figure.add_vline(x=float(mean), line_width=4, line_color="#77C14C") # Mean
+            figure.add_vline(x=float(median), line_width=4, line_color="#1FAFEE") # Median
+            figure.add_vline(x=float(std_dev), line_width=4, line_color="#D53614") # Standard deviation
+            figure.add_traces([
+            go.Scatter(x=[float(mean)], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[mean], hoverinfo="text"),
+            go.Scatter(x=[float(median)], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[median], hoverinfo="text"),
+            go.Scatter(x=[float(std_dev)], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[std_dev], hoverinfo="text")
+            ])
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
 
@@ -390,26 +776,26 @@ def initialize_callbacks(app):
             if clicked_data is None:
                 return dash.no_update
             selected_type = clicked_data['points'][0]['label'] 
-            if selected_type in R.known_types_es["DBpedia type"].values:
-                selected_row = R.known_types_es[R.known_types_es["DBpedia type"] == selected_type]
+            if selected_type in R.known_types_es_2021_05_01["DBpedia type"].values:
+                selected_row = R.known_types_es_2021_05_01[R.known_types_es_2021_05_01["DBpedia type"] == selected_type]
                 fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
             else:
                 fig = go.Figure(go.Bar(x = [0], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
             
-            fig.add_vline(x=int(R.es_stats[14]), line_width=4, line_color="#77C14C") # 10th percentile
-            fig.add_vline(x=int(R.es_stats[11]), line_width=4, line_color="#1FAFEE") # 1st quartile
-            fig.add_vline(x=int(R.es_stats[22]), line_width=4, line_color="#D53614") # 50th percentile
-            fig.add_vline(x=int(R.es_stats[12]), line_width=4, line_color="#D59D14") # 3rd quartile
-            fig.add_vline(x=int(R.es_stats[30]), line_width=4, line_color="#FFA4F5") # 90th percentile
-            fig.add_vline(x=int(R.es_stats[32]), line_width=4, line_color="#FFFB0B") # 95th percentile
+            fig.add_vline(x=int(R.es_stats[10]), line_width=4, line_color="#77C14C") # 10th percentile
+            fig.add_vline(x=int(R.es_stats[8]), line_width=4, line_color="#1FAFEE") # 1st quartile
+            fig.add_vline(x=int(R.es_stats[14]), line_width=4, line_color="#D53614") # 50th percentile
+            fig.add_vline(x=int(R.es_stats[9]), line_width=4, line_color="#D59D14") # 3rd quartile
+            fig.add_vline(x=int(R.es_stats[18]), line_width=4, line_color="#FFA4F5") # 90th percentile
+            fig.add_vline(x=int(R.es_stats[19]), line_width=4, line_color="#FFFB0B") # 95th percentile
     
             fig.add_traces([
-            go.Scatter(x=[int(R.es_stats[14])], y= [" "], mode='lines', name='10th percentile', line=dict(color="#77C14C"), hovertext=[R.es_stats[14]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[11])], y= [" "], mode='lines', name='1st quartile', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[11]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[22])], y= [" "], mode='lines', name='50th percentile', line=dict(color="#D53614"), hovertext=[R.es_stats[22]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[12])], y= [" "], mode='lines', name='3rd quartile', line=dict(color="#D59D14"), hovertext=[R.es_stats[12]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[30])], y= [" "], mode='lines', name='90th percentile', line=dict(color="#FFA4F5"), hovertext=[R.es_stats[30]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[32])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[R.es_stats[32]], hoverinfo="text")
+            go.Scatter(x=[int(R.es_stats[10])], y= [" "], mode='lines', name='10th percentile', line=dict(color="#77C14C"), hovertext=[R.es_stats[10]], hoverinfo="text"),
+            go.Scatter(x=[int(R.es_stats[8])], y= [" "], mode='lines', name='1st quartile', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[8]], hoverinfo="text"),
+            go.Scatter(x=[int(R.es_stats[14])], y= [" "], mode='lines', name='50th percentile', line=dict(color="#D53614"), hovertext=[R.es_stats[14]], hoverinfo="text"),
+            go.Scatter(x=[int(R.es_stats[9])], y= [" "], mode='lines', name='3rd quartile', line=dict(color="#D59D14"), hovertext=[R.es_stats[9]], hoverinfo="text"),
+            go.Scatter(x=[int(R.es_stats[18])], y= [" "], mode='lines', name='90th percentile', line=dict(color="#FFA4F5"), hovertext=[R.es_stats[18]], hoverinfo="text"),
+            go.Scatter(x=[int(R.es_stats[19])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[R.es_stats[19]], hoverinfo="text")
             ])
     
             fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
@@ -425,18 +811,32 @@ def initialize_callbacks(app):
         else:
             stats = R.es_stats
             if value == 'Oct 1st 2016':
-                dbpedia_entities = stats[63]
-                mean = stats[64]
+                dbpedia_entities = stats[42]
+                mean = stats[43]
                 median = 'dbpedia-es:Hinduismo'
-                std_dev = stats[67]
+                std_dev = stats[45]
                 top_file = R.top_2016_uriCounts_es
+            
+            if value == 'Oct 1st 2020':
+                dbpedia_entities = stats[82]
+                mean = stats[83]
+                median = 'dbpedia-es:Huiracocha_Inca'
+                std_dev = stats[85]
+                top_file = R.top_2020_uriCounts_es
     
             if value == 'May 25th 2021':
-                dbpedia_entities = stats[36]
-                mean = stats[37]
+                dbpedia_entities = stats[22]
+                mean = stats[23]
                 median = 'dbpedia-es:III_milenio_a._C.'
-                std_dev = stats[40]
-                top_file = R.top_uriCounts_es
+                std_dev = stats[25]
+                top_file = R.top_2021_05_uriCounts_es
+                
+            if value == 'Jun 25th 2021':
+                dbpedia_entities = stats[62]
+                mean = stats[63]
+                median = 'dbpedia-es:ITunes_Store'
+                std_dev = stats[65]
+                top_file = R.top_2021_06_uriCounts_es
                 
             mode = 'dbpedia-es:' + top_file['DBpedia entity'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
@@ -476,6 +876,10 @@ def initialize_callbacks(app):
             id="es_uriCounts_table",
             columns=[{"name": "DBpedia entity", "id": "DBpedia entity"},
                      {"name": "Count", "id": "Count"}],
+            style_header=
+           {
+              'fontWeight': 'bold'
+           },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
@@ -495,18 +899,32 @@ def initialize_callbacks(app):
         else:
             stats = R.es_stats
             if value == 'Oct 1st 2016':
-                surface_forms = stats[69]
-                mean = stats[70]
+                surface_forms = stats[46]
+                mean = stats[47]
                 median = '[hinduista - dbpedia-es:Hinduismo]'
-                std_dev = stats[73]
+                std_dev = stats[49]
                 top_file = R.top_2016_pairCounts_es
     
+            if value == 'Oct 1st 2020':
+                surface_forms = stats[86]
+                mean = stats[87]
+                median = '[Wiracocha - dbpedia-es:Huiracocha_(dios)]'
+                std_dev = stats[89]
+                top_file = R.top_2020_pairCounts_es
+    
             if value == 'May 25th 2021':
-                surface_forms = stats[42]
-                mean = stats[43]
-                median = '[ambiente - dbpedia-es:Hábitat]'
-                std_dev = stats[46]
-                top_file = R.top_pairCounts_es
+                surface_forms = stats[26]
+                mean = stats[27]
+                median = '[artículo - dbpedia-es:Película_de_culto]'
+                std_dev = stats[29]
+                top_file = R.top_2021_05_pairCounts_es
+                
+            if value == 'Jun 25th 2021':
+                surface_forms = stats[66]
+                mean = stats[67]
+                median = '[Herois (Héroes) - dbpedia-es:Héroes_(película)]'
+                std_dev = stats[69]
+                top_file = R.top_2021_06_pairCounts_es
                 
             mode = "[" + top_file['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ top_file['DBpedia entity'].iloc[0] + "]"
             cards_container = html.Div(id='cards_container', children = [
@@ -549,6 +967,10 @@ def initialize_callbacks(app):
             columns=[{"name": "Surface form", "id": "Surface form"},
                      {"name": "DBpedia entity", "id": "DBpedia entity"},
                      {"name": "Times linked", "id": "Times linked"}],
+            style_header=
+           {
+              'fontWeight': 'bold'
+           },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
@@ -568,18 +990,32 @@ def initialize_callbacks(app):
         else:
             stats = R.es_stats
             if value == 'Oct 1st 2016':
-                articles = stats[75]
-                mean = stats[76]
+                articles = stats[50]
+                mean = stats[51]
                 median = 'http://es.wikipedia.org/wiki/Imperio_almohade'
-                std_dev = stats[78]
+                std_dev = stats[52]
                 top_file = R.top_2016_tokenCounts_es
+                
+            if value == 'Oct 1st 2020':
+                articles = stats[70]
+                mean = stats[71]
+                median = 'http://es.wikipedia.org/wiki/Idioma_ruso_en_Ucrania'
+                std_dev = stats[72]
+                top_file = R.top_2020_tokenCounts_es
     
             if value == 'May 25th 2021':
-                articles = stats[48]
-                mean = stats[49]
+                articles = stats[30]
+                mean = stats[31]
                 median = 'http://es.wikipedia.org/wiki/Impunidad'
-                std_dev = stats[51]
-                top_file = R.top_tokenCounts_es
+                std_dev = stats[32]
+                top_file = R.top_2021_05_tokenCounts_es
+                
+            if value == 'Jun 25th 2021':
+                articles = stats[70]
+                mean = stats[71]
+                median = 'http://es.wikipedia.org/wiki/Invierno'
+                std_dev = stats[72]
+                top_file = R.top_2021_06_tokenCounts_es
                 
             mode = 'http://es.wikipedia.org/wiki/'+ top_file['Wikipedia article'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
@@ -619,6 +1055,10 @@ def initialize_callbacks(app):
             id="es_tokenCounts_table",
            columns=[{"name": "Wikipedia article", "id": "Wikipedia article"},
                      {"name": "Nº tokens", "id": "Nº tokens"}],
+           style_header=
+           {
+              'fontWeight': 'bold'
+           },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
@@ -637,20 +1077,36 @@ def initialize_callbacks(app):
         else:
             stats = R.es_stats
             if value == 'Oct 1st 2016':
-                surface_forms = stats[80]
-                mean = stats[85]
+                surface_forms = stats[54]
+                mean = stats[59]
                 median = 'doris miller'
-                std_dev = stats[88]
+                std_dev = stats[61]
                 top_file = R.top_2016_sfAndTotalCounts_es
-                values = [stats[81], stats[82], stats[83], stats[84]]
+                values = [stats[55], stats[56], stats[57], stats[58]]
+                
+            if value == 'Oct 1st 2020':
+                surface_forms = stats[94]
+                mean = stats[99]
+                median = 'Ciudad del Vaticano'
+                std_dev = stats[101]
+                top_file = R.top_2020_sfAndTotalCounts_es
+                values = [stats[95], stats[96], stats[97], stats[98]]
     
             if value == 'May 25th 2021':
-                surface_forms = stats[53]
-                mean = stats[58]
+                surface_forms = stats[34]
+                mean = stats[39]
                 median = 'pulmonar'
-                std_dev = stats[61]
-                top_file = R.top_sfAndTotalCounts_es
-                values = [stats[54], stats[55], stats[56], stats[57]]
+                std_dev = stats[41]
+                top_file = R.top_2021_05_sfAndTotalCounts_es
+                values = [stats[35], stats[36], stats[37], stats[38]]
+                
+            if value == 'Jun 25th 2021':
+                surface_forms = stats[74]
+                mean = stats[79]
+                median = 'culebrera europea'
+                std_dev = stats[81]
+                top_file = R.top_2021_06_sfAndTotalCounts_es
+                values = [stats[75], stats[76], stats[77], stats[78]]
                 
             mode = top_file['Surface form'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
@@ -696,6 +1152,10 @@ def initialize_callbacks(app):
            columns=[{"name": "Surface form", "id": "Surface form"},
                      {"name": "Times linked", "id": "Times linked"},
                      {"name": "Times as plain text", "id": "Times as plain text"}],
+           style_header=
+           {
+              'fontWeight': 'bold'
+           },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
@@ -712,7 +1172,7 @@ def initialize_callbacks(app):
             )
      def en_update_known_types_bar(clicked_data):
             selected_type = 'owlThing'
-            types_count_df = R.known_types_en
+            types_count_df = R.known_types_en_2021_05_01
             ontology_df = R.ontology_df
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
@@ -727,13 +1187,13 @@ def initialize_callbacks(app):
             if selected_all_instances_df.empty:
                 selected_all_instances_df.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
             figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = "DBpedia entity"))
-            figure.add_vline(x=float(R.en_stats[6]), line_width=4, line_color="#77C14C") # Mean
-            figure.add_vline(x=float(R.en_stats[7]), line_width=4, line_color="#1FAFEE") # Median
-            figure.add_vline(x=float(R.en_stats[9]), line_width=4, line_color="#D53614") # Standard deviation
+            figure.add_vline(x=float(R.en_stats[4]), line_width=4, line_color="#77C14C") # Mean
+            figure.add_vline(x=float(R.en_stats[5]), line_width=4, line_color="#1FAFEE") # Median
+            figure.add_vline(x=float(R.en_stats[6]), line_width=4, line_color="#D53614") # Standard deviation
             figure.add_traces([
-                go.Scatter(x=[float(R.en_stats[6])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.en_stats[6]], hoverinfo="text"),
-                go.Scatter(x=[float(R.en_stats[7])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[7]], hoverinfo="text"),
-                go.Scatter(x=[float(R.en_stats[9])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.en_stats[9]], hoverinfo="text")
+                go.Scatter(x=[float(R.en_stats[4])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.en_stats[4]], hoverinfo="text"),
+                go.Scatter(x=[float(R.en_stats[5])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[5]], hoverinfo="text"),
+                go.Scatter(x=[float(R.en_stats[6])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.en_stats[6]], hoverinfo="text")
                 ])
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
@@ -745,7 +1205,10 @@ def initialize_callbacks(app):
             )
      def en_update_instance_types_bar(clicked_data):
             selected_type = 'owlThing'
-            types_count_df = R.instance_types_en
+            mean = R.versions_stats[110]
+            median = R.versions_stats[111]
+            std_dev = R.versions_stats[112]
+            types_count_df = R.instance_types_en_2021_05_01
             ontology_df = R.ontology_df
             if clicked_data is not None:
                 if 'entry' not in clicked_data['points'][0].keys() or clicked_data['points'][0]['label'] == clicked_data['points'][0]['entry']:
@@ -759,7 +1222,15 @@ def initialize_callbacks(app):
             selected_all_instances_df = selected_all_instances_df.sort_values(by='Nº entities', ascending=False)
             if selected_all_instances_df.empty:
                 selected_all_instances_df.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
-            figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4'))
+            figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = 'DBpedia type'))
+            figure.add_vline(x=float(mean), line_width=4, line_color="#77C14C") # Mean
+            figure.add_vline(x=float(median), line_width=4, line_color="#1FAFEE") # Median
+            figure.add_vline(x=float(std_dev), line_width=4, line_color="#D53614") # Standard deviation
+            figure.add_traces([
+            go.Scatter(x=[float(mean)], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[mean], hoverinfo="text"),
+            go.Scatter(x=[float(median)], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[median], hoverinfo="text"),
+            go.Scatter(x=[float(std_dev)], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[std_dev], hoverinfo="text")
+            ])
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
         
@@ -772,26 +1243,26 @@ def initialize_callbacks(app):
             if clicked_data is None:
                 return dash.no_update
             selected_type = clicked_data['points'][0]['label'] 
-            if selected_type in R.known_types_en["DBpedia type"].values:
-                selected_row = R.known_types_en[R.known_types_en["DBpedia type"] == selected_type]
+            if selected_type in R.known_types_en_2021_05_01["DBpedia type"].values:
+                selected_row = R.known_types_en_2021_05_01[R.known_types_en_2021_05_01["DBpedia type"] == selected_type]
                 fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
             else:
                 fig = go.Figure(go.Bar(x = [0], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
             
-            fig.add_vline(x=int(R.en_stats[14]), line_width=4, line_color="#77C14C") # 10th percentile
-            fig.add_vline(x=int(R.en_stats[11]), line_width=4, line_color="#1FAFEE") # 1st quartile
-            fig.add_vline(x=int(R.en_stats[22]), line_width=4, line_color="#D53614") # 50th percentile
-            fig.add_vline(x=int(R.en_stats[12]), line_width=4, line_color="#D59D14") # 3rd quartile
-            fig.add_vline(x=int(R.en_stats[30]), line_width=4, line_color="#FFA4F5") # 90th percentile
-            fig.add_vline(x=int(R.en_stats[32]), line_width=4, line_color="#FFFB0B") # 95th percentile
+            fig.add_vline(x=int(R.en_stats[10]), line_width=4, line_color="#77C14C") # 10th percentile
+            fig.add_vline(x=int(R.en_stats[8]), line_width=4, line_color="#1FAFEE") # 1st quartile
+            fig.add_vline(x=int(R.en_stats[14]), line_width=4, line_color="#D53614") # 50th percentile
+            fig.add_vline(x=int(R.en_stats[9]), line_width=4, line_color="#D59D14") # 3rd quartile
+            fig.add_vline(x=int(R.en_stats[18]), line_width=4, line_color="#FFA4F5") # 90th percentile
+            fig.add_vline(x=int(R.en_stats[19]), line_width=4, line_color="#FFFB0B") # 95th percentile
     
             fig.add_traces([
-            go.Scatter(x=[int(R.en_stats[14])], y= [" "], mode='lines', name='10th percentile', line=dict(color="#77C14C"), hovertext=[R.en_stats[14]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[11])], y= [" "], mode='lines', name='1st quartile', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[11]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[22])], y= [" "], mode='lines', name='50th percentile', line=dict(color="#D53614"), hovertext=[R.en_stats[22]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[12])], y= [" "], mode='lines', name='3rd quartile', line=dict(color="#D59D14"), hovertext=[R.en_stats[12]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[30])], y= [" "], mode='lines', name='90th percentile', line=dict(color="#FFA4F5"), hovertext=[R.en_stats[30]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[32])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[R.en_stats[32]], hoverinfo="text")
+            go.Scatter(x=[int(R.en_stats[10])], y= [" "], mode='lines', name='10th percentile', line=dict(color="#77C14C"), hovertext=[R.en_stats[10]], hoverinfo="text"),
+            go.Scatter(x=[int(R.en_stats[8])], y= [" "], mode='lines', name='1st quartile', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[8]], hoverinfo="text"),
+            go.Scatter(x=[int(R.en_stats[14])], y= [" "], mode='lines', name='50th percentile', line=dict(color="#D53614"), hovertext=[R.en_stats[14]], hoverinfo="text"),
+            go.Scatter(x=[int(R.en_stats[9])], y= [" "], mode='lines', name='3rd quartile', line=dict(color="#D59D14"), hovertext=[R.en_stats[9]], hoverinfo="text"),
+            go.Scatter(x=[int(R.en_stats[18])], y= [" "], mode='lines', name='90th percentile', line=dict(color="#FFA4F5"), hovertext=[R.en_stats[18]], hoverinfo="text"),
+            go.Scatter(x=[int(R.en_stats[19])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[R.en_stats[19]], hoverinfo="text")
             ])
     
             fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
@@ -807,18 +1278,32 @@ def initialize_callbacks(app):
         else:
             stats = R.en_stats
             if value == 'Oct 1st 2016':
-                dbpedia_entities = stats[63]
-                mean = stats[64]
+                dbpedia_entities = stats[42]
+                mean = stats[43]
                 median = 'dbr:Latvian_constitutional_referendum,_2008'
-                std_dev = stats[67]
+                std_dev = stats[45]
                 top_file = R.top_2016_uriCounts_en
+            
+            if value == 'Oct 1st 2020':
+                dbpedia_entities = stats[82]
+                mean = stats[83]
+                median = 'dbr:Lamar_University'
+                std_dev = stats[85]
+                top_file = R.top_2020_uriCounts_en
     
             if value == 'May 25th 2021':
-                dbpedia_entities = stats[36]
-                mean = stats[37]
+                dbpedia_entities = stats[22]
+                mean = stats[23]
                 median = 'dbr:Kyrgyzstan_national_football_team'
-                std_dev = stats[40]
-                top_file = R.top_uriCounts_en
+                std_dev = stats[25]
+                top_file = R.top_2021_05_uriCounts_en
+                
+            if value == 'Jun 25th 2021':
+                dbpedia_entities = stats[62]
+                mean = stats[63]
+                median = 'dbr:Kwame_Nkrumah_University_of_Science_and_Technology'
+                std_dev = stats[65]
+                top_file = R.top_2021_06_uriCounts_en
                 
             mode = 'dbr:' + top_file['DBpedia entity'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
@@ -858,6 +1343,10 @@ def initialize_callbacks(app):
             id="en_uriCounts_table",
             columns=[{"name": "DBpedia entity", "id": "DBpedia entity"},
                      {"name": "Count", "id": "Count"}],
+            style_header=
+           {
+              'fontWeight': 'bold'
+           },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
@@ -877,18 +1366,32 @@ def initialize_callbacks(app):
         else:
             stats = R.en_stats
             if value == 'Oct 1st 2016':
-                surface_forms = stats[69]
-                mean = stats[70]
+                surface_forms = stats[46]
+                mean = stats[47]
                 median = '[part of the Soviet Union - dbr:Latvian_Soviet_Socialist_Republic]'
-                std_dev = stats[73]
+                std_dev = stats[49]
                 top_file = R.top_2016_pairCounts_en
     
+            if value == 'Oct 1st 2020':
+                surface_forms = stats[86]
+                mean = stats[87]
+                median = '[Lamar Softball Complex - dbr:Lamar_Softball_Complex]'
+                std_dev = stats[89]
+                top_file = R.top_2020_pairCounts_en
+    
             if value == 'May 25th 2021':
-                surface_forms = stats[42]
-                mean = stats[43]
-                median = '[Wallenpaupack - dbr:Lake_Wallenpaupack]'
-                std_dev = stats[46]
-                top_file = R.top_pairCounts_en
+                surface_forms = stats[26]
+                mean = stats[27]
+                median = '[Wallenpaupack -dbr:Lake_Wallenpaupack]'
+                std_dev = stats[29]
+                top_file = R.top_2021_05_pairCounts_en
+                
+            if value == 'Jun 25th 2021':
+                surface_forms = stats[66]
+                mean = stats[67]
+                median = '[Lakdi ka pul - dbr:Lakdi_ka_pul]'
+                std_dev = stats[69]
+                top_file = R.top_2021_06_pairCounts_en
                 
             mode = "[" + top_file['Surface form'].iloc[0] + " - " + "dbr:"+ top_file['DBpedia entity'].iloc[0] + "]"
             cards_container = html.Div(id='cards_container', children = [
@@ -931,6 +1434,10 @@ def initialize_callbacks(app):
             columns=[{"name": "Surface form", "id": "Surface form"},
                      {"name": "DBpedia entity", "id": "DBpedia entity"},
                      {"name": "Times linked", "id": "Times linked"}],
+            style_header=
+           {
+              'fontWeight': 'bold'
+           },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
@@ -950,18 +1457,32 @@ def initialize_callbacks(app):
         else:
             stats = R.en_stats
             if value == 'Oct 1st 2016':
-                articles = stats[75]
-                mean = stats[76]
+                articles = stats[50]
+                mean = stats[51]
                 median = 'http://en.wikipedia.org/wiki/Kushti'
-                std_dev = stats[78]
+                std_dev = stats[52]
                 top_file = R.top_2016_tokenCounts_en
+                
+            if value == 'Oct 1st 2020':
+                articles = stats[70]
+                mean = stats[71]
+                median = 'http://en.wikipedia.org/wiki/Klondike_Open'
+                std_dev = stats[72]
+                top_file = R.top_2020_tokenCounts_en
     
             if value == 'May 25th 2021':
-                articles = stats[48]
-                mean = stats[49]
+                articles = stats[30]
+                mean = stats[31]
                 median = 'http://en.wikipedia.org/wiki/Klas_Lund'
-                std_dev = stats[51]
-                top_file = R.top_tokenCounts_en
+                std_dev = stats[32]
+                top_file = R.top_2021_05_tokenCounts_en
+                
+            if value == 'Jun 25th 2021':
+                articles = stats[70]
+                mean = stats[71]
+                median = 'http://en.wikipedia.org/wiki/Kovno_Kollel'
+                std_dev = stats[72]
+                top_file = R.top_2021_06_tokenCounts_en
                 
             mode = top_file['Wikipedia article'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
@@ -1001,6 +1522,10 @@ def initialize_callbacks(app):
             id="en_tokenCounts_table",
            columns=[{"name": "Wikipedia article", "id": "Wikipedia article"},
                      {"name": "Nº tokens", "id": "Nº tokens"}],
+           style_header=
+           {
+              'fontWeight': 'bold'
+           },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
@@ -1019,20 +1544,36 @@ def initialize_callbacks(app):
         else:
             stats = R.en_stats
             if value == 'Oct 1st 2016':
-                surface_forms = stats[80]
-                mean = stats[85]
+                surface_forms = stats[54]
+                mean = stats[59]
                 median = 'Deep Cove'
-                std_dev = stats[88]
+                std_dev = stats[61]
                 top_file = R.top_2016_sfAndTotalCounts_en
-                values = [stats[81], stats[82], stats[83], stats[84]]
+                values = [stats[55], stats[56], stats[57], stats[58]]
+                
+            if value == 'Oct 1st 2020':
+                surface_forms = stats[94]
+                mean = stats[99]
+                median = 'The Herald'
+                std_dev = stats[101]
+                top_file = R.top_2020_sfAndTotalCounts_en
+                values = [stats[95], stats[96], stats[97], stats[98]]
     
             if value == 'May 25th 2021':
-                surface_forms = stats[53]
-                mean = stats[58]
+                surface_forms = stats[34]
+                mean = stats[39]
                 median = 'DC Comics'
-                std_dev = stats[61]
-                top_file = R.top_sfAndTotalCounts_en
-                values = [stats[54], stats[55], stats[56], stats[57]]
+                std_dev = stats[41]
+                top_file = R.top_2021_05_sfAndTotalCounts_en
+                values = [stats[35], stats[36], stats[37], stats[38]]
+                
+            if value == 'Jun 25th 2021':
+                surface_forms = stats[74]
+                mean = stats[79]
+                median = 'Cyropaedia'
+                std_dev = stats[81]
+                top_file = R.top_2021_06_sfAndTotalCounts_en
+                values = [stats[75], stats[76], stats[77], stats[78]]
                 
             mode = top_file['Surface form'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
@@ -1078,6 +1619,10 @@ def initialize_callbacks(app):
            columns=[{"name": "Surface form", "id": "Surface form"},
                      {"name": "Times linked", "id": "Times linked"},
                      {"name": "Times as plain text", "id": "Times as plain text"}],
+           style_header=
+           {
+              'fontWeight': 'bold'
+           },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={

@@ -407,7 +407,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             data=R.top_known_types_2021_05_en.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 425, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': 400, 'width': 325, 'margin-left': '10px'
                          }
         )
         ])])

@@ -262,3 +262,7 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 **Tasks in progress**: 
 - Add statistics of `2020.10.01` and `2021.06.01` versions for Wikistats files
 - Add a `Summary` tab to summarize the statistics in a table
+
+**[29/07/2021]**: A `Summary` tab has been added to show users a summary of the statistics for English and Spanish.
+
+![Summary](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/summary_tab.png)

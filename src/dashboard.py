@@ -154,7 +154,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         dcc.Tab(id='es_types_tab', label='Instance types', value = 'es_types', children = [
             html.Div([
             html.Br(),
-             html.Div(children=[html.H2("DBpedia Extraction Framework"),
+             html.Div(children=[html.H2("DBpedia Extraction Framework - May 2021"),
         html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.versions_stats[36])]
                                          )]),style={'display': 'inline-block'}, color="#F5F5F5"),
@@ -196,7 +196,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                                    style={'display': 'inline-block'})]
             )]),
          html.Br(),
-         html.Div([html.H2("DBpedia Spotlight"),      
+         html.Div([html.H2("DBpedia Spotlight - May 2021"),      
          html.Br(),        
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.es_stats[2])] 
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
@@ -328,7 +328,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         dcc.Tab(id='en_types_tab', label='Instance types', value = 'en_types', children = [
             html.Div([
             html.Br(),
-            html.Div(children=[html.H2("DBpedia Extraction Framework"),
+            html.Div(children=[html.H2("DBpedia Extraction Framework - May 2021"),
         html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.versions_stats[108])]
                                          )]),style={'display': 'inline-block'}, color="#F5F5F5"),
@@ -370,7 +370,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                                    style={'display': 'inline-block'})]
             )]),
          html.Br(),
-         html.Div([html.H2("DBpedia Spotlight"),      
+         html.Div([html.H2("DBpedia Spotlight - May 2021"),      
          html.Br(),        
          dbc.Card(dbc.CardBody([html.Div([html.H3("Nº DBpedia entities"), html.H3(R.en_stats[2])] 
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
@@ -476,7 +476,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             , style = subtabs_styles)
         ], style = tab_style, selected_style = tab_selected_style),
         # Comparison tab                    
-        dcc.Tab(label='Comparison', value='comparison-tab', children = [
+        dcc.Tab(label='Instance types comparison', value='comparison-tab', children = [
             html.Div([
             html.Br(),
         html.H3("Choose language version: "),

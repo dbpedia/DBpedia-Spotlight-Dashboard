@@ -1,0 +1,152 @@
+{
+    "Instance types": {
+        "Oct 2016": {
+            "N elements": "465",
+            "Mean": "31740.79",
+            "Median": "dbo:Work",
+            "Mode": "dbo:Agent",
+            "Standard deviation": "137336.27"
+        },
+        "Oct 2020": {
+            "N elements": "471",
+            "Mean": "39420.74",
+            "Median": "dbo:Work",
+            "Mode": "dbo:Agent",
+            "Standard deviation": "180554.64"
+        },
+        "May 2021": {
+            "N elements": "471",
+            "Mean": "40505.08",
+            "Median": "dbo:Work",
+            "Mode": "dbo:Agent",
+            "Standard deviation": "187283.71"
+        },
+        "Jun 2021": {
+            "N elements": "471",
+            "Mean": "40604.1",
+            "Median": "dbo:AdministrativeRegion",
+            "Mode": "dbo:Agent",
+            "Standard deviation": "188038.80"
+        }
+    },
+    "uriCounts": {
+        "Oct 2016": {
+            "N elements": "3735461",
+            "Mean": "49.05",
+            "Median": "dbr:Latvian_constitutional_referendum,_2008",
+            "Mode": "dbr:United_States",
+            "Standard deviation": "844.82"
+        },
+        "Oct 2020": {
+            "N elements": "4430132",
+            "Mean": "50.53",
+            "Median": "dbr:Lamar_University",
+            "Mode": "dbr:United_States",
+            "Standard deviation": "848.40"
+        },
+        "May 2021": {
+            "N elements": "4487385",
+            "Mean": "51.02",
+            "Median": "dbr:Kyrgyzstan_national_football_team",
+            "Mode": "dbr:United_States",
+            "Standard deviation": "856.22"
+        },
+        "Jun 2021": {
+            "N elements": "4518412",
+            "Mean": "51.18",
+            "Median": "dbr:Kwame_Nkrumah_University_of_Science_and_Technology",
+            "Mode": "dbr:United_States",
+            "Standard deviation": "857.20"
+        }
+    },
+    "pairCounts": {
+        "Oct 2016": {
+            "N elements": "7203551",
+            "Mean": "25.44",
+            "Median": "[part of the Soviet Union - dbr:Latvian_Soviet_Socialist_Republic]",
+            "Mode": "[United States - dbr:United_States]",
+            "Standard deviation": "504.23"
+        },
+        "Oct 2020": {
+            "N elements": "8667267",
+            "Mean": "25.83",
+            "Median": "[Lamar Softball Complex - dbr:Lamar_Softball_Complex]",
+            "Mode": "[United States - dbr:United_States]",
+            "Standard deviation": "509.01"
+        },
+        "May 2021": {
+            "N elements": "17844070",
+            "Mean": "25.88",
+            "Median": "[Wallenpaupack - dbr:Lake_Wallenpaupack]",
+            "Mode": "[United States - dbr:United_States]",
+            "Standard deviation": "510.35"
+        },
+        "Jun 2021": {
+            "N elements": "8994452",
+            "Mean": "25.93",
+            "Median": "[Lakdi ka pul - dbr:Lakdi_ka_pul]",
+            "Mode": "[United States - dbr:United_States]",
+            "Standard deviation": "511.03"
+        }
+    },
+    "tokenCounts": {
+        "Oct 2016": {
+            "N elements": "1970058",
+            "Mean": "230.81",
+            "Median": "http://en.wikipedia.org/wiki/Kushti",
+            "Mode": "http://en.wikipedia.org/wiki/United_States",
+            "Standard deviation": "1003870"
+        },
+        "Oct 2020": {
+            "N elements": "2330032",
+            "Mean": "236.34",
+            "Median": "http://en.wikipedia.org/wiki/Klondike_Open",
+            "Mode": "http://en.wikipedia.org/wiki/United_States",
+            "Standard deviation": "1186784"
+        },
+        "May 2021": {
+            "N elements": "2387035",
+            "Mean": "238.1",
+            "Median": "http://en.wikipedia.org/wiki/Klas_Lund",
+            "Mode": "http://en.wikipedia.org/wiki/United_States",
+            "Standard deviation": "1215818"
+        },
+        "Jun 2021": {
+            "N elements": "2402495",
+            "Mean": "238.57",
+            "Median": "http://en.wikipedia.org/wiki/Kovno_Kollel",
+            "Mode": "http://en.wikipedia.org/wiki/United_States",
+            "Standard deviation": "1223692"
+        }
+    },
+    "sfAndTotalCounts": {
+        "Oct 2016": {
+            "N elements": "10732608",
+            "Mean": "17.07",
+            "Median": "Deep Cove",
+            "Mode": "United States",
+            "Standard deviation": "478.91"
+        },
+        "Oct 2020": {
+            "N elements": "12797380",
+            "Mean": "17.49",
+            "Median": "The Herald",
+            "Mode": "United States",
+            "Standard deviation": "494.18"
+        },
+        "May 2021": {
+            "N elements": "13164312",
+            "Mean": "17.54",
+            "Median": "DC Comics",
+            "Mode": "United States",
+            "Standard deviation": "497.04"
+        },
+        "Jun 2021": {
+            "N elements": "13260279",
+            "Mean": "17.59",
+            "Median": "Cyropaedia",
+            "Mode": "United States",
+            "Standard deviation": "498.22"
+        }
+    }
+}

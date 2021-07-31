@@ -1,0 +1,152 @@
+{
+    "Instance types": {
+        "Oct 2016": {
+            "N elements": "183",
+            "Mean": "19347.9",
+            "Median": "dbo:Athlete",
+            "Mode": "dbo:Agent",
+            "Standard deviation": "53906.64"
+        },
+        "Oct 2020": {
+            "N elements": "188",
+            "Mean": "24359.51",
+            "Median": "dbo:AdministrativeRegion",
+            "Mode": "dbo:Agent",
+            "Standard deviation": "73938.93"
+        },
+        "May 2021": {
+            "N elements": "188",
+            "Mean": "25146.26",
+            "Median": "dbo:AdministrativeRegion",
+            "Mode": "dbo:Agent",
+            "Standard deviation": "76489.93"
+        },
+        "Jun 2021": {
+            "N elements": "188",
+            "Mean": "25313.68",
+            "Median": "dbo:AdministrativeRegion",
+            "Mode": "dbo:Agent",
+            "Standard deviation": "76908.65"
+        }
+    },
+    "uriCounts": {
+        "Oct 2016": {
+            "N elements": "855800",
+            "Mean": "53.34",
+            "Median": "dbpedia-es:Hinduismo",
+            "Mode": "dbpedia-es:Estados_Unidos",
+            "Standard deviation": "987.45"
+        },
+        "Oct 2020": {
+            "N elements": "1051602",
+            "Mean": "55.07",
+            "Median": "dbpedia-es:Huiracocha_Inca",
+            "Mode": "dbpedia-es:Estados_Unidos",
+            "Standard deviation": "999.59"
+        },
+        "May 2021": {
+            "N elements": "1075967",
+            "Mean": "55.73",
+            "Median": "dbpedia-es:III_milenio_a._C.",
+            "Mode": "dbpedia-es:Estados_Unidos",
+            "Standard deviation": "999.80"
+        },
+        "Jun 2021": {
+            "N elements": "1083969",
+            "Mean": "55.89",
+            "Median": "dbpedia-es:ITunes_Store",
+            "Mode": "dbpedia-es:Estados_Unidos",
+            "Standard deviation": "1003.04"
+        }
+    },
+    "pairCounts": {
+        "Oct 2016": {
+            "N elements": "1663152",
+            "Mean": "27.45",
+            "Median": "[hinduista - dbpedia-es:Hinduismo]",
+            "Mode": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
+            "Standard deviation": "584.40"
+        },
+        "Oct 2020": {
+            "N elements": "2079461",
+            "Mean": "27.85",
+            "Median": "[Wiracocha - dbpedia-es:Huiracocha_(dios)]",
+            "Mode": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
+            "Standard deviation": "594.55"
+        },
+        "May 2021": {
+            "N elements": "3473622",
+            "Mean": "28.33",
+            "Median": "[art\u00edculo - dbpedia-es:Pel\u00edcula_de_culto]",
+            "Mode": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
+            "Standard deviation": "630.78"
+        },
+        "Jun 2021": {
+            "N elements": "2173521",
+            "Mean": "27.95",
+            "Median": "[Herois (H\u00e9roes) - dbpedia-es:H\u00e9roes_(pel\u00edcula)]",
+            "Mode": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
+            "Standard deviation": "596.16"
+        }
+    },
+    "tokenCounts": {
+        "Oct 2016": {
+            "N elements": "390398",
+            "Mean": "255.72",
+            "Median": "http://es.wikipedia.org/wiki/Imperio_almohade",
+            "Mode": "http://es.wikipedia.org/wiki/Estados_Unidos",
+            "Standard deviation": "179655"
+        },
+        "Oct 2020": {
+            "N elements": "491748",
+            "Mean": "259.62",
+            "Median": "http://es.wikipedia.org/wiki/Idioma_ruso_en_Ucrania",
+            "Mode": "http://es.wikipedia.org/wiki/Estados_Unidos",
+            "Standard deviation": "226427"
+        },
+        "May 2021": {
+            "N elements": "509175",
+            "Mean": "261.85",
+            "Median": "http://es.wikipedia.org/wiki/Impunidad",
+            "Mode": "http://es.wikipedia.org/wiki/Estados_Unidos",
+            "Standard deviation": "234659"
+        },
+        "Jun 2021": {
+            "N elements": "513395",
+            "Mean": "262.48",
+            "Median": "http://es.wikipedia.org/wiki/Invierno",
+            "Mode": "http://es.wikipedia.org/wiki/Estados_Unidos",
+            "Standard deviation": "236804"
+        }
+    },
+    "sfAndTotalCounts": {
+        "Oct 2016": {
+            "N elements": "2468712",
+            "Mean": "18.49",
+            "Median": "doris miller",
+            "Mode": "Estados Unidos",
+            "Standard deviation": "511.23"
+        },
+        "Oct 2020": {
+            "N elements": "3034770",
+            "Mean": "19.08",
+            "Median": "Ciudad del Vaticano",
+            "Mode": "Estados Unidos",
+            "Standard deviation": "531.54"
+        },
+        "May 2021": {
+            "N elements": "3129811",
+            "Mean": "19.21",
+            "Median": "pulmonar",
+            "Mode": "Estados Unidos",
+            "Standard deviation": "534.70"
+        },
+        "Jun 2021": {
+            "N elements": "3154614",
+            "Mean": "19.26",
+            "Median": "culebrera europea",
+            "Mode": "Estados Unidos",
+            "Standard deviation": "536.55"
+        }
+    }
+}

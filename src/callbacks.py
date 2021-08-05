@@ -167,7 +167,8 @@ def initialize_callbacks(app):
     ],
        style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '17px'
            },
             data=[
         {
@@ -354,7 +355,8 @@ def initialize_callbacks(app):
     ],
            style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '16px'
            },
             data=[
         {
@@ -485,41 +487,46 @@ def initialize_callbacks(app):
             version1_container = html.Div(id='entity_container', children = [
                 html.H4(value1),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº DBpedia entities"), html.H4(entities_version1)])
+                        html.Div([html.H5("Nº DBpedia entities"), html.H4(entities_version1)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº DBpedia types"), html.H4(types_version1)])
+                        html.Div([html.H5("Nº DBpedia types"), html.H4(types_version1)])
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
                 )
-                ])
+                ], style={'display': 'inline-block'})
                 
             version2_container = html.Div(id='type_container', children = [
                 html.H4(value2),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº DBpedia entities"), html.H4(entities_version2)])
+                        html.Div([html.H5("Nº DBpedia entities"), html.H4(entities_version2)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº DBpedia types"), html.H4(types_version2)])
+                        html.Div([html.H5("Nº DBpedia types"), html.H4(types_version2)])
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
                 )
-                ])
+                ], style={'display': 'inline-block', "margin-left": "47px"})
+            
+            version_container=  html.Div(id='version_container', children = [
+                version1_container, version2_container
+                ]
+                )
             
             growth_container = html.Div(id='growth_container', children = [
-            html.H4("Growth between versions"),
+            html.H3("Growth between versions"),
             dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Entity growth"), html.H4(str(entity_growth))])
+                        html.Div([html.H5("Entity growth"), html.H4(str(entity_growth))])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
             dbc.Card(dbc.CardBody(
-                html.Div([html.H4("Type growth"), html.H4(str(type_growth))])
+                html.Div([html.H5("Type growth"), html.H4(str(type_growth))])
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
                 )
                 ])
             title = html.H3("Version comparison")
             
-            return title, html.Br(), version1_container, html.Br(), version2_container, html.Br(), growth_container
+            return title, version_container, html.Br(), growth_container
     
     
     
@@ -841,31 +848,33 @@ def initialize_callbacks(app):
             mode = 'dbpedia-es:' + top_file['DBpedia entity'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº DBpedia entities"), html.H4(dbpedia_entities)])
+                        html.Div([html.H5("Nº DBpedia entities"), html.H4(dbpedia_entities)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H4("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)])
+                       html.Div([html.H5("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
+                html.Br(),
+                html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Intermediate DBpedia entity (median)"), html.H4(median)])
-                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                        html.Div([html.H5("Intermediate DBpedia entity (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("DBpedia entity that appears the most (mode)"), html.H4(mode)])
+                        html.Div([html.H5("DBpedia entity that appears the most (mode)"), html.H4(mode)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -878,7 +887,8 @@ def initialize_callbacks(app):
                      {"name": "Count", "id": "Count"}],
             style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '17px'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -929,33 +939,33 @@ def initialize_callbacks(app):
             mode = "[" + top_file['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ top_file['DBpedia entity'].iloc[0] + "]"
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)])
+                        html.Div([html.H5("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H4("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                       html.Div([html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Intermediate pair (median)"), html.H4(median)])
+                        html.Div([html.H5("Intermediate pair (median)"), html.H4(median)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                  dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Pair that appears the most (mode)"), html.H4(mode)])
+                        html.Div([html.H5("Pair that appears the most (mode)"), html.H4(mode)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -969,7 +979,8 @@ def initialize_callbacks(app):
                      {"name": "Times linked", "id": "Times linked"}],
             style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '17px'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -1020,31 +1031,33 @@ def initialize_callbacks(app):
             mode = 'http://es.wikipedia.org/wiki/'+ top_file['Wikipedia article'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº Wikipedia articles"), html.H4(articles)])
+                        html.Div([html.H5("Nº Wikipedia articles"), html.H4(articles)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H4("Nº tokens per Wikipedia article (mean)"), html.H4(mean)])
+                       html.Div([html.H5("Nº tokens per Wikipedia article (mean)"), html.H4(mean)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
+                html.Br(),
+                html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Intermediate Wikipedia article (median)"), html.H4(median)])
-                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                        html.Div([html.H5("Intermediate Wikipedia article (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Wikipedia article that appears the most (mode)"), html.H4(mode)])
+                        html.Div([html.H5("Wikipedia article that appears the most (mode)"), html.H4(mode)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -1057,7 +1070,8 @@ def initialize_callbacks(app):
                      {"name": "Nº tokens", "id": "Nº tokens"}],
            style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '17px'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -1111,31 +1125,33 @@ def initialize_callbacks(app):
             mode = top_file['Surface form'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº surface forms"), html.H4(surface_forms)])
+                        html.Div([html.H5("Nº surface forms"), html.H4(surface_forms)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H4("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                       html.Div([html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
+                html.Br(),
+                html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Intermediate surface form (median)"), html.H4(median)])
-                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                        html.Div([html.H5("Intermediate surface form (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Surface form that appears the most (mode)"), html.H4(mode)])
+                        html.Div([html.H5("Surface form that appears the most (mode)"), html.H4(mode)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -1154,12 +1170,13 @@ def initialize_callbacks(app):
                      {"name": "Times as plain text", "id": "Times as plain text"}],
            style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '17px'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 400, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': 400, 'width': 500, 'margin-left': '10px'
                          }
         )])])
             
@@ -1308,31 +1325,33 @@ def initialize_callbacks(app):
             mode = 'dbr:' + top_file['DBpedia entity'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº DBpedia entities"), html.H4(dbpedia_entities)])
+                        html.Div([html.H5("Nº DBpedia entities"), html.H4(dbpedia_entities)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
-                html.H4("Measures of central tendency"),
+                html.H5("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H4("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)])
+                       html.Div([html.H5("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
+                html.Br(),
+                html.Br(),
                  dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Intermediate DBpedia entity (median)"), html.H4(median)])
-                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                        html.Div([html.H5("Intermediate DBpedia entity (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("DBpedia entity that appears the most (mode)"), html.H4(mode)])
+                        html.Div([html.H5("DBpedia entity that appears the most (mode)"), html.H4(mode)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -1345,7 +1364,8 @@ def initialize_callbacks(app):
                      {"name": "Count", "id": "Count"}],
             style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '17px'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -1396,33 +1416,33 @@ def initialize_callbacks(app):
             mode = "[" + top_file['Surface form'].iloc[0] + " - " + "dbr:"+ top_file['DBpedia entity'].iloc[0] + "]"
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)])
+                        html.Div([html.H5("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H4("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                       html.Div([html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Intermediate pair (median)"), html.H4(median)])
+                        html.Div([html.H5("Intermediate pair (median)"), html.H4(median)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                  dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Pair that appears the most (mode)"), html.H4(mode)])
+                        html.Div([html.H5("Pair that appears the most (mode)"), html.H4(mode)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -1436,12 +1456,13 @@ def initialize_callbacks(app):
                      {"name": "Times linked", "id": "Times linked"}],
             style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '17px'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 780, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': 400, 'width': 800, 'margin-left': '10px'
                          }
         )])])
             
@@ -1487,31 +1508,33 @@ def initialize_callbacks(app):
             mode = top_file['Wikipedia article'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº Wikipedia articles"), html.H4(articles)])
+                        html.Div([html.H5("Nº Wikipedia articles"), html.H4(articles)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H4("Nº tokens per Wikipedia article (mean)"), html.H4(mean)])
+                       html.Div([html.H5("Nº tokens per Wikipedia article (mean)"), html.H4(mean)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
+                html.Br(),
+                html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Intermediate Wikipedia article (median)"), html.H4(median)])
-                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                        html.Div([html.H5("Intermediate Wikipedia article (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Wikipedia article that appears the most (mode)"), html.H4(mode)])
+                        html.Div([html.H5("Wikipedia article that appears the most (mode)"), html.H4(mode)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -1524,12 +1547,13 @@ def initialize_callbacks(app):
                      {"name": "Nº tokens", "id": "Nº tokens"}],
            style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '17px'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 500, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': 400, 'width': 540, 'margin-left': '10px'
                          }
         )])])
             return cards_container, html.Br(), html.H4("Top 50 Wikipedia articles with more tokens"), html.Br(), table_container
@@ -1578,31 +1602,33 @@ def initialize_callbacks(app):
             mode = top_file['Surface form'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Nº surface forms"), html.H4(surface_forms)])
+                        html.Div([html.H5("Nº surface forms"), html.H4(surface_forms)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H4("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                       html.Div([html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
+                html.Br(),
+                html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Intermediate surface form (median)"), html.H4(median)])
-                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                        html.Div([html.H5("Intermediate surface form (median)"), html.H4(median)])
+                ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H4("Surface form that appears the most (mode)"), html.H4(mode)])
+                        html.Div([html.H5("Surface form that appears the most (mode)"), html.H4(mode)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H4("Standard deviation"), html.H4(std_dev)])
+                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -1621,12 +1647,13 @@ def initialize_callbacks(app):
                      {"name": "Times as plain text", "id": "Times as plain text"}],
            style_header=
            {
-              'fontWeight': 'bold'
+              'fontWeight': 'bold',
+              'font-size': '17px'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 625, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': 400, 'width': 680, 'margin-left': '10px'
                          }
         )])])
             

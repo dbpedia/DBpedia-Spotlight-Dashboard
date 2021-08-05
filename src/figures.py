@@ -1,43 +1,92 @@
 # -*- coding: utf-8 -*-
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import resources as R
 
 # Instance types tab figures
-def get_language_statistics_figure(stats):
+def get_language_statistics_figure(lang):
+    if lang == 'es':
+        image = "https://raw.githubusercontent.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_urls_impact.png"
+    else:
+        image = "https://raw.githubusercontent.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/en_urls_impact.png"
+    '''
+    if text == "Impact of unknown types URLs":
+        gauge = {'axis': {'range': [0, 1]}, 'bar': {'color': "red"}}
+    else:
+        gauge = {'axis': {'range': [0, 1]}}
+    
     # Indicators for precision and impact
-    fig = make_subplots(rows=1, cols=2, specs=[[{'type' : 'indicator'}, 
-                                                  {'type' : 'indicator'}]])
+    fig = go.Figure()
     fig.add_trace(
     go.Indicator(
     mode = "gauge+number",
-    value = float(stats[20]),
-    title = {'text': "Precision of DBpedia types URLs"},
+    value = value,
+    title = {'text': text},
     domain = {'x': [0, 1], 'y': [0, 1]},
-    gauge = {'axis': {'range': [0, 1]}}
-),
-    row=1, col=1
+    gauge = gauge
 )
-
+)
+    '''
+    # Constants
+    img_width = 1666
+    img_height = 445
+    scale_factor = 0.75
+    
+    # Create figure
+    fig = go.Figure()
+    
+    # Add invisible scatter trace.
+    # This trace is added to help the autoresize logic work.
     fig.add_trace(
-    go.Indicator(
-    mode = "gauge+number",
-    value = float(stats[21]),
-    title = {'text': "Impact of unknown types URLs"},
-    domain = {'x': [0, 1], 'y': [0, 1]},
-    gauge = {'axis': {'range': [0, 1]}, 'bar': {'color': "red"}}
-),
- 
-   row=1, col=2
-)
-    fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=1400)
+        go.Scatter(
+            x=[0, img_width * scale_factor],
+            y=[0, img_height * scale_factor],
+            mode="markers",
+            marker_opacity=0
+        )
+    )
+    
+    # Configure axes
+    fig.update_xaxes(
+        visible=False,
+        range=[0, img_width * scale_factor]
+    )
+    
+    fig.update_yaxes(
+        visible=False,
+        range=[0, img_height * scale_factor],
+        # the scaleanchor attribute ensures that the aspect ratio stays constant
+        scaleanchor="x"
+    )
+        # Add image
+    fig.add_layout_image(
+        dict(
+            x=0,
+            sizex=img_width * scale_factor,
+            y=img_height * scale_factor,
+            sizey=img_height * scale_factor,
+            xref="x",
+            yref="y",
+            opacity=1.0,
+            layer="below",
+            sizing="stretch",
+            source=image)
+    )
+    
+    # Configure other layout
+    fig.update_layout(
+        width=img_width * scale_factor,
+        height=img_height * scale_factor,
+        margin={"l": 0, "r": 0, "t": 0, "b": 0},
+        template = "simple_white"
+    )
+    
     return fig
 
 def get_ontology_figure():
     ontology_df = R.ontology_df
     # Ontology treemap 
     fig2 =  go.Figure(go.Treemap(labels=ontology_df['labels'], parents=ontology_df['parents']))
-    fig2.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700)
+    fig2.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=500)
     return fig2
 
 
@@ -124,10 +173,10 @@ def get_init_bar_figure_pos(language_directory,df):
 
 def get_version_bar_figure(labels, values):
     fig = go.Figure()
-    fig.add_trace(go.Bar(x= [int(values[0])], orientation='h', marker_color='#A349A4', name = labels[0], width = 1, hovertext=[values[0]], hoverinfo="text"))
-    fig.add_trace(go.Bar(x= [int(values[1])], orientation='h', marker_color="#77C14C", name = labels[1], width = 0.5, hovertext=[values[1]], hoverinfo="text"))
+    fig.add_trace(go.Bar(x= [int(values[0])], orientation='h', marker_color='#A349A4', name = labels[0], hovertext=[values[0]], hoverinfo="text"))
+    fig.add_trace(go.Bar(x= [int(values[1])], orientation='h', marker_color="#77C14C", name = labels[1], hovertext=[values[1]], hoverinfo="text"))
     
-    fig.update_layout(yaxis={'ticks':'', 'showticklabels':False}, barmode='overlay', margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia version")
+    fig.update_layout(yaxis={'ticks':'', 'showticklabels':False}, margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia version")
     return fig
     
 def get_version_pie_figure(labels,values):
@@ -144,9 +193,14 @@ def get_versions_instance_types_figure(labels, version1_df, version2_df):
     fig.update_layout(barmode='group', margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
     return fig
 
-
-es_statistics_figure = get_language_statistics_figure(R.es_stats)
-en_statistics_figure = get_language_statistics_figure(R.en_stats)
+'''
+es_precision_figure = get_language_statistics_figure(float(R.es_stats[20]), "Precision of DBpedia types URLs")
+es_impact_figure = get_language_statistics_figure(float(R.es_stats[21]), "Impact of unknown types URLs")
+en_precision_figure = get_language_statistics_figure(float(R.en_stats[20]), "Precision of DBpedia types URLs")
+en_impact_figure = get_language_statistics_figure(float(R.en_stats[21]), "Impact of unknown types URLs")
+'''
+es_statistics_figure = get_language_statistics_figure("es")
+en_statistics_figure = get_language_statistics_figure("en")
 ontology_figure = get_ontology_figure()
 es_instance_types_figure = get_instance_types_figure(R.es_dashboard_directory, R.instance_types_es_2021_05_01)
 en_instance_types_figure = get_instance_types_figure(R.en_dashboard_directory, R.instance_types_en_2021_05_01)

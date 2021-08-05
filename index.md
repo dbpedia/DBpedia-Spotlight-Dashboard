@@ -266,3 +266,6 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 **[29/07/2021]**: A `Summary` tab has been added to show users a summary of the statistics for English and Spanish.
 
 ![Summary](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/summary_tab.png)
+
+**[05/08/2021]**:
+Meeting with mentors. Finally, the publication of the statistics as linked data is pending as a future task due to lack of time. It only remains to make some visual improvements to the Dashboard. 

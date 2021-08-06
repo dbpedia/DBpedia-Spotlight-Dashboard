@@ -196,9 +196,9 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
           html.Br(),
           html.Br(),
           html.Div(children=[html.H4("Entities by DBpedia types"),
-           dcc.Graph(id='ontologyy', figure=F.ontology_figure, style={'display': 'inline-block'}),
+           dcc.Graph(id='ontologyy', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='es_instance_types', figure=F.es_instance_types_figure, 
-                                   style={'display': 'inline-block'})]
+                                   style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})]
             )]),
          html.Br(),
          html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
@@ -210,16 +210,16 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                   style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
           dcc.Graph(id='es_statistics', figure=F.es_statistics_figure),
         html.Div(children=[html.H4("Entities by DBpedia types"),
-           dcc.Graph(id='ontology', figure=F.ontology_figure, style={'display': 'inline-block'}),
+           dcc.Graph(id='ontology', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='es_known_types', figure=F.es_known_types_figure, 
-                                   style={'display': 'inline-block'})]
+                                   style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})]
             ),
         html.Br(),
         html.H4("Position measures for DBpedia types"),
         html.Div([
-         dcc.Graph(id='ontology_pos', figure=F.ontology_figure, style={'display': 'inline-block'}),
+         dcc.Graph(id='ontology_pos', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
          dcc.Graph(id='es_known_types_pos', figure=F.es_pos_known_types_figure, 
-                                 style={'display': 'inline-block'})
+                                 style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})
         ]),
         html.Br(),
         html.H4("Top 50 DBpedia types with more entities"),
@@ -375,9 +375,9 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
           html.Br(),
           html.Br(),
           html.Div(children=[html.H4("Entities by DBpedia types"),
-           dcc.Graph(id='en_ontologyy', figure=F.ontology_figure, style={'display': 'inline-block'}),
+           dcc.Graph(id='en_ontologyy', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='en_instance_types', figure=F.en_instance_types_figure, 
-                                   style={'display': 'inline-block'})]
+                                   style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})]
             )]),
          html.Br(),
          html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
@@ -389,16 +389,16 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                   style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
           dcc.Graph(id='en_statistics', figure=F.en_statistics_figure),
         html.Div(children=[html.H4("Entities by DBpedia types"),
-           dcc.Graph(id='en_ontology', figure=F.ontology_figure, style={'display': 'inline-block'}),
+           dcc.Graph(id='en_ontology', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='en_known_types', figure=F.en_known_types_figure, 
-                                   style={'display': 'inline-block'})]
+                                   style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})]
             ),
         html.Br(),
         html.H4("Position measures for DBpedia types"),
         html.Div([
-         dcc.Graph(id='en_ontology_pos', figure=F.ontology_figure, style={'display': 'inline-block'}),
+         dcc.Graph(id='en_ontology_pos', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
          dcc.Graph(id='en_known_types_pos', figure=F.en_pos_known_types_figure, 
-                                 style={'display': 'inline-block'})
+                                 style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})
         ]),
         html.Br(),
         html.H4("Top 50 DBpedia types with more entities"),

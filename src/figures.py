@@ -69,7 +69,7 @@ def get_ontology_figure():
     ontology_df = R.ontology_df
     # Ontology treemap 
     fig2 =  go.Figure(go.Treemap(labels=ontology_df['labels'], parents=ontology_df['parents']))
-    fig2.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=600)
+    fig2.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0))
     return fig2
 
 
@@ -92,7 +92,7 @@ def get_instance_types_figure(language_directory, instance_types_df):
     go.Scatter(x=[float(median)], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[median], hoverinfo="text"),
     go.Scatter(x=[float(std_dev)], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[std_dev], hoverinfo="text")
     ])
-    fig3.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+    fig3.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
     return fig3
 
 
@@ -112,14 +112,14 @@ def get_known_types_figure(language_directory, known_types_df):
     go.Scatter(x=[float(stats[5])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[stats[5]], hoverinfo="text"),
     go.Scatter(x=[float(stats[6])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[stats[6]], hoverinfo="text")
     ])
-    fig4.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+    fig4.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
     return fig4
 
 def get_sfpie_figure(values):
     # sfAndTotalCounts pie chart
     labels = ['Without associated link','Not appearing as text','Not appearing as text without associated link','Rest']
     fig5 = go.Figure(data=[go.Pie(labels=labels, values=values)])
-    fig5.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=300, width=700)
+    fig5.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0))
     return fig5
 
 
@@ -149,7 +149,7 @@ def get_init_bar_figure_pos(language_directory,df):
     go.Scatter(x=[int(stats[19])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[stats[19]], hoverinfo="text")
     ])
     
-    fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
+    fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
     return fig
 
 # Comparison tab figures
@@ -159,12 +159,12 @@ def get_version_bar_figure(labels, values):
     fig.add_trace(go.Bar(x= [int(values[0])], orientation='h', marker_color='#A349A4', name = labels[0], hovertext=[values[0]], hoverinfo="text"))
     fig.add_trace(go.Bar(x= [int(values[1])], orientation='h', marker_color="#77C14C", name = labels[1], hovertext=[values[1]], hoverinfo="text"))
     
-    fig.update_layout(yaxis={'ticks':'', 'showticklabels':False}, margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia version")
+    fig.update_layout(yaxis={'ticks':'', 'showticklabels':False}, margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia version")
     return fig
     
 def get_version_pie_figure(labels,values):
     fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
-    fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=300, width=700)
+    fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0))
     return fig
 
 def get_versions_instance_types_figure(labels, version1_df, version2_df):
@@ -173,7 +173,7 @@ def get_versions_instance_types_figure(labels, version1_df, version2_df):
     fig.add_trace(go.Bar(x = version1_df['Nº entities'], y = version1_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = labels[0]))
     fig.add_trace(go.Bar(x = version2_df['Nº entities'], y = version2_df['DBpedia type'], orientation='h', marker_color="#77C14C", name = labels[1]))
     
-    fig.update_layout(barmode='group', margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+    fig.update_layout(barmode='group', margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
     return fig
 
 es_statistics_figure = get_language_statistics_figure("es")

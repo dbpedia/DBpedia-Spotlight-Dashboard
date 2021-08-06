@@ -608,14 +608,14 @@ def initialize_callbacks(app):
             
             bar_figure = F.get_version_bar_figure([value1, value2], [entities_version1, entities_version2])
             pie_figure = F.get_version_pie_figure([value1, value2], [entities_version1, entities_version2])
-            bar_graph = dcc.Graph(id='versions_bar', figure=bar_figure, style={'display': 'inline-block'})
-            pie_graph = dcc.Graph(id='versions_pie', figure=pie_figure, style={'display': 'inline-block'})
+            bar_graph = dcc.Graph(id='versions_bar', figure=bar_figure, style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})
+            pie_graph = dcc.Graph(id='versions_pie', figure=pie_figure, style={'height':'19.53125vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})
             title = html.H3(value1 + " VS " + value2)
             type_title = html.H3("DBpedia types comparison")
             types_container = html.Div([
-                dcc.Graph(id='ontology_version', figure=F.ontology_figure, style={'display': 'inline-block'}),
+                dcc.Graph(id='ontology_version', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
                 dcc.Graph(id='instance_types_version', figure=F.get_versions_instance_types_figure([value1, value2], df1, df2), 
-                                     style={'display': 'inline-block'})
+                                     style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})
                 ]
                 )
             return title, html.Br(), bar_graph, pie_graph, html.Br(), html.Br(),  type_title, types_container
@@ -702,7 +702,7 @@ def initialize_callbacks(app):
             figure = go.Figure()    
             figure.add_trace(go.Bar(x = selected_all_instances_df1['Nº entities'], y = selected_all_instances_df1['DBpedia type'], orientation='h', marker_color='#A349A4', name = value1))
             figure.add_trace(go.Bar(x = selected_all_instances_df2['Nº entities'], y = selected_all_instances_df2['DBpedia type'], orientation='h', marker_color="#77C14C", name = value2))
-            figure.update_layout(barmode='group', margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+            figure.update_layout(barmode='group', margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
 
     # Spanish known types callback
@@ -735,7 +735,7 @@ def initialize_callbacks(app):
                 go.Scatter(x=[float(R.es_stats[5])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[5]], hoverinfo="text"),
                 go.Scatter(x=[float(R.es_stats[6])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.es_stats[6]], hoverinfo="text")
                 ])
-            figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+            figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
         
  # Spanish instance types callback
@@ -771,7 +771,7 @@ def initialize_callbacks(app):
             go.Scatter(x=[float(median)], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[median], hoverinfo="text"),
             go.Scatter(x=[float(std_dev)], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[std_dev], hoverinfo="text")
             ])
-            figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+            figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
 
 # Spanish known types position measures callback
@@ -805,7 +805,7 @@ def initialize_callbacks(app):
             go.Scatter(x=[int(R.es_stats[19])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[R.es_stats[19]], hoverinfo="text")
             ])
     
-            fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
+            fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
             return fig
         
 # Spanish uriCounts callback
@@ -1158,7 +1158,7 @@ def initialize_callbacks(app):
             
             figure_container = html.Div([
             html.H4("Surface forms"),
-            dcc.Graph(id='es_pie', figure=F.get_sfpie_figure(values))
+            dcc.Graph(id='es_pie', figure=F.get_sfpie_figure(values), style={'height':'19.53125vw', 'width':'45.572916666666664vw'})
             ])
                 
             table_container = html.Div(id='table_container', children = [
@@ -1212,7 +1212,7 @@ def initialize_callbacks(app):
                 go.Scatter(x=[float(R.en_stats[5])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[5]], hoverinfo="text"),
                 go.Scatter(x=[float(R.en_stats[6])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.en_stats[6]], hoverinfo="text")
                 ])
-            figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+            figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
         
  # English instance types callback
@@ -1248,7 +1248,7 @@ def initialize_callbacks(app):
             go.Scatter(x=[float(median)], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[median], hoverinfo="text"),
             go.Scatter(x=[float(std_dev)], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[std_dev], hoverinfo="text")
             ])
-            figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
+            figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
         
 # English known types position measures callback
@@ -1282,7 +1282,7 @@ def initialize_callbacks(app):
             go.Scatter(x=[int(R.en_stats[19])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[R.en_stats[19]], hoverinfo="text")
             ])
     
-            fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", height=400, width=700, xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
+            fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
             return fig
         
 # English uriCounts callback
@@ -1635,7 +1635,7 @@ def initialize_callbacks(app):
             
             figure_container = html.Div([
             html.H4("Surface forms"),
-            dcc.Graph(id='es_pie', figure=F.get_sfpie_figure(values))
+            dcc.Graph(id='es_pie', figure=F.get_sfpie_figure(values), style={'height':'19.53125vw', 'width':'45.572916666666664vw'})
             ])
                 
             table_container = html.Div(id='table_container', children = [

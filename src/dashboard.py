@@ -62,7 +62,7 @@ app.layout = html.Div(children=[
         html.Div([
             html.Img(
                     src = app.get_asset_url('spotlight_logo.png'),
-                    height = '2.7994791666666665vw',
+                    height = '43px',
                     width = 'auto')
             ],
             className = 'col-2',
@@ -503,14 +503,14 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             {'label': 'May 1st 2021', 'value': 'May 1st 2021'},
             {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
             ], 
-            placeholder="Version 1", style={'display': 'inline-block', 'width': 600}),
+            placeholder="Version 1", style={'display': 'inline-block', 'width': '39.0625vw'}),
         dcc.Dropdown(id='version2_dropdown',options=[
             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
             {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
             {'label': 'May 1st 2021', 'value': 'May 1st 2021'},
             {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
             ], 
-            placeholder="Version 2", style={'display': 'inline-block', 'width': 600, "margin-left": "1.6276041666666667vw"})
+            placeholder="Version 2", style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})
         ]),
        html.Br(),
        html.Div(id='data_container'),

@@ -45,6 +45,7 @@ tab_selected_style = {
 
 
 app = dash.Dash(external_stylesheets=[dbc.themes.LUX])
+app.title = 'DBpedia Spotlight Dashboard'
 
 app.layout = html.Div(children=[
     # Header

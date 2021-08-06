@@ -90,15 +90,14 @@ function versions_statistics {
 	INSTANCE_TYPES_TSV_LINES=$(cat instance_types_$1_$2 | wc -l)
 	echo "Number of DBpedia types: $INSTANCE_TYPES_TSV_LINES" >> versions_statistics.txt
 	echo "Calculating stats of instance_types_$1_$2 URLs"
-	cat "instance_types_$1_$2" | cut -f 2 -d$' ' | datamash mean 1 median 1 pvar 1 sum 1 > temp.txt
+	cat "instance_types_$1_$2" | cut -f 2 -d$' ' | datamash mean 1 pvar 1 sum 1 > temp.txt
 	MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 	MEAN=$(echo 'print(round('$MEAN',2))' | python3 )
-	MEDIAN=$(awk -F '\t' '{ print $2 }' temp.txt)
-	MEDIAN=$(echo 'print(round('$MEDIAN',2))' | python3 )
-	VAR=$(awk -F '\t' '{ print $3 }' temp.txt)
+	VAR=$(awk -F '\t' '{ print $2 }' temp.txt)
 	VAR=$(echo 'print(round('$VAR',2))' | python3 )
 	STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
-	SUM=$(awk -F '\t' '{ print $4 }' temp.txt)
+	SUM=$(awk -F '\t' '{ print $3 }' temp.txt)
+	MEDIAN=$(echo 'print(round(' $SUM / 2 '))' | python3 )
 	echo "Calculating position measures"
 	cat "instance_types_$1_$2" | awk '{for (i=1; i<=$2; i++) print NR}' | datamash q1 1 q3 1 perc:10 1 perc:20 1 perc:30 1 perc:40 1 perc:50 1 perc:60 1 perc:70 1 perc:80 1 perc:90 1 perc:95 1 > temp.txt
 	Q1=$(awk -F '\t' '{ print $1 }' temp.txt)

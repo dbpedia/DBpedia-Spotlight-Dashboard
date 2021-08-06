@@ -155,6 +155,14 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         dcc.Tab(id='es_types_tab', label='Instance types', value = 'es_types', children = [
             html.Div([
             html.Br(),
+            dcc.Markdown('''
+    In this tab are displayed:
+    
+     1. Calculated measures from instance-types, redirects and disambiguations datasets obtained from the `DBpedia Extraction Framework`
+     2. Calculated measures from the instance-types that `DBpedia Spotlight` actually uses (`known types`) after the entity validation process (check the `Information` tab for more details about entity validation)
+            
+                         '''),
+            html.Br(),
              html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
         html.Br(),
         html.Br(),
@@ -199,7 +207,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
           html.Div(children=[html.H4("Entities by DBpedia types"),
            dcc.Graph(id='ontologyy', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='es_instance_types', figure=F.es_instance_types_figure, 
-                                   style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})]
+                                   style={'height':'26.041666666666668vw', 'width':'52.083333333333336vw', 'display': 'inline-block'})]
             )]),
          html.Br(),
          html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
@@ -213,7 +221,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         html.Div(children=[html.H4("Entities by DBpedia types"),
            dcc.Graph(id='ontology', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='es_known_types', figure=F.es_known_types_figure, 
-                                   style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})]
+                                   style={'height':'26.041666666666668vw', 'width':'52.083333333333336vw', 'display': 'inline-block'})]
             ),
         html.Br(),
         html.H4("Position measures for DBpedia types"),
@@ -234,7 +242,8 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=R.top_known_types_2021_05_es.to_dict("records"),
             fill_width=False,
@@ -334,6 +343,14 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         dcc.Tab(id='en_types_tab', label='Instance types', value = 'en_types', children = [
             html.Div([
             html.Br(),
+            dcc.Markdown('''
+    In this tab are displayed:
+    
+     1. Calculated measures from instance-types, redirects and disambiguations datasets obtained from the `DBpedia Extraction Framework`
+     2. Calculated measures from the instance-types that `DBpedia Spotlight` actually uses (`known types`) after the entity validation process (check the `Information` tab for more details about entity validation)
+            
+                         '''),
+            html.Br(),
             html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
         html.Br(),
         html.Br(),
@@ -378,7 +395,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
           html.Div(children=[html.H4("Entities by DBpedia types"),
            dcc.Graph(id='en_ontologyy', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='en_instance_types', figure=F.en_instance_types_figure, 
-                                   style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})]
+                                   style={'height':'26.041666666666668vw', 'width':'52.083333333333336vw', 'display': 'inline-block'})]
             )]),
          html.Br(),
          html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
@@ -392,7 +409,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         html.Div(children=[html.H4("Entities by DBpedia types"),
            dcc.Graph(id='en_ontology', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='en_known_types', figure=F.en_known_types_figure, 
-                                   style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})]
+                                   style={'height':'26.041666666666668vw', 'width':'52.083333333333336vw', 'display': 'inline-block'})]
             ),
         html.Br(),
         html.H4("Position measures for DBpedia types"),
@@ -413,7 +430,8 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=R.top_known_types_2021_05_en.to_dict("records"),
             fill_width=False,

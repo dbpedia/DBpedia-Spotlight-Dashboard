@@ -131,7 +131,7 @@ def get_init_bar_figure_pos(language_directory,df):
     
     # For displaying positional measures
     first_row=df.iloc[0]
-    fig = go.Figure(go.Bar(x = [first_row[2]], y = [first_row[0]], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
+    fig = go.Figure(go.Bar(x = [first_row[2]], y = [first_row[0]], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type", hovertext=["Nº entities: "+ str(first_row[1])], hoverinfo="text"))
     
     fig.add_vline(x=int(stats[10]), line_width=4, line_color="#77C14C") # 10th percentile
     fig.add_vline(x=int(stats[8]), line_width=4, line_color="#1FAFEE") # 1st quartile

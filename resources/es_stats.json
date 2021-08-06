@@ -3,59 +3,122 @@
         "2016.10.01": {
             "nElements": "183",
             "mean": "19347.9",
-            "median": "dbo:Athlete",
-            "mode": "dbo:Agent",
-            "standardDeviation": "53906.64"
+            "median": "1770333",
+            "medianLabel": "dbo:Athlete",
+            "mode": "363756",
+            "modeLabel": "dbo:Agent",
+            "standardDeviation": "53906.64",
+            "q1": "3",
+            "q1Label": "dbo:Place",
+            "q3": "16",
+            "q3Label": "dbo:ArchitecturalStructure",
+            "perc10": "1",
+            "perc10Label": "dbo:Agent",
+            "perc50": "8",
+            "perc50Label": "dbo:Athlete",
+            "perc90": "38",
+            "perc90Label": "dbo:Single",
+            "perc95": "59",
+            "perc95Label": "dbo:VideoGame"
         },
         "2020.10.01": {
             "nElements": "188",
             "mean": "24359.51",
-            "median": "dbo:AdministrativeRegion",
-            "mode": "dbo:Agent",
-            "standardDeviation": "73938.93"
+            "median": "2289794",
+            "medianLabel": "dbo:AdministrativeRegion",
+            "mode": "535166",
+            "modeLabel": "dbo:Agent",
+            "standardDeviation": "73938.93",
+            "q1": "3",
+            "q1Label": "dbo:Place",
+            "q3": "14",
+            "q3Label": "dbo:ArchitecturalStructure",
+            "perc10": "1",
+            "perc10Label": "dbo:Agent",
+            "perc50": "7",
+            "perc50Label": "dbo:AdministrativeRegion",
+            "perc90": "36",
+            "perc90Label": "dbo:NaturalPlace",
+            "perc95": "56",
+            "perc95Label": "dbo:RouteOfTransportation"
         },
         "2021.05.01": {
             "nElements": "188",
             "mean": "25146.26",
-            "median": "dbo:AdministrativeRegion",
-            "mode": "dbo:Agent",
-            "standardDeviation": "76489.93"
+            "median": "2379486",
+            "medianLabel": "dbo:AdministrativeRegion",
+            "mode": "561008",
+            "modeLabel": "dbo:Agent",
+            "standardDeviation": "76489.93",
+            "q1": "3",
+            "q1Label": "dbo:Place",
+            "q3": "14",
+            "q3Label": "dbo:ArchitecturalStructure",
+            "perc10": "1",
+            "perc10Label": "dbo:Agent",
+            "perc50": "7",
+            "perc50Label": "dbo:AdministrativeRegion",
+            "perc90": "36",
+            "perc90Label": "dbo:NaturalPlace",
+            "perc95": "56",
+            "perc95Label": "dbo:RouteOfTransportation"
         },
         "2021.06.01": {
             "nElements": "188",
             "mean": "25313.68",
-            "median": "dbo:AdministrativeRegion",
-            "mode": "dbo:Agent",
-            "standardDeviation": "76908.65"
+            "medianLabel": "dbo:AdministrativeRegion",
+            "mode": "564230",
+            "modeLabel": "dbo:Agent",
+            "standardDeviation": "76908.65",
+            "q1": "3",
+            "q1Label": "dbo:Place",
+            "q3": "14",
+            "q3Label": "dbo:ArchitecturalStructure",
+            "perc10": "1",
+            "perc10Label": "dbo:Agent",
+            "perc50": "7",
+            "perc50Label": "dbo:AdministrativeRegion",
+            "perc90": "36",
+            "perc90Label": "dbo:NaturalPlace",
+            "perc95": "56",
+            "perc95Label": "dbo:Noble"
         }
     },
     "uriCounts": {
         "2016.10.25": {
             "nElements": "855800",
             "mean": "53.34",
-            "median": "dbpedia-es:Hinduismo",
-            "mode": "dbpedia-es:Estados_Unidos",
+            "median": "371399",
+            "medianLabel": "dbpedia-es:Hinduismo",
+            "mode": "336580",
+            "modeLabel": "dbpedia-es:Estados_Unidos",
             "standardDeviation": "987.45"
         },
         "2020.10.25": {
             "nElements": "1051602",
             "mean": "55.07",
-            "median": "dbpedia-es:Huiracocha_Inca",
-            "mode": "dbpedia-es:Estados_Unidos",
+            "median": "462200",
+            "medianLabel": "dbpedia-es:Huiracocha_Inca",
+            "mode": "397985",
+            "modeLabel": "dbpedia-es:Estados_Unidos",
             "standardDeviation": "999.59"
         },
         "2021.05.25": {
             "nElements": "1075967",
             "mean": "55.73",
-            "median": "dbpedia-es:III_milenio_a._C.",
-            "mode": "dbpedia-es:Estados_Unidos",
+            "median": "475322",
+            "medianLabel": "dbpedia-es:III_milenio_a._C.",
+            "mode": "386830",
+            "modeLabel": "dbpedia-es:Estados_Unidos",
             "standardDeviation": "999.80"
         },
         "2021.06.25": {
             "nElements": "1083969",
             "mean": "55.89",
-            "median": "dbpedia-es:ITunes_Store",
-            "mode": "dbpedia-es:Estados_Unidos",
+            "median": "479271",
+            "medianLabel": "dbpedia-es:ITunes_Store",
+            "mode": "388967",
+            "modeLabel": "dbpedia-es:Estados_Unidos",
             "standardDeviation": "1003.04"
         }
     },
@@ -63,29 +126,37 @@
         "2016.10.25": {
             "nElements": "1663152",
             "mean": "27.45",
-            "median": "[hinduista - dbpedia-es:Hinduismo]",
-            "mode": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
+            "median": "742137",
+            "medianLabel": "[hinduista - dbpedia-es:Hinduismo]",
+            "mode": "233725",
+            "modeLabel": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
             "standardDeviation": "584.40"
         },
         "2020.10.25": {
             "nElements": "2079461",
             "mean": "27.85",
-            "median": "[Wiracocha - dbpedia-es:Huiracocha_(dios)]",
-            "mode": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
+            "median": "944462",
+            "mode": "280774",
+            "medianLabel": "[Wiracocha - dbpedia-es:Huiracocha_(dios)]",
+            "modeLabel": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
             "standardDeviation": "594.55"
         },
         "2021.05.25": {
-            "nElements": "3473622",
-            "mean": "28.33",
-            "median": "[art\u00edculo - dbpedia-es:Pel\u00edcula_de_culto]",
-            "mode": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
-            "standardDeviation": "630.78"
+            "nElements": "2154724",
+            "mean": "27.9",
+            "median": "984147",
+            "medianLabel": "[art\u00edculo - dbpedia-es:Pel\u00edcula_de_culto]",
+            "mode": "290150",
+            "modeLabel": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
+            "standardDeviation": "594.53"
         },
         "2021.06.25": {
             "nElements": "2173521",
             "mean": "27.95",
-            "median": "[Herois (H\u00e9roes) - dbpedia-es:H\u00e9roes_(pel\u00edcula)]",
-            "mode": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
+            "median": "994114",
+            "medianLabel": "[Herois (H\u00e9roes) - dbpedia-es:H\u00e9roes_(pel\u00edcula)]",
+            "mode": "292391",
+            "modeLabel": "[Estados Unidos - dbpedia-es:Estados_Unidos]",
             "standardDeviation": "596.16"
         }
     },
@@ -93,29 +164,37 @@
         "2016.10.25": {
             "nElements": "390398",
             "mean": "255.72",
-            "median": "http://es.wikipedia.org/wiki/Imperio_almohade",
-            "mode": "http://es.wikipedia.org/wiki/Estados_Unidos",
+            "median": "179655",
+            "medianLabel": "http://es.wikipedia.org/wiki/Imperio_almohade",
+            "mode": "108325",
+            "modeLabel": "http://es.wikipedia.org/wiki/Estados_Unidos",
             "standardDeviation": "179655"
         },
         "2020.10.25": {
             "nElements": "491748",
             "mean": "259.62",
-            "median": "http://es.wikipedia.org/wiki/Idioma_ruso_en_Ucrania",
-            "mode": "http://es.wikipedia.org/wiki/Estados_Unidos",
+            "median": "226427",
+            "medianLabel": "http://es.wikipedia.org/wiki/Idioma_ruso_en_Ucrania",
+            "mode": "124791",
+            "modeLabel": "http://es.wikipedia.org/wiki/Estados_Unidos",
             "standardDeviation": "226427"
         },
         "2021.05.25": {
             "nElements": "509175",
             "mean": "261.85",
-            "median": "http://es.wikipedia.org/wiki/Impunidad",
-            "mode": "http://es.wikipedia.org/wiki/Estados_Unidos",
+            "median": "234659",
+            "medianLabel": "http://es.wikipedia.org/wiki/Impunidad",
+            "mode": "122900",
+            "modeLabel": "http://es.wikipedia.org/wiki/Estados_Unidos",
             "standardDeviation": "234659"
         },
         "2021.06.25": {
             "nElements": "513395",
             "mean": "262.48",
-            "median": "http://es.wikipedia.org/wiki/Invierno",
-            "mode": "http://es.wikipedia.org/wiki/Estados_Unidos",
+            "median": "236804",
+            "medianLabel": "http://es.wikipedia.org/wiki/Invierno",
+            "mode": "123443",
+            "modeLabel": "http://es.wikipedia.org/wiki/Estados_Unidos",
             "standardDeviation": "236804"
         }
     },
@@ -123,29 +202,37 @@
         "2016.10.25": {
             "nElements": "2468712",
             "mean": "18.49",
-            "median": "doris miller",
-            "mode": "Estados Unidos",
+            "median": "515916",
+            "medianLabel": "doris miller",
+            "mode": "235995",
+            "modeLabel": "Estados Unidos",
             "standardDeviation": "511.23"
         },
         "2020.10.25": {
             "nElements": "3034770",
             "mean": "19.08",
-            "median": "Ciudad del Vaticano",
-            "mode": "Estados Unidos",
+            "median": "622149",
+            "medianLabel": "Ciudad del Vaticano",
+            "mode": "284851",
+            "modeLabel": "Estados Unidos",
             "standardDeviation": "531.54"
         },
         "2021.05.25": {
             "nElements": "3129811",
             "mean": "19.21",
-            "median": "pulmonar",
-            "mode": "Estados Unidos",
+            "median": "636453",
+            "medianLabel": "pulmonar",
+            "mode": "294695",
+            "modeLabel": "Estados Unidos",
             "standardDeviation": "534.70"
         },
         "2021.06.25": {
             "nElements": "3154614",
             "mean": "19.26",
-            "median": "culebrera europea",
-            "mode": "Estados Unidos",
+            "median": "639512",
+            "medianLabel": "culebrera europea",
+            "mode": "297084",
+            "modeLabel": "Estados Unidos",
             "standardDeviation": "536.55"
         }
     }

@@ -168,7 +168,8 @@ def initialize_callbacks(app):
        style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=[
         {
@@ -356,7 +357,8 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.0416666666666667vw'
+              'font-size': '1.0416666666666667vw',
+              'text-align': 'center'
            },
             data=[
         {
@@ -785,7 +787,7 @@ def initialize_callbacks(app):
             selected_type = clicked_data['points'][0]['label'] 
             if selected_type in R.known_types_es_2021_05_01["DBpedia type"].values:
                 selected_row = R.known_types_es_2021_05_01[R.known_types_es_2021_05_01["DBpedia type"] == selected_type]
-                fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
+                fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type", hovertext=["Nº entities: "+ str(selected_row.iloc[0]["Nº entities"])], hoverinfo="text"))
             else:
                 fig = go.Figure(go.Bar(x = [0], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
             
@@ -888,7 +890,8 @@ def initialize_callbacks(app):
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -980,7 +983,8 @@ def initialize_callbacks(app):
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -1071,7 +1075,8 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -1171,7 +1176,8 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -1262,7 +1268,7 @@ def initialize_callbacks(app):
             selected_type = clicked_data['points'][0]['label'] 
             if selected_type in R.known_types_en_2021_05_01["DBpedia type"].values:
                 selected_row = R.known_types_en_2021_05_01[R.known_types_en_2021_05_01["DBpedia type"] == selected_type]
-                fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
+                fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type", hovertext=["Nº entities: "+ str(selected_row.iloc[0]["Nº entities"])], hoverinfo="text"))
             else:
                 fig = go.Figure(go.Bar(x = [0], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
             
@@ -1365,7 +1371,8 @@ def initialize_callbacks(app):
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -1457,7 +1464,8 @@ def initialize_callbacks(app):
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -1548,7 +1556,8 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
@@ -1648,7 +1657,8 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw'
+              'font-size': '1.1067708333333333vw',
+              'text-align': 'center'
            },
             data=top_file.to_dict("records"),
             fill_width=False,

@@ -5,7 +5,7 @@ DBpedia Extraction Framework instance-types
 Number of DBpedia entities (without counting repetitions): 923443
 Number of DBpedia types: 183
 Mean number of DBpedia entities per type: 19347.9
-Median number of DBpedia entities per type (occurrences): 2164
+Median number of DBpedia entities per type (occurrences): 1770333
 Population standard deviation of DBpedia entities per type: 53906.64
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 3540666
 First quartile value of DBpedia entities per type: 3
@@ -28,7 +28,7 @@ DBpedia Extraction Framework instance-types
 Number of DBpedia entities (without counting repetitions): 1277362
 Number of DBpedia types: 188
 Mean number of DBpedia entities per type: 24359.51
-Median number of DBpedia entities per type (occurrences): 2506
+Median number of DBpedia entities per type (occurrences): 2289794
 Population standard deviation of DBpedia entities per type: 73938.93
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 4579588
 First quartile value of DBpedia entities per type: 3
@@ -51,7 +51,7 @@ DBpedia Extraction Framework instance-types
 Number of DBpedia entities (without counting repetitions): 1327554
 Number of DBpedia types: 188
 Mean number of DBpedia entities per type: 25146.26
-Median number of DBpedia entities per type (occurrences): 2636
+Median number of DBpedia entities per type (occurrences): 2363748
 Population standard deviation of DBpedia entities per type: 76489.93
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 4727497
 First quartile value of DBpedia entities per type: 3
@@ -74,7 +74,7 @@ DBpedia Extraction Framework instance-types
 Number of DBpedia entities (without counting repetitions): 1337360
 Number of DBpedia types: 188
 Mean number of DBpedia entities per type: 25313.68
-Median number of DBpedia entities per type (occurrences): 2642
+Median number of DBpedia entities per type (occurrences): 2379486
 Population standard deviation of DBpedia entities per type: 76908.65
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 4758971
 First quartile value of DBpedia entities per type: 3
@@ -97,7 +97,7 @@ DBpedia Extraction Framework instance-types
 Number of DBpedia entities (without counting repetitions): 4767202
 Number of DBpedia types: 465
 Mean number of DBpedia entities per type: 31740.79
-Median number of DBpedia entities per type (occurrences): 1924
+Median number of DBpedia entities per type (occurrences): 7379734
 Population standard deviation of DBpedia entities per type: 137336.27
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 14759468
 First quartile value of DBpedia entities per type: 3
@@ -120,7 +120,7 @@ DBpedia Extraction Framework instance-types
 Number of DBpedia entities (without counting repetitions): 6218434
 Number of DBpedia types: 471
 Mean number of DBpedia entities per type: 39420.74
-Median number of DBpedia entities per type (occurrences): 2146
+Median number of DBpedia entities per type (occurrences): 9283584
 Population standard deviation of DBpedia entities per type: 180554.64
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 18567169
 First quartile value of DBpedia entities per type: 3
@@ -143,7 +143,7 @@ DBpedia Extraction Framework instance-types
 Number of DBpedia entities (without counting repetitions): 6419269
 Number of DBpedia types: 471
 Mean number of DBpedia entities per type: 40505.08
-Median number of DBpedia entities per type (occurrences): 2113
+Median number of DBpedia entities per type (occurrences): 9538947
 Population standard deviation of DBpedia entities per type: 187283.71
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 19077894
 First quartile value of DBpedia entities per type: 3
@@ -166,7 +166,7 @@ DBpedia Extraction Framework instance-types
 Number of DBpedia entities (without counting repetitions): 6442040
 Number of DBpedia types: 471
 Mean number of DBpedia entities per type: 40604.1
-Median number of DBpedia entities per type (occurrences): 2114
+Median number of DBpedia entities per type (occurrences): 9562266
 Population standard deviation of DBpedia entities per type: 188038.80
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 19124532
 First quartile value of DBpedia entities per type: 3

@@ -8,7 +8,7 @@ DBpedia Spotlight May 2021 instance-types (after validation process)
 Number of DBpedia entities with DBpedia types (without counting repetitions): 757866
 Number of DBpedia types: 183
 Mean number of DBpedia entities per type: 13989.87
-Median number of DBpedia entities per type (occurrences): 1888
+Median number of DBpedia entities per type (occurrences): 1280073
 Population standard deviation of DBpedia entities per type: 41780.68
 Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 2560146
 First quartile value of DBpedia entities per type: 3
@@ -38,10 +38,10 @@ Population standard deviation of uriCounts URLs per DBpedia entity: 999.80
 
 DBpedia Spotlight May 2021 pairCounts
 -------------------------------------
-Number of [Surface form - DBpedia entity] pairs: 3473622
-Mean number of pairCounts URLs per surface form: 28.33
-Median number of pairCounts URLs per surface form: 1552650
-Population standard deviation of pairCounts URLs per surface form: 630.78
+Number of [Surface form - DBpedia entity] pairs: 2154724
+Mean number of pairCounts URLs per surface form: 27.9
+Median number of pairCounts URLs per surface form: 984147
+Population standard deviation of pairCounts URLs per surface form: 594.53
 
 DBpedia Spotlight May 2021 tokenCounts
 -------------------------------------

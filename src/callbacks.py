@@ -169,7 +169,7 @@ def initialize_callbacks(app):
        style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw',
+              'font-size': '0.9765625vw',
               'text-align': 'center'
            },
             data=[
@@ -217,7 +217,7 @@ def initialize_callbacks(app):
             fill_width=False,
             merge_duplicate_headers=True,
             style_table={
-                'overflowY': 'scroll', 'height': '19.53125vw', 'width': '130.20833333333334vw', 'margin-left': '0.6510416666666666vw'
+                'overflowY': 'scroll', 'height': '19.53125vw', 'width': '97.65625vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])
     

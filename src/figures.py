@@ -12,7 +12,7 @@ def get_language_statistics_figure(lang):
     # Constants
     img_width = 1666
     img_height = 445
-    scale_factor = 0.75
+    scale_factor = 0.55
     
     # Create figure
     fig = go.Figure()

@@ -217,7 +217,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.es_stats[3])])]),
                   style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
+          html.Br(),
           dcc.Graph(id='es_statistics', figure=F.es_statistics_figure),
+          html.Br(),
+          html.Br(),
         html.Div(children=[html.H4("Entities by DBpedia types"),
            dcc.Graph(id='ontology', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='es_known_types', figure=F.es_known_types_figure, 
@@ -248,7 +251,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             data=R.top_known_types_2021_05_es.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 425, 'margin-left': '0.6510416666666666vw'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '27.669270833333332vw', 'margin-left': '0.6510416666666666vw'
                          }
         )
         ])])
@@ -405,7 +408,10 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.en_stats[3])])]),
                   style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
+          html.Br(),
           dcc.Graph(id='en_statistics', figure=F.en_statistics_figure),
+          html.Br(),
+          html.Br(),
         html.Div(children=[html.H4("Entities by DBpedia types"),
            dcc.Graph(id='en_ontology', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
            dcc.Graph(id='en_known_types', figure=F.en_known_types_figure, 
@@ -436,7 +442,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             data=R.top_known_types_2021_05_en.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 375, 'margin-left': '0.6510416666666666vw'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '24.4140625vw', 'margin-left': '0.6510416666666666vw'
                          }
         )
         ])])

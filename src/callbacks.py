@@ -113,7 +113,7 @@ def initialize_callbacks(app):
                 uri_std_dev = stats[25]
                 pair_elements = stats[26]
                 pair_mean = stats[27]
-                pair_median = '[artículo - dbpedia-es:Película_de_culto]'
+                pair_median = '[ambiente - dbpedia-es:Hábitat]'
                 pair_mode =  "[" + R.top_2021_05_pairCounts_es['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ R.top_2021_05_pairCounts_es['DBpedia entity'].iloc[0] + "]"
                 pair_std_dev = stats[29]
                 token_elements = stats[30]
@@ -345,7 +345,7 @@ def initialize_callbacks(app):
                 
             table_container = html.Div(id='table_container', children = [
         DataTable(
-            id="es_summary_table",
+            id="en_summary_table",
            columns=[
         {"name": ["", "File"], "id": "file"},
         {"name": ["", "Nº elements"], "id": "elements"},
@@ -357,7 +357,7 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '1.0416666666666667vw',
+              'font-size': '0.9765625vw',
               'text-align': 'center'
            },
             data=[
@@ -928,7 +928,7 @@ def initialize_callbacks(app):
             if value == 'May 25th 2021':
                 surface_forms = stats[26]
                 mean = stats[27]
-                median = '[artículo - dbpedia-es:Película_de_culto]'
+                median = '[ambiente - dbpedia-es:Hábitat]'
                 std_dev = stats[29]
                 top_file = R.top_2021_05_pairCounts_es
                 

@@ -10,37 +10,37 @@ import callbacks as CB
 
 
 tabs_styles = {
-    'height': '44px',
+    'height': '2.8645833333333335vw',
     'align-items': 'center',
-    'margin-left': '50px',
-    'margin-right': '50px'
+    'margin-left': '3.2552083333333335vw',
+    'margin-right': '3.2552083333333335vw'
 }
 
 subtabs_styles = {
-    'height': '44px',
-    'width' : '1000px',
+    'height': '2.8645833333333335vw',
+    'width' : '65.10416666666667vw',
     'align-items': 'center',
-    'margin-left': '200px',
-    'margin-right': '50px'
+    'margin-left': '13.020833333333334vw',
+    'margin-right': '3.2552083333333335vw'
 }
 
 tab_style = {
-    'borderBottom': '1px solid #d6d6d6',
-    'padding': '6px',
+    'borderBottom': '0.06510416666666667vw solid #d6d6d6',
+    'padding': '0.390625vw',
     'fontWeight': 'bold',
-    'border-radius': '15px',
+    'border-radius': '0.9765625vw',
     'background-color': '#F2F2F2',
-    'box-shadow': '4px 4px 4px 4px lightgrey',
+    'box-shadow': '0.2604166666666667vw 0.2604166666666667vw 0.2604166666666667vw 0.2604166666666667vw lightgrey',
  
 }
  
 tab_selected_style = {
-    'borderTop': '1px solid #d6d6d6',
-    'borderBottom': '1px solid #d6d6d6',
+    'borderTop': '0.06510416666666667vw solid #d6d6d6',
+    'borderBottom': '0.06510416666666667vw solid #d6d6d6',
     'backgroundColor': '#119DFF',
     'color': 'white',
-    'padding': '6px',
-    'border-radius': '15px',
+    'padding': '0.390625vw',
+    'border-radius': '0.9765625vw',
 }
 
 
@@ -62,7 +62,7 @@ app.layout = html.Div(children=[
         html.Div([
             html.Img(
                     src = app.get_asset_url('spotlight_logo.png'),
-                    height = '43 px',
+                    height = '2.7994791666666665vw',
                     width = 'auto')
             ],
             className = 'col-2',
@@ -128,7 +128,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
 ![DBpedia Spotlight Dashboard Flowchart](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_flowchart.png)  
             
                          ''')
-                        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+                        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
             ], style = tab_style, selected_style = tab_selected_style),
         # Spanish tab
         dcc.Tab(id='es_tab', label='Spanish', value = "spanish", children = [
@@ -147,26 +147,26 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 placeholder="Version"),
              html.Br(),
             html.Div(id='es_summary_container')
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),   
             
         # Instance-types subtab
         dcc.Tab(id='es_types_tab', label='Instance types', value = 'es_types', children = [
             html.Div([
             html.Br(),
-             html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"2px black solid", 'width': 'auto'}),
+             html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
         html.Br(),
         html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia entities"), html.H4(R.versions_stats[36])]
                                          )]),style={'display': 'inline-block'}, color="#F5F5F5"),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.versions_stats[37])] 
-                                         )]), style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
+                                         )]), style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
          html.Br(),
          html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº redirects"), html.H4(R.es_stats[0])] 
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº disambiguations"), html.H4(R.es_stats[1])] 
-                                         )]),style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
+                                         )]),style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
           html.Br(),
           html.Br(),
           html.H4("Measures of central tendency"),
@@ -201,13 +201,13 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                                    style={'display': 'inline-block'})]
             )]),
          html.Br(),
-         html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"2px black solid", 'width': 'auto'}),      
+         html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
          html.Br(),
          html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia entities"), html.H4(R.es_stats[2])] 
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.es_stats[3])])]),
-                  style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5')]),
+                  style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
           dcc.Graph(id='es_statistics', figure=F.es_statistics_figure),
         html.Div(children=[html.H4("Entities by DBpedia types"),
            dcc.Graph(id='ontology', figure=F.ontology_figure, style={'display': 'inline-block'}),
@@ -233,16 +233,16 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=R.top_known_types_2021_05_es.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 425, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': 400, 'width': 425, 'margin-left': '0.6510416666666666vw'
                          }
         )
         ])])
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style)
         ,
          # uriCounts subtab
@@ -258,7 +258,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             placeholder="Version"),
          html.Br(),
         html.Div(id='uriCounts_container')
-        ],style = {'margin-left': '50px', 'margin-right': '50px'})
+        ],style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
          ], style = tab_style, selected_style = tab_selected_style)
               ,
           # pairCounts subtab
@@ -274,7 +274,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             placeholder="Version"),
          html.Br(),
         html.Div(id='pairCounts_container')
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
           ], style = tab_style, selected_style = tab_selected_style)
               ,
           # tokenCounts subtab
@@ -290,7 +290,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             placeholder="Version"),
          html.Br(),
         html.Div(id='tokenCounts_container')
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),
           # sfAndTotalCounts subtab
         dcc.Tab(label='sfAndTotalCounts', children = [
@@ -305,7 +305,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             placeholder="Version"),
          html.Br(),
         html.Div(id='sfAndTotalCounts_container')
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
               ], style = tab_style, selected_style = tab_selected_style)
         ], style = subtabs_styles)
         ], style = tab_style, selected_style = tab_selected_style)
@@ -327,25 +327,25 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 placeholder="Version"),
              html.Br(),
             html.Div(id='en_summary_container')        
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),   
         # Instance-types subtab
         dcc.Tab(id='en_types_tab', label='Instance types', value = 'en_types', children = [
             html.Div([
             html.Br(),
-            html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"2px black solid", 'width': 'auto'}),
+            html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
         html.Br(),
         html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia entities"), html.H4(R.versions_stats[108])]
                                          )]),style={'display': 'inline-block'}, color="#F5F5F5"),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.versions_stats[109])] 
-                                         )]), style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),  
+                                         )]), style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),  
           html.Br(),
           html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº redirects"), html.H4(R.en_stats[0])] 
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº disambiguations"), html.H4(R.en_stats[1])] 
-                                         )]),style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5'),
+                                         )]),style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
           html.Br(),
           html.Br(),
           html.H4("Measures of central tendency"),
@@ -380,13 +380,13 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                                    style={'display': 'inline-block'})]
             )]),
          html.Br(),
-         html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"2px black solid", 'width': 'auto'}),      
+         html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
          html.Br(),        
          html.Br(),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia entities"), html.H4(R.en_stats[2])] 
                                          )]),style={'display': 'inline-block'}, color='#F5F5F5'),
          dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.en_stats[3])])]),
-                  style={'display': 'inline-block', "margin-left": "30px"}, color='#F5F5F5')]),
+                  style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
           dcc.Graph(id='en_statistics', figure=F.en_statistics_figure),
         html.Div(children=[html.H4("Entities by DBpedia types"),
            dcc.Graph(id='en_ontology', figure=F.ontology_figure, style={'display': 'inline-block'}),
@@ -412,16 +412,16 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=R.top_known_types_2021_05_en.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 375, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': 400, 'width': 375, 'margin-left': '0.6510416666666666vw'
                          }
         )
         ])])
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),
         # uriCounts subtab
          dcc.Tab(label='uriCounts', value = 'en_uricounts', children = [
@@ -436,7 +436,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             placeholder="Version"),
          html.Br(),
         html.Div(id='en_uriCounts_container')
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
          ], style = tab_style, selected_style = tab_selected_style),
         # pairCounts subtab
          dcc.Tab(label='pairCounts', children = [
@@ -451,7 +451,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             placeholder="Version"),
          html.Br(),
         html.Div(id='en_pairCounts_container')
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
           ], style = tab_style, selected_style = tab_selected_style),
           # tokenCounts subtab
          dcc.Tab(label='tokenCounts', children = [
@@ -466,7 +466,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             placeholder="Version"),
          html.Br(),
         html.Div(id='en_tokenCounts_container')
-        ], style = {'margin-left': '50px', 'margin-right': '50px'})
+        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),
           # sfAndTotalCounts subtab
         dcc.Tab(label='sfAndTotalCounts', children = [
@@ -481,7 +481,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             placeholder="Version"),
          html.Br(),
         html.Div(id='en_sfAndTotalCounts_container')
-              ], style = {'margin-left': '50px', 'margin-right': '50px'})
+              ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style)]
             , style = subtabs_styles)
         ], style = tab_style, selected_style = tab_selected_style),
@@ -510,13 +510,13 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             {'label': 'May 1st 2021', 'value': 'May 1st 2021'},
             {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
             ], 
-            placeholder="Version 2", style={'display': 'inline-block', 'width': 600, "margin-left": "25px"})
+            placeholder="Version 2", style={'display': 'inline-block', 'width': 600, "margin-left": "1.6276041666666667vw"})
         ]),
        html.Br(),
        html.Div(id='data_container'),
        html.Br(),
        html.Div(id='figures_container')
-      ], style = {'margin-left': '50px', 'margin-right': '50px'})
+      ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),
         
       # Feedback tab
@@ -550,7 +550,7 @@ If you want to know more about these usability principles and about some aspects
 Thanks for your time!              
 '''
           )
-                ], style = {'margin-left': '50px', 'margin-right': '50px'})
+                ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
 ], style = tab_style, selected_style = tab_selected_style)
 ], style = tabs_styles)
 ])

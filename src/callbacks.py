@@ -168,7 +168,7 @@ def initialize_callbacks(app):
        style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=[
         {
@@ -215,7 +215,7 @@ def initialize_callbacks(app):
             fill_width=False,
             merge_duplicate_headers=True,
             style_table={
-                'overflowY': 'scroll', 'height': 300, 'width': 1500, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '19.53125vw', 'width': '97.65625vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])
     
@@ -356,7 +356,7 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '16px'
+              'font-size': '1.0416666666666667vw'
            },
             data=[
         {
@@ -403,7 +403,7 @@ def initialize_callbacks(app):
             fill_width=False,
             merge_duplicate_headers=True,
             style_table={
-                'overflowY': 'scroll', 'height': 300, 'width': 1500, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '19.53125vw', 'width': '97.65625vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])
     
@@ -492,7 +492,7 @@ def initialize_callbacks(app):
                 ),
                 dbc.Card(dbc.CardBody(
                         html.Div([html.H5("Nº DBpedia types"), html.H4(types_version1)])
-                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "1.6276041666666667vw"}
                 )
                 ], style={'display': 'inline-block'})
                 
@@ -504,9 +504,9 @@ def initialize_callbacks(app):
                 ),
                 dbc.Card(dbc.CardBody(
                         html.Div([html.H5("Nº DBpedia types"), html.H4(types_version2)])
-                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "1.6276041666666667vw"}
                 )
-                ], style={'display': 'inline-block', "margin-left": "47px"})
+                ], style={'display': 'inline-block', "margin-left": "3.0598958333333335vw"})
             
             version_container=  html.Div(id='version_container', children = [
                 version1_container, version2_container
@@ -521,7 +521,7 @@ def initialize_callbacks(app):
                 ),
             dbc.Card(dbc.CardBody(
                 html.Div([html.H5("Type growth"), html.H4(str(type_growth))])
-                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "25px"}
+                ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "1.6276041666666667vw"}
                 )
                 ])
             title = html.H3("Version comparison")
@@ -888,12 +888,12 @@ def initialize_callbacks(app):
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 450, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '29.296875vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])])
     
@@ -980,12 +980,12 @@ def initialize_callbacks(app):
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 520, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '33.854166666666664vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])])
             
@@ -1071,12 +1071,12 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 475, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '30.924479166666668vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])])
             return cards_container, html.Br(), html.H4("Top 50 Wikipedia articles with more tokens"), html.Br(), table_container
@@ -1171,12 +1171,12 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 500, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '32.552083333333336vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])])
             
@@ -1365,12 +1365,12 @@ def initialize_callbacks(app):
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 500, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '32.552083333333336vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])])
     
@@ -1457,12 +1457,12 @@ def initialize_callbacks(app):
             style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 800, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '52.083333333333336vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])])
             
@@ -1548,12 +1548,12 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 540, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '35.15625vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])])
             return cards_container, html.Br(), html.H4("Top 50 Wikipedia articles with more tokens"), html.Br(), table_container
@@ -1648,12 +1648,12 @@ def initialize_callbacks(app):
            style_header=
            {
               'fontWeight': 'bold',
-              'font-size': '17px'
+              'font-size': '1.1067708333333333vw'
            },
             data=top_file.to_dict("records"),
             fill_width=False,
             style_table={
-                'overflowY': 'scroll', 'height': 400, 'width': 680, 'margin-left': '10px'
+                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '44.270833333333336vw', 'margin-left': '0.6510416666666666vw'
                          }
         )])])
             

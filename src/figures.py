@@ -8,24 +8,7 @@ def get_language_statistics_figure(lang):
         image = "https://raw.githubusercontent.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/es_urls_impact.png"
     else:
         image = "https://raw.githubusercontent.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/en_urls_impact.png"
-    '''
-    if text == "Impact of unknown types URLs":
-        gauge = {'axis': {'range': [0, 1]}, 'bar': {'color': "red"}}
-    else:
-        gauge = {'axis': {'range': [0, 1]}}
-    
-    # Indicators for precision and impact
-    fig = go.Figure()
-    fig.add_trace(
-    go.Indicator(
-    mode = "gauge+number",
-    value = value,
-    title = {'text': text},
-    domain = {'x': [0, 1], 'y': [0, 1]},
-    gauge = gauge
-)
-)
-    '''
+
     # Constants
     img_width = 1666
     img_height = 445
@@ -86,7 +69,7 @@ def get_ontology_figure():
     ontology_df = R.ontology_df
     # Ontology treemap 
     fig2 =  go.Figure(go.Treemap(labels=ontology_df['labels'], parents=ontology_df['parents']))
-    fig2.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=500)
+    fig2.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=600)
     return fig2
 
 
@@ -193,12 +176,6 @@ def get_versions_instance_types_figure(labels, version1_df, version2_df):
     fig.update_layout(barmode='group', margin=dict(t=0, b=0, r=0, l=0, pad=0), height=400, width=700, yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
     return fig
 
-'''
-es_precision_figure = get_language_statistics_figure(float(R.es_stats[20]), "Precision of DBpedia types URLs")
-es_impact_figure = get_language_statistics_figure(float(R.es_stats[21]), "Impact of unknown types URLs")
-en_precision_figure = get_language_statistics_figure(float(R.en_stats[20]), "Precision of DBpedia types URLs")
-en_impact_figure = get_language_statistics_figure(float(R.en_stats[21]), "Impact of unknown types URLs")
-'''
 es_statistics_figure = get_language_statistics_figure("es")
 en_statistics_figure = get_language_statistics_figure("en")
 ontology_figure = get_ontology_figure()

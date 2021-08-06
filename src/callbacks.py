@@ -11,6 +11,7 @@ import figures as F
 es_executed = False
 en_executed = False
 
+
 def initialize_callbacks(app):
      # Spanish Tab callback
      @app.callback(dash.dependencies.Output('subtabs', 'value'),
@@ -489,11 +490,11 @@ def initialize_callbacks(app):
             version1_container = html.Div(id='entity_container', children = [
                 html.H4(value1),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº DBpedia entities"), html.H4(entities_version1)])
+                        [html.H5("Nº DBpedia entities"), html.H4(entities_version1)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº DBpedia types"), html.H4(types_version1)])
+                        [html.H5("Nº DBpedia types"), html.H4(types_version1)]
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "1.6276041666666667vw"}
                 )
                 ], style={'display': 'inline-block'})
@@ -501,11 +502,11 @@ def initialize_callbacks(app):
             version2_container = html.Div(id='type_container', children = [
                 html.H4(value2),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº DBpedia entities"), html.H4(entities_version2)])
+                        [html.H5("Nº DBpedia entities"), html.H4(entities_version2)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº DBpedia types"), html.H4(types_version2)])
+                        [html.H5("Nº DBpedia types"), html.H4(types_version2)]
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "1.6276041666666667vw"}
                 )
                 ], style={'display': 'inline-block', "margin-left": "3.0598958333333335vw"})
@@ -518,11 +519,11 @@ def initialize_callbacks(app):
             growth_container = html.Div(id='growth_container', children = [
             html.H3("Growth between versions"),
             dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Entity growth"), html.H4(str(entity_growth))])
+                        [html.H5("Entity growth"), html.H4(str(entity_growth))]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
             dbc.Card(dbc.CardBody(
-                html.Div([html.H5("Type growth"), html.H4(str(type_growth))])
+                [html.H5("Type growth"), html.H4(str(type_growth))]
                 ), color="#F5F5F5", style={'display': 'inline-block', "margin-left": "1.6276041666666667vw"}
                 )
                 ])
@@ -850,39 +851,38 @@ def initialize_callbacks(app):
             mode = 'dbpedia-es:' + top_file['DBpedia entity'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº DBpedia entities"), html.H4(dbpedia_entities)])
+                        [html.H5("Nº DBpedia entities"), html.H4(dbpedia_entities)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)])
+                       [html.H5("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate DBpedia entity (median)"), html.H4(median)])
+                        [html.H5("Intermediate DBpedia entity (median)"), html.H4(median)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("DBpedia entity that appears the most (mode)"), html.H4(mode)])
+                        [html.H5("DBpedia entity that appears the most (mode)"), html.H4(mode)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
+                         [html.H5("Standard deviation"), html.H4(std_dev)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
                 
             table_container = html.Div(id='table_container', children = [
-        html.Div([
         DataTable(
             id="es_uriCounts_table",
             columns=[{"name": "DBpedia entity", "id": "DBpedia entity"},
@@ -898,7 +898,7 @@ def initialize_callbacks(app):
             style_table={
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '29.296875vw', 'margin-left': '0.6510416666666666vw'
                          }
-        )])])
+        )])
     
         return cards_container, html.Br(), html.H4("Top 50 most frequent entities"), html.Br(), table_container  
         
@@ -942,39 +942,38 @@ def initialize_callbacks(app):
             mode = "[" + top_file['Surface form'].iloc[0] + " - " + 'dbpedia-es:'+ top_file['DBpedia entity'].iloc[0] + "]"
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)])
+                        [html.H5("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                       [html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate pair (median)"), html.H4(median)])
+                        [html.H5("Intermediate pair (median)"), html.H4(median)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                  dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Pair that appears the most (mode)"), html.H4(mode)])
+                        [html.H5("Pair that appears the most (mode)"), html.H4(mode)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
+                         [html.H5("Standard deviation"), html.H4(std_dev)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
                 
             table_container = html.Div(id='table_container', children = [
-        html.Div([
         DataTable(
             id="es_pairCounts_table",
             columns=[{"name": "Surface form", "id": "Surface form"},
@@ -991,7 +990,7 @@ def initialize_callbacks(app):
             style_table={
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '33.854166666666664vw', 'margin-left': '0.6510416666666666vw'
                          }
-        )])])
+        )])
             
             return cards_container, html.Br(), html.H4("Top 50 most linked surface forms"), html.Br(), table_container
 
@@ -1035,39 +1034,38 @@ def initialize_callbacks(app):
             mode = 'http://es.wikipedia.org/wiki/'+ top_file['Wikipedia article'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº Wikipedia articles"), html.H4(articles)])
+                        [html.H5("Nº Wikipedia articles"), html.H4(articles)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº tokens per Wikipedia article (mean)"), html.H4(mean)])
+                       [html.H5("Nº tokens per Wikipedia article (mean)"), html.H4(mean)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate Wikipedia article (median)"), html.H4(median)])
+                        [html.H5("Intermediate Wikipedia article (median)"), html.H4(median)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Wikipedia article that appears the most (mode)"), html.H4(mode)])
+                        [html.H5("Wikipedia article that appears the most (mode)"), html.H4(mode)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
+                         [html.H5("Standard deviation"), html.H4(std_dev)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
                 
             table_container = html.Div(id='table_container', children = [
-        html.Div([
         DataTable(
             id="es_tokenCounts_table",
            columns=[{"name": "Wikipedia article", "id": "Wikipedia article"},
@@ -1083,7 +1081,7 @@ def initialize_callbacks(app):
             style_table={
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '30.924479166666668vw', 'margin-left': '0.6510416666666666vw'
                          }
-        )])])
+        )])
             return cards_container, html.Br(), html.H4("Top 50 Wikipedia articles with more tokens"), html.Br(), table_container
 
 # Spanish sfAndTotalCounts callback
@@ -1130,33 +1128,33 @@ def initialize_callbacks(app):
             mode = top_file['Surface form'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº surface forms"), html.H4(surface_forms)])
+                        [html.H5("Nº surface forms"), html.H4(surface_forms)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                       [html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate surface form (median)"), html.H4(median)])
+                        [html.H5("Intermediate surface form (median)"), html.H4(median)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Surface form that appears the most (mode)"), html.H4(mode)])
+                        [html.H5("Surface form that appears the most (mode)"), html.H4(mode)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
+                         [html.H5("Standard deviation"), html.H4(std_dev)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -1167,7 +1165,6 @@ def initialize_callbacks(app):
             ])
                 
             table_container = html.Div(id='table_container', children = [
-        html.Div([
         DataTable(
             id="es_sfAndTotalCounts_table",
            columns=[{"name": "Surface form", "id": "Surface form"},
@@ -1184,7 +1181,7 @@ def initialize_callbacks(app):
             style_table={
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '32.552083333333336vw', 'margin-left': '0.6510416666666666vw'
                          }
-        )])])
+        )])
             
             return cards_container, html.Br(), figure_container, html.Br(), html.H4("Top 50 most linked surface forms"), html.Br(), table_container                
         
@@ -1331,39 +1328,38 @@ def initialize_callbacks(app):
             mode = 'dbr:' + top_file['DBpedia entity'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº DBpedia entities"), html.H4(dbpedia_entities)])
+                        [html.H5("Nº DBpedia entities"), html.H4(dbpedia_entities)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H5("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)])
+                       [html.H5("Nº occurrences per DBpedia entity (mean)"), html.H4(mean)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                  dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate DBpedia entity (median)"), html.H4(median)])
+                        [html.H5("Intermediate DBpedia entity (median)"), html.H4(median)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("DBpedia entity that appears the most (mode)"), html.H4(mode)])
+                        [html.H5("DBpedia entity that appears the most (mode)"), html.H4(mode)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
+                         [html.H5("Standard deviation"), html.H4(std_dev)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
                 
             table_container = html.Div(id='table_container', children = [
-        html.Div([
         DataTable(
             id="en_uriCounts_table",
             columns=[{"name": "DBpedia entity", "id": "DBpedia entity"},
@@ -1379,7 +1375,7 @@ def initialize_callbacks(app):
             style_table={
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '32.552083333333336vw', 'margin-left': '0.6510416666666666vw'
                          }
-        )])])
+        )])
     
         return cards_container, html.Br(), html.H4("Top 50 most frequent entities"), html.Br(), table_container  
         
@@ -1423,39 +1419,38 @@ def initialize_callbacks(app):
             mode = "[" + top_file['Surface form'].iloc[0] + " - " + "dbr:"+ top_file['DBpedia entity'].iloc[0] + "]"
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)])
+                        [html.H5("Nº [Surface form - DBpedia entity] pairs"), html.H4(surface_forms)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                       [html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate pair (median)"), html.H4(median)])
+                        [html.H5("Intermediate pair (median)"), html.H4(median)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                  dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Pair that appears the most (mode)"), html.H4(mode)])
+                        [html.H5("Pair that appears the most (mode)"), html.H4(mode)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
+                         [html.H5("Standard deviation"), html.H4(std_dev)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
                 
             table_container = html.Div(id='table_container', children = [
-        html.Div([
         DataTable(
             id="en_pairCounts_table",
             columns=[{"name": "Surface form", "id": "Surface form"},
@@ -1472,7 +1467,7 @@ def initialize_callbacks(app):
             style_table={
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '52.083333333333336vw', 'margin-left': '0.6510416666666666vw'
                          }
-        )])])
+        )])
             
             return cards_container, html.Br(), html.H4("Top 50 most linked surface forms"), html.Br(), table_container
 
@@ -1516,39 +1511,38 @@ def initialize_callbacks(app):
             mode = top_file['Wikipedia article'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº Wikipedia articles"), html.H4(articles)])
+                        [html.H5("Nº Wikipedia articles"), html.H4(articles)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº tokens per Wikipedia article (mean)"), html.H4(mean)])
+                       [html.H5("Nº tokens per Wikipedia article (mean)"), html.H4(mean)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate Wikipedia article (median)"), html.H4(median)])
+                        [html.H5("Intermediate Wikipedia article (median)"), html.H4(median)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Wikipedia article that appears the most (mode)"), html.H4(mode)])
+                        [html.H5("Wikipedia article that appears the most (mode)"), html.H4(mode)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
+                         [html.H5("Standard deviation"), html.H4(std_dev)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
                 
             table_container = html.Div(id='table_container', children = [
-        html.Div([
         DataTable(
             id="en_tokenCounts_table",
            columns=[{"name": "Wikipedia article", "id": "Wikipedia article"},
@@ -1564,7 +1558,7 @@ def initialize_callbacks(app):
             style_table={
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '35.15625vw', 'margin-left': '0.6510416666666666vw'
                          }
-        )])])
+        )])
             return cards_container, html.Br(), html.H4("Top 50 Wikipedia articles with more tokens"), html.Br(), table_container
 
 # English sfAndTotalCounts callback
@@ -1611,33 +1605,33 @@ def initialize_callbacks(app):
             mode = top_file['Surface form'].iloc[0]
             cards_container = html.Div(id='cards_container', children = [
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Nº surface forms"), html.H4(surface_forms)])
+                        [html.H5("Nº surface forms"), html.H4(surface_forms)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)])
+                       [html.H5("Nº DBpedia entity links per surface form (mean)"), html.H4(mean)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate surface form (median)"), html.H4(median)])
+                        [html.H5("Intermediate surface form (median)"), html.H4(median)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Surface form that appears the most (mode)"), html.H4(mode)])
+                        [html.H5("Surface form that appears the most (mode)"), html.H4(mode)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(std_dev)])
+                         [html.H5("Standard deviation"), html.H4(std_dev)]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 )
                 ])
@@ -1648,7 +1642,6 @@ def initialize_callbacks(app):
             ])
                 
             table_container = html.Div(id='table_container', children = [
-        html.Div([
         DataTable(
             id="en_sfAndTotalCounts_table",
            columns=[{"name": "Surface form", "id": "Surface form"},
@@ -1665,7 +1658,7 @@ def initialize_callbacks(app):
             style_table={
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '44.270833333333336vw', 'margin-left': '0.6510416666666666vw'
                          }
-        )])])
+        )])
             
             return cards_container, html.Br(), figure_container, html.Br(), html.H4("Top 50 most linked surface forms"), html.Br(), table_container        
         

@@ -166,40 +166,40 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
              html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
         html.Br(),
         html.Br(),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia entities"), html.H4(R.versions_stats[36])]
-                                         )]),style={'display': 'inline-block'}, color="#F5F5F5"),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.versions_stats[37])] 
-                                         )]), style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
+         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia entities"), html.H4(R.versions_stats[36])]
+                                         ),style={'display': 'inline-block'}, color="#F5F5F5"),
+         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.versions_stats[37])] 
+                                         ), style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
          html.Br(),
          html.Br(),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº redirects"), html.H4(R.es_stats[0])] 
-                                         )]),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº disambiguations"), html.H4(R.es_stats[1])] 
-                                         )]),style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
+         dbc.Card(dbc.CardBody([html.H5("Nº redirects"), html.H4(R.es_stats[0])] 
+                                         ),style={'display': 'inline-block'}, color='#F5F5F5'),
+         dbc.Card(dbc.CardBody([html.H5("Nº disambiguations"), html.H4(R.es_stats[1])] 
+                                         ),style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
           html.Br(),
           html.Br(),
           html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.versions_stats[38])])
+                       [html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.versions_stats[38])]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate DBpedia type (median)"), html.H4('dbo:AdministrativeRegion')])
+                        [html.H5("Intermediate DBpedia type (median)"), html.H4('dbo:AdministrativeRegion')]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Agent')])
+                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Agent')]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(R.versions_stats[40])])
+                         [html.H5("Standard deviation"), html.H4(R.versions_stats[40])]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
           html.Br(),
@@ -213,9 +213,9 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
          html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
          html.Br(),
          html.Br(),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia entities"), html.H4(R.es_stats[2])] 
-                                         )]),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.es_stats[3])])]),
+         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia entities"), html.H4(R.es_stats[2])] 
+                                         ),style={'display': 'inline-block'}, color='#F5F5F5'),
+         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.es_stats[3])]),
                   style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
           html.Br(),
           dcc.Graph(id='es_statistics', figure=F.es_statistics_figure),
@@ -236,8 +236,6 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         html.Br(),
         html.H4("Top 50 DBpedia types with more entities"),
         html.Br(),
-        html.Div([
-        html.Div([
         DataTable(
             id="es_top_known_types_table",
             columns=[{"name": "DBpedia type", "id": "DBpedia type"},
@@ -254,7 +252,6 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '27.669270833333332vw', 'margin-left': '0.6510416666666666vw'
                          }
         )
-        ])])
         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style)
         ,
@@ -357,40 +354,40 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
         html.Br(),
         html.Br(),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia entities"), html.H4(R.versions_stats[108])]
-                                         )]),style={'display': 'inline-block'}, color="#F5F5F5"),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.versions_stats[109])] 
-                                         )]), style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),  
+         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia entities"), html.H4(R.versions_stats[108])]
+                                         ),style={'display': 'inline-block'}, color="#F5F5F5"),
+         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.versions_stats[109])] 
+                                         ), style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),  
           html.Br(),
           html.Br(),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº redirects"), html.H4(R.en_stats[0])] 
-                                         )]),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº disambiguations"), html.H4(R.en_stats[1])] 
-                                         )]),style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
+         dbc.Card(dbc.CardBody([html.H5("Nº redirects"), html.H4(R.en_stats[0])] 
+                                         ),style={'display': 'inline-block'}, color='#F5F5F5'),
+         dbc.Card(dbc.CardBody([html.H5("Nº disambiguations"), html.H4(R.en_stats[1])] 
+                                         ),style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
           html.Br(),
           html.Br(),
           html.H4("Measures of central tendency"),
                 dbc.Card(dbc.CardBody(
-                       html.Div([html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.versions_stats[110])])
+                       [html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.versions_stats[110])]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("Intermediate DBpedia type (median)"), html.H4('dbo:Work')])
+                        [html.H5("Intermediate DBpedia type (median)"), html.H4('dbo:Work')]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        html.Div([html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Agent')])
+                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Agent')]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
                 html.Br(),
                 html.H4("Measures of dispersion"),
                 dbc.Card(dbc.CardBody(
-                         html.Div([html.H5("Standard deviation"), html.H4(R.versions_stats[112])])
+                         [html.H5("Standard deviation"), html.H4(R.versions_stats[112])]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
           html.Br(),
@@ -404,9 +401,9 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
          html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
          html.Br(),        
          html.Br(),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia entities"), html.H4(R.en_stats[2])] 
-                                         )]),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.Div([html.H5("Nº DBpedia types"), html.H4(R.en_stats[3])])]),
+         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia entities"), html.H4(R.en_stats[2])] 
+                                         ),style={'display': 'inline-block'}, color='#F5F5F5'),
+         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.en_stats[3])]),
                   style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
           html.Br(),
           dcc.Graph(id='en_statistics', figure=F.en_statistics_figure),
@@ -427,8 +424,6 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         html.Br(),
         html.H4("Top 50 DBpedia types with more entities"),
         html.Br(),
-        html.Div([
-        html.Div([
         DataTable(
             id="en_top_known_types_table",
             columns=[{"name": "DBpedia type", "id": "DBpedia type"},
@@ -445,7 +440,6 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '24.4140625vw', 'margin-left': '0.6510416666666666vw'
                          }
         )
-        ])])
         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),
         # uriCounts subtab

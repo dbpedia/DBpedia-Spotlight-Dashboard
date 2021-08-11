@@ -269,3 +269,14 @@ This is how the dashboard is at the moment, waiting for feedback from the mentor
 
 **[05/08/2021]**:
 Meeting with mentors. Finally, the publication of the statistics as linked data is pending as a future task due to lack of time. It only remains to make some visual improvements to the Dashboard. 
+
+**[11/08/2021]**: Some visual changes have been made to the Dashboard:
+- Changed the web page title and added the Spotlight icon
+- Changed the order of the `Instance-types` tab
+    - The cards of each version have been put in different columns:
+![2 columns](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/2_columns.png)
+    - The 2 bars of the left graph have been put separately:
+![2 bars](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/2_bars.png)
+- The **Position measures** graphs have been changed since the previous graphs were more confusing:
+![Quartiles](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/quartiles.png)
+- Also the dashboard is already available to everyone at http://134.155.95.24:8050/

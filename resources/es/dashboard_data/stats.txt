@@ -5,24 +5,24 @@ Number of disambiguations (without counting repetitions): 51115
 
 DBpedia Spotlight May 2021 instance-types (after validation process)
 -------------------------------------
-Number of DBpedia entities with DBpedia types (without counting repetitions): 757866
-Number of DBpedia types: 183
-Mean number of DBpedia entities per type: 13989.87
-Median number of DBpedia entities per type (occurrences): 1280073
-Population standard deviation of DBpedia entities per type: 41780.68
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 2560146
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 16
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 2
-30th percentile value of DBpedia entities per type: 4
-40th percentile value of DBpedia entities per type: 5
-50th percentile value of DBpedia entities per type: 6
-60th percentile value of DBpedia entities per type: 9
-70th percentile value of DBpedia entities per type: 12
-80th percentile value of DBpedia entities per type: 21
-90th percentile value of DBpedia entities per type: 38
-95th percentile value of DBpedia entities per type: 60
+Number of DBpedia entities with DBpedia types (without counting repetitions): 940823
+Number of DBpedia types: 151
+Mean number of DBpedia entities per type: 6230.62
+Median number of DBpedia entities per type (occurrences): 470412.0
+Population standard deviation of DBpedia entities per type: 22649.09
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 940823
+First quartile value of DBpedia entities per type: 235206.0
+Third quartile value of DBpedia entities per type: 705618.0
+10th percentile value of DBpedia entities per type: 94082
+20th percentile value of DBpedia entities per type: 188165
+30th percentile value of DBpedia entities per type: 282247
+40th percentile value of DBpedia entities per type: 376329
+50th percentile value of DBpedia entities per type: 470412.0
+60th percentile value of DBpedia entities per type: 564494
+70th percentile value of DBpedia entities per type: 658576
+80th percentile value of DBpedia entities per type: 752658
+90th percentile value of DBpedia entities per type: 846741
+95th percentile value of DBpedia entities per type: 893782
 
 DBpedia Spotlight May 2021 URLs
 -------------------------------------

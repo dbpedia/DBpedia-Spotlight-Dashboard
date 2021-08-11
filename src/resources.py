@@ -9,6 +9,8 @@ import re
 def tsv_to_df(path):
     if "uriCounts" in path: 
         df = pd.read_csv(path, sep='\t',  names=["DBpedia entity", "Count"])
+    elif "known_types_without_repetitions" in path:
+        df = pd.read_csv(path, sep=' ',  names=["DBpedia type", "Nº entities", "Cumulative total"])
     elif "known_types" in path:
         df = pd.read_csv(path, sep=' ',  names=["DBpedia type", "Nº entities", "Pos"])
     elif "known_types_top50" in path:
@@ -55,6 +57,7 @@ versions_directory =  root_path + "resources/versions/"
 # Known types files
 known_types_file = "known_types"
 top_known_types_file = "known_types_top50"
+known_types_without_repetitions_file = "known_types_without_repetitions"
 # Ontology dataframe
 ontology_df = tsv_to_df(root_path + "resources/ontologies.csv")
 # Known types dataframes
@@ -62,6 +65,9 @@ known_types_es_2021_05_01 = tsv_to_df(es_dashboard_directory + known_types_file)
 known_types_en_2021_05_01 = tsv_to_df(en_dashboard_directory + known_types_file)
 top_known_types_2021_05_es = tsv_to_df(es_dashboard_directory + top_known_types_file)
 top_known_types_2021_05_en = tsv_to_df(en_dashboard_directory + top_known_types_file)
+# Known types without repetitions
+known_types_es_2021_05_01_without_repetitions = tsv_to_df(es_dashboard_directory + known_types_without_repetitions_file)
+known_types_en_2021_05_01_without_repetitions = tsv_to_df(en_dashboard_directory + known_types_without_repetitions_file)
 # Instance types 2016 dataframes
 instance_types_es_2016_10_01 = tsv_to_df(versions_directory + "instance_types_es_2016.10.01")
 instance_types_en_2016_10_01 = tsv_to_df(versions_directory + "instance_types_en_2016.10.01")
@@ -134,3 +140,40 @@ top_2021_06_tokenCounts_en = tsv_to_df(en_dashboard_directory + top_2021_06_toke
 es_stats = get_statistics(es_dashboard_directory)
 en_stats = get_statistics(en_dashboard_directory)
 versions_stats = get_version_statistics(root_path + "resources/versions/")
+
+# Delete repeated entities
+
+def del_entities(file):
+    df = tsv_to_df(file)
+    df2 = df.copy()
+    types = df["DBpedia type"].tolist()
+    parents = ontology_df["parents"].tolist()
+    for tipo in types:
+        updated_parent_value = 0
+        children = ontology_df.loc[ontology_df['parents'] == tipo, 'labels'].values
+        for sub_tipo in children:
+            if tipo in parents and sub_tipo in df["DBpedia type"].values :
+                if(updated_parent_value == 0):
+                    parent_value =  df.loc[df["DBpedia type"] == tipo, 'Nº entities'].iloc[0]
+                else:
+                    parent_value = updated_parent_value
+                child_value = df.loc[df["DBpedia type"] == sub_tipo, 'Nº entities'].iloc[0]
+                updated_parent_value = parent_value - child_value
+                df2.loc[df2['DBpedia type'] == tipo, 'Nº entities'] = updated_parent_value
+    df2 = df2[df2['Nº entities'] > 0]
+    df2 = df2.sort_values(by=['Nº entities'], ascending=False)
+    if 'Pos' in df2.columns:
+        df2 = df2.drop('Pos', 1)
+    df2['Cumulative total'] = df2['Nº entities'].cumsum()
+    df2.to_csv(file + "_without_repetitions", sep=' ', index=False, header=None)
+    
+del_entities(es_dashboard_directory + known_types_file)
+del_entities(en_dashboard_directory + known_types_file)
+del_entities(versions_directory + "instance_types_es_2016.10.01")
+del_entities(versions_directory + "instance_types_en_2016.10.01")
+del_entities(versions_directory + "instance_types_es_2020.10.01")
+del_entities(versions_directory + "instance_types_en_2020.10.01")
+del_entities(versions_directory + "instance_types_es_2021.05.01")
+del_entities(versions_directory + "instance_types_en_2021.05.01")
+del_entities(versions_directory + "instance_types_es_2021.06.01")
+del_entities(versions_directory + "instance_types_en_2021.06.01")

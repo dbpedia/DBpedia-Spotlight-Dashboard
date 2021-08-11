@@ -5,24 +5,24 @@ Number of disambiguations (without counting repetitions): 324062
 
 DBpedia Spotlight May 2021 instance-types (after validation process)
 -------------------------------------
-Number of DBpedia entities with DBpedia types (without counting repetitions): 2807280
-Number of DBpedia types: 460
-Mean number of DBpedia entities per type: 20406.63
-Median number of DBpedia entities per type (occurrences): 4693526
-Population standard deviation of DBpedia entities per type: 96811.84
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 9387051
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 26
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 2
-30th percentile value of DBpedia entities per type: 3
-40th percentile value of DBpedia entities per type: 5
-50th percentile value of DBpedia entities per type: 7
-60th percentile value of DBpedia entities per type: 11
-70th percentile value of DBpedia entities per type: 19
-80th percentile value of DBpedia entities per type: 35
-90th percentile value of DBpedia entities per type: 71
-95th percentile value of DBpedia entities per type: 116
+Number of DBpedia entities with DBpedia types (without counting repetitions): 3397679
+Number of DBpedia types: 411
+Mean number of DBpedia entities per type: 8266.86
+Median number of DBpedia entities per type (occurrences): 1698840.0
+Population standard deviation of DBpedia entities per type: 38377.14
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 3397679
+First quartile value of DBpedia entities per type: 849420.0
+Third quartile value of DBpedia entities per type: 2548260.0
+10th percentile value of DBpedia entities per type: 339768
+20th percentile value of DBpedia entities per type: 679536
+30th percentile value of DBpedia entities per type: 1019304
+40th percentile value of DBpedia entities per type: 1359072
+50th percentile value of DBpedia entities per type: 1698840.0
+60th percentile value of DBpedia entities per type: 2038607
+70th percentile value of DBpedia entities per type: 2378375
+80th percentile value of DBpedia entities per type: 2718143
+90th percentile value of DBpedia entities per type: 3057911
+95th percentile value of DBpedia entities per type: 3227795
 
 DBpedia Spotlight May 2021 URLs
 -------------------------------------
@@ -38,16 +38,16 @@ Population standard deviation of uriCounts URLs per DBpedia entity: 856.22
 
 DBpedia Spotlight May 2021 pairCounts
 -------------------------------------
-Number of [Surface form - DBpedia entity] pairs: 8922035
+Number of [Surface form - DBpedia entity] pairs: 17844070
 Mean number of pairCounts URLs per surface form: 25.88
-Median number of pairCounts URLs per surface form: 4614495
+Median number of pairCounts URLs per surface form: 8922036
 Population standard deviation of pairCounts URLs per surface form: 510.35
 
 DBpedia Spotlight May 2021 tokenCounts
 -------------------------------------
 Number of Wikipedia articles: 2387035
 Mean number of tokens per Wikipedia article: 238.1
-Median number of tokens per Wikipedia article: 1215818  
+Median number of tokens per Wikipedia article: 1215818 
 Population standard deviation of tokens per Wikipedia article: 964.50
 
 DBpedia Spotlight May 2021 sfAndTotalCounts
@@ -143,7 +143,7 @@ DBpedia Spotlight 2020 tokenCounts
 -------------------------------------
 Number of Wikipedia articles: 2330032
 Mean number of tokens per Wikipedia article: 236.34
-Median number of tokens per Wikipedia article: 1186784 
+Median number of tokens per Wikipedia article: 1186784  
 Population standard deviation of tokens per Wikipedia article: 958.24
 
 DBpedia Spotlight 2020 sfAndTotalCounts

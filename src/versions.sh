@@ -83,51 +83,38 @@ function versions_statistics {
 	INSTANCE_TYPES_LINES=$(cat filtered_instance_types | awk -F ' ' '{print $1}' | sort | uniq | wc -l)
 	echo "DBpedia Extraction Framework instance-types" >> versions_statistics.txt
 	echo "-------------------------------------" >> versions_statistics.txt
-	echo "Number of DBpedia entities (without counting repetitions): $INSTANCE_TYPES_LINES" >> versions_statistics.txt
 	echo "Getting number of resources for each DBpedia type"
 	cat filtered_instance_types | cut -d \< -f 4 | cut -d \> -f 1 | sort | uniq -c | sort -bgr | awk '{ print $2 " " $1}' >> instance_types_$1_$2
 	sed -i 's%http://dbpedia.org/ontology/%%g' instance_types_$1_$2
-	INSTANCE_TYPES_TSV_LINES=$(cat instance_types_$1_$2 | wc -l)
-	echo "Number of DBpedia types: $INSTANCE_TYPES_TSV_LINES" >> versions_statistics.txt
-	echo "Calculating stats of instance_types_$1_$2 URLs"
-	cat "instance_types_$1_$2" | cut -f 2 -d$' ' | datamash mean 1 pvar 1 sum 1 > temp.txt
+	INSTANCE_TYPES_TSV_LINES=$(cat instance_types_$1_$2_without_repetitions | wc -l)
+	echo "Calculating stats of instance_types_$1_$2 URLs" 
+	cat "instance_types_$1_$2_without_repetitions" | cut -f 2 -d$' ' | datamash mean 1 pvar 1 sum 1 > temp.txt
 	MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
-	MEAN=$(echo 'print(round('$MEAN',2))' | python3 )
+	MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
 	VAR=$(awk -F '\t' '{ print $2 }' temp.txt)
 	VAR=$(echo 'print(round('$VAR',2))' | python3 )
 	STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
 	SUM=$(awk -F '\t' '{ print $3 }' temp.txt)
-	MEDIAN=$(echo 'print(round(' $SUM / 2 '))' | python3 )
+	MEDIAN=$(echo 'print( ('$SUM' + 1) / 2 )' | python3 )
+	echo "Number of DBpedia entities (without counting repetitions): $SUM" >> versions_statistics.txt
+	echo "Number of DBpedia types: $INSTANCE_TYPES_TSV_LINES" >> versions_statistics.txt
 	echo "Calculating position measures"
-	cat "instance_types_$1_$2" | awk '{for (i=1; i<=$2; i++) print NR}' | datamash q1 1 q3 1 perc:10 1 perc:20 1 perc:30 1 perc:40 1 perc:50 1 perc:60 1 perc:70 1 perc:80 1 perc:90 1 perc:95 1 > temp.txt
-	Q1=$(awk -F '\t' '{ print $1 }' temp.txt)
-	Q1=$(echo 'print(round(' $Q1 '))' | python3 )
-	Q3=$(awk -F '\t' '{ print $2 }' temp.txt)
-	Q3=$(echo 'print(round(' $Q3 '))' | python3 )
-	PERC10=$(awk -F '\t' '{ print $3 }' temp.txt)
-	PERC10=$(echo 'print(round(' $PERC10 '))' | python3 )
-	PERC20=$(awk -F '\t' '{ print $4 }' temp.txt)
-	PERC20=$(echo 'print(round(' $PERC20 '))' | python3 )
-	PERC30=$(awk -F '\t' '{ print $5 }' temp.txt)
-	PERC30=$(echo 'print(round(' $PERC30 '))' | python3 )
-	PERC40=$(awk -F '\t' '{ print $6 }' temp.txt)
-	PERC40=$(echo 'print(round(' $PERC40 '))' | python3 )
-	PERC50=$(awk -F '\t' '{ print $7 }' temp.txt)
-	PERC50=$(echo 'print(round(' $PERC50 '))' | python3 )
-	PERC60=$(awk -F '\t' '{ print $8 }' temp.txt)
-	PERC60=$(echo 'print(round(' $PERC60 '))' | python3 )
-	PERC70=$(awk -F '\t' '{ print $9 }' temp.txt)
-	PERC70=$(echo 'print(round(' $PERC70 '))' | python3 )
-	PERC80=$(awk -F '\t' '{ print $10 }' temp.txt)
-	PERC80=$(echo 'print(round(' $PERC80 '))' | python3 )
-	PERC90=$(awk -F '\t' '{ print $11 }' temp.txt)
-	PERC90=$(echo 'print(round(' $PERC90 '))' | python3 )
-	PERC95=$(awk -F '\t' '{ print $12 }' temp.txt)
-	PERC95=$(echo 'print(round(' $PERC95 '))' | python3 )
+	Q1=$(echo 'print( ('$SUM' + 1) / 4 )' | python3 )
+	Q3=$(echo 'print( 3 * ('$SUM' + 1) / 4 )' | python3 )
+	PERC10=$(echo 'print(round(('$SUM' * 0.1)))' | python3 )
+	PERC20=$(echo 'print(round(('$SUM' * 0.2)))' | python3 )
+	PERC30=$(echo 'print(round(('$SUM' * 0.3)))' | python3 )
+	PERC40=$(echo 'print(round(('$SUM' * 0.4)))' | python3 )
+	PERC50=$(echo 'print( ('$SUM' + 1) / 2 )' | python3 )
+	PERC60=$(echo 'print(round(('$SUM' * 0.6)))' | python3 )
+	PERC70=$(echo 'print(round(('$SUM' * 0.7)))' | python3 )
+	PERC80=$(echo 'print(round(('$SUM' * 0.8)))' | python3 )
+	PERC90=$(echo 'print(round(('$SUM' * 0.9)))' | python3 )
+	PERC95=$(echo 'print(round(('$SUM' * 0.95)))' | python3 )
 	echo "Mean number of DBpedia entities per type: $MEAN" >> versions_statistics.txt
 	echo "Median number of DBpedia entities per type (occurrences): $MEDIAN" >> versions_statistics.txt
 	echo "Population standard deviation of DBpedia entities per type: $STDDEV" >> versions_statistics.txt
-	echo "Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): $SUM" >> versions_statistics.txt
+	echo "Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): $SUM" >> versions_statistics.txt
 	echo "First quartile value of DBpedia entities per type: $Q1" >> versions_statistics.txt
 	echo "Third quartile value of DBpedia entities per type: $Q3" >> versions_statistics.txt
 	echo "10th percentile value of DBpedia entities per type: $PERC10" >> versions_statistics.txt
@@ -184,7 +171,7 @@ check "datamash"
 echo "Calculating versions statistics"
 if [ -f $RESOURCES_DIR/versions/versions_statistics.txt ]; then
 	rm $RESOURCES_DIR/versions/versions_statistics.txt
-	rm $RESOURCES_DIR/versions/*instance_types*
+	rm $RESOURCES_DIR/versions/*.01
 else
 	cd $RESOURCES_DIR
 	mkdir versions

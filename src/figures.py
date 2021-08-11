@@ -76,20 +76,16 @@ def get_ontology_figure():
 def get_instance_types_figure(language_directory, instance_types_df):
     if language_directory == R.es_dashboard_directory:
         mean = R.versions_stats[38]
-        median = R.versions_stats[39]
         std_dev = R.versions_stats[40]
     else:
         mean = R.versions_stats[110]
-        median = R.versions_stats[111]
         std_dev = R.versions_stats[112]
     # Instance types Bar 
     fig3 = go.Figure(go.Bar(x = instance_types_df['Nº entities'], y = instance_types_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = "DBpedia type"))
     fig3.add_vline(x=float(mean), line_width=4, line_color="#77C14C") # Mean
-    fig3.add_vline(x=float(median), line_width=4, line_color="#1FAFEE") # Median
     fig3.add_vline(x=float(std_dev), line_width=4, line_color="#D53614") # Standard deviation
     fig3.add_traces([
     go.Scatter(x=[float(mean)], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[mean], hoverinfo="text"),
-    go.Scatter(x=[float(median)], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[median], hoverinfo="text"),
     go.Scatter(x=[float(std_dev)], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[std_dev], hoverinfo="text")
     ])
     fig3.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
@@ -105,11 +101,9 @@ def get_known_types_figure(language_directory, known_types_df):
     # Valid types Bar 
     fig4 = go.Figure(go.Bar(x = known_types_df['Nº entities'], y = known_types_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = "DBpedia entity"))
     fig4.add_vline(x=float(stats[4]), line_width=4, line_color="#77C14C") # Mean
-    fig4.add_vline(x=float(stats[5]), line_width=4, line_color="#1FAFEE") # Median
     fig4.add_vline(x=float(stats[6]), line_width=4, line_color="#D53614") # Standard deviation
     fig4.add_traces([
     go.Scatter(x=[float(stats[4])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[stats[4]], hoverinfo="text"),
-    go.Scatter(x=[float(stats[5])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[stats[5]], hoverinfo="text"),
     go.Scatter(x=[float(stats[6])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[stats[6]], hoverinfo="text")
     ])
     fig4.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
@@ -126,30 +120,126 @@ def get_sfpie_figure(values):
 def get_init_bar_figure_pos(language_directory,df):
     if language_directory == R.es_dashboard_directory:
         stats = R.es_stats
+        known_types = R.known_types_es_2021_05_01_without_repetitions
+        vals = [0, 200000, 400000, 600000, 800000, 1000000, 1200000]
+        text = ['0%', '25%', '50%', '75%', '90%', '95%','100%']
     else:
+        known_types = R.known_types_en_2021_05_01_without_repetitions
         stats = R.en_stats
+        vals = [0, 1000000, 2000000, 3000000, 4000000]
+        text = ['0%', '35%', '80%', '95%', '100%']
+        
+    x = known_types["DBpedia type"].tolist()
+    cumulative = known_types["Cumulative total"].tolist()
+    n_entities = known_types["Nº entities"].tolist()
+    quartile1 = list()
+    quartile2 = list()
+    quartile3 = list()
+    quartile4 = list()
+    p10 = list()
+    p90 = list()
+    p95 = list()
     
+    for value in cumulative:
+        i = 0
+        if value <= float(stats[10]): # 10th percentile
+            p10.append(n_entities[i])
+        if value <= float(stats[8]): # 1st quartile
+            quartile1.append(n_entities[i])
+        if value <= float(stats[14]): # 2nd quartile
+            quartile2.append(n_entities[i])
+        if value <= float(stats[9]): # 3rd quartile
+            quartile3.append(n_entities[i])  
+        if value <= float(stats[18]): # 90th percentile
+            p90.append(n_entities[i])
+        if value <= float(stats[19]): # 95th percentile
+            p95.append(n_entities[i])
+        # 4th quartile
+        quartile4.append(n_entities[i])
+        i+=1
+        
     # For displaying positional measures
-    first_row=df.iloc[0]
-    fig = go.Figure(go.Bar(x = [first_row[2]], y = [first_row[0]], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type", hovertext=["Nº entities: "+ str(first_row[1])], hoverinfo="text"))
+    fig = go.Figure()
+    # 10th percentile
+    fig.add_trace(go.Scatter(
+        x=x, y=p10,
+        name='Percentile 10',
+        hoverinfo='x+y',
+        mode='lines',
+        line=dict(width=0.5, color="#77C14C"),
+        stackgroup='one' # define stack group
+    ))
+     # 1st quartile
+    fig.add_trace(go.Scatter(
+        x=x, y=quartile1,
+        name='Quartile 1',
+        hoverinfo='x+y',
+        mode='lines',
+        line=dict(width=0.5, color="#1FAFEE"),
+        stackgroup='one' # define stack group
+    ))
+     # 2nd quartile
+    fig.add_trace(go.Scatter(
+        x=x, y=quartile2,
+        name='Quartile 2',
+        hoverinfo='x+y',
+        mode='lines',
+        line=dict(width=0.5, color="#D53614"),
+        stackgroup='one' # define stack group
+    ))
+      # 3rd quartile
+    fig.add_trace(go.Scatter(
+        x=x, y=quartile3,
+        name='Quartile 3',
+        hoverinfo='x+y',
+        mode='lines',
+        line=dict(width=0.5, color="#D59D14"),
+        stackgroup='one' # define stack group
+    ))
+          # 90th percentile
+    fig.add_trace(go.Scatter(
+        x=x, y=p90,
+        name='Percentile 90',
+        hoverinfo='x+y',
+        mode='lines',
+        line=dict(width=0.5, color="#FFA4F5"),
+        stackgroup='one' # define stack group
+    ))
     
-    fig.add_vline(x=int(stats[10]), line_width=4, line_color="#77C14C") # 10th percentile
-    fig.add_vline(x=int(stats[8]), line_width=4, line_color="#1FAFEE") # 1st quartile
-    fig.add_vline(x=int(stats[14]), line_width=4, line_color="#D53614") # 50th percentile
-    fig.add_vline(x=int(stats[9]), line_width=4, line_color="#D59D14") # 3rd quartile
-    fig.add_vline(x=int(stats[18]), line_width=4, line_color="#FFA4F5") # 90th percentile
-    fig.add_vline(x=int(stats[19]), line_width=4, line_color="#FFFB0B") # 95th percentile
+           # 95th percentile
+    fig.add_trace(go.Scatter(
+        x=x, y=p95,
+        name='Percentile 95',
+        hoverinfo='x+y',
+        mode='lines',
+        line=dict(width=0.5, color="#FFFB0B"),
+        stackgroup='one' # define stack group
+    ))
     
-    fig.add_traces([
-    go.Scatter(x=[int(stats[10])], y= [" "], mode='lines', name='10th percentile', line=dict(color="#77C14C"), hovertext=[stats[10]], hoverinfo="text"),
-    go.Scatter(x=[int(stats[8])], y= [" "], mode='lines', name='1st quartile', line=dict(color="#1FAFEE"), hovertext=[stats[8]], hoverinfo="text"),
-    go.Scatter(x=[int(stats[14])], y= [" "], mode='lines', name='50th percentile', line=dict(color="#D53614"), hovertext=[stats[14]], hoverinfo="text"),
-    go.Scatter(x=[int(stats[9])], y= [" "], mode='lines', name='3rd quartile', line=dict(color="#D59D14"), hovertext=[stats[9]], hoverinfo="text"),
-    go.Scatter(x=[int(stats[18])], y= [" "], mode='lines', name='90th percentile', line=dict(color="#FFA4F5"), hovertext=[stats[18]], hoverinfo="text"),
-    go.Scatter(x=[int(stats[19])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[stats[19]], hoverinfo="text")
-    ])
+         # 4th quartile
+    fig.add_trace(go.Scatter(
+        x=x, y=quartile4,
+        name='Quartile 4',
+        hoverinfo='x+y',
+        mode='lines',
+        line=dict(width=0.5, color='rgb(184, 247, 212)'),
+        stackgroup='one' # define stack group
+    ))
     
-    fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
+    fig.update_layout(
+    showlegend=True,
+    margin=dict(t=0, b=0, r=0, l=0, pad=0),
+    template = "simple_white",
+    xaxis_type='category',
+    yaxis=dict(
+        type='linear',
+        autorange = True,
+        tickmode = 'array',
+        tickvals = vals,
+        ticktext = text,
+        ),
+    xaxis_title="DBpedia type", yaxis_title="Filled area")
+
     return fig
 
 # Comparison tab figures

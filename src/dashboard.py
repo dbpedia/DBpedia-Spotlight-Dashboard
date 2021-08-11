@@ -186,13 +186,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        [html.H5("Intermediate DBpedia type (median)"), html.H4('dbo:AdministrativeRegion')]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                dbc.Card(dbc.CardBody(
-                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Agent')]
+                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Location')]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
@@ -217,6 +211,26 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                                          ),style={'display': 'inline-block'}, color='#F5F5F5'),
          dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.es_stats[3])]),
                   style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
+         html.Br(),
+          html.Br(),
+          html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       [html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.es_stats[4])]
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Location')]
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         [html.H5("Standard deviation"), html.H4(R.es_stats[6])]
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
           html.Br(),
           dcc.Graph(id='es_statistics', figure=F.es_statistics_figure),
           html.Br(),
@@ -228,11 +242,8 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             ),
         html.Br(),
         html.H4("Position measures for DBpedia types"),
-        html.Div([
-         dcc.Graph(id='ontology_pos', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
-         dcc.Graph(id='es_known_types_pos', figure=F.es_pos_known_types_figure, 
-                                 style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})
-        ]),
+        dcc.Graph(id='es_known_types_pos', figure=F.es_pos_known_types_figure, 
+             style={'height':'32.552083333333336vw', 'width':'65.10416666666667vw'}),
         html.Br(),
         html.H4("Top 50 DBpedia types with more entities"),
         html.Br(),
@@ -374,13 +385,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                 html.Br(),
                 html.Br(),
                 dbc.Card(dbc.CardBody(
-                        [html.H5("Intermediate DBpedia type (median)"), html.H4('dbo:Work')]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                dbc.Card(dbc.CardBody(
-                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Agent')]
+                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Location')]
                 ), color="#F5F5F5", style={'display': 'inline-block'}
                 ),
                 html.Br(),
@@ -406,6 +411,26 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
          dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.en_stats[3])]),
                   style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
           html.Br(),
+          html.Br(),
+          html.H4("Measures of central tendency"),
+                dbc.Card(dbc.CardBody(
+                       [html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.en_stats[4])]
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                dbc.Card(dbc.CardBody(
+                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Location')]
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+                html.Br(),
+                html.Br(),
+                html.H4("Measures of dispersion"),
+                dbc.Card(dbc.CardBody(
+                         [html.H5("Standard deviation"), html.H4(R.en_stats[6])]
+                ), color="#F5F5F5", style={'display': 'inline-block'}
+                ),
+          html.Br(),
           dcc.Graph(id='en_statistics', figure=F.en_statistics_figure),
           html.Br(),
           html.Br(),
@@ -416,11 +441,8 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             ),
         html.Br(),
         html.H4("Position measures for DBpedia types"),
-        html.Div([
-         dcc.Graph(id='en_ontology_pos', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
          dcc.Graph(id='en_known_types_pos', figure=F.en_pos_known_types_figure, 
-                                 style={'height':'26.041666666666668vw', 'width':'45.572916666666664vw', 'display': 'inline-block'})
-        ]),
+           style={'height':'32.552083333333336vw', 'width':'65.10416666666667vw'}),
         html.Br(),
         html.H4("Top 50 DBpedia types with more entities"),
         html.Br(),

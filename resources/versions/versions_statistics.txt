@@ -2,183 +2,183 @@ Language -> es | Version -> 2016.10.01
 
 DBpedia Extraction Framework instance-types
 -------------------------------------
-Number of DBpedia entities (without counting repetitions): 923443
-Number of DBpedia types: 183
-Mean number of DBpedia entities per type: 19347.9
-Median number of DBpedia entities per type (occurrences): 1770333
-Population standard deviation of DBpedia entities per type: 53906.64
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 3540666
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 16
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 3
-30th percentile value of DBpedia entities per type: 4
-40th percentile value of DBpedia entities per type: 6
-50th percentile value of DBpedia entities per type: 8
-60th percentile value of DBpedia entities per type: 10
-70th percentile value of DBpedia entities per type: 13
-80th percentile value of DBpedia entities per type: 21
-90th percentile value of DBpedia entities per type: 38
-95th percentile value of DBpedia entities per type: 59
+Number of DBpedia entities (without counting repetitions): 1216139
+Number of DBpedia types: 153
+Mean number of DBpedia entities per type: 7948.62
+Median number of DBpedia entities per type (occurrences): 608070.0
+Population standard deviation of DBpedia entities per type: 25596.24
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 1216139
+First quartile value of DBpedia entities per type: 304035.0
+Third quartile value of DBpedia entities per type: 912105.0
+10th percentile value of DBpedia entities per type: 121614
+20th percentile value of DBpedia entities per type: 243228
+30th percentile value of DBpedia entities per type: 364842
+40th percentile value of DBpedia entities per type: 486456
+50th percentile value of DBpedia entities per type: 608070.0
+60th percentile value of DBpedia entities per type: 729683
+70th percentile value of DBpedia entities per type: 851297
+80th percentile value of DBpedia entities per type: 972911
+90th percentile value of DBpedia entities per type: 1094525
+95th percentile value of DBpedia entities per type: 1155332
 
 Language -> es | Version -> 2020.10.01
 
 DBpedia Extraction Framework instance-types
 -------------------------------------
-Number of DBpedia entities (without counting repetitions): 1277362
-Number of DBpedia types: 188
-Mean number of DBpedia entities per type: 24359.51
-Median number of DBpedia entities per type (occurrences): 2289794
-Population standard deviation of DBpedia entities per type: 73938.93
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 4579588
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 14
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 2
-30th percentile value of DBpedia entities per type: 4
-40th percentile value of DBpedia entities per type: 5
-50th percentile value of DBpedia entities per type: 7
-60th percentile value of DBpedia entities per type: 9
-70th percentile value of DBpedia entities per type: 12
-80th percentile value of DBpedia entities per type: 19
-90th percentile value of DBpedia entities per type: 36
-95th percentile value of DBpedia entities per type: 56
+Number of DBpedia entities (without counting repetitions): 1624435
+Number of DBpedia types: 154
+Mean number of DBpedia entities per type: 10548.28
+Median number of DBpedia entities per type (occurrences): 812218.0
+Population standard deviation of DBpedia entities per type: 37380.84
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 1624435
+First quartile value of DBpedia entities per type: 406109.0
+Third quartile value of DBpedia entities per type: 1218327.0
+10th percentile value of DBpedia entities per type: 162444
+20th percentile value of DBpedia entities per type: 324887
+30th percentile value of DBpedia entities per type: 487330
+40th percentile value of DBpedia entities per type: 649774
+50th percentile value of DBpedia entities per type: 812218.0
+60th percentile value of DBpedia entities per type: 974661
+70th percentile value of DBpedia entities per type: 1137104
+80th percentile value of DBpedia entities per type: 1299548
+90th percentile value of DBpedia entities per type: 1461992
+95th percentile value of DBpedia entities per type: 1543213
 
 Language -> es | Version -> 2021.05.01
 
 DBpedia Extraction Framework instance-types
 -------------------------------------
-Number of DBpedia entities (without counting repetitions): 1327554
-Number of DBpedia types: 188
-Mean number of DBpedia entities per type: 25146.26
-Median number of DBpedia entities per type (occurrences): 2363748
-Population standard deviation of DBpedia entities per type: 76489.93
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 4727497
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 14
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 2
-30th percentile value of DBpedia entities per type: 3
-40th percentile value of DBpedia entities per type: 5
-50th percentile value of DBpedia entities per type: 7
-60th percentile value of DBpedia entities per type: 9
-70th percentile value of DBpedia entities per type: 12
-80th percentile value of DBpedia entities per type: 19
-90th percentile value of DBpedia entities per type: 36
-95th percentile value of DBpedia entities per type: 56
+Number of DBpedia entities (without counting repetitions): 1682882
+Number of DBpedia types: 154
+Mean number of DBpedia entities per type: 10927.81
+Median number of DBpedia entities per type (occurrences): 841441.5
+Population standard deviation of DBpedia entities per type: 38523.14
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 1682882
+First quartile value of DBpedia entities per type: 420720.75
+Third quartile value of DBpedia entities per type: 1262162.25
+10th percentile value of DBpedia entities per type: 168288
+20th percentile value of DBpedia entities per type: 336576
+30th percentile value of DBpedia entities per type: 504865
+40th percentile value of DBpedia entities per type: 673153
+50th percentile value of DBpedia entities per type: 841441.5
+60th percentile value of DBpedia entities per type: 1009729
+70th percentile value of DBpedia entities per type: 1178017
+80th percentile value of DBpedia entities per type: 1346306
+90th percentile value of DBpedia entities per type: 1514594
+95th percentile value of DBpedia entities per type: 1598738
 
 Language -> es | Version -> 2021.06.01
 
 DBpedia Extraction Framework instance-types
 -------------------------------------
-Number of DBpedia entities (without counting repetitions): 1337360
-Number of DBpedia types: 188
-Mean number of DBpedia entities per type: 25313.68
-Median number of DBpedia entities per type (occurrences): 2379486
-Population standard deviation of DBpedia entities per type: 76908.65
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 4758971
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 14
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 2
-30th percentile value of DBpedia entities per type: 3
-40th percentile value of DBpedia entities per type: 5
-50th percentile value of DBpedia entities per type: 7
-60th percentile value of DBpedia entities per type: 9
-70th percentile value of DBpedia entities per type: 12
-80th percentile value of DBpedia entities per type: 19
-90th percentile value of DBpedia entities per type: 36
-95th percentile value of DBpedia entities per type: 56
+Number of DBpedia entities (without counting repetitions): 1693996
+Number of DBpedia types: 154
+Mean number of DBpedia entities per type: 10999.97
+Median number of DBpedia entities per type (occurrences): 846998.5
+Population standard deviation of DBpedia entities per type: 38706.37
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 1693996
+First quartile value of DBpedia entities per type: 423499.25
+Third quartile value of DBpedia entities per type: 1270497.75
+10th percentile value of DBpedia entities per type: 169400
+20th percentile value of DBpedia entities per type: 338799
+30th percentile value of DBpedia entities per type: 508199
+40th percentile value of DBpedia entities per type: 677598
+50th percentile value of DBpedia entities per type: 846998.5
+60th percentile value of DBpedia entities per type: 1016398
+70th percentile value of DBpedia entities per type: 1185797
+80th percentile value of DBpedia entities per type: 1355197
+90th percentile value of DBpedia entities per type: 1524596
+95th percentile value of DBpedia entities per type: 1609296
 
 Language -> en | Version -> 2016.10.01
 
 DBpedia Extraction Framework instance-types
 -------------------------------------
-Number of DBpedia entities (without counting repetitions): 4767202
-Number of DBpedia types: 465
-Mean number of DBpedia entities per type: 31740.79
-Median number of DBpedia entities per type (occurrences): 7379734
-Population standard deviation of DBpedia entities per type: 137336.27
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 14759468
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 22
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 3
-30th percentile value of DBpedia entities per type: 4
-40th percentile value of DBpedia entities per type: 6
-50th percentile value of DBpedia entities per type: 8
-60th percentile value of DBpedia entities per type: 12
-70th percentile value of DBpedia entities per type: 17
-80th percentile value of DBpedia entities per type: 29
-90th percentile value of DBpedia entities per type: 64
-95th percentile value of DBpedia entities per type: 107
+Number of DBpedia entities (without counting repetitions): 5765325
+Number of DBpedia types: 418
+Mean number of DBpedia entities per type: 13792.64
+Median number of DBpedia entities per type (occurrences): 2882663.0
+Population standard deviation of DBpedia entities per type: 68936.49
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 5765325
+First quartile value of DBpedia entities per type: 1441331.5
+Third quartile value of DBpedia entities per type: 4323994.5
+10th percentile value of DBpedia entities per type: 576532
+20th percentile value of DBpedia entities per type: 1153065
+30th percentile value of DBpedia entities per type: 1729598
+40th percentile value of DBpedia entities per type: 2306130
+50th percentile value of DBpedia entities per type: 2882663.0
+60th percentile value of DBpedia entities per type: 3459195
+70th percentile value of DBpedia entities per type: 4035727
+80th percentile value of DBpedia entities per type: 4612260
+90th percentile value of DBpedia entities per type: 5188792
+95th percentile value of DBpedia entities per type: 5477059
 
 Language -> en | Version -> 2020.10.01
 
 DBpedia Extraction Framework instance-types
 -------------------------------------
-Number of DBpedia entities (without counting repetitions): 6218434
-Number of DBpedia types: 471
-Mean number of DBpedia entities per type: 39420.74
-Median number of DBpedia entities per type (occurrences): 9283584
-Population standard deviation of DBpedia entities per type: 180554.64
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 18567169
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 22
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 2
-30th percentile value of DBpedia entities per type: 4
-40th percentile value of DBpedia entities per type: 5
-50th percentile value of DBpedia entities per type: 7
-60th percentile value of DBpedia entities per type: 11
-70th percentile value of DBpedia entities per type: 17
-80th percentile value of DBpedia entities per type: 28
-90th percentile value of DBpedia entities per type: 60
-95th percentile value of DBpedia entities per type: 102
+Number of DBpedia entities (without counting repetitions): 7195535
+Number of DBpedia types: 421
+Mean number of DBpedia entities per type: 17091.53
+Median number of DBpedia entities per type (occurrences): 3597768.0
+Population standard deviation of DBpedia entities per type: 93186.30
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 7195535
+First quartile value of DBpedia entities per type: 1798884.0
+Third quartile value of DBpedia entities per type: 5396652.0
+10th percentile value of DBpedia entities per type: 719554
+20th percentile value of DBpedia entities per type: 1439107
+30th percentile value of DBpedia entities per type: 2158660
+40th percentile value of DBpedia entities per type: 2878214
+50th percentile value of DBpedia entities per type: 3597768.0
+60th percentile value of DBpedia entities per type: 4317321
+70th percentile value of DBpedia entities per type: 5036874
+80th percentile value of DBpedia entities per type: 5756428
+90th percentile value of DBpedia entities per type: 6475982
+95th percentile value of DBpedia entities per type: 6835758
 
 Language -> en | Version -> 2021.05.01
 
 DBpedia Extraction Framework instance-types
 -------------------------------------
-Number of DBpedia entities (without counting repetitions): 6419269
-Number of DBpedia types: 471
-Mean number of DBpedia entities per type: 40505.08
-Median number of DBpedia entities per type (occurrences): 9538947
-Population standard deviation of DBpedia entities per type: 187283.71
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 19077894
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 21
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 2
-30th percentile value of DBpedia entities per type: 4
-40th percentile value of DBpedia entities per type: 5
-50th percentile value of DBpedia entities per type: 7
-60th percentile value of DBpedia entities per type: 11
-70th percentile value of DBpedia entities per type: 16
-80th percentile value of DBpedia entities per type: 28
-90th percentile value of DBpedia entities per type: 60
-95th percentile value of DBpedia entities per type: 102
+Number of DBpedia entities (without counting repetitions): 7413709
+Number of DBpedia types: 421
+Mean number of DBpedia entities per type: 17609.76
+Median number of DBpedia entities per type (occurrences): 3706855.0
+Population standard deviation of DBpedia entities per type: 96640.17
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 7413709
+First quartile value of DBpedia entities per type: 1853427.5
+Third quartile value of DBpedia entities per type: 5560282.5
+10th percentile value of DBpedia entities per type: 741371
+20th percentile value of DBpedia entities per type: 1482742
+30th percentile value of DBpedia entities per type: 2224113
+40th percentile value of DBpedia entities per type: 2965484
+50th percentile value of DBpedia entities per type: 3706855.0
+60th percentile value of DBpedia entities per type: 4448225
+70th percentile value of DBpedia entities per type: 5189596
+80th percentile value of DBpedia entities per type: 5930967
+90th percentile value of DBpedia entities per type: 6672338
+95th percentile value of DBpedia entities per type: 7043024
 
 Language -> en | Version -> 2021.06.01
 
 DBpedia Extraction Framework instance-types
 -------------------------------------
-Number of DBpedia entities (without counting repetitions): 6442040
-Number of DBpedia types: 471
-Mean number of DBpedia entities per type: 40604.1
-Median number of DBpedia entities per type (occurrences): 9562266
-Population standard deviation of DBpedia entities per type: 188038.80
-Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): 19124532
-First quartile value of DBpedia entities per type: 3
-Third quartile value of DBpedia entities per type: 21
-10th percentile value of DBpedia entities per type: 1
-20th percentile value of DBpedia entities per type: 2
-30th percentile value of DBpedia entities per type: 4
-40th percentile value of DBpedia entities per type: 5
-50th percentile value of DBpedia entities per type: 7
-60th percentile value of DBpedia entities per type: 11
-70th percentile value of DBpedia entities per type: 16
-80th percentile value of DBpedia entities per type: 28
-90th percentile value of DBpedia entities per type: 60
-95th percentile value of DBpedia entities per type: 102
+Number of DBpedia entities (without counting repetitions): 7435957
+Number of DBpedia types: 421
+Mean number of DBpedia entities per type: 17662.61
+Median number of DBpedia entities per type (occurrences): 3717979.0
+Population standard deviation of DBpedia entities per type: 96990.10
+Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): 7435957
+First quartile value of DBpedia entities per type: 1858989.5
+Third quartile value of DBpedia entities per type: 5576968.5
+10th percentile value of DBpedia entities per type: 743596
+20th percentile value of DBpedia entities per type: 1487191
+30th percentile value of DBpedia entities per type: 2230787
+40th percentile value of DBpedia entities per type: 2974383
+50th percentile value of DBpedia entities per type: 3717979.0
+60th percentile value of DBpedia entities per type: 4461574
+70th percentile value of DBpedia entities per type: 5205170
+80th percentile value of DBpedia entities per type: 5948766
+90th percentile value of DBpedia entities per type: 6692361
+95th percentile value of DBpedia entities per type: 7064159
 

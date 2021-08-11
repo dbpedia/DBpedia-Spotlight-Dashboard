@@ -49,8 +49,8 @@ def initialize_callbacks(app):
             if value == 'Oct 2016':
                it_elements = versions_stats[1]
                it_mean = versions_stats[2]
-               it_median = 'dbo:Athlete'
-               it_mode = 'dbo:Agent'
+               it_median = 'dbo:Insect'
+               it_mode = 'dbo:Location'
                it_std_dev = versions_stats[4]
                uri_elements = stats[42]
                uri_mean = stats[43]
@@ -77,8 +77,8 @@ def initialize_callbacks(app):
                 it_elements = versions_stats[19]
                 it_mean = versions_stats[20]
                 it_std_dev = versions_stats[22]
-                it_mode = 'dbo:Agent'
-                it_median = 'dbo:AdministrativeRegion'
+                it_mode = 'dbo:Location'
+                it_median = 'dbo:Person'
                 uri_elements = stats[82]
                 uri_mean = stats[83]
                 uri_median = 'dbpedia-es:Huiracocha_Inca'
@@ -105,8 +105,8 @@ def initialize_callbacks(app):
                 it_elements = versions_stats[37]
                 it_mean = versions_stats[38]
                 it_std_dev = versions_stats[40]
-                it_mode = 'dbo:Agent'
-                it_median = 'dbo:AdministrativeRegion'
+                it_mode = 'dbo:Location'
+                it_median = 'dbo:Person'
                 uri_elements = stats[22]
                 uri_mean = stats[23]
                 uri_median = 'dbpedia-es:III_milenio_a._C.'
@@ -132,8 +132,8 @@ def initialize_callbacks(app):
                 it_elements = versions_stats[55]
                 it_mean = versions_stats[56]
                 it_std_dev = versions_stats[58]
-                it_mode = 'dbo:Agent'
-                it_median = 'dbo:AdministrativeRegion'
+                it_mode = 'dbo:Location'
+                it_median = 'dbo:Person'
                 uri_elements = stats[62]
                 uri_mean = stats[63]
                 uri_median = 'dbpedia-es:ITunes_Store'
@@ -237,8 +237,8 @@ def initialize_callbacks(app):
             if value == 'Oct 2016':
                it_elements = versions_stats[73]
                it_mean = versions_stats[74]
-               it_median = 'dbo:Work'
-               it_mode = 'dbo:Agent'
+               it_median = 'dbo:PersonFunction'
+               it_mode = 'dbo:CareerStation'
                it_std_dev = versions_stats[76] 
                uri_elements = stats[42]
                uri_mean = stats[43]
@@ -265,8 +265,8 @@ def initialize_callbacks(app):
                 it_elements = versions_stats[91]
                 it_mean = versions_stats[92]
                 it_std_dev = versions_stats[94]
-                it_median = 'dbo:Work'
-                it_mode = 'dbo:Agent'
+                it_median = 'dbo:Person'
+                it_mode = 'dbo:CareerStation'
                 uri_elements = stats[82]
                 uri_mean = stats[83]
                 uri_median = 'dbr:Lamar_University'
@@ -293,8 +293,8 @@ def initialize_callbacks(app):
                 it_elements = versions_stats[109]
                 it_mean = versions_stats[110]
                 it_std_dev = versions_stats[112]
-                it_median = 'dbo:Work'
-                it_mode = 'dbo:Agent'
+                it_median = 'dbo:Person'
+                it_mode = 'dbo:CareerStation'
                 uri_elements = stats[22]
                 uri_mean = stats[23]
                 uri_median = 'dbr:Kyrgyzstan_national_football_team'
@@ -321,8 +321,8 @@ def initialize_callbacks(app):
                 it_elements = versions_stats[127]
                 it_mean = versions_stats[128]
                 it_std_dev = versions_stats[130]
-                it_median = 'dbo:AdministrativeRegion'
-                it_mode = 'dbo:Agent'
+                it_median = 'dbo:PersonFunction'
+                it_mode = 'dbo:CareerStation'
                 uri_elements = stats[62]
                 uri_mean = stats[63]
                 uri_median = 'dbr:Kwame_Nkrumah_University_of_Science_and_Technology'
@@ -731,11 +731,9 @@ def initialize_callbacks(app):
                 selected_all_instances_df.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
             figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = "DBpedia entity"))
             figure.add_vline(x=float(R.es_stats[4]), line_width=4, line_color="#77C14C") # Mean
-            figure.add_vline(x=float(R.es_stats[5]), line_width=4, line_color="#1FAFEE") # Median
             figure.add_vline(x=float(R.es_stats[6]), line_width=4, line_color="#D53614") # Standard deviation
             figure.add_traces([
                 go.Scatter(x=[float(R.es_stats[4])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.es_stats[4]], hoverinfo="text"),
-                go.Scatter(x=[float(R.es_stats[5])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[5]], hoverinfo="text"),
                 go.Scatter(x=[float(R.es_stats[6])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.es_stats[6]], hoverinfo="text")
                 ])
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
@@ -749,7 +747,6 @@ def initialize_callbacks(app):
      def es_update_instance_types_bar(clicked_data):
             selected_type = 'owlThing'
             mean = R.versions_stats[38]
-            median = R.versions_stats[39]
             std_dev = R.versions_stats[40]
             types_count_df = R.instance_types_es_2021_05_01
             ontology_df = R.ontology_df
@@ -767,49 +764,13 @@ def initialize_callbacks(app):
                 selected_all_instances_df.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
             figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = 'DBpedia type'))
             figure.add_vline(x=float(mean), line_width=4, line_color="#77C14C") # Mean
-            figure.add_vline(x=float(median), line_width=4, line_color="#1FAFEE") # Median
             figure.add_vline(x=float(std_dev), line_width=4, line_color="#D53614") # Standard deviation
             figure.add_traces([
             go.Scatter(x=[float(mean)], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[mean], hoverinfo="text"),
-            go.Scatter(x=[float(median)], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[median], hoverinfo="text"),
             go.Scatter(x=[float(std_dev)], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[std_dev], hoverinfo="text")
             ])
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
-
-# Spanish known types position measures callback
-     @app.callback(
-            dash.dependencies.Output('es_known_types_pos', 'figure'),
-            [dash.dependencies.Input('ontology_pos', 'clickData')]
-            )
-     def es_update_inits_bar_pos(clicked_data):
-            if clicked_data is None:
-                return dash.no_update
-            selected_type = clicked_data['points'][0]['label'] 
-            if selected_type in R.known_types_es_2021_05_01["DBpedia type"].values:
-                selected_row = R.known_types_es_2021_05_01[R.known_types_es_2021_05_01["DBpedia type"] == selected_type]
-                fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type", hovertext=["Nº entities: "+ str(selected_row.iloc[0]["Nº entities"])], hoverinfo="text"))
-            else:
-                fig = go.Figure(go.Bar(x = [0], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
-            
-            fig.add_vline(x=int(R.es_stats[10]), line_width=4, line_color="#77C14C") # 10th percentile
-            fig.add_vline(x=int(R.es_stats[8]), line_width=4, line_color="#1FAFEE") # 1st quartile
-            fig.add_vline(x=int(R.es_stats[14]), line_width=4, line_color="#D53614") # 50th percentile
-            fig.add_vline(x=int(R.es_stats[9]), line_width=4, line_color="#D59D14") # 3rd quartile
-            fig.add_vline(x=int(R.es_stats[18]), line_width=4, line_color="#FFA4F5") # 90th percentile
-            fig.add_vline(x=int(R.es_stats[19]), line_width=4, line_color="#FFFB0B") # 95th percentile
-    
-            fig.add_traces([
-            go.Scatter(x=[int(R.es_stats[10])], y= [" "], mode='lines', name='10th percentile', line=dict(color="#77C14C"), hovertext=[R.es_stats[10]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[8])], y= [" "], mode='lines', name='1st quartile', line=dict(color="#1FAFEE"), hovertext=[R.es_stats[8]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[14])], y= [" "], mode='lines', name='50th percentile', line=dict(color="#D53614"), hovertext=[R.es_stats[14]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[9])], y= [" "], mode='lines', name='3rd quartile', line=dict(color="#D59D14"), hovertext=[R.es_stats[9]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[18])], y= [" "], mode='lines', name='90th percentile', line=dict(color="#FFA4F5"), hovertext=[R.es_stats[18]], hoverinfo="text"),
-            go.Scatter(x=[int(R.es_stats[19])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[R.es_stats[19]], hoverinfo="text")
-            ])
-    
-            fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
-            return fig
         
 # Spanish uriCounts callback
      @app.callback(
@@ -1208,11 +1169,9 @@ def initialize_callbacks(app):
                 selected_all_instances_df.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
             figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = "DBpedia entity"))
             figure.add_vline(x=float(R.en_stats[4]), line_width=4, line_color="#77C14C") # Mean
-            figure.add_vline(x=float(R.en_stats[5]), line_width=4, line_color="#1FAFEE") # Median
             figure.add_vline(x=float(R.en_stats[6]), line_width=4, line_color="#D53614") # Standard deviation
             figure.add_traces([
                 go.Scatter(x=[float(R.en_stats[4])], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[R.en_stats[4]], hoverinfo="text"),
-                go.Scatter(x=[float(R.en_stats[5])], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[5]], hoverinfo="text"),
                 go.Scatter(x=[float(R.en_stats[6])], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[R.en_stats[6]], hoverinfo="text")
                 ])
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
@@ -1226,7 +1185,6 @@ def initialize_callbacks(app):
      def en_update_instance_types_bar(clicked_data):
             selected_type = 'owlThing'
             mean = R.versions_stats[110]
-            median = R.versions_stats[111]
             std_dev = R.versions_stats[112]
             types_count_df = R.instance_types_en_2021_05_01
             ontology_df = R.ontology_df
@@ -1244,49 +1202,13 @@ def initialize_callbacks(app):
                 selected_all_instances_df.append({'DBpedia type': selected_type, 'Nº entities': 0}, ignore_index=True)
             figure = go.Figure(go.Bar(x = selected_all_instances_df['Nº entities'], y = selected_all_instances_df['DBpedia type'], orientation='h', marker_color='#A349A4', name = 'DBpedia type'))
             figure.add_vline(x=float(mean), line_width=4, line_color="#77C14C") # Mean
-            figure.add_vline(x=float(median), line_width=4, line_color="#1FAFEE") # Median
             figure.add_vline(x=float(std_dev), line_width=4, line_color="#D53614") # Standard deviation
             figure.add_traces([
             go.Scatter(x=[float(mean)], y= [" "], mode='lines', name='Mean', line=dict(color="#77C14C"), hovertext=[mean], hoverinfo="text"),
-            go.Scatter(x=[float(median)], y= [" "], mode='lines', name='Median', line=dict(color="#1FAFEE"), hovertext=[median], hoverinfo="text"),
             go.Scatter(x=[float(std_dev)], y= [" "], mode='lines', name='Standard deviation', line=dict(color="#D53614"), hovertext=[std_dev], hoverinfo="text")
             ])
             figure.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
             return figure
-        
-# English known types position measures callback
-     @app.callback(
-            dash.dependencies.Output('en_known_types_pos', 'figure'),
-            [dash.dependencies.Input('en_ontology_pos', 'clickData')]
-            )
-     def en_update_inits_bar_pos(clicked_data):
-            if clicked_data is None:
-                return dash.no_update
-            selected_type = clicked_data['points'][0]['label'] 
-            if selected_type in R.known_types_en_2021_05_01["DBpedia type"].values:
-                selected_row = R.known_types_en_2021_05_01[R.known_types_en_2021_05_01["DBpedia type"] == selected_type]
-                fig = go.Figure(go.Bar(x = [selected_row.iloc[0]['Pos']], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type", hovertext=["Nº entities: "+ str(selected_row.iloc[0]["Nº entities"])], hoverinfo="text"))
-            else:
-                fig = go.Figure(go.Bar(x = [0], y = [selected_type], width=[0.1] , orientation='h', marker_color='#A349A4', name = "Selected DBpedia type"))
-            
-            fig.add_vline(x=int(R.en_stats[10]), line_width=4, line_color="#77C14C") # 10th percentile
-            fig.add_vline(x=int(R.en_stats[8]), line_width=4, line_color="#1FAFEE") # 1st quartile
-            fig.add_vline(x=int(R.en_stats[14]), line_width=4, line_color="#D53614") # 50th percentile
-            fig.add_vline(x=int(R.en_stats[9]), line_width=4, line_color="#D59D14") # 3rd quartile
-            fig.add_vline(x=int(R.en_stats[18]), line_width=4, line_color="#FFA4F5") # 90th percentile
-            fig.add_vline(x=int(R.en_stats[19]), line_width=4, line_color="#FFFB0B") # 95th percentile
-    
-            fig.add_traces([
-            go.Scatter(x=[int(R.en_stats[10])], y= [" "], mode='lines', name='10th percentile', line=dict(color="#77C14C"), hovertext=[R.en_stats[10]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[8])], y= [" "], mode='lines', name='1st quartile', line=dict(color="#1FAFEE"), hovertext=[R.en_stats[8]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[14])], y= [" "], mode='lines', name='50th percentile', line=dict(color="#D53614"), hovertext=[R.en_stats[14]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[9])], y= [" "], mode='lines', name='3rd quartile', line=dict(color="#D59D14"), hovertext=[R.en_stats[9]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[18])], y= [" "], mode='lines', name='90th percentile', line=dict(color="#FFA4F5"), hovertext=[R.en_stats[18]], hoverinfo="text"),
-            go.Scatter(x=[int(R.en_stats[19])], y= [" "], mode='lines', name='95th percentile', line=dict(color="#FFFB0B"), hovertext=[R.en_stats[19]], hoverinfo="text")
-            ])
-    
-            fig.update_layout(margin=dict(t=0, b=0, r=0, l=0, pad=0), template = "simple_white", xaxis_title="Number of DBpedia types", yaxis_title="DBpedia type")
-            return fig
         
 # English uriCounts callback
      @app.callback(

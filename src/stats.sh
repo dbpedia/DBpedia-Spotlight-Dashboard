@@ -61,52 +61,40 @@ cd $RESOURCES_DIR/$1/$DASHBOARD
 echo "DBpedia Spotlight May 2021 instance-types (after validation process)" >> stats.txt
 echo "-------------------------------------" >> stats.txt
 KNOWN_TYPES_LINES=$(cat valid_urls | wc -l)
-KNOWN_TYPES_TSV_LINES=$(cat known_types | wc -l)
-echo "Number of DBpedia entities with DBpedia types (without counting repetitions): $KNOWN_TYPES_LINES" >> stats.txt
-echo "Number of DBpedia types: $KNOWN_TYPES_TSV_LINES" >> stats.txt
+KNOWN_TYPES_TSV_LINES=$(cat known_types_without_repetitions | wc -l)
 echo "Getting most used resources of known_types file"
 cat known_types | head -n 50 >> known_types_top50
 echo "Done"
 echo "Calculating stats of known_types URLs"
-cat known_types | cut -f 2 -d$' ' | datamash mean 1 pvar 1 sum 1 >> temp.txt
+# awk -F ' ' '{total+=$2;print $0,total}' known_types_without_repetitions
+cat known_types_without_repetitions  | cut -f 2 -d$' ' | datamash mean 1 pvar 1 sum 1 >> temp.txt
 MEAN=$(awk -F '\t' '{ print $1 }' temp.txt)
 MEAN=$(echo 'print(round(' $MEAN ',2))' | python3 )
 VAR=$(awk -F '\t' '{ print $2 }' temp.txt)
 VAR=$(echo 'print(round(' $VAR ',2))' | python3 )
 STDDEV=$(bc <<< "scale=2; sqrt($VAR)")
 SUM=$(awk -F '\t' '{ print $3 }' temp.txt)
-MEDIAN=$(echo 'print(round(' $SUM / 2 '))' | python3 )
+MEDIAN=$(echo 'print( ('$SUM' + 1) / 2 )' | python3 )
+echo "Number of DBpedia entities with DBpedia types (without counting repetitions): $SUM" >> stats.txt
+echo "Number of DBpedia types: $KNOWN_TYPES_TSV_LINES" >> stats.txt
 rm temp.txt
 echo "Calculating position measures"
-cat known_types | awk '{for (i=1; i<=$2; i++) print NR}' | datamash q1 1 q3 1 perc:10 1 perc:20 1 perc:30 1 perc:40 1 perc:50 1 perc:60 1 perc:70 1 perc:80 1 perc:90 1 perc:95 1 >> temp.txt
-Q1=$(awk -F '\t' '{ print $1 }' temp.txt)
-Q1=$(echo 'print(round(' $Q1 '))' | python3 )
-Q3=$(awk -F '\t' '{ print $2 }' temp.txt)
-Q3=$(echo 'print(round(' $Q3 '))' | python3 )
-PERC10=$(awk -F '\t' '{ print $3 }' temp.txt)
-PERC10=$(echo 'print(round(' $PERC10 '))' | python3 )
-PERC20=$(awk -F '\t' '{ print $4 }' temp.txt)
-PERC20=$(echo 'print(round(' $PERC20 '))' | python3 )
-PERC30=$(awk -F '\t' '{ print $5 }' temp.txt)
-PERC30=$(echo 'print(round(' $PERC30 '))' | python3 )
-PERC40=$(awk -F '\t' '{ print $6 }' temp.txt)
-PERC40=$(echo 'print(round(' $PERC40 '))' | python3 )
-PERC50=$(awk -F '\t' '{ print $7 }' temp.txt)
-PERC50=$(echo 'print(round(' $PERC50 '))' | python3 )
-PERC60=$(awk -F '\t' '{ print $8 }' temp.txt)
-PERC60=$(echo 'print(round(' $PERC60 '))' | python3 )
-PERC70=$(awk -F '\t' '{ print $9 }' temp.txt)
-PERC70=$(echo 'print(round(' $PERC70 '))' | python3 )
-PERC80=$(awk -F '\t' '{ print $10 }' temp.txt)
-PERC80=$(echo 'print(round(' $PERC80 '))' | python3 )
-PERC90=$(awk -F '\t' '{ print $11 }' temp.txt)
-PERC90=$(echo 'print(round(' $PERC90 '))' | python3 )
-PERC95=$(awk -F '\t' '{ print $12 }' temp.txt)
-PERC95=$(echo 'print(round(' $PERC95 '))' | python3 )
+Q1=$(echo 'print( ('$SUM' + 1) / 4 )' | python3 )
+Q3=$(echo 'print( 3 * ('$SUM' + 1) / 4 )' | python3 )
+PERC10=$(echo 'print(round(('$SUM' * 0.1)))' | python3 )
+PERC20=$(echo 'print(round(('$SUM' * 0.2)))' | python3 )
+PERC30=$(echo 'print(round(('$SUM' * 0.3)))' | python3 )
+PERC40=$(echo 'print(round(('$SUM' * 0.4)))' | python3 )
+PERC50=$(echo 'print( ('$SUM' + 1) / 2 )' | python3 )
+PERC60=$(echo 'print(round(('$SUM' * 0.6)))' | python3 )
+PERC70=$(echo 'print(round(('$SUM' * 0.7)))' | python3 )
+PERC80=$(echo 'print(round(('$SUM' * 0.8)))' | python3 )
+PERC90=$(echo 'print(round(('$SUM' * 0.9)))' | python3 )
+PERC95=$(echo 'print(round(('$SUM' * 0.95)))' | python3 )
 echo "Mean number of DBpedia entities per type: $MEAN" >> stats.txt
 echo "Median number of DBpedia entities per type (occurrences): $MEDIAN" >> stats.txt
 echo "Population standard deviation of DBpedia entities per type: $STDDEV" >> stats.txt
-echo "Number of DBpedia entities with DBpedia types (counting repetitions, for checking quartiles and percentiles): $SUM" >> stats.txt
+echo "Number of DBpedia entities with DBpedia types (for checking quartiles and percentiles): $SUM" >> stats.txt
 echo "First quartile value of DBpedia entities per type: $Q1" >> stats.txt
 echo "Third quartile value of DBpedia entities per type: $Q3" >> stats.txt
 echo "10th percentile value of DBpedia entities per type: $PERC10" >> stats.txt
@@ -124,6 +112,7 @@ echo "Done"
 rm temp.txt
 echo "Generating file for dashboard"
 # cat known_types |  awk '$0=$0" " NR' > known_types
+# cat known_types_without_repetitions |  awk '$0=$0" " NR' > known_types_without_repetitions
 }
 
 function get_uriCounts {

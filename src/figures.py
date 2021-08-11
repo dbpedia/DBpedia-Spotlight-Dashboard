@@ -121,69 +121,68 @@ def get_init_bar_figure_pos(language_directory,df):
     if language_directory == R.es_dashboard_directory:
         stats = R.es_stats
         known_types = R.known_types_es_2021_05_01_without_repetitions
-        vals = [0, 200000, 400000, 600000, 800000, 1000000, 1200000]
-        text = ['0%', '25%', '50%', '75%', '90%', '95%','100%']
     else:
         known_types = R.known_types_en_2021_05_01_without_repetitions
         stats = R.en_stats
-        vals = [0, 1000000, 2000000, 3000000, 4000000]
-        text = ['0%', '35%', '80%', '95%', '100%']
         
     x = known_types["DBpedia type"].tolist()
     cumulative = known_types["Cumulative total"].tolist()
     n_entities = known_types["Nº entities"].tolist()
     quartile1 = list()
+    quartile1_text = list()
     quartile2 = list()
+    quartile2_text = list()
     quartile3 = list()
+    quartile3_text = list()
     quartile4 = list()
-    p10 = list()
+    quartile4_text = list()
     p90 = list()
+    p90_text = list()
     p95 = list()
-    
+    p95_text = list()
+    i = 0
     for value in cumulative:
-        i = 0
-        if value <= float(stats[10]): # 10th percentile
-            p10.append(n_entities[i])
         if value <= float(stats[8]): # 1st quartile
             quartile1.append(n_entities[i])
+            quartile1_text.append("("+ x[i]+", " + str(n_entities[i])+")")
         if value <= float(stats[14]): # 2nd quartile
             quartile2.append(n_entities[i])
+            quartile2_text.append("("+ x[i]+", " + str(n_entities[i])+")")
         if value <= float(stats[9]): # 3rd quartile
-            quartile3.append(n_entities[i])  
+            quartile3.append(n_entities[i])
+            quartile3_text.append("("+ x[i]+", " + str(n_entities[i])+")")
         if value <= float(stats[18]): # 90th percentile
             p90.append(n_entities[i])
+            p90_text.append("("+ x[i]+", " + str(n_entities[i])+")")
         if value <= float(stats[19]): # 95th percentile
             p95.append(n_entities[i])
+            p95_text.append("("+ x[i]+", " + str(n_entities[i])+")")
         # 4th quartile
         quartile4.append(n_entities[i])
+        quartile4_text.append("("+ x[i]+", " + str(n_entities[i])+")")
         i+=1
         
     # For displaying positional measures
     fig = go.Figure()
-    # 10th percentile
-    fig.add_trace(go.Scatter(
-        x=x, y=p10,
-        name='Percentile 10',
-        hoverinfo='x+y',
-        mode='lines',
-        line=dict(width=0.5, color="#77C14C"),
-        stackgroup='one' # define stack group
-    ))
+    
      # 1st quartile
     fig.add_trace(go.Scatter(
         x=x, y=quartile1,
         name='Quartile 1',
-        hoverinfo='x+y',
+        hoverinfo="text",
+        hovertext=quartile1_text,
         mode='lines',
         line=dict(width=0.5, color="#1FAFEE"),
-        stackgroup='one' # define stack group
+        stackgroup='one',
+        groupnorm='percent'
     ))
      # 2nd quartile
     fig.add_trace(go.Scatter(
         x=x, y=quartile2,
         name='Quartile 2',
-        hoverinfo='x+y',
         mode='lines',
+        hoverinfo="text",
+        hovertext=quartile2_text,
         line=dict(width=0.5, color="#D53614"),
         stackgroup='one' # define stack group
     ))
@@ -191,17 +190,20 @@ def get_init_bar_figure_pos(language_directory,df):
     fig.add_trace(go.Scatter(
         x=x, y=quartile3,
         name='Quartile 3',
-        hoverinfo='x+y',
+        hoverinfo="text",
+        hovertext=quartile3_text,
         mode='lines',
         line=dict(width=0.5, color="#D59D14"),
         stackgroup='one' # define stack group
     ))
+    
           # 90th percentile
     fig.add_trace(go.Scatter(
         x=x, y=p90,
         name='Percentile 90',
-        hoverinfo='x+y',
         mode='lines',
+        hoverinfo="text",
+        hovertext=p90_text,
         line=dict(width=0.5, color="#FFA4F5"),
         stackgroup='one' # define stack group
     ))
@@ -210,8 +212,9 @@ def get_init_bar_figure_pos(language_directory,df):
     fig.add_trace(go.Scatter(
         x=x, y=p95,
         name='Percentile 95',
-        hoverinfo='x+y',
         mode='lines',
+        hoverinfo="text",
+        hovertext=p95_text,
         line=dict(width=0.5, color="#FFFB0B"),
         stackgroup='one' # define stack group
     ))
@@ -220,7 +223,8 @@ def get_init_bar_figure_pos(language_directory,df):
     fig.add_trace(go.Scatter(
         x=x, y=quartile4,
         name='Quartile 4',
-        hoverinfo='x+y',
+        hoverinfo="text",
+        hovertext=quartile4_text,
         mode='lines',
         line=dict(width=0.5, color='rgb(184, 247, 212)'),
         stackgroup='one' # define stack group
@@ -233,10 +237,9 @@ def get_init_bar_figure_pos(language_directory,df):
     xaxis_type='category',
     yaxis=dict(
         type='linear',
-        autorange = True,
         tickmode = 'array',
-        tickvals = vals,
-        ticktext = text,
+        tickvals = [0, 20, 40, 60, 80, 100],
+        ticktext = ['0%', '30%', '60%', '80%', '90%', '100%']
         ),
     xaxis_title="DBpedia type", yaxis_title="Filled area")
 

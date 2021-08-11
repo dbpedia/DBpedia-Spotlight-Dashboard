@@ -238,8 +238,8 @@ def get_init_bar_figure_pos(language_directory,df):
     yaxis=dict(
         type='linear',
         tickmode = 'array',
-        tickvals = [0, 20, 40, 60, 80, 100],
-        ticktext = ['0%', '30%', '60%', '80%', '90%', '100%']
+        tickvals = [0, 17, 33, 50, 67, 83, 100],
+        ticktext = ['0%', '25%', '50%', '75%', '90%', '95%', '100%']
         ),
     xaxis_title="DBpedia type", yaxis_title="Filled area")
 

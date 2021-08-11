@@ -131,6 +131,42 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
                          ''')
                         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
             ], style = tab_style, selected_style = tab_selected_style),
+         # Comparison tab                    
+        dcc.Tab(label='Instance-types comparison', value='comparison-tab', children = [
+            html.Div([
+            html.Br(),
+        html.H3("Choose language version: "),
+        dcc.Dropdown(id='lang_dropdown',options=[
+            {'label': 'Spanish', 'value': 'Spanish'},
+            {'label': 'English', 'value': 'English'}],
+            value='English',
+            placeholder="Language"),
+        html.Br(),
+        html.H3("Choose 2 versions to compare: "),
+        html.Div([
+        dcc.Dropdown(id='version1_dropdown',options=[
+            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 1st 2021', 'value': 'May 1st 2021'},
+            {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
+            ],
+            value='Oct 1st 2016',
+            placeholder="Version 1", style={'display': 'inline-block', 'width': '39.0625vw'}),
+        dcc.Dropdown(id='version2_dropdown',options=[
+            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
+            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
+            {'label': 'May 1st 2021', 'value': 'May 1st 2021'},
+            {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
+            ], 
+            value='June 1st 2021',
+            placeholder="Version 2", style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})
+        ]),
+       html.Br(),
+       html.Div(id='data_container'),
+       html.Br(),
+       html.Div(id='figures_container')
+      ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
+        ], style = tab_style, selected_style = tab_selected_style),
         # Spanish tab
         dcc.Tab(id='es_tab', label='Spanish', value = "spanish", children = [
         dcc.Tabs(id='subtabs', value='subtab-1', children=[
@@ -525,39 +561,6 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
               ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style)]
             , style = subtabs_styles)
-        ], style = tab_style, selected_style = tab_selected_style),
-        # Comparison tab                    
-        dcc.Tab(label='Instance types comparison', value='comparison-tab', children = [
-            html.Div([
-            html.Br(),
-        html.H3("Choose language version: "),
-        dcc.Dropdown(id='lang_dropdown',options=[
-            {'label': 'Spanish', 'value': 'Spanish'},
-            {'label': 'English', 'value': 'English'}], 
-            placeholder="Language"),
-        html.Br(),
-        html.H3("Choose 2 versions to compare: "),
-        html.Div([
-        dcc.Dropdown(id='version1_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 1st 2021', 'value': 'May 1st 2021'},
-            {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
-            ], 
-            placeholder="Version 1", style={'display': 'inline-block', 'width': '39.0625vw'}),
-        dcc.Dropdown(id='version2_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 1st 2021', 'value': 'May 1st 2021'},
-            {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
-            ], 
-            placeholder="Version 2", style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})
-        ]),
-       html.Br(),
-       html.Div(id='data_container'),
-       html.Br(),
-       html.Div(id='figures_container')
-      ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),
         
       # Feedback tab

@@ -174,7 +174,7 @@ def initialize_callbacks(app):
            },
             data=[
         {
-            "file": "Instance types",
+            "file": "Instance-types",
             "elements": it_elements,
             "mean": it_mean,
             "median": it_median,
@@ -363,7 +363,7 @@ def initialize_callbacks(app):
            },
             data=[
         {
-            "file": "Instance types",
+            "file": "Instance-types",
             "elements": it_elements,
             "mean": it_mean,
             "median": it_median,

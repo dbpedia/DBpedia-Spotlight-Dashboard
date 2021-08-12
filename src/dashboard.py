@@ -81,6 +81,20 @@ app.layout = html.Div(children=[
             html.Div([
             html.Br(),
             dcc.Markdown('''
+## DBpedia Spotlight Dashboard
+
+The purpose of this dashboard is to **facilitate the understanding and analysis of both DBpedia datasets and Wikistats** by calculating statistical measures on these data that allow understanding the trends of **DBpedia resources**, **Wikipedia links** and **surface forms**.
+ 
+ To make the dashboard, it is first necessary to **obtain the raw data**.  Subsequently, it is verified that the DBpedia entities (URLs) that Spotlight uses (URLs of the `uriCounts` file) are found  in one of the three DBpedia datasets (`instance-types`, `redirects` and `disambiguations`).  If they are found in a dataset, they are entities whose type is **known** (from DBpedia), on the contrary,  if they are not found in any dataset, they are entities whose type is **unknown**.  This process is called **entity validation**. 
+Once `valid URLs` (of known type), `invalid URLs` (of unknown type)  and the `DBpedia types` that each URL present are known, a series of **statistical measures** are calculated on the data  (percentage of valid URLs over the total (**precision**), percentage of invalid URLs over the total (**impact**), mean, median, standard deviation, quartiles , percentiles, etc).   
+Afterwards, **necessary figures** are generated to visualize the statistics.  Once all the figures are ready, they are placed and the final dashboard is obtained.
+
+### DBpedia Spotlight Dashboard Flowchart
+'''),
+html.Img(src='https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_flowchart.png', style={'height':'26.041666666666668vw', 'width':'65.10416666666667vw'}),
+html.Br(),
+html.Br(),
+dcc.Markdown('''                         
 ## DBpedia Spotlight 
 **DBpedia Spotlight** is a tool for automatically **annotating mentions of DBpedia resources in text**,  providing a solution for linking unstructured information sources to the Linked Open Data cloud through DBpedia. Spotlight can annotate texts in multiple languages (e.g., English, German, French, Portuguese, etc). 
 
@@ -113,28 +127,17 @@ As mentioned before, Spotlight models are created from the **DBpedia datasets** 
 ![Wikistats](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/information_wikistats.png)
 
 ### DBpedia Spotlight Flowchart
-
-![DBpedia Spotlight Flowchart](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/spotlight_flowchart.png)
-
-## DBpedia Spotlight Dashboard
-
-The purpose of this dashboard is to **facilitate the understanding and analysis of both DBpedia datasets and Wikistats** by calculating statistical measures on these data that allow understanding the trends of **DBpedia resources**, **Wikipedia links** and **surface forms**.
- 
- To make the dashboard, it is first necessary to **obtain the raw data**.  Subsequently, it is verified that the DBpedia entities (URLs) that Spotlight uses (URLs of the `uriCounts` file) are found  in one of the three DBpedia datasets (`instance-types`, `redirects` and `disambiguations`).  If they are found in a dataset, they are entities whose type is **known** (from DBpedia), on the contrary,  if they are not found in any dataset, they are entities whose type is **unknown**.  This process is called **entity validation**. 
-Once `valid URLs` (of known type), `invalid URLs` (of unknown type)  and the `DBpedia types` that each URL present are known, a series of **statistical measures** are calculated on the data  (percentage of valid URLs over the total (**precision**), percentage of invalid URLs over the total (**impact**), mean, median, standard deviation, quartiles , percentiles, etc).   
-Afterwards, **necessary figures** are generated to visualize the statistics.  Once all the figures are ready, they are placed and the final dashboard is obtained.
-
-### DBpedia Spotlight Dashboard Flowchart
-
-![DBpedia Spotlight Dashboard Flowchart](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_flowchart.png)  
-            
-                         ''')
+'''),
+html.Img(src='https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/spotlight_flowchart.png', style={'height':'26.041666666666668vw', 'width':'65.10416666666667vw'}),
                         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
             ], style = tab_style, selected_style = tab_selected_style),
          # Comparison tab                    
         dcc.Tab(label='Instance-types comparison', value='comparison-tab', children = [
             html.Div([
-            html.Br(),
+                html.Br(),
+            dcc.Markdown('''
+              In this section, it is shown the difference instance-types size between two versions from the same language.          
+                         '''),    
         html.H3("Choose language version: "),
         dcc.Dropdown(id='lang_dropdown',options=[
             {'label': 'Spanish', 'value': 'Spanish'},
@@ -188,7 +191,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         ], style = tab_style, selected_style = tab_selected_style),   
             
         # Instance-types subtab
-        dcc.Tab(id='es_types_tab', label='Instance types', value = 'es_types', children = [
+        dcc.Tab(id='es_types_tab', label='Instance-types', value = 'es_types', children = [
             html.Div([
             html.Br(),
             dcc.Markdown('''
@@ -198,7 +201,6 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
      2. Calculated measures from the instance-types that `DBpedia Spotlight` actually uses (`known types`) after the entity validation process (check the `Information` tab for more details about entity validation)
             
                          '''),
-            html.Br(),
              html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
         html.Br(),
         html.Br(),
@@ -278,11 +280,22 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             ),
         html.Br(),
         html.H4("Position measures for DBpedia types"),
+         dcc.Markdown('''
+              The following chart presents the quartile and percentile information about 
+              the instance-types, ordered from highest to lowest number of entities and 
+              considering leaf nodes from the hierarchy [http://mappings.dbpedia.org/server/ontology/classes/] 
+              (internal nodes are considered only for those cases in which the instance has not assigned a leaf node). 
+              According to the chart, quartile 1 contains the most representative instances (instances with high frequency), 
+              as the instances move away from the origin they will have less representativeness (the instance frequency decreased).
+                         '''),
         dcc.Graph(id='es_known_types_pos', figure=F.es_pos_known_types_figure, 
              style={'height':'32.552083333333336vw', 'width':'65.10416666666667vw'}),
         html.Br(),
         html.H4("Top 50 DBpedia types with more entities"),
-        html.Br(),
+        dcc.Markdown('''
+    The following list is based on the `Entities by DBpedia Types` information.
+            
+                         '''),
         DataTable(
             id="es_top_known_types_table",
             columns=[{"name": "DBpedia type", "id": "DBpedia type"},
@@ -387,7 +400,7 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),   
         # Instance-types subtab
-        dcc.Tab(id='en_types_tab', label='Instance types', value = 'en_types', children = [
+        dcc.Tab(id='en_types_tab', label='Instance-types', value = 'en_types', children = [
             html.Div([
             html.Br(),
             dcc.Markdown('''
@@ -397,7 +410,6 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
      2. Calculated measures from the instance-types that `DBpedia Spotlight` actually uses (`known types`) after the entity validation process (check the `Information` tab for more details about entity validation)
             
                          '''),
-            html.Br(),
             html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
         html.Br(),
         html.Br(),
@@ -477,11 +489,22 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
             ),
         html.Br(),
         html.H4("Position measures for DBpedia types"),
+        dcc.Markdown('''
+              The following chart presents the quartile and percentile information about 
+              the instance-types, ordered from highest to lowest number of entities and 
+              considering leaf nodes from the hierarchy [http://mappings.dbpedia.org/server/ontology/classes/] 
+              (internal nodes are considered only for those cases in which the instance has not assigned a leaf node). 
+              According to the chart, quartile 1 contains the most representative instances (instances with high frequency), 
+              as the instances move away from the origin they will have less representativeness (the instance frequency decreased).
+                         '''),
          dcc.Graph(id='en_known_types_pos', figure=F.en_pos_known_types_figure, 
            style={'height':'32.552083333333336vw', 'width':'65.10416666666667vw'}),
         html.Br(),
         html.H4("Top 50 DBpedia types with more entities"),
-        html.Br(),
+        dcc.Markdown('''
+    The following list is based on the `Entities by DBpedia Types` information.
+            
+                         '''),
         DataTable(
             id="en_top_known_types_table",
             columns=[{"name": "DBpedia type", "id": "DBpedia type"},

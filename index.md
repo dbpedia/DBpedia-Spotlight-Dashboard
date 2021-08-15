@@ -280,3 +280,21 @@ Meeting with mentors. Finally, the publication of the statistics as linked data 
 - The **Position measures** graphs have been changed since the previous graphs were more confusing:
 ![Quartiles](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/quartiles.png)
 - Also the dashboard is already available to everyone at http://134.155.95.24:8050/
+
+**[15/08/2021]**: Most of the visual changes suggested by the mentors have been implemented:
+- The `median` measure has been eliminated from the Summary tab tables
+- Dashboard logo has been moved to the left
+- `English` and Spanish tabs have been removed and replaced by a `Details` tab so as not to mix topics with languages
+
+![Details](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/details.png)
+
+- Cards have been removed from the `Comparison` tab and in their place a table with highlighted differences has been put
+
+![Comparison table](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/comparison_table.png)
+
+- Added space between buttons
+- Horizontal lines have been added to separate views better
+- The `Summary` sub-tab has been assigned as default when clicking on the `Details` tab
+- The `Details` tab dropdown has been synchronized so that you only have to select version 1 time (in the `Summary` tab preferably)
+- A summary of how statistics have been computed has been added to the `Information` tab
+- The width of the tables has been modified so that they can be seen well in all possible screens (Not checked yet)

@@ -3,9 +3,6 @@ import dash
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
-from dash_table import DataTable
-import figures as F
-import resources as R
 import callbacks as CB
 
 
@@ -30,7 +27,8 @@ tab_style = {
     'fontWeight': 'bold',
     'border-radius': '0.9765625vw',
     'background-color': '#F2F2F2',
-    'box-shadow': '0.2604166666666667vw 0.2604166666666667vw 0.2604166666666667vw 0.2604166666666667vw lightgrey',
+    'margin-left': '0.9765625vw' ,
+    'box-shadow': ' 0.13020833333333334vw  0.13020833333333334vw  0.13020833333333334vw  0.13020833333333334vw lightgrey',
  
 }
  
@@ -41,8 +39,8 @@ tab_selected_style = {
     'color': 'white',
     'padding': '0.390625vw',
     'border-radius': '0.9765625vw',
+    'margin-left': '0.9765625vw'
 }
-
 
 app = dash.Dash(external_stylesheets=[dbc.themes.LUX])
 app.title = 'DBpedia Spotlight Dashboard'
@@ -50,8 +48,19 @@ app.title = 'DBpedia Spotlight Dashboard'
 app.layout = html.Div(children=[
     # Header
     html.Div([
-        html.Div([], className = 'col-2'),
-        
+        html.Div([], className = 'col-1'),
+        html.Div([
+            html.Img(
+                    src = app.get_asset_url('spotlight_logo.png'),
+                    height = '43px',
+                    width = 'auto')
+            ],
+            className = 'col-1',
+            style = {
+                    'align-items': 'center',
+                    'padding-top' : '1%',
+                    'height' : 'auto'
+                    }),
         html.Div([
             html.H1(children='DBpedia Spotlight Dashboard',
                     style = {'textAlign' : 'center'}
@@ -59,19 +68,7 @@ app.layout = html.Div(children=[
             className='col-8',
             style = {'padding-top' : '1%'}
         ),
-        
-        html.Div([
-            html.Img(
-                    src = app.get_asset_url('spotlight_logo.png'),
-                    height = '43px',
-                    width = 'auto')
-            ],
-            className = 'col-2',
-            style = {
-                    'align-items': 'center',
-                    'padding-top' : '1%',
-                    'height' : 'auto'})
-
+         html.Div([], className = 'col-2')
         ], 
         className = 'row',
         style = {'height' : '4%', 'background-color' : '#F5F5F5'}),
@@ -88,6 +85,13 @@ The purpose of this dashboard is to **facilitate the understanding and analysis 
  To make the dashboard, it is first necessary to **obtain the raw data**.  Subsequently, it is verified that the DBpedia entities (URLs) that Spotlight uses (URLs of the `uriCounts` file) are found  in one of the three DBpedia datasets (`instance-types`, `redirects` and `disambiguations`).  If they are found in a dataset, they are entities whose type is **known** (from DBpedia), on the contrary,  if they are not found in any dataset, they are entities whose type is **unknown**.  This process is called **entity validation**. 
 Once `valid URLs` (of known type), `invalid URLs` (of unknown type)  and the `DBpedia types` that each URL present are known, a series of **statistical measures** are calculated on the data  (percentage of valid URLs over the total (**precision**), percentage of invalid URLs over the total (**impact**), mean, median, standard deviation, quartiles , percentiles, etc).   
 Afterwards, **necessary figures** are generated to visualize the statistics.  Once all the figures are ready, they are placed and the final dashboard is obtained.
+
+### Statistics Calculation
+For the computation of statistics, [Datamash command-line program](https://www.gnu.org/software/datamash/) has been used.
+
+The measures of central tendency and dispersion (`mean`, `mode` and `standard deviation`) have been calculated using the corresponding frequencies that appear in the different files (instance-types, uriCounts, pairCounts, tokenCounts and sfAndTotalCounts).
+
+For the position measures (`median`, `quartiles` and `percentiles`), these frequencies have been ordered and the number obtained in each statistical measure has been mapped with its corresponding label in each file.
 
 ### DBpedia Spotlight Dashboard Flowchart
 '''),
@@ -134,19 +138,17 @@ html.Img(src='https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/im
          # Comparison tab                    
         dcc.Tab(label='Instance-types comparison', value='comparison-tab', children = [
             html.Div([
-                html.Br(),
+            html.Br(),
             dcc.Markdown('''
               In this section, it is shown the difference instance-types size between two versions from the same language.          
                          '''),    
-        html.H3("Choose language version: "),
+        html.H3("Choose language and 2 versions to compare: "),
+        html.Div([
         dcc.Dropdown(id='lang_dropdown',options=[
             {'label': 'Spanish', 'value': 'Spanish'},
             {'label': 'English', 'value': 'English'}],
             value='English',
-            placeholder="Language"),
-        html.Br(),
-        html.H3("Choose 2 versions to compare: "),
-        html.Div([
+            style={'display': 'inline-block', 'width': '29.296875vw'}), 
         dcc.Dropdown(id='version1_dropdown',options=[
             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
             {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
@@ -154,7 +156,7 @@ html.Img(src='https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/im
             {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
             ],
             value='Oct 1st 2016',
-            placeholder="Version 1", style={'display': 'inline-block', 'width': '39.0625vw'}),
+            style={'display': 'inline-block', 'width': '29.296875vw', "margin-left": "0.8138020833333334vw"}),
         dcc.Dropdown(id='version2_dropdown',options=[
             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
             {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
@@ -162,156 +164,60 @@ html.Img(src='https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/im
             {'label': 'June 1st 2021', 'value': 'June 1st 2021'}
             ], 
             value='June 1st 2021',
-            placeholder="Version 2", style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})
+             style={'display': 'inline-block', 'width': '29.296875vw', "margin-left": "1.25vw"})
         ]),
-       html.Br(),
+       html.Hr(),
        html.Div(id='data_container'),
-       html.Br(),
-       html.Div(id='figures_container')
+       html.Hr(style={'margin-top': '-0.6510416666666666vw'}),
+       html.Div(id='figures_container')      
       ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),
-        # Spanish tab
-        dcc.Tab(id='es_tab', label='Spanish', value = "spanish", children = [
-        dcc.Tabs(id='subtabs', value='subtab-1', children=[
+                         
+        # Details tab
+         dcc.Tab(id='details_tab', label='Details', value = "details", children = [        
+            dcc.Tabs(id='subtabs', value='subtab-1', children=[
             
         # Summary subtab    
-          dcc.Tab(id='es_summary_tab', label='Summary', value = 'es_summary', children = [
+          dcc.Tab(id='summary_tab', label='Summary', value = 'summary', children = [
             html.Div([
              html.Br(),
-            html.H3("Choose files version: "),
-            dcc.Dropdown(id='es_summary_dropdown',options=[
+            html.H3("Choose language and files version: "),
+            html.Div([
+              dcc.Dropdown(id='summary_language_dropdown',options=[
+            {'label': 'Spanish', 'value': 'Spanish'},
+            {'label': 'English', 'value': 'English'}],
+            placeholder="Language", style={'display': 'inline-block', 'width': '39.0625vw'}),  
+            dcc.Dropdown(id='summary_version_dropdown',options=[
                 {'label': 'Oct 2016', 'value': 'Oct 2016'},
                 {'label': 'Oct 2020', 'value': 'Oct 2020'},
                 {'label': 'May 2021', 'value': 'May 2021'},
                 {'label': 'Jun 2021', 'value': 'Jun 2021'}], 
-                placeholder="Version"),
-             html.Br(),
-            html.Div(id='es_summary_container')
+                placeholder="Version", 
+                style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})
+            ]
+            ),
+             html.Hr(),
+            html.Div(id='summary_container')
         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),   
             
         # Instance-types subtab
-        dcc.Tab(id='es_types_tab', label='Instance-types', value = 'es_types', children = [
+        dcc.Tab(id='types_tab', label='Instance-types', value = 'types', children = [
             html.Div([
             html.Br(),
-            dcc.Markdown('''
-    In this tab are displayed:
-    
-     1. Calculated measures from instance-types, redirects and disambiguations datasets obtained from the `DBpedia Extraction Framework`
-     2. Calculated measures from the instance-types that `DBpedia Spotlight` actually uses (`known types`) after the entity validation process (check the `Information` tab for more details about entity validation)
-            
-                         '''),
-             html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
-        html.Br(),
-        html.Br(),
-         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia entities"), html.H4(R.versions_stats[36])]
-                                         ),style={'display': 'inline-block'}, color="#F5F5F5"),
-         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.versions_stats[37])] 
-                                         ), style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
-         html.Br(),
-         html.Br(),
-         dbc.Card(dbc.CardBody([html.H5("Nº redirects"), html.H4(R.es_stats[0])] 
-                                         ),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.H5("Nº disambiguations"), html.H4(R.es_stats[1])] 
-                                         ),style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
-          html.Br(),
-          html.Br(),
-          html.H4("Measures of central tendency"),
-                dbc.Card(dbc.CardBody(
-                       [html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.versions_stats[38])]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                dbc.Card(dbc.CardBody(
-                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Location')]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                html.H4("Measures of dispersion"),
-                dbc.Card(dbc.CardBody(
-                         [html.H5("Standard deviation"), html.H4(R.versions_stats[40])]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-          html.Br(),
-          html.Br(),
-          html.Div(children=[html.H4("Entities by DBpedia types"),
-           dcc.Graph(id='ontologyy', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
-           dcc.Graph(id='es_instance_types', figure=F.es_instance_types_figure, 
-                                   style={'height':'26.041666666666668vw', 'width':'52.083333333333336vw', 'display': 'inline-block'})]
-            )]),
-         html.Br(),
-         html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
-         html.Br(),
-         html.Br(),
-         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia entities"), html.H4(R.es_stats[2])] 
-                                         ),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.es_stats[3])]),
-                  style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
-         html.Br(),
-          html.Br(),
-          html.H4("Measures of central tendency"),
-                dbc.Card(dbc.CardBody(
-                       [html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.es_stats[4])]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                dbc.Card(dbc.CardBody(
-                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Location')]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                html.H4("Measures of dispersion"),
-                dbc.Card(dbc.CardBody(
-                         [html.H5("Standard deviation"), html.H4(R.es_stats[6])]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-          html.Br(),
-          dcc.Graph(id='es_statistics', figure=F.es_statistics_figure),
-          html.Br(),
-          html.Br(),
-        html.Div(children=[html.H4("Entities by DBpedia types"),
-           dcc.Graph(id='ontology', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
-           dcc.Graph(id='es_known_types', figure=F.es_known_types_figure, 
-                                   style={'height':'26.041666666666668vw', 'width':'52.083333333333336vw', 'display': 'inline-block'})]
-            ),
-        html.Br(),
-        html.H4("Position measures for DBpedia types"),
-         dcc.Markdown('''
-              The following chart presents the quartile and percentile information about 
-              the instance-types, ordered from highest to lowest number of entities and 
-              considering leaf nodes from the hierarchy [http://mappings.dbpedia.org/server/ontology/classes/] 
-              (internal nodes are considered only for those cases in which the instance has not assigned a leaf node). 
-              According to the chart, quartile 1 contains the most representative instances (instances with high frequency), 
-              as the instances move away from the origin they will have less representativeness (the instance frequency decreased).
-                         '''),
-        dcc.Graph(id='es_known_types_pos', figure=F.es_pos_known_types_figure, 
-             style={'height':'32.552083333333336vw', 'width':'65.10416666666667vw'}),
-        html.Br(),
-        html.H4("Top 50 DBpedia types with more entities"),
-        dcc.Markdown('''
-    The following list is based on the `Entities by DBpedia Types` information.
-            
-                         '''),
-        DataTable(
-            id="es_top_known_types_table",
-            columns=[{"name": "DBpedia type", "id": "DBpedia type"},
-                     {"name": "Nº entities", "id": "Nº entities"}],
-            style_header=
-           {
-              'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw',
-              'text-align': 'center'
-           },
-            data=R.top_known_types_2021_05_es.to_dict("records"),
-            fill_width=False,
-            style_table={
-                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '27.669270833333332vw', 'margin-left': '0.6510416666666666vw'
-                         }
-        )
+             html.H3("Choose language and instance-types file version: "),
+            html.Div([
+              dcc.Dropdown(id='types_language_dropdown',options=[
+            {'label': 'Spanish', 'value': 'Spanish'},
+            {'label': 'English', 'value': 'English'}],
+            placeholder="Language", style={'display': 'inline-block', 'width': '39.0625vw'}),
+            dcc.Dropdown(id='types_version_dropdown',options=[
+                {'label': 'May 2021', 'value': 'May 2021'}], 
+                value="May 2021", 
+                style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})
+            ]),
+             html.Hr(),
+             html.Div(id='types_container')
         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style)
         ,
@@ -319,14 +225,19 @@ html.Img(src='https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/im
          dcc.Tab(label='uriCounts', value = 'es_uricounts', children = [
         html.Div([
         html.Br(),
-        html.H3("Choose uriCounts file version: "),
-        dcc.Dropdown(id='uriCounts_dropdown',options=[
-            {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
-            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
-            placeholder="Version"),
-         html.Br(),
+        html.H3("Choose language and uriCounts file version: "),
+        html.Div([
+        dcc.Dropdown(id='uriCounts_language_dropdown',options=[
+            {'label': 'Spanish', 'value': 'Spanish'},
+            {'label': 'English', 'value': 'English'}],
+            placeholder="Language", style={'display': 'inline-block', 'width': '39.0625vw'}),    
+        dcc.Dropdown(id='uriCounts_version_dropdown',options=[
+            {'label': 'Oct 2016', 'value': 'Oct 2016'},
+            {'label': 'Oct 2020', 'value': 'Oct 2020'},
+            {'label': 'May 2021', 'value': 'May 2021'},
+            {'label': 'Jun 2021', 'value': 'Jun 2021'}], 
+            placeholder="Version", style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})]),
+         html.Hr(),
         html.Div(id='uriCounts_container')
         ],style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
          ], style = tab_style, selected_style = tab_selected_style)
@@ -335,14 +246,19 @@ html.Img(src='https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/im
          dcc.Tab(label='pairCounts', children = [
              html.Div([
                 html.Br(),
-        html.H3("Choose pairCounts file version: "),
-        dcc.Dropdown(id='pairCounts_dropdown',options=[
-             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
-            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
-            placeholder="Version"),
-         html.Br(),
+        html.H3("Choose language and pairCounts file version: "),
+        html.Div([
+        dcc.Dropdown(id='pairCounts_language_dropdown',options=[
+            {'label': 'Spanish', 'value': 'Spanish'},
+            {'label': 'English', 'value': 'English'}],
+            placeholder="Language", style={'display': 'inline-block', 'width': '39.0625vw'}),    
+        dcc.Dropdown(id='pairCounts_version_dropdown',options=[
+            {'label': 'Oct 2016', 'value': 'Oct 2016'},
+            {'label': 'Oct 2020', 'value': 'Oct 2020'},
+            {'label': 'May 2021', 'value': 'May 2021'},
+            {'label': 'Jun 2021', 'value': 'Jun 2021'}], 
+            placeholder="Version", style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})]),
+         html.Hr(),
         html.Div(id='pairCounts_container')
         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
           ], style = tab_style, selected_style = tab_selected_style)
@@ -351,14 +267,19 @@ html.Img(src='https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/im
          dcc.Tab(label='tokenCounts', children = [
           html.Div([
           html.Br(),
-        html.H3("Choose tokenCounts file version: "),
-        dcc.Dropdown(id='tokenCounts_dropdown',options=[
-             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
-            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
-            placeholder="Version"),
-         html.Br(),
+        html.H3("Choose language and tokenCounts file version: "),
+        html.Div([
+        dcc.Dropdown(id='tokenCounts_language_dropdown',options=[
+            {'label': 'Spanish', 'value': 'Spanish'},
+            {'label': 'English', 'value': 'English'}],
+            placeholder="Language", style={'display': 'inline-block', 'width': '39.0625vw'}),    
+        dcc.Dropdown(id='tokenCounts_version_dropdown',options=[
+            {'label': 'Oct 2016', 'value': 'Oct 2016'},
+            {'label': 'Oct 2020', 'value': 'Oct 2020'},
+            {'label': 'May 2021', 'value': 'May 2021'},
+            {'label': 'Jun 2021', 'value': 'Jun 2021'}], 
+            placeholder="Version", style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})]),
+         html.Hr(),
         html.Div(id='tokenCounts_container')
         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
         ], style = tab_style, selected_style = tab_selected_style),
@@ -366,225 +287,24 @@ html.Img(src='https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/im
         dcc.Tab(label='sfAndTotalCounts', children = [
             html.Div([
              html.Br(),
-        html.H3("Choose sfAndTotalCounts file version: "),
-        dcc.Dropdown(id='sfAndTotalCounts_dropdown',options=[
-             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
-            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
-            placeholder="Version"),
-         html.Br(),
+        html.H3("Choose language and sfAndTotalCounts file version: "),
+        html.Div([
+        dcc.Dropdown(id='sfAndTotalCounts_language_dropdown',options=[
+            {'label': 'Spanish', 'value': 'Spanish'},
+            {'label': 'English', 'value': 'English'}],
+            placeholder="Language", style={'display': 'inline-block', 'width': '39.0625vw'}),    
+        dcc.Dropdown(id='sfAndTotalCounts_version_dropdown',options=[
+            {'label': 'Oct 2016', 'value': 'Oct 2016'},
+            {'label': 'Oct 2020', 'value': 'Oct 2020'},
+            {'label': 'May 2021', 'value': 'May 2021'},
+            {'label': 'Jun 2021', 'value': 'Jun 2021'}], 
+            placeholder="Version", style={'display': 'inline-block', 'width': '39.0625vw', "margin-left": "1.6276041666666667vw"})]),
+         html.Hr(),
         html.Div(id='sfAndTotalCounts_container')
         ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
               ], style = tab_style, selected_style = tab_selected_style)
         ], style = subtabs_styles)
-        ], style = tab_style, selected_style = tab_selected_style)
-          ,
-        # English tab
-        dcc.Tab(id='en_tab', label='English', value = "english", children = [
-        dcc.Tabs(id='en-subtabs', value='en-subtab-1', children=[
-            
-        # Summary subtab    
-        dcc.Tab(id='en_summary_tab', label='Summary', value = 'en_summary', children = [
-        html.Div([
-        html.Br(),
-            html.H3("Choose files version: "),
-            dcc.Dropdown(id='en_summary_dropdown',options=[
-                {'label': 'Oct 2016', 'value': 'Oct 2016'},
-                {'label': 'Oct 2020', 'value': 'Oct 2020'},
-                {'label': 'May 2021', 'value': 'May 2021'},
-                {'label': 'Jun 2021', 'value': 'Jun 2021'}], 
-                placeholder="Version"),
-             html.Br(),
-            html.Div(id='en_summary_container')        
-        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
-        ], style = tab_style, selected_style = tab_selected_style),   
-        # Instance-types subtab
-        dcc.Tab(id='en_types_tab', label='Instance-types', value = 'en_types', children = [
-            html.Div([
-            html.Br(),
-            dcc.Markdown('''
-    In this tab are displayed:
-    
-     1. Calculated measures from instance-types, redirects and disambiguations datasets obtained from the `DBpedia Extraction Framework`
-     2. Calculated measures from the instance-types that `DBpedia Spotlight` actually uses (`known types`) after the entity validation process (check the `Information` tab for more details about entity validation)
-            
-                         '''),
-            html.Div(children=[html.H3(html.B("DBpedia Extraction Framework - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),
-        html.Br(),
-        html.Br(),
-         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia entities"), html.H4(R.versions_stats[108])]
-                                         ),style={'display': 'inline-block'}, color="#F5F5F5"),
-         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.versions_stats[109])] 
-                                         ), style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),  
-          html.Br(),
-          html.Br(),
-         dbc.Card(dbc.CardBody([html.H5("Nº redirects"), html.H4(R.en_stats[0])] 
-                                         ),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.H5("Nº disambiguations"), html.H4(R.en_stats[1])] 
-                                         ),style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5'),
-          html.Br(),
-          html.Br(),
-          html.H4("Measures of central tendency"),
-                dbc.Card(dbc.CardBody(
-                       [html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.versions_stats[110])]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                dbc.Card(dbc.CardBody(
-                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Location')]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                html.H4("Measures of dispersion"),
-                dbc.Card(dbc.CardBody(
-                         [html.H5("Standard deviation"), html.H4(R.versions_stats[112])]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-          html.Br(),
-          html.Br(),
-          html.Div(children=[html.H4("Entities by DBpedia types"),
-           dcc.Graph(id='en_ontologyy', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
-           dcc.Graph(id='en_instance_types', figure=F.en_instance_types_figure, 
-                                   style={'height':'26.041666666666668vw', 'width':'52.083333333333336vw', 'display': 'inline-block'})]
-            )]),
-         html.Br(),
-         html.Div([html.H3(html.B("DBpedia Spotlight - May 2021"), style={'display': 'inline-block', "border-bottom":"0.13020833333333334vw black solid", 'width': 'auto'}),      
-         html.Br(),        
-         html.Br(),
-         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia entities"), html.H4(R.en_stats[2])] 
-                                         ),style={'display': 'inline-block'}, color='#F5F5F5'),
-         dbc.Card(dbc.CardBody([html.H5("Nº DBpedia types"), html.H4(R.en_stats[3])]),
-                  style={'display': 'inline-block', "margin-left": "1.953125vw"}, color='#F5F5F5')]),
-          html.Br(),
-          html.Br(),
-          html.H4("Measures of central tendency"),
-                dbc.Card(dbc.CardBody(
-                       [html.H5("Nº entities per DBpedia type (mean)"), html.H4(R.en_stats[4])]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                dbc.Card(dbc.CardBody(
-                        [html.H5("DBpedia type that appears the most (mode)"), html.H4('dbo:Location')]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-                html.Br(),
-                html.Br(),
-                html.H4("Measures of dispersion"),
-                dbc.Card(dbc.CardBody(
-                         [html.H5("Standard deviation"), html.H4(R.en_stats[6])]
-                ), color="#F5F5F5", style={'display': 'inline-block'}
-                ),
-          html.Br(),
-          dcc.Graph(id='en_statistics', figure=F.en_statistics_figure),
-          html.Br(),
-          html.Br(),
-        html.Div(children=[html.H4("Entities by DBpedia types"),
-           dcc.Graph(id='en_ontology', figure=F.ontology_figure, style={'height':'26.041666666666668vw', 'width':'39.0625vw', 'display': 'inline-block'}),
-           dcc.Graph(id='en_known_types', figure=F.en_known_types_figure, 
-                                   style={'height':'26.041666666666668vw', 'width':'52.083333333333336vw', 'display': 'inline-block'})]
-            ),
-        html.Br(),
-        html.H4("Position measures for DBpedia types"),
-        dcc.Markdown('''
-              The following chart presents the quartile and percentile information about 
-              the instance-types, ordered from highest to lowest number of entities and 
-              considering leaf nodes from the hierarchy [http://mappings.dbpedia.org/server/ontology/classes/] 
-              (internal nodes are considered only for those cases in which the instance has not assigned a leaf node). 
-              According to the chart, quartile 1 contains the most representative instances (instances with high frequency), 
-              as the instances move away from the origin they will have less representativeness (the instance frequency decreased).
-                         '''),
-         dcc.Graph(id='en_known_types_pos', figure=F.en_pos_known_types_figure, 
-           style={'height':'32.552083333333336vw', 'width':'65.10416666666667vw'}),
-        html.Br(),
-        html.H4("Top 50 DBpedia types with more entities"),
-        dcc.Markdown('''
-    The following list is based on the `Entities by DBpedia Types` information.
-            
-                         '''),
-        DataTable(
-            id="en_top_known_types_table",
-            columns=[{"name": "DBpedia type", "id": "DBpedia type"},
-                     {"name": "Nº entities", "id": "Nº entities"}],
-            style_header=
-           {
-              'fontWeight': 'bold',
-              'font-size': '1.1067708333333333vw',
-              'text-align': 'center'
-           },
-            data=R.top_known_types_2021_05_en.to_dict("records"),
-            fill_width=False,
-            style_table={
-                'overflowY': 'scroll', 'height': '26.041666666666668vw', 'width': '24.4140625vw', 'margin-left': '0.6510416666666666vw'
-                         }
-        )
-        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
-        ], style = tab_style, selected_style = tab_selected_style),
-        # uriCounts subtab
-         dcc.Tab(label='uriCounts', value = 'en_uricounts', children = [
-        html.Div([
-        html.Br(),
-        html.H3("Choose uriCounts file version: "),
-        dcc.Dropdown(id='en_uriCounts_dropdown',options=[
-             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
-            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
-            placeholder="Version"),
-         html.Br(),
-        html.Div(id='en_uriCounts_container')
-        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
-         ], style = tab_style, selected_style = tab_selected_style),
-        # pairCounts subtab
-         dcc.Tab(label='pairCounts', children = [
-        html.Div([
-        html.Br(),
-        html.H3("Choose pairCounts file version: "),
-        dcc.Dropdown(id='en_pairCounts_dropdown',options=[
-             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
-            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
-            placeholder="Version"),
-         html.Br(),
-        html.Div(id='en_pairCounts_container')
-        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
-          ], style = tab_style, selected_style = tab_selected_style),
-          # tokenCounts subtab
-         dcc.Tab(label='tokenCounts', children = [
-        html.Div([
-          html.Br(),
-        html.H3("Choose tokenCounts file version: "),
-        dcc.Dropdown(id='en_tokenCounts_dropdown',options=[
-             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
-            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
-            placeholder="Version"),
-         html.Br(),
-        html.Div(id='en_tokenCounts_container')
-        ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
-        ], style = tab_style, selected_style = tab_selected_style),
-          # sfAndTotalCounts subtab
-        dcc.Tab(label='sfAndTotalCounts', children = [
-            html.Div([
-             html.Br(),
-        html.H3("Choose sfAndTotalCounts file version: "),
-        dcc.Dropdown(id='en_sfAndTotalCounts_dropdown',options=[
-             {'label': 'Oct 1st 2016', 'value': 'Oct 1st 2016'},
-            {'label': 'Oct 1st 2020', 'value': 'Oct 1st 2020'},
-            {'label': 'May 25th 2021', 'value': 'May 25th 2021'},
-            {'label': 'Jun 25th 2021', 'value': 'Jun 25th 2021'}], 
-            placeholder="Version"),
-         html.Br(),
-        html.Div(id='en_sfAndTotalCounts_container')
-              ], style = {'margin-left': '3.2552083333333335vw', 'margin-right': '3.2552083333333335vw'})
-        ], style = tab_style, selected_style = tab_selected_style)]
-            , style = subtabs_styles)
-        ], style = tab_style, selected_style = tab_selected_style),
+        ], style = tab_style, selected_style = tab_selected_style) ,             
         
       # Feedback tab
         dcc.Tab(label='Feedback', children = [

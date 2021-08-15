@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import plotly.graph_objects as go
 import resources as R
+import re
 
 # Instance types tab figures
 def get_language_statistics_figure(lang):
@@ -241,7 +242,7 @@ def get_init_bar_figure_pos(language_directory,df):
         tickvals = [0, 17, 33, 50, 67, 83, 100],
         ticktext = ['0%', '25%', '50%', '75%', '90%', '95%', '100%']
         ),
-    xaxis_title="DBpedia type", yaxis_title="Filled area")
+    xaxis_title="DBpedia type", yaxis_title="Percent of information per instance")
 
     return fig
 
@@ -268,6 +269,27 @@ def get_versions_instance_types_figure(labels, version1_df, version2_df):
     
     fig.update_layout(barmode='group', margin=dict(t=0, b=0, r=0, l=0, pad=0), yaxis=dict(showgrid=False), template = "simple_white", xaxis_title="Number of DBpedia entities", yaxis_title="DBpedia type")
     return fig
+
+pattern = re.compile("(\(.*?)\)")
+
+
+def color_brackets(value):
+    found = re.search(pattern, value)
+
+    if found:
+        if found.group()[1] == "+":
+            color = "green"
+        elif found.group()[1] == "-":
+            color = "red"
+        else:
+            color = "black"
+            
+        substituted = pattern.sub(
+            f"<span style='color: {color};'>{found.group()}</span>", value
+        )
+        return substituted
+
+    return value
 
 es_statistics_figure = get_language_statistics_figure("es")
 en_statistics_figure = get_language_statistics_figure("en")

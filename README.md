@@ -1,5 +1,7 @@
-# DBpedia-Spotlight-Dashboard
+# DBpedia-Spotlight-Dashboard - GSoC 2021
 An integrated statistical information tool from the Wikipedia dumps and the DBpedia Extraction Framework artifacts
+
+Dashboard URL: http://134.155.95.24:8050/
 
 ## Table of contents
 - [Objective](#objective)

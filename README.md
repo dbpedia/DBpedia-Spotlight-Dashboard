@@ -1,4 +1,4 @@
-# DBpedia-Spotlight-Dashboard
+# DBpedia-Spotlight-Dashboard - GSoC 2021
 An integrated statistical information tool from the Wikipedia dumps and the DBpedia Extraction Framework artifacts
 
 ## Table of contents

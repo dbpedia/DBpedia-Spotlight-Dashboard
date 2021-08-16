@@ -3,11 +3,13 @@ An integrated statistical information tool from the Wikipedia dumps and the DBpe
 
 Dashboard URL: http://134.155.95.24:8050/
 
-## Table of contents
+## Table of Contents
 - [Objective](#objective)
 - [Dashboard chart](#dbpedia-spotlight-dashboard-flowchart)
 - [Dashboard content](#dashboard-content)
 - [Raw data](#raw-data)
+- [Used tools](#used-tools)
+- [How to run](#how-to-run)
 - [Future work](#future-work)
 
 ### Objective
@@ -173,8 +175,20 @@ As mentioned before, the statistical measures have been calculated from the **DB
 
 ![Wikistats](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/information_wikistats.png)
 
-### Future work
+###  Used Tools
+ - [GNU datamash](https://www.gnu.org/software/datamash/) for statistics calculation
+ - [Dash framework](https://dash.plotly.com/) for building the web app
+ - [Plotly Python graphing library](https://plotly.com/python/) for visualizations
+ - [Spyder IDE](https://www.spyder-ide.org/) for development and integration
 
+### How to Run
+In order to run the dashboard on yout local system, it is only necessary to:
+- Clone the repository
+- Go to the root folder and execute `main.sh` script
+
+The script will install all the necessary packages and modules
+
+### Future Work
 These are some tasks that would be interesting to do in the future:
 - Include the rest of the languages available in DBpedia-Spotlight in the `Details` and `Instance-types comparison` tabs.
 - Define the statistical information as Linked Data

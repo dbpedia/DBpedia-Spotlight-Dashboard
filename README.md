@@ -8,6 +8,7 @@ Dashboard URL: http://134.155.95.24:8050/
 - [Dashboard chart](#dbpedia-spotlight-dashboard-flowchart)
 - [Dashboard content](#dashboard-content)
 - [Raw data](#raw-data)
+- [Future work](#future-work)
 
 ### Objective
 
@@ -171,3 +172,10 @@ As mentioned before, the statistical measures have been calculated from the **DB
 - **tokenCounts**: contains the number of times the words (tokens) appear in each Wikipedia article
 
 ![Wikistats](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/information_wikistats.png)
+
+### Future work
+
+These are some tasks that would be interesting to do in the future:
+- Include the rest of the languages available in DBpedia-Spotlight in the `Details` and `Instance-types comparison` tabs.
+- Define the statistical information as Linked Data
+- Define an onotlogy for the representation of statistical information

@@ -3,10 +3,14 @@ An integrated statistical information tool from the Wikipedia dumps and the DBpe
 
 Dashboard URL: http://134.155.95.24:8050/
 
-## Table of contents
+## Table of Contents
 - [Objective](#objective)
 - [Dashboard chart](#dbpedia-spotlight-dashboard-flowchart)
+- [Dashboard content](#dashboard-content)
 - [Raw data](#raw-data)
+- [Used tools](#used-tools)
+- [How to run](#how-to-run)
+- [Future work](#future-work)
 
 ### Objective
 
@@ -19,6 +23,139 @@ Afterwards, **necessary figures** are generated to visualize the statistics.  On
 ### DBpedia Spotlight Dashboard Flowchart
 
 ![DBpedia Spotlight Dashboard Flowchart](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/dashboard_flowchart.png)
+
+### Dashboard Content
+The dashboard consists of 4 tabs: 
+ - [**Information**](#information-tab)
+ - [**Instance-types comparison**](#instance-types-comparison-tab)
+ - [**Details**](#details-tab)
+ - [**Feedback**](#feedback-tab)
+
+![Tabs](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/1_tabs.png)
+
+#### Information tab
+This tab explains:
+ - The **purpose** of this dashboard
+ - How the **statistics** have been computed
+ - The **entity validation** process
+ - The **raw files** that DBpedia Spotlight uses during the generation of a language model
+ 
+![Information](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/2_information.png)
+ 
+#### Instance-types comparison tab
+This tab is used to compare the `instance-types` of the versions *October 2016,* *October 2020*, *May 2021* and *June 2021* for **English** and **Spanish** languages
+
+It is divided into 3 views:
+ - **Version comparison**: a table to compare the number of entities and types of the selected versions as well as the diffs
+ 
+ ![Version Comparison](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/3_comparison.png)
+
+ - **Version 1 VS Version 2**: allows to see graphically the number of entities of selected versions
+ 
+![VS](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/4_comparison.png)
+
+ - **DBpedia types comparison**: allows to compare the entities of each selected version according to the DBpedia classes following a [hierarchy structure](http://mappings.dbpedia.org/server/ontology/classes/)
+ 
+![Types comparison](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/5_comparison.png)
+
+#### Details tab
+It contains 6 sub-tabs:
+ - Summary
+ - Instance-types
+ - uriCounts
+ - pairCounts
+ - tokenCounts
+ - sfAndTotalCounts
+
+![Sub-tabs](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/6_details.png)
+ 
+ ##### Summary
+ It is used to view the calculated statistics in table form
+
+![Summary](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/7_details.png)
+
+##### Instance-types
+Allows to view the instance-types in more detail for the selected language and version
+
+![Instance-types](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/8_details.png)
+
+
+It is divided in two main sections:
+
+ - **DBpedia Extraction Framework**: to see metrics about the `raw files` of the DBpedia Databus that Spotlight uses to generate the models
+ - **DBpedia Spotlight**: to see metrics about the entities and types that are actually used by DBpedia Spotlight after the `entity validation process`
+ 
+ Both sections are formed by the following views:
+ - **Measures of Central Tendency**: mean, mode
+ - **Measures of Dispersion**: standard deviation
+ 
+ ![Instance-types measures](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/9_details.png)
+
+ - **Entities by DBpedia types** 
+ 
+![Instance-types entities and types](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/10_details.png)
+
+Moreover, the following views can be seen in the **DBpedia Spotlight** section:
+ - **Precision and impact** calculated after entity validation process
+
+![Precision and impact](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/11_details.png)
+
+ - **Position measures for DBpedia types** (quartiles and percentiles)
+
+![Position measures](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/12_details.png)
+
+ - **Top 50 DBpedia types with more entities**
+ 
+![Top](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/13_details.png)
+
+##### uriCounts
+Allows to see metrics calculated from the **uriCounts file**
+
+The main measures are:
+ - **Measures of Central Tendency**: mean, mode, median
+ - **Measures of Dispersion**: standard deviation
+ 
+ ![uriCounts](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/14_details.png)
+
+##### pairCounts
+Allows to see metrics calculated from the **pairCounts file**
+
+The main measures are:
+ - **Measures of Central Tendency**: mean, mode, median
+ - **Measures of Dispersion**: standard deviation
+ 
+ ![pairCounts](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/15_details.png)
+
+##### tokenCounts
+Allows to see metrics calculated from the **tokenCounts file**
+
+The main measures are:
+ - **Measures of Central Tendency**: mean, mode, median
+ - **Measures of Dispersion**: standard deviation
+ 
+ ![tokenCounts](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/16_details.png)
+
+##### sfAndTotalCounts
+Allows to see metrics calculated from the **sfAndTotalCounts file**
+
+The main measures are:
+ - **Measures of Central Tendency**: mean, mode, median
+ - **Measures of Dispersion**: standard deviation
+ 
+![sfAndTotalCounts](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/17_details.png)
+
+In addition, it can be seen the surface forms according to their state in the **Wikipedia dump**:
+ - **Without associated link** (**-1** in second file column)
+ - **Not appearing as text** (**0** in third file column)
+ - **Not appearing as text without associated link** (**-1** in second file column and **0** in third file column)
+ - **Rest** (surface forms with associated link and appearing as text)
+
+![sfAndTotalCounts pie chart](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/18_details.png)
+
+#### Feedback tab
+Any questions or suggestions for improvement can be made by filling out the following form: https://forms.gle/YKiibhasVuYQ5goe6
+
+![Feedback tab](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/19_feedback.png)
 
 ### Raw Data
 As mentioned before, the statistical measures have been calculated from the **DBpedia datasets** and the Wikipedia statistical files (**Wikistats**)
@@ -37,3 +174,22 @@ As mentioned before, the statistical measures have been calculated from the **DB
 - **tokenCounts**: contains the number of times the words (tokens) appear in each Wikipedia article
 
 ![Wikistats](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/information_wikistats.png)
+
+###  Used Tools
+ - [GNU datamash](https://www.gnu.org/software/datamash/) for statistics calculation
+ - [Dash framework](https://dash.plotly.com/) for building the web app
+ - [Plotly Python graphing library](https://plotly.com/python/) for visualizations
+ - [Spyder IDE](https://www.spyder-ide.org/) for development and integration
+
+### How to Run
+In order to run the dashboard on yout local system, it is only necessary to:
+- Clone the repository
+- Go to the root folder and execute `main.sh` script
+
+The script will install all the necessary packages and modules
+
+### Future Work
+These are some tasks that would be interesting to do in the future:
+- Include the rest of the languages available in DBpedia-Spotlight in the `Details` and `Instance-types comparison` tabs.
+- Define the statistical information as Linked Data
+- Define an onotlogy for the representation of statistical information

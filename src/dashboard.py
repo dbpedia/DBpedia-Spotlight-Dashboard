@@ -82,9 +82,15 @@ app.layout = html.Div(children=[
 
 The purpose of this dashboard is to **facilitate the understanding and analysis of both DBpedia datasets and Wikistats** by calculating statistical measures on these data that allow understanding the trends of **DBpedia resources**, **Wikipedia links** and **surface forms**.
  
- To make the dashboard, it is first necessary to **obtain the raw data**.  Subsequently, it is verified that the DBpedia entities (URLs) that Spotlight uses (URLs of the `uriCounts` file) are found  in one of the three DBpedia datasets (`instance-types`, `redirects` and `disambiguations`).  If they are found in a dataset, they are entities whose type is **known** (from DBpedia), on the contrary,  if they are not found in any dataset, they are entities whose type is **unknown**.  This process is called **entity validation**. 
-Once `valid URLs` (of known type), `invalid URLs` (of unknown type)  and the `DBpedia types` that each URL present are known, a series of **statistical measures** are calculated on the data  (percentage of valid URLs over the total (**precision**), percentage of invalid URLs over the total (**impact**), mean, median, standard deviation, quartiles , percentiles, etc).   
-Afterwards, **necessary figures** are generated to visualize the statistics.  Once all the figures are ready, they are placed and the final dashboard is obtained.
+ To make the dashboard, these steps have been followed:
+
+ 1. `Obtain raw data` from the DBpedia Databus
+ 2. `Entity validation process`: throughout the project, it was seen that there are Spotlight entities whose type is **unknown**. This process consists of determining the DBpedia entities with `known types` and those with `unknown types`.
+DBpedia entities with `known types` will be found in one of the following datasets: `instance-types`, `redirects`, and `disambiguations`. 
+Whereas entities with `unknown types` will not be found in any of them. 
+ 3. `Computation of statistical measures`: percentage of entities with known types over the total (precision), percentage of entities with unknown types over the total (impact), mean, median, standard deviation, quartiles, percentiles...
+ 4. `Plot dashboard figures`
+
 
 ### Statistics Calculation
 For the computation of statistics, [Datamash command-line program](https://www.gnu.org/software/datamash/) has been used.

@@ -276,7 +276,7 @@ The results obtained are the following:
 In addition, the dashboard as a whole was also evaluated:
 
 | Nº people who gave a global rating | Mark (from 0 to 10) |
-|------------------------------------|---------------------|
+|:----------------------------------:|:-------------------:|
 |                  2                 |          8          |
 |                  1                 |         8.5         |
 |                  3                 |          9          |

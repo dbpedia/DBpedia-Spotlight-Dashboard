@@ -344,7 +344,7 @@ Throughout this work:
 
 Measures of central tendency, measures of dispersion and position measures have been calculated. **Measures of central tendency** are used to see where the data are grouped the most. **Measures of dispersion** are used to see the degree of variability of the data. **Position measures** divide the data into intervals of the same size.
 
-After analyzing all these measures, the **high degree of dispersion** in the data has been observed, which means that the data is very far from the mean, therefore the information is not very representative, that is, there is an imbalance in the data. In addition, since entity types are highly unbalanced, much of the information in the dataset is covered by a small group of entities. Thus, after ordering the entities from highest to lowest, it was observed that the **first quartile** was covered by 1 or 2 types of entities, while the last quartile contained a large number of types of entities.
+After analyzing all these measures, the **high degree of dispersion** in the data has been observed, which means that the data is very far from the mean, that is, the data presents a high imbalance ratio. In addition, since entity types are highly unbalanced, much of the information in the dataset is covered by a small group of entities. Thus, after ordering the entities from highest to lowest, it was observed that the **first quartile** was covered by 1 or 2 types of entities, while the last quartile contained a large number of types of entities.
 
 ### Future Work
 These are some tasks that would be interesting to do in the future:

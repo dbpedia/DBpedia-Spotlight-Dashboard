@@ -300,10 +300,10 @@ GNU datamash is a command-line program which performs basic numeric, textual and
  
 | Operation | Description         | Example                                           |
 |-----------|---------------------|---------------------------------------------------|
-| sum       | Sum of the values   | `cat file \| cut -f 2 -d$'\t' \| datamash sum 1`    |
-| mean      | Mean of the values  | `cat file \| cut -f 2 -d$'\t' \| datamash mean 1`   |
-| pvar      | Population variance | `cat file \| cut -f 2 -d$'\t' \| datamash pvar 1`   |
-| median    | Median value        | `cat file \| cut -f 2 -d$'\t' \| datamash median 1` |
+| sum       | Sum of the values   | ` seq 10 \| datamash sum 1`    |
+| mean      | Mean of the values  | ` seq 10 \| datamash mean 1`   |
+| pvar      | Population variance | ` seq 10 \| datamash pvar 1`   |
+| median    | Median value        | ` seq 10 \| datamash median 1` |
 
  - [Dash framework](https://dash.plotly.com/) for building the web app
  

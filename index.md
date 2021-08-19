@@ -114,8 +114,8 @@ It contains 6 sub-tabs:
 ![Sub-tabs](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/6_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 6. Sub-tabs of Details tab*
  
- #### Summary
- It shows the calculated statistics.
+#### Summary
+It shows the calculated statistics.
  
  In **Figure 7** can be seen **measures of central tendency** (mean and mode) that are used to know where the data is inclined or clustered the most. In this case, we can see how the DBpedia entities, surface forms and Wikipedia tokens are grouped.
  Also it can be seen the standard deviation, which is the main **measure of dispersion**, that is used to observe the degree of variability of DBpedia entities, surface forms and Wikipedia tokens.
@@ -297,11 +297,12 @@ GNU datamash is a command-line program which performs basic numeric, textual and
  
 | Operation | Description         | Example                                           |
 |-----------|---------------------|---------------------------------------------------|
-| sum       | Sum of the values   | ` seq 10 \| datamash sum 1`    |
-| mean      | Mean of the values  | ` seq 10 \| datamash mean 1`   |
-| pvar      | Population variance | ` seq 10 \| datamash pvar 1`   |
-| median    | Median value        | ` seq 10 \| datamash median 1` |
+| sum       | Sum of the values   | ` seq 10 \| datamash sum 1`                       |
+| mean      | Mean of the values  | ` seq 10 \| datamash mean 1`                      |
+| pvar      | Population variance | ` seq 10 \| datamash pvar 1`                      |
+| median    | Median value        | ` seq 10 \| datamash median 1`                    |
 
+ 
  - [Dash framework](https://dash.plotly.com/) for building the web app
  
 Dash is a productive Python framework for building web analytic applications.
@@ -318,7 +319,8 @@ Plotly's Python graphing library makes interactive, publication-quality graphs. 
 | `go.Bar()`     | Bar chart     |
 | `go.Pie()`     | Pie chart     |
 
- - [Spyder IDE](https://www.spyder-ide.org/) for development and integration
+
+- [Spyder IDE](https://www.spyder-ide.org/) for development and integration
  
 Spyder is a free and open source scientific environment written in Python, for Python, and designed by and for scientists, engineers and data analysts. It features a unique combination of the advanced editing, analysis, debugging, and profiling functionality of a comprehensive development tool with the data exploration, interactive execution, deep inspection, and beautiful visualization capabilities of a scientific package.
 

@@ -69,7 +69,7 @@ The dashboard consists of 4 tabs:
 ![Tabs](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/1_tabs.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 2. Dashboard tabs*
 
-[Figure 2](tabs) shows the 4 main tabs of the dashboard
+[Figure 2](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/1_tabs.png) shows the 4 main tabs of the dashboard
 
 #### Information tab
 This tab explains:

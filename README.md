@@ -66,7 +66,7 @@ The dashboard consists of 4 tabs:
  - [**Details**](#details-tab)
  - [**Feedback**](#feedback-tab)
 
-[Figure 2]() shows the 4 main tabs of the dashboard
+**Figure 2** shows the 4 main tabs of the dashboard
 
 ![Tabs](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/1_tabs.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 2. Dashboard tabs*
@@ -84,21 +84,21 @@ This tab is used to compare the `instance-types` of the versions *October 2016,*
 It is divided into 3 views:
  - **Version comparison**: a table to compare the number of entities and types of the selected versions as well as their differences
  
- [Figure 3]() shows a table with entities and types of **October 2016** and **May 2021** versions for the **English** language.
+ **Figure 3** shows a table with entities and types of **October 2016** and **May 2021** versions for the **English** language.
  
  ![Version Comparison](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/3_comparison.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 3. Version comparison*
 
  - **Version 1 VS Version 2**:  a chart illustrates the number of entities from the selected versions
  
- [Figure 4]() shows a chart with the number of entities of **October 2016** and **May 2021** versions for the **English** language.
+ **Figure 4** shows a chart with the number of entities of **October 2016** and **May 2021** versions for the **English** language.
  
 ![VS](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/4_comparison.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 4. Version 1 VS Version 2*
 
  - **DBpedia types comparison**: the entities from each selected version are graphically compared based on the [DBpedia hierarchy of classes](http://mappings.dbpedia.org/server/ontology/classes/)
  
-[Figure 5]() shows a chart with the number of entities by DBpedia types of **October 2016** and **May 2021** versions for the **English** language. 
+Figure 5** shows a chart with the number of entities by DBpedia types of **October 2016** and **May 2021** versions for the **English** language. 
  
 ![Types comparison](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/5_comparison.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 5. DBpedia types comparison*
@@ -112,7 +112,7 @@ It contains 6 sub-tabs:
  - tokenCounts
  - sfAndTotalCounts
 
-[Figure 6]() shows the 6 sub-tabs of the Details tab
+**Figure 6** shows the 6 sub-tabs of the Details tab
 
 ![Sub-tabs](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/6_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 6. Sub-tabs of Details tab*
@@ -120,7 +120,7 @@ It contains 6 sub-tabs:
  ##### Summary
  It shows the calculated statistics.
  
- In [Figure 7]() can be seen **measures of central tendency** (mean and mode) that are used to know where the data is inclined or clustered the most. In this case, we can see how the DBpedia entities, surface forms and Wikipedia tokens are grouped.
+ In **Figure 7** can be seen **measures of central tendency** (mean and mode) that are used to know where the data is inclined or clustered the most. In this case, we can see how the DBpedia entities, surface forms and Wikipedia tokens are grouped.
  Also it can be seen the standard deviation, which is the main **measure of dispersion**, that is used to observe the degree of variability of DBpedia entities, surface forms and Wikipedia tokens.
 
 ![Summary](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/7_details.png)
@@ -129,7 +129,7 @@ It contains 6 sub-tabs:
 ##### Instance-types
 Allows to view the instance-types in more detail for the selected language and version
 
-[Figure 8]() shows part of the content of the instance-types sub-tab of **May 2021** version for the **English** language .
+**Figure 8** shows part of the content of the instance-types sub-tab of **May 2021** version for the **English** language .
 
 ![Instance-types](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/8_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 8. Instance-types details*
@@ -145,7 +145,7 @@ It is divided in two main sections:
 
  - **Entities by DBpedia types** 
  
-[Figure 9]() shows the entities by DBpedia types chart of **May 2021** version for the **English** language .
+**Figure 9** shows the entities by DBpedia types chart of **May 2021** version for the **English** language .
 
 ![Instance-types entities and types](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/10_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 9. Entities by DBpedia types chart*
@@ -158,21 +158,21 @@ These measurements are used to find out which Spotlight entities have **known DB
     Precision = Nº entities with known types / Nº entities
     Impact = Nº entities with unknown types / Nº entities
 
-In the [Figure 10]() it can be seen that 63% of entities present known types and 27% present unknown types in the case of **English** language in **May 2021** version 
+In the **Figure 10** it can be seen that 63% of entities present known types and 27% present unknown types in the case of **English** language in **May 2021** version 
 
 ![Precision and impact](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/11_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 10. Precision and Impact indicators*
 
 - **Position measures for DBpedia types** (quartiles and percentiles)
 
-[Figure 11]() shows the position measures for DBpedia types chart of **May 2021** version for the **English** language .
+**Figure 11** shows the position measures for DBpedia types chart of **May 2021** version for the **English** language .
 
 ![Position measures](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/12_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 11. Position measures for DBpedia types*
 
  - **Top 50 DBpedia types with more entities**
  
-[Figure 12]() shows the top 50 DBpedia types with more entities table of **May 2021** version for the **English** language .
+**Figure 12** shows the top 50 DBpedia types with more entities table of **May 2021** version for the **English** language .
 
 ![Top](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/13_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 12. Top 50 DBpedia types with more entities*
@@ -184,7 +184,7 @@ The main measures are:
  - **Measures of Central Tendency**: mean, mode, median
  - **Measures of Dispersion**: standard deviation
  
- [Figure 13]() shows the calculated measures of **central tendency** and **dispersion** from uriCounts file of **May 2021** version for the **English** language .
+ **Figure 13** shows the calculated measures of **central tendency** and **dispersion** from uriCounts file of **May 2021** version for the **English** language .
  
  ![uriCounts](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/14_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 13. Calculated measures from uriCounts file*
@@ -197,7 +197,7 @@ The main measures are:
  - **Measures of Central Tendency**: mean, mode, median
  - **Measures of Dispersion**: standard deviation
  
- [Figure 14]() shows the calculated measures of **central tendency** and **dispersion** from pairCounts file of **May 2021** version for the **English** language .
+ **Figure 14** shows the calculated measures of **central tendency** and **dispersion** from pairCounts file of **May 2021** version for the **English** language .
  
  ![pairCounts](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/15_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 14. Calculated measures from pairCounts file*
@@ -209,7 +209,7 @@ The main measures are:
  - **Measures of Central Tendency**: mean, mode, median
  - **Measures of Dispersion**: standard deviation
  
- [Figure 15]() shows the calculated measures of **central tendency** and **dispersion** from tokenCounts file of **May 2021** version for the **English** language .
+ **Figure 15** shows the calculated measures of **central tendency** and **dispersion** from tokenCounts file of **May 2021** version for the **English** language .
  
  ![tokenCounts](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/16_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 15. Calculated measures from tokenCounts file*
@@ -221,12 +221,12 @@ The main measures are:
  - **Measures of Central Tendency**: mean, mode, median
  - **Measures of Dispersion**: standard deviation
 
-[Figure 16]() shows the calculated measures of **central tendency** and **dispersion** from sfAndTotalCounts file of **May 2021** version for the **English** language .
+**Figure 16** shows the calculated measures of **central tendency** and **dispersion** from sfAndTotalCounts file of **May 2021** version for the **English** language .
  
 ![sfAndTotalCounts](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/17_details.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 16. Calculated measures from sfAndTotalCounts file*
 
-In addition, in [Figure 17]() can be seen the surface forms according to their state in the **Wikipedia dump**:
+In addition, in **Figure 17** can be seen the surface forms according to their state in the **Wikipedia dump**:
  - **Without associated link** (**-1** in second file column)
  - **Not appearing as text** (**0** in third file column)
  - **Not appearing as text without associated link** (**-1** in second file column and **0** in third file column)
@@ -238,7 +238,7 @@ In addition, in [Figure 17]() can be seen the surface forms according to their s
 #### Feedback tab
 Any questions or suggestions for improvement can be made by filling out the following form: https://forms.gle/YKiibhasVuYQ5goe6
 
-[Figure 18]() shows the Feedback tab.
+**Figure 18** shows the Feedback tab.
 
 ![Feedback tab](https://raw.github.com/dbpedia/DBpedia-Spotlight-Dashboard/main/images/doc/19_feedback.png)
 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 18. Feedback tab*

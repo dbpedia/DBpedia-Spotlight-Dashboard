@@ -295,6 +295,7 @@ Finally, it has been concluded that the dashboard can be improved in some aspect
 
 GNU datamash is a command-line program which performs basic numeric, textual and statistical operations on input textual data files.
  
+
 | Operation | Description         | Example                                           |
 |-----------|---------------------|---------------------------------------------------|
 | sum       | Sum of the values   | ` seq 10 \| datamash sum 1`                       |
@@ -303,7 +304,9 @@ GNU datamash is a command-line program which performs basic numeric, textual and
 | median    | Median value        | ` seq 10 \| datamash median 1`                    |
 
  
- - [Dash framework](https://dash.plotly.com/) for building the web app
+
+
+- [Dash framework](https://dash.plotly.com/) for building the web app
  
 Dash is a productive Python framework for building web analytic applications.
 
@@ -312,12 +315,15 @@ Written on top of Flask, Plotly.js, and React.js, Dash is ideal for building dat
 
 Plotly's Python graphing library makes interactive, publication-quality graphs. Examples of how to make line plots, scatter plots, area charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, polar charts, and bubble charts.
 
+
 | Function       | Chart         |
 |----------------|---------------|
 | `go.Scatter()` | Scatter plot  |
 | `go.Treemap()` | Treemap chart |
 | `go.Bar()`     | Bar chart     |
 | `go.Pie()`     | Pie chart     |
+
+
 
 
 - [Spyder IDE](https://www.spyder-ide.org/) for development and integration

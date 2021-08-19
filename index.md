@@ -1,5 +1,5 @@
 
-# Table of Contents
+## Table of Contents
 - [Objective](#objective)
 - [Dashboard chart](#dbpedia-spotlight-dashboard-flowchart)
 - [Dashboard content](#dashboard-content)

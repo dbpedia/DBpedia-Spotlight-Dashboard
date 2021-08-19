@@ -9,6 +9,7 @@
 - [How to run](#how-to-run)
 - [Conclusions](#conclusions)
 - [Future work](#future-work)
+- [Progress](#progress)
 
 ## Objective
 
